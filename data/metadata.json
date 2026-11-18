@@ -70,5 +70,8 @@
     },
     "layer1_complete": true,
     "layer2_complete": true
-  }
+  },
+  "last_odds_fetch": "2026-11-18 03:49:50 UTC",
+  "odds_snapshot": "opening",
+  "api_remaining": "491"
 }
