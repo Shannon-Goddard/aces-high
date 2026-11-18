@@ -131,25 +131,42 @@ def team_hunger_score(players_on_team):
     return round(total_s / total_w, 1) if total_w else 50.0
 
 
-def team_injury_flag(players_on_team):
+def team_injury_flag(players_on_team, practice_index=None):
     """
-    Weighted injury penalty 0-100 based on who is Out/Doubtful.
-    QB out = massive hit. Backup LS out = barely registers.
-    Returns a 0-100 penalty score (higher = worse injury situation).
+    Weighted injury penalty 0-100 using practice trajectory when available,
+    falling back to report_status from players.json.
+    Concern < 25 (trending full / healthy) = no penalty applied.
     """
+    if practice_index is None:
+        practice_index = {}
+
+    STATUS_FALLBACK = {'out': 85, 'doubtful': 70, 'questionable': 40, 'probable': 15}
+
     penalty = 0.0
     for p in players_on_team:
-        inj = p.get('injury') or {}
-        status = (str(inj.get('report_status') or '')).lower()
-        if status not in ('out', 'doubtful'):
+        team_slug = ABBR_TO_SLUG.get(p.get('team', ''), '')
+        name      = p.get('name', '')
+        key       = f"{team_slug}:{name}"
+
+        practice = practice_index.get(key)
+        if practice:
+            concern = practice.get('practice_score', 0)
+        else:
+            inj     = p.get('injury') or {}
+            status  = (str(inj.get('report_status') or '')).lower()
+            concern = STATUS_FALLBACK.get(status, 0)
+
+        if concern < 25:
             continue
-        pos  = (p.get('position') or '').upper()
-        snap = (p.get('layer1_body') or {}).get('snap_pct') or 0.0
+
+        pos   = (p.get('position') or '').upper()
+        snap  = (p.get('layer1_body') or {}).get('snap_pct') or 0.0
         skill = ((p.get('layer2_skill') or {}).get('skill_score') or 50.0) / 100.0
-        # Base penalty: snap% × skill level × position multiplier
-        pos_mult = 2.5 if pos == 'QB' else 1.5 if pos in KEY_POSITIONS else 0.5
-        penalty += snap * skill * pos_mult * 100.0
-    # Cap at 100, normalize so a single star QB out ≈ 60-70 penalty
+
+        concern_mult = concern / 100.0
+        pos_mult     = 2.5 if pos == 'QB' else 1.5 if pos in KEY_POSITIONS else 0.5
+        penalty     += snap * skill * pos_mult * concern_mult * 100.0
+
     return round(min(100.0, penalty), 1)
 
 
@@ -214,20 +231,23 @@ def normalize(score, lo=NORM_MIN, hi=NORM_MAX):
     return round(max(0.0, min(100.0, (score - lo) / (hi - lo) * 100.0)), 1)
 
 
-def raw_team_score(slug, team_index, news_index, weather_mods=None):
+def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_index=None):
     """
     Compute a 0-100 normalized score for a team.
-    weather_mods: dict from get_weather_modifiers() — applied to passing/kicking components.
+    weather_mods:   dict from get_weather_modifiers()
+    practice_index: dict from practice.json players keyed by 'slug:name'
     Returns dict with component breakdown.
     """
     if weather_mods is None:
-        weather_mods = {'passing_mult': 1.0, 'kicker_mult': 1.0, 'dome': False}
+        weather_mods = {'passing_mult': 1.0, 'kicker_mult': 1.0, 'dome': False, 'cold_joint_flag': False}
+    if practice_index is None:
+        practice_index = {}
 
     players      = team_index.get(slug, [])
     body         = team_body_score(players)
     skill        = team_skill_score(players)
     hunger       = team_hunger_score(players)
-    injury       = team_injury_flag(players)
+    injury       = team_injury_flag(players, practice_index)
     joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
 
@@ -309,10 +329,12 @@ def pick_side(home_team, away_team, home_score, away_score, spread):
             return home_team, "underdog"
 
 
-def predict_game(game, team_index, news_index, weather_index=None):
+def predict_game(game, team_index, news_index, weather_index=None, practice_index=None):
     """Generate a prediction for a single game."""
     if weather_index is None:
         weather_index = {}
+    if practice_index is None:
+        practice_index = {}
 
     home = game['home_team']
     away = game['away_team']
@@ -323,9 +345,8 @@ def predict_game(game, team_index, news_index, weather_index=None):
         return None
 
     weather_mods = get_weather_modifiers(game['game_id'], weather_index)
-    # Both teams play in the same stadium — same weather hits both
-    home_data = raw_team_score(home_slug, team_index, news_index, weather_mods)
-    away_data = raw_team_score(away_slug, team_index, news_index, weather_mods)
+    home_data = raw_team_score(home_slug, team_index, news_index, weather_mods, practice_index)
+    away_data = raw_team_score(away_slug, team_index, news_index, weather_mods, practice_index)
 
     spread = game['consensus'].get('spread') or 0.0
     edge = spread_to_implied_edge(spread, home_data['composite'], away_data['composite'])
@@ -378,7 +399,10 @@ def predict_game(game, team_index, news_index, weather_index=None):
                 "conditions":      weather_mods.get('weather'),
                 "notes":           weather_mods.get('notes'),
             },
-            "practice_trajectory": None,
+            "practice_trajectory": {
+                "home": practice_index.get(f"{home_slug}:{home}", {}).get('trajectory'),
+                "away": practice_index.get(f"{away_slug}:{away}", {}).get('trajectory'),
+            },
             "mbti_adjustment":     None,
             "coach_compatibility": None,
             "relationship_web":    None,
@@ -390,17 +414,19 @@ def main():
     import sys
     reset = '--reset' in sys.argv
 
-    odds_data    = load('odds.json')
-    players_data = load('players.json')
-    news_data    = load('news.json')
-    weather_data = load('weather.json')
-    existing     = load('predictions.json')
-    metadata     = load('metadata.json')
+    odds_data      = load('odds.json')
+    players_data   = load('players.json')
+    news_data      = load('news.json')
+    weather_data   = load('weather.json')
+    practice_data  = load('practice.json')
+    existing       = load('predictions.json')
+    metadata       = load('metadata.json')
 
     # Build indexes
-    team_index    = build_team_index(players_data['players'])
-    news_index    = {t['team_slug']: t for t in news_data.get('news', [])}
-    weather_index = weather_data.get('games', {})
+    team_index     = build_team_index(players_data['players'])
+    news_index     = {t['team_slug']: t for t in news_data.get('news', [])}
+    weather_index  = weather_data.get('games', {})
+    practice_index = practice_data.get('players', {})
 
     # Track existing game_ids to avoid duplicates (skip if reset)
     existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
@@ -417,7 +443,7 @@ def main():
                         p['closing_spread'] = game['consensus'].get('spread')
             continue
 
-        pred = predict_game(game, team_index, news_index, weather_index)
+        pred = predict_game(game, team_index, news_index, weather_index, practice_index)
         if pred:
             new_predictions.append(pred)
 

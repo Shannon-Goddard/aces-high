@@ -1,0 +1,38 @@
+name: Practice Reports
+
+on:
+  schedule:
+    # Wed/Thu/Fri at 19:00 UTC — after NFL teams release practice participation
+    - cron: '0 19 * * 3'
+    - cron: '0 19 * * 4'
+    - cron: '0 19 * * 5'
+  workflow_dispatch:
+
+jobs:
+  practice:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch practice reports
+        run: python scripts/fetch_practice.py
+
+      - name: Regenerate predictions with updated injury data
+        run: python scripts/predict.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "aces-high-bot"
+          git config user.email "bot@aces-high"
+          git add data/practice.json data/predictions.json data/metadata.json
+          git diff --staged --quiet || git commit -m "practice reports + predictions — $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --rebase && git push

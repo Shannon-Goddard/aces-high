@@ -14,16 +14,16 @@
       "pick_type": "underdog",
       "confidence": 20,
       "edge_score": -30.0,
-      "home_score": 28.1,
-      "away_score": 27.7,
+      "home_score": 7.1,
+      "away_score": 8.9,
       "home_breakdown": {
-        "composite": 28.1,
-        "raw": 35.5,
+        "composite": 7.1,
+        "raw": 23.9,
         "body": 77.1,
         "skill": 60.1,
         "adjusted_skill": 60.1,
         "hunger": 54.6,
-        "injury_penalty": 23.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -34,13 +34,13 @@
         "player_count": 91
       },
       "away_breakdown": {
-        "composite": 27.7,
-        "raw": 35.2,
+        "composite": 8.9,
+        "raw": 24.9,
         "body": 75.9,
         "skill": 63.9,
         "adjusted_skill": 63.9,
         "hunger": 55.4,
-        "injury_penalty": 31.2,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -55,7 +55,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -70,7 +70,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -91,7 +94,7 @@
       "confidence": 20,
       "edge_score": -30.0,
       "home_score": 29.5,
-      "away_score": 44.1,
+      "away_score": 29.0,
       "home_breakdown": {
         "composite": 29.5,
         "raw": 36.2,
@@ -108,13 +111,13 @@
         "player_count": 99
       },
       "away_breakdown": {
-        "composite": 44.1,
-        "raw": 44.3,
+        "composite": 29.0,
+        "raw": 35.9,
         "body": 80.9,
         "skill": 63.3,
         "adjusted_skill": 63.3,
         "hunger": 57.7,
-        "injury_penalty": 44.5,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -127,7 +130,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -140,7 +143,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -197,7 +203,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -210,7 +216,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -228,18 +237,18 @@
       "total": 45.3,
       "pick": "Buffalo Bills",
       "pick_type": "favorite",
-      "confidence": 80,
-      "edge_score": 30.0,
-      "home_score": 39.7,
+      "confidence": 52,
+      "edge_score": 2.0,
+      "home_score": 25.5,
       "away_score": 8.4,
       "home_breakdown": {
-        "composite": 39.7,
-        "raw": 41.8,
+        "composite": 25.5,
+        "raw": 34.0,
         "body": 74.6,
         "skill": 61.8,
         "adjusted_skill": 61.8,
         "hunger": 55.5,
-        "injury_penalty": 47.9,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -267,7 +276,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -280,7 +289,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -296,23 +308,23 @@
       "game_time": "2026-11-22T18:00:00Z",
       "spread": -11.5,
       "total": 49.0,
-      "pick": "Chicago Bears",
-      "pick_type": "favorite",
-      "confidence": 48,
-      "edge_score": -1.7,
-      "home_score": 36.0,
+      "pick": "New Orleans Saints",
+      "pick_type": "underdog",
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 8.8,
       "away_score": 25.0,
       "home_breakdown": {
-        "composite": 36.0,
-        "raw": 39.8,
+        "composite": 8.8,
+        "raw": 24.8,
         "body": 74.8,
         "skill": 65.2,
         "adjusted_skill": 65.2,
         "hunger": 53.0,
-        "injury_penalty": 0.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
-        "injury_flag": false,
+        "injury_flag": true,
         "distraction_flag": false,
         "weather_notes": [],
         "player_count": 90
@@ -337,7 +349,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -350,7 +362,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -411,7 +426,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -426,7 +441,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -446,16 +464,16 @@
       "pick_type": "underdog",
       "confidence": 20,
       "edge_score": -30.0,
-      "home_score": 26.7,
-      "away_score": 37.3,
+      "home_score": 10.8,
+      "away_score": 28.7,
       "home_breakdown": {
-        "composite": 26.7,
-        "raw": 34.7,
+        "composite": 10.8,
+        "raw": 26.0,
         "body": 77.1,
         "skill": 67.1,
         "adjusted_skill": 67.1,
         "hunger": 54.1,
-        "injury_penalty": 42.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -466,13 +484,13 @@
         "player_count": 108
       },
       "away_breakdown": {
-        "composite": 37.3,
-        "raw": 40.5,
+        "composite": 28.7,
+        "raw": 35.8,
         "body": 76.7,
         "skill": 65.9,
         "adjusted_skill": 65.9,
         "hunger": 56.6,
-        "injury_penalty": 68.4,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -487,7 +505,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -502,7 +520,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -522,16 +543,16 @@
       "pick_type": "underdog",
       "confidence": 80,
       "edge_score": 30.0,
-      "home_score": 36.7,
-      "away_score": 14.1,
+      "home_score": 29.8,
+      "away_score": 4.2,
       "home_breakdown": {
-        "composite": 36.7,
-        "raw": 40.2,
+        "composite": 29.8,
+        "raw": 36.4,
         "body": 78.3,
         "skill": 68.9,
         "adjusted_skill": 68.9,
         "hunger": 50.4,
-        "injury_penalty": 74.4,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -540,16 +561,16 @@
         "player_count": 99
       },
       "away_breakdown": {
-        "composite": 14.1,
-        "raw": 27.7,
+        "composite": 4.2,
+        "raw": 22.3,
         "body": 73.7,
         "skill": 58.2,
         "adjusted_skill": 58.2,
         "hunger": 55.3,
-        "injury_penalty": 0.0,
+        "injury_penalty": 36.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
-        "injury_flag": false,
+        "injury_flag": true,
         "distraction_flag": true,
         "weather_notes": [],
         "player_count": 115
@@ -559,7 +580,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -572,7 +593,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -633,7 +657,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -648,7 +672,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -666,18 +693,18 @@
       "total": 40.5,
       "pick": "Denver Broncos",
       "pick_type": "favorite",
-      "confidence": 80,
-      "edge_score": 30.0,
-      "home_score": 55.7,
+      "confidence": 57,
+      "edge_score": 7.3,
+      "home_score": 40.5,
       "away_score": 28.5,
       "home_breakdown": {
-        "composite": 55.7,
-        "raw": 50.6,
+        "composite": 40.5,
+        "raw": 42.3,
         "body": 81.6,
         "skill": 64.3,
         "adjusted_skill": 64.3,
         "hunger": 58.6,
-        "injury_penalty": 5.7,
+        "injury_penalty": 61.4,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -705,7 +732,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -718,7 +745,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -775,7 +805,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -788,7 +818,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -809,7 +842,7 @@
       "confidence": 20,
       "edge_score": -30.0,
       "home_score": 6.5,
-      "away_score": 40.6,
+      "away_score": 25.9,
       "home_breakdown": {
         "composite": 6.5,
         "raw": 23.6,
@@ -826,13 +859,13 @@
         "player_count": 102
       },
       "away_breakdown": {
-        "composite": 40.6,
-        "raw": 42.3,
+        "composite": 25.9,
+        "raw": 34.3,
         "body": 77.1,
         "skill": 62.2,
         "adjusted_skill": 62.2,
         "hunger": 51.9,
-        "injury_penalty": 46.3,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -845,7 +878,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -858,7 +891,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -878,16 +914,16 @@
       "pick_type": "favorite",
       "confidence": 20,
       "edge_score": -30.0,
-      "home_score": 11.5,
+      "home_score": 7.7,
       "away_score": 26.9,
       "home_breakdown": {
-        "composite": 11.5,
-        "raw": 26.3,
+        "composite": 7.7,
+        "raw": 24.2,
         "body": 67.2,
         "skill": 67.9,
         "adjusted_skill": 67.9,
         "hunger": 54.3,
-        "injury_penalty": 86.2,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -915,7 +951,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -928,7 +964,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -989,7 +1028,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1004,7 +1043,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1020,20 +1062,20 @@
       "game_time": "2026-11-26T18:00:00Z",
       "spread": 2.0,
       "total": 54.5,
-      "pick": "Chicago Bears",
-      "pick_type": "favorite",
-      "confidence": 26,
-      "edge_score": -24.3,
-      "home_score": 26.7,
-      "away_score": 36.0,
+      "pick": "Detroit Lions",
+      "pick_type": "underdog",
+      "confidence": 63,
+      "edge_score": 13.3,
+      "home_score": 10.8,
+      "away_score": 8.8,
       "home_breakdown": {
-        "composite": 26.7,
-        "raw": 34.7,
+        "composite": 10.8,
+        "raw": 26.0,
         "body": 77.1,
         "skill": 67.1,
         "adjusted_skill": 67.1,
         "hunger": 54.1,
-        "injury_penalty": 42.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -1044,16 +1086,16 @@
         "player_count": 108
       },
       "away_breakdown": {
-        "composite": 36.0,
-        "raw": 39.8,
+        "composite": 8.8,
+        "raw": 24.8,
         "body": 74.8,
         "skill": 65.2,
         "adjusted_skill": 65.2,
         "hunger": 53.0,
-        "injury_penalty": 0.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
-        "injury_flag": false,
+        "injury_flag": true,
         "distraction_flag": false,
         "weather_notes": [
           "dome \u2014 no weather impact"
@@ -1065,7 +1107,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1080,7 +1122,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1101,7 +1146,7 @@
       "confidence": 20,
       "edge_score": -30.0,
       "home_score": 24.1,
-      "away_score": 36.7,
+      "away_score": 29.8,
       "home_breakdown": {
         "composite": 24.1,
         "raw": 33.3,
@@ -1120,13 +1165,13 @@
         "player_count": 99
       },
       "away_breakdown": {
-        "composite": 36.7,
-        "raw": 40.2,
+        "composite": 29.8,
+        "raw": 36.4,
         "body": 78.3,
         "skill": 68.9,
         "adjusted_skill": 68.9,
         "hunger": 50.4,
-        "injury_penalty": 74.4,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1141,7 +1186,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1156,7 +1201,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1172,20 +1220,20 @@
       "game_time": "2026-11-27T01:20:00Z",
       "spread": -2.8,
       "total": 50.5,
-      "pick": "Buffalo Bills",
-      "pick_type": "favorite",
-      "confidence": 75,
-      "edge_score": 24.7,
-      "home_score": 39.7,
+      "pick": "Kansas City Chiefs",
+      "pick_type": "underdog",
+      "confidence": 27,
+      "edge_score": -22.7,
+      "home_score": 25.5,
       "away_score": 29.5,
       "home_breakdown": {
-        "composite": 39.7,
-        "raw": 41.8,
+        "composite": 25.5,
+        "raw": 34.0,
         "body": 74.6,
         "skill": 61.8,
         "adjusted_skill": 61.8,
         "hunger": 55.5,
-        "injury_penalty": 47.9,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1213,7 +1261,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1226,7 +1274,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1246,31 +1297,31 @@
       "pick_type": "favorite",
       "confidence": 20,
       "edge_score": -30.0,
-      "home_score": 14.1,
-      "away_score": 55.7,
+      "home_score": 4.2,
+      "away_score": 40.5,
       "home_breakdown": {
-        "composite": 14.1,
-        "raw": 27.7,
+        "composite": 4.2,
+        "raw": 22.3,
         "body": 73.7,
         "skill": 58.2,
         "adjusted_skill": 58.2,
         "hunger": 55.3,
-        "injury_penalty": 0.0,
+        "injury_penalty": 36.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
-        "injury_flag": false,
+        "injury_flag": true,
         "distraction_flag": true,
         "weather_notes": [],
         "player_count": 115
       },
       "away_breakdown": {
-        "composite": 55.7,
-        "raw": 50.6,
+        "composite": 40.5,
+        "raw": 42.3,
         "body": 81.6,
         "skill": 64.3,
         "adjusted_skill": 64.3,
         "hunger": 58.6,
-        "injury_penalty": 5.7,
+        "injury_penalty": 61.4,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1283,7 +1334,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1296,7 +1347,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1312,20 +1366,20 @@
       "game_time": "2026-11-29T18:00:00Z",
       "spread": -7.0,
       "total": 42.5,
-      "pick": "Minnesota Vikings",
-      "pick_type": "favorite",
-      "confidence": 69,
-      "edge_score": 19.0,
-      "home_score": 40.6,
+      "pick": "Atlanta Falcons",
+      "pick_type": "underdog",
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 25.9,
       "away_score": 27.9,
       "home_breakdown": {
-        "composite": 40.6,
-        "raw": 42.3,
+        "composite": 25.9,
+        "raw": 34.3,
         "body": 77.1,
         "skill": 62.2,
         "adjusted_skill": 62.2,
         "hunger": 51.9,
-        "injury_penalty": 46.3,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1357,7 +1411,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1372,7 +1426,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1390,18 +1447,18 @@
       "total": 44.0,
       "pick": "Baltimore Ravens",
       "pick_type": "underdog",
-      "confidence": 24,
-      "edge_score": -26.3,
-      "home_score": 28.1,
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 7.1,
       "away_score": 30.2,
       "home_breakdown": {
-        "composite": 28.1,
-        "raw": 35.5,
+        "composite": 7.1,
+        "raw": 23.9,
         "body": 77.1,
         "skill": 60.1,
         "adjusted_skill": 60.1,
         "hunger": 54.6,
-        "injury_penalty": 23.0,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -1433,7 +1490,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1448,7 +1505,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1505,7 +1565,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1518,7 +1578,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1534,20 +1597,20 @@
       "game_time": "2026-11-29T18:00:00Z",
       "spread": 4.0,
       "total": 44.5,
-      "pick": "Indianapolis Colts",
-      "pick_type": "underdog",
-      "confidence": 61,
-      "edge_score": 11.3,
-      "home_score": 27.7,
+      "pick": "New York Giants",
+      "pick_type": "favorite",
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 8.9,
       "away_score": 28.3,
       "home_breakdown": {
-        "composite": 27.7,
-        "raw": 35.2,
+        "composite": 8.9,
+        "raw": 24.9,
         "body": 75.9,
         "skill": 63.9,
         "adjusted_skill": 63.9,
         "hunger": 55.4,
-        "injury_penalty": 31.2,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -1579,7 +1642,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1594,7 +1657,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1651,7 +1717,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1664,7 +1730,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1721,7 +1790,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1734,7 +1803,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1795,7 +1867,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1810,7 +1882,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1830,16 +1905,16 @@
       "pick_type": "underdog",
       "confidence": 80,
       "edge_score": 30.0,
-      "home_score": 44.1,
-      "away_score": 11.5,
+      "home_score": 29.0,
+      "away_score": 7.7,
       "home_breakdown": {
-        "composite": 44.1,
-        "raw": 44.3,
+        "composite": 29.0,
+        "raw": 35.9,
         "body": 80.9,
         "skill": 63.3,
         "adjusted_skill": 63.3,
         "hunger": 57.7,
-        "injury_penalty": 44.5,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1850,13 +1925,13 @@
         "player_count": 99
       },
       "away_breakdown": {
-        "composite": 11.5,
-        "raw": 26.3,
+        "composite": 7.7,
+        "raw": 24.2,
         "body": 67.2,
         "skill": 67.9,
         "adjusted_skill": 67.9,
         "hunger": 54.3,
-        "injury_penalty": 86.2,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
@@ -1871,7 +1946,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1886,7 +1961,10 @@
             "dome \u2014 no weather impact"
           ]
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -1907,7 +1985,7 @@
       "confidence": 20,
       "edge_score": -30.0,
       "home_score": 6.5,
-      "away_score": 27.8,
+      "away_score": 26.2,
       "home_breakdown": {
         "composite": 6.5,
         "raw": 23.6,
@@ -1924,13 +2002,13 @@
         "player_count": 102
       },
       "away_breakdown": {
-        "composite": 27.8,
-        "raw": 35.3,
+        "composite": 26.2,
+        "raw": 34.4,
         "body": 77.0,
         "skill": 62.0,
         "adjusted_skill": 62.0,
         "hunger": 54.2,
-        "injury_penalty": 94.2,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -1943,7 +2021,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1956,7 +2034,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -2013,7 +2094,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -2026,7 +2107,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
@@ -2046,16 +2130,16 @@
       "pick_type": "favorite",
       "confidence": 80,
       "edge_score": 30.0,
-      "home_score": 37.3,
+      "home_score": 28.7,
       "away_score": 2.8,
       "home_breakdown": {
-        "composite": 37.3,
-        "raw": 40.5,
+        "composite": 28.7,
+        "raw": 35.8,
         "body": 76.7,
         "skill": 65.9,
         "adjusted_skill": 65.9,
         "hunger": 56.6,
-        "injury_penalty": 68.4,
+        "injury_penalty": 100.0,
         "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
@@ -2083,7 +2167,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:07 UTC",
+      "predicted_at": "2026-11-18 05:10 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -2096,7 +2180,10 @@
           "conditions": null,
           "notes": []
         },
-        "practice_trajectory": null,
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
