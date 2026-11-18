@@ -280,9 +280,10 @@ function renderDetail(slug) {
 }
 
 async function init() {
+  const bust = `?v=${Date.now()}`;
   const [predRes, playersRes] = await Promise.all([
-    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
-    fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => [])
+    fetch(`${ROOT}data/predictions.json${bust}`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/players.json${bust}`).then(r => r.json()).catch(e => { console.error('players.json fetch failed:', e); return []; })
   ]);
 
   const predictions = predRes.predictions || [];

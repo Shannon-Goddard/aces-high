@@ -234,7 +234,8 @@ function loadMore() {
 }
 
 async function init() {
-  const data = await fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => []);
+  const bust = `?v=${Date.now()}`;
+  const data = await fetch(`${ROOT}data/players.json${bust}`).then(r => r.json()).catch(e => { console.error('players.json:', e); return []; });
   allPlayers = Array.isArray(data) ? data : (data.players || []);
 
   // Populate team dropdown
