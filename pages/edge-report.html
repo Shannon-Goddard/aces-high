@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Edge Report</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Edge Report</div>
+    <div class="page-sub" id="report-sub">Loading...</div>
+  </div>
+
+  <!-- Week summary strip -->
+  <div id="week-strip" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem"></div>
+
+  <!-- Sharp warnings banner -->
+  <div id="sharp-banner" style="display:none;margin-bottom:1.5rem"></div>
+
+  <!-- Best Bets -->
+  <div id="best-bets-section" style="display:none;margin-bottom:2.5rem">
+    <div class="section-label">Best Bets This Week</div>
+    <div id="best-bets-grid" class="grid-2"></div>
+  </div>
+
+  <!-- Active Bets -->
+  <div id="active-bets-section" style="display:none;margin-bottom:2.5rem">
+    <div class="section-label">Active Bets</div>
+    <div id="active-bets-grid" class="grid-2"></div>
+  </div>
+
+  <!-- Stay Away -->
+  <div id="stay-away-section" style="display:none;margin-bottom:2.5rem">
+    <div class="section-label">Stay Away — Too Close to Call</div>
+    <div id="stay-away-list"></div>
+  </div>
+
+  <!-- Skip list -->
+  <div id="skip-section" style="display:none;margin-bottom:2rem">
+    <div class="section-label" style="cursor:pointer" onclick="toggleSkip()">
+      Below Threshold <span id="skip-toggle-icon" style="color:var(--text-muted);font-size:0.8rem">▼ show</span>
+    </div>
+    <div id="skip-list" style="display:none"></div>
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT = '../';
+const CONF_THRESHOLD = 40;
+const BEST_BET_THRESHOLD = 70;
+const COIN_FLIP_MARGIN = 2.0;
+
+const TEAM_SLUGS = {
+  'Buffalo Bills':'buf','Miami Dolphins':'mia','New England Patriots':'ne',
+  'New York Jets':'nyj','Baltimore Ravens':'bal','Cincinnati Bengals':'cin',
+  'Cleveland Browns':'cle','Pittsburgh Steelers':'pit','Houston Texans':'hou',
+  'Indianapolis Colts':'ind','Jacksonville Jaguars':'jax','Tennessee Titans':'ten',
+  'Denver Broncos':'den','Kansas City Chiefs':'kc','Las Vegas Raiders':'lv',
+  'Los Angeles Chargers':'lac','Dallas Cowboys':'dal','New York Giants':'nyg',
+  'Philadelphia Eagles':'phi','Washington Commanders':'wsh','Chicago Bears':'chi',
+  'Detroit Lions':'det','Green Bay Packers':'gb','Minnesota Vikings':'min',
+  'Atlanta Falcons':'atl','Carolina Panthers':'car','New Orleans Saints':'no',
+  'Tampa Bay Buccaneers':'tb','Arizona Cardinals':'ari','Los Angeles Rams':'lar',
+  'San Francisco 49ers':'sf','Seattle Seahawks':'sea'
+};
+
+function slugFor(n) { return TEAM_SLUGS[n] || n.toLowerCase().replace(/\s+/g,'').slice(0,3); }
+function logo(slug, size=24) {
+  return `<img src="https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png" style="width:${size}px;height:${size}px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'">`;
+}
+
+// ── Plain-English reasoning ───────────────────────────────────────────────────
+function buildReasoning(p) {
+  const hb = p.home_breakdown || {};
+  const ab = p.away_breakdown || {};
+  const pickIsHome = p.pick === p.home_team;
+  const pickBd  = pickIsHome ? hb : ab;
+  const otherBd = pickIsHome ? ab : hb;
+  const lines = [];
+
+  // Composite gap
+  const gap = Math.abs((pickBd.composite || 0) - (otherBd.composite || 0));
+  if (gap >= 15) lines.push(`Model sees a <strong>dominant edge</strong> — composite gap of ${gap.toFixed(1)} points.`);
+  else if (gap >= 8) lines.push(`Solid composite advantage of ${gap.toFixed(1)} points over the opponent.`);
+  else if (gap >= 4) lines.push(`Modest composite edge of ${gap.toFixed(1)} points.`);
+
+  // Spread context
+  if (p.pick_type === 'underdog') {
+    const absSpread = Math.abs(p.spread || 0);
+    if (absSpread >= 10) lines.push(`Getting ${absSpread} points as the underdog — model says the gap isn't that wide.`);
+    else lines.push(`Taking the points as the underdog.`);
+  } else {
+    lines.push(`Laying the spread as the favorite.`);
+  }
+
+  // Silence bonus
+  if (pickBd.silence_bonus && !otherBd.silence_bonus) lines.push(`${p.pick} is operating in silence — no noise, no distractions.`);
+  else if (pickBd.silence_bonus) lines.push(`${p.pick} has the silence bonus.`);
+
+  // Injury flags
+  if (pickBd.injury_flag && otherBd.injury_flag) lines.push(`Both teams flagged for injuries — no edge there.`);
+  else if (!pickBd.injury_flag && otherBd.injury_flag) lines.push(`${p.pick} is healthy; opponent is banged up.`);
+  else if (pickBd.injury_flag) lines.push(`${p.pick} is carrying injury concerns — factor that in.`);
+
+  // Distraction
+  if (otherBd.distraction_flag) lines.push(`Opponent has a distraction flag — locker room noise.`);
+  if (pickBd.distraction_flag) lines.push(`${p.pick} has a distraction flag — mild concern.`);
+
+  // Weather
+  const wx = (p.modifiers_applied || {}).weather || {};
+  if (wx.dome) lines.push(`Dome game — weather is a non-factor.`);
+  else if (wx.wind_flag) lines.push(`Wind is a factor today — passing game may be limited.`);
+  else if (wx.precip_flag) lines.push(`Rain or snow in the forecast — expect a grind.`);
+  else if (wx.cold_flag) lines.push(`Cold game — kicker and passing efficiency may dip.`);
+
+  // Practice trajectory
+  const pt = (p.modifiers_applied || {}).practice_trajectory || {};
+  const pickTraj  = pickIsHome ? pt.home : pt.away;
+  const otherTraj = pickIsHome ? pt.away : pt.home;
+  if (pickTraj && pickTraj < 25) lines.push(`${p.pick}'s practice trajectory is clean — trending healthy.`);
+  if (otherTraj && otherTraj > 60) lines.push(`Opponent has a high practice concern score (${otherTraj}) — key players may be limited.`);
+
+  // Line movement
+  const lm = p.line_movement;
+  if (lm && lm.sharp_signal === 'with_pick') lines.push(`Sharp money is moving <strong>with this pick</strong> — line moved ${Math.abs(lm.spread_move).toFixed(1)} pts our way.`);
+  if (lm && lm.sharp_signal === 'against_pick') lines.push(`⚠ Sharp money moved <strong>against this pick</strong> — ${Math.abs(lm.spread_move).toFixed(1)} pts.`);
+
+  return lines;
+}
+
+function pickLabel(p) {
+  if (p.spread === null || p.spread === undefined) return p.pick;
+  if (p.pick === p.home_team) {
+    return `${p.home_team} ${p.spread > 0 ? '+' : ''}${p.spread}`;
+  }
+  const awayLine = (-p.spread).toFixed(1);
+  return `${p.away_team} ${p.spread < 0 ? '+' : ''}${awayLine}`;
+}
+
+function confBadge(c) {
+  const cls = c >= 70 ? 'score-high' : c >= 50 ? 'score-mid' : 'score-low';
+  return `<span class="score ${cls}">${c}</span>`;
+}
+
+function edgeBadge(e) {
+  const cls = e >= 20 ? 'text-green' : e >= 5 ? 'text-yellow' : e >= 0 ? 'text-dim' : 'text-red';
+  return `<span class="${cls}" style="font-size:0.8rem;font-weight:700">Edge ${e >= 0 ? '+' : ''}${e}</span>`;
+}
+
+function gameTimeStr(t) {
+  if (!t) return '';
+  return new Date(t).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' });
+}
+
+// ── Best Bet / Active Bet card ────────────────────────────────────────────────
+function renderBetCard(p, isBest) {
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+  const awaySlug = p.away_slug || slugFor(p.away_team);
+  const pickSlug = p.pick === p.home_team ? homeSlug : awaySlug;
+  const reasons  = buildReasoning(p);
+  const lm       = p.line_movement;
+  const sharpAgainst = lm && lm.sharp_signal === 'against_pick';
+
+  const borderStyle = isBest
+    ? 'border-color:rgba(201,168,76,0.4)'
+    : 'border-color:rgba(46,204,113,0.2)';
+
+  return `
+    <div class="card" style="${borderStyle}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:0.5rem">
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+          ${logo(awaySlug)} <span style="color:var(--text-dim);font-size:0.8rem">${p.away_team}</span>
+          <span style="color:var(--text-muted);font-size:0.75rem">@</span>
+          ${logo(homeSlug)} <span style="color:var(--text-dim);font-size:0.8rem">${p.home_team}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.4rem;flex-shrink:0">
+          ${isBest ? '<span style="font-size:0.68rem;font-weight:800;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase">Best Bet</span>' : ''}
+          ${confBadge(p.confidence)}
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-wrap:wrap">
+        ${logo(pickSlug, 32)}
+        <div>
+          <div style="font-size:1.05rem;font-weight:800;color:${isBest ? 'var(--gold)' : 'var(--text)'}">▶ ${pickLabel(p)}</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)">${p.pick_type} · ${gameTimeStr(p.game_time)} · Wk ${p.week}</div>
+        </div>
+        <div style="margin-left:auto">${edgeBadge(p.edge_score)}</div>
+      </div>
+
+      ${sharpAgainst ? `<div style="background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.25);border-radius:4px;padding:0.5rem 0.75rem;margin-bottom:0.75rem;font-size:0.78rem;color:var(--red)">⚠ Sharp money moved against this pick — proceed with caution</div>` : ''}
+
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7">
+        ${reasons.map(r => `<div style="padding:0.15rem 0;padding-left:0.75rem;border-left:2px solid var(--border)">→ ${r}</div>`).join('')}
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.875rem;padding-top:0.75rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted)">
+        <span>Spread: <span style="color:var(--text-dim)">${p.home_team} ${(p.spread||0) > 0 ? '+' : ''}${p.spread}</span></span>
+        <span>O/U: <span style="color:var(--text-dim)">${p.total || '—'}</span></span>
+        <a href="./predictions.html#${p.game_id}" style="font-size:0.72rem;color:var(--gold-dim)">Full breakdown →</a>
+      </div>
+    </div>`;
+}
+
+// ── Stay Away card ────────────────────────────────────────────────────────────
+function renderStayAway(p) {
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+  const awaySlug = p.away_slug || slugFor(p.away_team);
+  const gap = Math.abs((p.home_score || 0) - (p.away_score || 0));
+  return `
+    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.5rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:0.4rem">
+        ${logo(awaySlug)} <span style="font-size:0.83rem">${p.away_team}</span>
+        <span style="color:var(--text-muted);font-size:0.75rem">@</span>
+        ${logo(homeSlug)} <span style="font-size:0.83rem">${p.home_team}</span>
+      </div>
+      <span class="flag flag-distract" style="margin-left:auto">Coin flip</span>
+      <span style="font-size:0.78rem;color:var(--text-muted)">Composite gap: ${gap.toFixed(1)} pts — model has no conviction here</span>
+    </div>`;
+}
+
+// ── Skip row ──────────────────────────────────────────────────────────────────
+function renderSkipRow(p) {
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+  const awaySlug = p.away_slug || slugFor(p.away_team);
+  const pickSlug = p.pick === p.home_team ? homeSlug : awaySlug;
+
+  let reason = '';
+  if (p.edge_score <= -20) reason = 'Model strongly disagrees with the spread — no edge.';
+  else if (p.edge_score < 0) reason = `Negative edge (${p.edge_score}) — line is against us.`;
+  else reason = `Confidence ${p.confidence} — below the ${CONF_THRESHOLD} threshold.`;
+
+  return `
+    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 1rem;border-bottom:1px solid var(--border);font-size:0.8rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:0.35rem;min-width:280px">
+        ${logo(awaySlug,18)} <span style="color:var(--text-dim)">${p.away_team}</span>
+        <span style="color:var(--text-muted)">@</span>
+        ${logo(homeSlug,18)} <span style="color:var(--text-dim)">${p.home_team}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem">
+        ${logo(pickSlug,16)}
+        <span style="color:var(--text-muted)">Pick: ${p.pick}</span>
+        ${confBadge(p.confidence)}
+      </div>
+      <span style="color:var(--text-muted);margin-left:auto">${reason}</span>
+    </div>`;
+}
+
+// ── Week strip tile ───────────────────────────────────────────────────────────
+function stripTile(value, label, color) {
+  return `<div class="summary-tile" style="min-width:120px;flex:1">
+    <div class="tile-value" style="font-size:1.3rem;color:${color || 'var(--gold)'}">${value}</div>
+    <div class="tile-label">${label}</div>
+  </div>`;
+}
+
+let skipOpen = false;
+function toggleSkip() {
+  skipOpen = !skipOpen;
+  document.getElementById('skip-list').style.display = skipOpen ? 'block' : 'none';
+  document.getElementById('skip-toggle-icon').textContent = skipOpen ? '▲ hide' : '▼ show';
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+async function init() {
+  const [predRes, metaRes, ledgerRes] = await Promise.all([
+    fetch(`${ROOT}data/predictions.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/metadata.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})),
+    fetch(`${ROOT}data/ledger.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({ bets: [] }))
+  ]);
+
+  const week   = metaRes.week || '—';
+  const season = metaRes.season || '2025';
+  document.getElementById('report-sub').textContent =
+    `Season ${season} · Week ${week} · Generated ${metaRes.last_prediction || 'pending'}`;
+
+  const allPreds = (predRes.predictions || []).filter(p => p.week == week);
+  if (!allPreds.length) {
+    document.getElementById('report-sub').textContent = 'No predictions available yet.';
+    return;
+  }
+
+  // Partition
+  const bestBets   = allPreds.filter(p => p.confidence >= BEST_BET_THRESHOLD).sort((a,b) => b.confidence - a.confidence);
+  const activeBets = allPreds.filter(p => p.confidence >= CONF_THRESHOLD && p.confidence < BEST_BET_THRESHOLD).sort((a,b) => b.confidence - a.confidence);
+  const stayAway   = allPreds.filter(p => {
+    const gap = Math.abs((p.home_score || 0) - (p.away_score || 0));
+    return gap < COIN_FLIP_MARGIN && p.confidence < CONF_THRESHOLD;
+  });
+  const skips = allPreds.filter(p => p.confidence < CONF_THRESHOLD && !stayAway.includes(p))
+    .sort((a,b) => b.confidence - a.confidence);
+
+  const sharpWarnings = allPreds.filter(p =>
+    p.line_movement && p.line_movement.sharp_signal === 'against_pick'
+  );
+
+  // Week strip
+  const openLedgerBets = (ledgerRes.bets || []).filter(b => b.status === 'open' && b.week == week);
+  document.getElementById('week-strip').innerHTML = [
+    stripTile(allPreds.length, 'Games This Week', 'var(--text)'),
+    stripTile(bestBets.length + activeBets.length, 'Bets Placed', 'var(--green)'),
+    stripTile(bestBets.length, 'Best Bets', 'var(--gold)'),
+    stripTile(stayAway.length, 'Stay Away', 'var(--yellow)'),
+    stripTile(sharpWarnings.length, 'Sharp Warnings', sharpWarnings.length > 0 ? 'var(--red)' : 'var(--text-muted)'),
+    stripTile(openLedgerBets.length, 'Open in Ledger', 'var(--text-dim)')
+  ].join('');
+
+  // Sharp warnings banner
+  if (sharpWarnings.length) {
+    document.getElementById('sharp-banner').style.display = 'block';
+    document.getElementById('sharp-banner').innerHTML = `
+      <div style="background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.3);border-radius:var(--radius);padding:1rem 1.25rem">
+        <div style="font-size:0.72rem;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">⚠ Sharp Money Alert</div>
+        <div style="font-size:0.85rem;color:var(--text-dim)">
+          ${sharpWarnings.map(p => {
+            const move = Math.abs(p.line_movement.spread_move).toFixed(1);
+            return `<div style="padding:0.2rem 0"><strong>${p.pick}</strong> — line moved ${move} pts against our pick in ${p.away_team} @ ${p.home_team}</div>`;
+          }).join('')}
+        </div>
+      </div>`;
+  }
+
+  // Best Bets
+  if (bestBets.length) {
+    document.getElementById('best-bets-section').style.display = 'block';
+    document.getElementById('best-bets-grid').innerHTML = bestBets.map(p => renderBetCard(p, true)).join('');
+  }
+
+  // Active Bets
+  if (activeBets.length) {
+    document.getElementById('active-bets-section').style.display = 'block';
+    document.getElementById('active-bets-grid').innerHTML = activeBets.map(p => renderBetCard(p, false)).join('');
+  }
+
+  // Stay Away
+  if (stayAway.length) {
+    document.getElementById('stay-away-section').style.display = 'block';
+    document.getElementById('stay-away-list').innerHTML = stayAway.map(renderStayAway).join('');
+  }
+
+  // Skips
+  if (skips.length) {
+    document.getElementById('skip-section').style.display = 'block';
+    document.getElementById('skip-list').innerHTML =
+      `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">` +
+      skips.map(renderSkipRow).join('') +
+      `</div>`;
+  }
+}
+
+init();
+</script>
+
+<style>
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.875rem;
+}
+</style>
+</body>
+</html>
