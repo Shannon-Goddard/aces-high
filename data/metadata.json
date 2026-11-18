@@ -80,9 +80,10 @@
   "odds_snapshot": "opening",
   "api_remaining": "491",
   "last_coaches_fetch": "2026-11-18 20:34:02 UTC",
-  "last_personality_inference": "2026-11-18 20:37:47 UTC",
+  "last_personality_inference": "2026-11-18 21:42:59 UTC",
   "personality_summary": {
     "total_players": 3216,
+    "compat_computed": 3216,
     "type_distribution": {
       "ESFP": 398,
       "ESTP": 371,

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-18 21:45:32 UTC",
+  "last_updated": "2026-11-18 19:44:21 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -2120,7 +2120,7 @@
     {
       "team_slug": "buf",
       "team_name": "Buffalo Bills",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 2,
       "headlines": [
         {
@@ -2151,7 +2151,7 @@
     {
       "team_slug": "mia",
       "team_name": "Miami Dolphins",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 2,
       "headlines": [
         {
@@ -2186,7 +2186,7 @@
     {
       "team_slug": "ne",
       "team_name": "New England Patriots",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 4,
       "headlines": [
         {
@@ -2236,15 +2236,9 @@
     {
       "team_slug": "nyj",
       "team_name": "New York Jets",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
-      "headline_count": 4,
+      "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 2,
       "headlines": [
-        {
-          "headline": "Jets QB Geno Smith (ankle) intends to play vs. Chargers: 'That's the plan'",
-          "description": "Jets quarterback Geno Smith says he intends to play Sunday against the Chargers despite still walking with a noticeable limp due to an ankle injury.",
-          "published": "2026-11-18T21:09:21Z",
-          "source": "espn"
-        },
         {
           "headline": "2027 NFL draft: Dolphins, Titans, Eagles, Jets, Chargers in race for No. 1 pick",
           "description": "Five NFL teams have at least 5% odds to land the No. 1 pick in 2027, per ESPN's Football Power Index: the Dolphins, Titans, Eagles, Jets and Chargers.",
@@ -2256,25 +2250,13 @@
           "description": "Why Cockcroft likes the Jets D/ST for Week 11",
           "published": "2026-11-17T22:29:16Z",
           "source": "espn"
-        },
-        {
-          "headline": "Jets QB Smith (ankle) intends to play vs. Chargers: 'That's the plan'",
-          "description": "Jets quarterback Geno Smith says he intends to play Sunday against the Chargers despite still walking with a noticeable limp due to an ankle injury.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
-          "source": "espn_rss"
         }
       ],
-      "keywords_found": {
-        "injury": [
-          "injury",
-          "ankle",
-          "back"
-        ]
-      },
-      "silence_bonus": false,
-      "silence_reason": null,
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
       "flags": {
-        "injury": true,
+        "injury": false,
         "distraction": false,
         "trade": false,
         "coach": false,
@@ -2285,15 +2267,9 @@
     {
       "team_slug": "bal",
       "team_name": "Baltimore Ravens",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
-      "headline_count": 5,
+      "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 3,
       "headlines": [
-        {
-          "headline": "Ravens' Flowers 'super frustrated' by latest late-game fumble",
-          "description": "Ravens wide receiver Zay Flowers said he was \"super frustrated\" after having the ball ripped away around midfield in the final two minutes of a loss to the Chargers on Monday night.",
-          "published": "2026-11-18T20:29:38Z",
-          "source": "espn"
-        },
         {
           "headline": "The NFL's current worst team? Lamar-less Ravens making that case",
           "description": "The Ravens have gone 38 days without a win. It has been 24 days since they've had a lead.",
@@ -2305,12 +2281,6 @@
           "description": "Baltimore Ravens coach Jesse Minter had some strong words when addressing the team's identity on Monday.",
           "published": "2026-11-18T17:42:12Z",
           "source": "espn"
-        },
-        {
-          "headline": "Ravens WR Flowers 'super frustrated' by latest late-game fumble",
-          "description": "Ravens wide receiver Zay Flowers said he was \"super frustrated\" after having the ball ripped away around midfield in the final two minutes of a loss to the Chargers on Monday night.",
-          "published": "Wed, 18 Nov 2026 15:48:52 EST",
-          "source": "espn_rss"
         },
         {
           "headline": "The NFL's current worst team? Lamar-less Ravens making that case",
@@ -2338,7 +2308,7 @@
     {
       "team_slug": "cin",
       "team_name": "Cincinnati Bengals",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -2363,7 +2333,7 @@
     {
       "team_slug": "cle",
       "team_name": "Cleveland Browns",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -2392,7 +2362,7 @@
     {
       "team_slug": "pit",
       "team_name": "Pittsburgh Steelers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 5,
       "headlines": [
         {
@@ -2402,9 +2372,9 @@
           "source": "espn"
         },
         {
-          "headline": "Sources: Mason McCormick avoided ankle fracture; Steelers place guard on IR",
-          "description": "Steelers guard Mason McCormick, who has been placed on injured reserve, does not need surgery after he was carted off the field with an ankle injury, sources told NFL Network.",
-          "published": "2026-11-18T19:43:15Z",
+          "headline": "Sources: Steelers G Mason McCormick avoided fracture, won't need ankle surgery",
+          "description": "Steelers guard Mason McCormick does not need surgery after he was carted off the field with an ankle injury, sources told NFL Network.",
+          "published": "2026-11-18T13:14:25Z",
           "source": "espn"
         },
         {
@@ -2416,13 +2386,13 @@
         {
           "headline": "Eagles' Sirianni sticking with Milton as QB1, Mannion as offensive playcaller",
           "description": "QB Joe Milton will start again for the Eagles on Sunday and Sean Mannion will remain as the offensive playcaller against the Steelers, coach Nick Sirianni said.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         },
         {
-          "headline": "Steelers G McCormick placed on IR, could return for playoffs, sources say",
-          "description": "Steelers guard Mason McCormick, who has been placed on injured reserve, does not need surgery after he was carted off the field with an ankle injury, sources told NFL Network.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "headline": "Sources: Steelers G McCormick avoided ankle fracture, could return for playoffs",
+          "description": "Steelers guard Mason McCormick does not need surgery after he was carted off the field with an ankle injury, sources told NFL Network.",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2431,9 +2401,7 @@
           "arrest"
         ],
         "injury": [
-          "injured",
           "injury",
-          "placed on ir",
           "surgery",
           "fracture",
           "ankle"
@@ -2456,7 +2424,7 @@
     {
       "team_slug": "hou",
       "team_name": "Houston Texans",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 3,
       "headlines": [
         {
@@ -2497,7 +2465,7 @@
     {
       "team_slug": "ind",
       "team_name": "Indianapolis Colts",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 2,
       "headlines": [
         {
@@ -2532,7 +2500,7 @@
     {
       "team_slug": "jax",
       "team_name": "Jacksonville Jaguars",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 2,
       "headlines": [
         {
@@ -2544,7 +2512,7 @@
         {
           "headline": "Jaguars rule starting center Hainsey (knee) out for Giants game",
           "description": "Jaguars center Robert Hainsey will miss Sunday's game against the Giants because of a knee injury, coach Liam Coen said Wednesday.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2569,13 +2537,13 @@
     {
       "team_slug": "ten",
       "team_name": "Tennessee Titans",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 5,
       "headlines": [
         {
           "headline": "Titans WR Wan'Dale Robinson out for season with ankle injury",
           "description": "Titans wide receiver Wan'Dale Robinson will miss the rest of the season due to an ankle injury, coach Robert Saleh said Wednesday.",
-          "published": "2026-11-18T19:45:54Z",
+          "published": "2026-11-18T19:41:41Z",
           "source": "espn"
         },
         {
@@ -2599,7 +2567,7 @@
         {
           "headline": "Titans WR Robinson out for season with ankle injury",
           "description": "Titans wide receiver Wan'Dale Robinson will miss the rest of the season due to an ankle injury, coach Robert Saleh said Wednesday.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2625,7 +2593,7 @@
     {
       "team_slug": "den",
       "team_name": "Denver Broncos",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -2650,7 +2618,7 @@
     {
       "team_slug": "kc",
       "team_name": "Kansas City Chiefs",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -2675,7 +2643,7 @@
     {
       "team_slug": "lv",
       "team_name": "Las Vegas Raiders",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -2700,51 +2668,21 @@
     {
       "team_slug": "lac",
       "team_name": "Los Angeles Chargers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
-      "headline_count": 5,
+      "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 1,
       "headlines": [
-        {
-          "headline": "Jets QB Geno Smith (ankle) intends to play vs. Chargers: 'That's the plan'",
-          "description": "Jets quarterback Geno Smith says he intends to play Sunday against the Chargers despite still walking with a noticeable limp due to an ankle injury.",
-          "published": "2026-11-18T21:09:21Z",
-          "source": "espn"
-        },
-        {
-          "headline": "Ravens' Flowers 'super frustrated' by latest late-game fumble",
-          "description": "Ravens wide receiver Zay Flowers said he was \"super frustrated\" after having the ball ripped away around midfield in the final two minutes of a loss to the Chargers on Monday night.",
-          "published": "2026-11-18T20:29:38Z",
-          "source": "espn"
-        },
         {
           "headline": "2027 NFL draft: Dolphins, Titans, Eagles, Jets, Chargers in race for No. 1 pick",
           "description": "Five NFL teams have at least 5% odds to land the No. 1 pick in 2027, per ESPN's Football Power Index: the Dolphins, Titans, Eagles, Jets and Chargers.",
           "published": "2026-11-18T13:32:42Z",
           "source": "espn"
-        },
-        {
-          "headline": "Jets QB Smith (ankle) intends to play vs. Chargers: 'That's the plan'",
-          "description": "Jets quarterback Geno Smith says he intends to play Sunday against the Chargers despite still walking with a noticeable limp due to an ankle injury.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
-          "source": "espn_rss"
-        },
-        {
-          "headline": "Ravens WR Flowers 'super frustrated' by latest late-game fumble",
-          "description": "Ravens wide receiver Zay Flowers said he was \"super frustrated\" after having the ball ripped away around midfield in the final two minutes of a loss to the Chargers on Monday night.",
-          "published": "Wed, 18 Nov 2026 15:48:52 EST",
-          "source": "espn_rss"
         }
       ],
-      "keywords_found": {
-        "injury": [
-          "injury",
-          "ankle",
-          "back"
-        ]
-      },
-      "silence_bonus": false,
-      "silence_reason": null,
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
       "flags": {
-        "injury": true,
+        "injury": false,
         "distraction": false,
         "trade": false,
         "coach": false,
@@ -2755,7 +2693,7 @@
     {
       "team_slug": "dal",
       "team_name": "Dallas Cowboys",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 7,
       "headlines": [
         {
@@ -2773,7 +2711,7 @@
         {
           "headline": "Pettine to take over defensive playcalling for Cowboys; Parker still DC",
           "description": "Christian Parker will remain as the Cowboys' defensive coordinator, but Mike Pettine will call the defense on game day, coach Brian Schottenhiemer said.",
-          "published": "2026-11-18T21:29:26Z",
+          "published": "2026-11-18T18:39:08Z",
           "source": "espn"
         },
         {
@@ -2791,7 +2729,7 @@
         {
           "headline": "Pettine to take over defensive playcalling for Cowboys; Parker still DC",
           "description": "Christian Parker will remain as the Cowboys' defensive coordinator, but Mike Pettine will call the defense on game day, coach Brian Schottenhiemer said.",
-          "published": "Wed, 18 Nov 2026 15:48:52 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         },
         {
@@ -2820,7 +2758,7 @@
     {
       "team_slug": "nyg",
       "team_name": "New York Giants",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 3,
       "headlines": [
         {
@@ -2838,7 +2776,7 @@
         {
           "headline": "Jaguars rule starting center Hainsey (knee) out for Giants game",
           "description": "Jaguars center Robert Hainsey will miss Sunday's game against the Giants because of a knee injury, coach Liam Coen said Wednesday.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2863,7 +2801,7 @@
     {
       "team_slug": "phi",
       "team_name": "Philadelphia Eagles",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 3,
       "headlines": [
         {
@@ -2881,7 +2819,7 @@
         {
           "headline": "Eagles' Sirianni sticking with Milton as QB1, Mannion as offensive playcaller",
           "description": "QB Joe Milton will start again for the Eagles on Sunday and Sean Mannion will remain as the offensive playcaller against the Steelers, coach Nick Sirianni said.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2900,13 +2838,13 @@
     {
       "team_slug": "wsh",
       "team_name": "Washington Commanders",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
           "headline": "Sources: Aiyuk contacted Daniels to mend friendship with Commanders star QB",
           "description": "Brandon Aiyuk and Jayden Daniels have patched up their relationship after a falling out earlier this year, sources told ESPN.",
-          "published": "Wed, 18 Nov 2026 15:48:51 EST",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
           "source": "espn_rss"
         }
       ],
@@ -2929,8 +2867,8 @@
     {
       "team_slug": "chi",
       "team_name": "Chicago Bears",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
-      "headline_count": 2,
+      "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 3,
       "headlines": [
         {
           "headline": "Three-win Saints, Kellen Moore face defining stretch of games",
@@ -2943,6 +2881,12 @@
           "description": "Caleb Williams spent his bye week resting his ailing hamstring, supporting his close friend Pete Crow-Armstrong as the Cubs outfielder was named NL MVP, and putting one of the worst games of his career in the rearview mirror.",
           "published": "2026-11-18T02:45:43Z",
           "source": "espn"
+        },
+        {
+          "headline": "Bears' Williams has moved on from career-worst 4-INT game, but frustration lingers",
+          "description": "Caleb Williams spent his bye week resting his ailing hamstring, supporting his close friend Pete Crow-Armstrong as the Cubs outfielder was named NL MVP, and putting one of the worst games of his career in the rearview mirror.",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
+          "source": "espn_rss"
         }
       ],
       "keywords_found": {
@@ -2968,14 +2912,26 @@
     {
       "team_slug": "det",
       "team_name": "Detroit Lions",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
-      "headline_count": 0,
-      "headlines": [],
-      "keywords_found": {},
-      "silence_bonus": true,
-      "silence_reason": "no_headlines",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Campbell says Hutchinson injury won't prompt celly ban: 'We're not talking to 8-year-olds'",
+          "description": "Although Aidan Hutchinson's knee injury is a \"gut punch\" to the Lions, Dan Campbell said he won't tell his players to change the way they celebrate.",
+          "published": "Wed, 18 Nov 2026 14:35:24 EST",
+          "source": "espn_rss"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "knee"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
       "flags": {
-        "injury": false,
+        "injury": true,
         "distraction": false,
         "trade": false,
         "coach": false,
@@ -2986,7 +2942,7 @@
     {
       "team_slug": "gb",
       "team_name": "Green Bay Packers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 2,
       "headlines": [
         {
@@ -3017,7 +2973,7 @@
     {
       "team_slug": "min",
       "team_name": "Minnesota Vikings",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 4,
       "headlines": [
         {
@@ -3064,7 +3020,7 @@
     {
       "team_slug": "atl",
       "team_name": "Atlanta Falcons",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},
@@ -3082,7 +3038,7 @@
     {
       "team_slug": "car",
       "team_name": "Carolina Panthers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -3111,7 +3067,7 @@
     {
       "team_slug": "no",
       "team_name": "New Orleans Saints",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -3136,7 +3092,7 @@
     {
       "team_slug": "tb",
       "team_name": "Tampa Bay Buccaneers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},
@@ -3154,7 +3110,7 @@
     {
       "team_slug": "ari",
       "team_name": "Arizona Cardinals",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -3184,7 +3140,7 @@
     {
       "team_slug": "lar",
       "team_name": "Los Angeles Rams",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 1,
       "headlines": [
         {
@@ -3213,7 +3169,7 @@
     {
       "team_slug": "sf",
       "team_name": "San Francisco 49ers",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 3,
       "headlines": [
         {
@@ -3258,7 +3214,7 @@
     {
       "team_slug": "sea",
       "team_name": "Seattle Seahawks",
-      "scanned_at": "2026-11-18 21:45:32 UTC",
+      "scanned_at": "2026-11-18 19:44:21 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},

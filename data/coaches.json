@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-18 20:03:47 UTC",
+  "last_updated": "2026-11-18 20:34:02 UTC",
   "pfr_source": "https://www.pro-football-reference.com/coaches/",
   "pfr_citation": "When using SR data, please cite us and provide a link and/or a mention.",
   "change_flags": [],
@@ -9,6 +9,17 @@
       "team_slug": "buf",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "TE",
+        "college_position": null,
+        "college": "Kansas",
+        "birth_year": 1976,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Sean McDermott",
         "pfr_from": 2017,
@@ -27,9 +38,13 @@
         "tf": "T",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game"
+        ],
         "tf_evidence": [
-          "0.646 W-L% over 8 years \u2014 analytical consistency"
+          "NFL playing experience \u2014 analytical understanding of player reality",
+          "0.646 W-L% over 8 years \u2014 analytical consistency",
+          "NFL playing career + analytical record = strong T signal"
         ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
@@ -45,7 +60,7 @@
         "Analytical profile fits HC decision-making demands",
         "Elite W-L% (0.646) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -53,6 +68,17 @@
       "team_slug": "buf",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Joe Brady",
         "pfr_from": 2026,
@@ -71,8 +97,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -86,7 +116,7 @@
       "role_fit_evidence": [
         "Winning pedigree as HC \u2014 understands full game context"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -94,6 +124,7 @@
       "team_slug": "buf",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -113,7 +144,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -121,6 +152,17 @@
       "team_slug": "mia",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": "Yale",
+        "birth_year": 1983,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Mike McDaniel",
         "pfr_from": 2022,
@@ -140,9 +182,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -156,7 +200,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 55,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -164,6 +208,7 @@
       "team_slug": "mia",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Lovie Smith",
         "pfr_from": 2004,
@@ -201,7 +246,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -209,6 +254,7 @@
       "team_slug": "mia",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Red Weaver",
         "pfr_from": 1924,
@@ -240,7 +286,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -248,6 +294,17 @@
       "team_slug": "ne",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "OLB",
+        "college_position": null,
+        "college": "Ohio State",
+        "birth_year": 1975,
+        "nfl_draft_year": 1997,
+        "nfl_draft_round": 3,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Mike Vrabel",
         "pfr_from": 2018,
@@ -266,8 +323,11 @@
         "tf": "F",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game"
+        ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -281,7 +341,7 @@
       "mbti_type": "??F?",
       "role_fit_score": 55,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -289,6 +349,17 @@
       "team_slug": "ne",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Josh McDaniels",
         "pfr_from": 2009,
@@ -308,9 +379,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -324,7 +398,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -332,6 +406,7 @@
       "team_slug": "ne",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -351,7 +426,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -359,6 +434,17 @@
       "team_slug": "nyj",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "DB",
+        "college_position": null,
+        "college": "Texas A&M; Navarro",
+        "birth_year": 1972,
+        "nfl_draft_year": 1994,
+        "nfl_draft_round": 1,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Aaron Glenn",
         "pfr_from": 2025,
@@ -378,9 +464,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -392,7 +481,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -400,6 +489,7 @@
       "team_slug": "nyj",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -419,7 +509,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -427,6 +517,7 @@
       "team_slug": "nyj",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Jeff Ulbrich",
         "pfr_from": 2024,
@@ -458,7 +549,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -466,6 +557,17 @@
       "team_slug": "bal",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": "Miami OH",
+        "birth_year": 1962,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "John Harbaugh",
         "pfr_from": 2008,
@@ -485,9 +587,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "12 years at .500+ \u2014 consistency over flash"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "0.609 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
           "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
         ],
@@ -508,7 +612,7 @@
         "1 Super Bowl(s) \u2014 peak performance validated",
         "12 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -516,6 +620,17 @@
       "team_slug": "bal",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Todd Monken",
         "pfr_from": 2026,
@@ -534,8 +649,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -549,7 +668,7 @@
       "role_fit_evidence": [
         "Winning pedigree as HC \u2014 understands full game context"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -557,6 +676,7 @@
       "team_slug": "bal",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -576,7 +696,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -584,6 +704,17 @@
       "team_slug": "cin",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Nebraska",
+        "birth_year": 1983,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Zac Taylor",
         "pfr_from": 2019,
@@ -603,6 +734,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -619,7 +751,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -627,6 +759,7 @@
       "team_slug": "cin",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -646,7 +779,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -654,6 +787,7 @@
       "team_slug": "cin",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -673,7 +807,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -681,6 +815,17 @@
       "team_slug": "cle",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": "Penn",
+        "birth_year": 1982,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Kevin Stefanski",
         "pfr_from": 2020,
@@ -700,9 +845,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -716,7 +863,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -724,6 +871,7 @@
       "team_slug": "cle",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -743,7 +891,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -751,6 +899,17 @@
       "team_slug": "cle",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Jim Schwartz",
         "pfr_from": 2009,
@@ -770,9 +929,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -786,7 +947,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -794,6 +955,17 @@
       "team_slug": "pit",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "William & Mary",
+        "birth_year": 1972,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Mike Tomlin",
         "pfr_from": 2007,
@@ -813,6 +985,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background",
           "13 years at .500+ \u2014 consistency over flash"
         ],
         "tf_evidence": [
@@ -836,7 +1009,7 @@
         "1 Super Bowl(s) \u2014 peak performance validated",
         "13 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -844,6 +1017,17 @@
       "team_slug": "pit",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Arthur Smith",
         "pfr_from": 2021,
@@ -863,9 +1047,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -879,7 +1066,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -887,6 +1074,7 @@
       "team_slug": "pit",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Bill Austin",
         "pfr_from": 1966,
@@ -920,7 +1108,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -928,6 +1116,17 @@
       "team_slug": "hou",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "ILB",
+        "college_position": null,
+        "college": "Alabama",
+        "birth_year": 1984,
+        "nfl_draft_year": 2006,
+        "nfl_draft_round": 2,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "DeMeco Ryans",
         "pfr_from": 2023,
@@ -947,9 +1146,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -961,7 +1163,7 @@
       "mbti_type": "E???",
       "role_fit_score": 55,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -969,6 +1171,7 @@
       "team_slug": "hou",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -988,7 +1191,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -996,6 +1199,7 @@
       "team_slug": "hou",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -1015,7 +1219,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1023,6 +1227,17 @@
       "team_slug": "ind",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Montana",
+        "birth_year": 1986,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Shane Steichen",
         "pfr_from": 2023,
@@ -1042,6 +1257,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [],
@@ -1056,7 +1272,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1064,6 +1280,7 @@
       "team_slug": "ind",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -1083,7 +1300,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1091,6 +1308,17 @@
       "team_slug": "ind",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Gus Bradley",
         "pfr_from": 2013,
@@ -1110,9 +1338,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -1124,7 +1355,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1132,6 +1363,17 @@
       "team_slug": "jax",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Maine",
+        "birth_year": 1986,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Liam Coen",
         "pfr_from": 2025,
@@ -1151,6 +1393,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -1169,7 +1412,7 @@
       "role_fit_evidence": [
         "Elite W-L% (0.741) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1177,6 +1420,7 @@
       "team_slug": "jax",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Zac Taylor",
         "pfr_from": 2019,
@@ -1214,7 +1458,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1222,6 +1466,7 @@
       "team_slug": "jax",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -1241,7 +1486,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1249,6 +1494,17 @@
       "team_slug": "ten",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Washington",
+        "birth_year": 1988,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Brian Callahan",
         "pfr_from": 2024,
@@ -1268,6 +1524,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [],
@@ -1282,7 +1539,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1290,6 +1547,7 @@
       "team_slug": "ten",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -1309,7 +1567,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1317,6 +1575,7 @@
       "team_slug": "ten",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "George Wilson",
         "pfr_from": 1957,
@@ -1352,7 +1611,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1360,6 +1619,17 @@
       "team_slug": "den",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "QB",
+        "college_position": null,
+        "college": "Eastern Illinois",
+        "birth_year": 1963,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Sean Payton",
         "pfr_from": 2006,
@@ -1379,11 +1649,14 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "11 years at .500+ \u2014 consistency over flash"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "0.626 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
-          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure",
+          "NFL playing career + analytical record = strong T signal"
         ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
@@ -1402,7 +1675,7 @@
         "1 Super Bowl(s) \u2014 peak performance validated",
         "11 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1410,6 +1683,7 @@
       "team_slug": "den",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Vince Lombardi",
         "pfr_from": 1959,
@@ -1447,7 +1721,7 @@
         "Analytical \u2014 scheme design and play-calling under pressure",
         "Winning pedigree as HC \u2014 understands full game context"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1455,6 +1729,17 @@
       "team_slug": "den",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "DB",
+        "college_position": null,
+        "college": "Colorado",
+        "birth_year": 1972,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Vance Joseph",
         "pfr_from": 2017,
@@ -1474,9 +1759,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -1488,7 +1776,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1496,6 +1784,17 @@
       "team_slug": "kc",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "OL",
+        "college": "BYU",
+        "birth_year": 1958,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_override"
+      },
       "pfr_record": {
         "name": "Andy Reid",
         "pfr_from": 1999,
@@ -1515,6 +1814,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (OL) \u2014 competitive playing background",
           "20 years, 0.641 W-L% \u2014 sustained excellence suggests internal drive over external validation"
         ],
         "tf_evidence": [
@@ -1538,7 +1838,7 @@
         "3 Super Bowl(s) \u2014 peak performance validated",
         "20 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1546,6 +1846,17 @@
       "team_slug": "kc",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Matt Nagy",
         "pfr_from": 2018,
@@ -1565,9 +1876,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -1583,7 +1896,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1591,6 +1904,17 @@
       "team_slug": "kc",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Steve Spagnuolo",
         "pfr_from": 2009,
@@ -1610,9 +1934,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -1624,7 +1951,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1632,6 +1959,17 @@
       "team_slug": "lv",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "DB",
+        "college": "Pacific",
+        "birth_year": 1951,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Pete Carroll",
         "pfr_from": 1994,
@@ -1651,6 +1989,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (DB) \u2014 competitive playing background",
           "12 years at .500+ \u2014 consistency over flash"
         ],
         "tf_evidence": [
@@ -1673,7 +2012,7 @@
         "1 Super Bowl(s) \u2014 peak performance validated",
         "12 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1681,6 +2020,7 @@
       "team_slug": "lv",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Norv Turner",
         "pfr_from": 1994,
@@ -1714,7 +2054,7 @@
       "mbti_type": "??F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1722,6 +2062,7 @@
       "team_slug": "lv",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Otto Graham",
         "pfr_from": 1966,
@@ -1755,7 +2096,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1763,6 +2104,17 @@
       "team_slug": "lac",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "QB",
+        "college_position": null,
+        "college": "Michigan",
+        "birth_year": 1963,
+        "nfl_draft_year": 1987,
+        "nfl_draft_round": 1,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Jim Harbaugh",
         "pfr_from": 2011,
@@ -1781,9 +2133,13 @@
         "tf": "T",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game"
+        ],
         "tf_evidence": [
-          "0.620 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven"
+          "NFL playing experience \u2014 analytical understanding of player reality",
+          "0.620 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
+          "NFL playing career + analytical record = strong T signal"
         ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
@@ -1799,7 +2155,7 @@
         "Analytical profile fits HC decision-making demands",
         "Elite W-L% (0.620) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1807,6 +2163,7 @@
       "team_slug": "lac",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -1826,7 +2183,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1834,6 +2191,17 @@
       "team_slug": "lac",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Jesse Minter",
         "pfr_from": 2026,
@@ -1852,8 +2220,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -1865,7 +2237,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1873,6 +2245,17 @@
       "team_slug": "dal",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Baker",
+        "birth_year": 1963,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Mike McCarthy",
         "pfr_from": 2006,
@@ -1892,6 +2275,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "12 years at .500+ \u2014 consistency over flash"
         ],
         "tf_evidence": [
@@ -1915,7 +2299,7 @@
         "1 Super Bowl(s) \u2014 peak performance validated",
         "12 years experience \u2014 battle-tested"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1923,6 +2307,17 @@
       "team_slug": "dal",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Brian Schottenheimer",
         "pfr_from": 2025,
@@ -1942,9 +2337,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -1958,7 +2356,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -1966,6 +2364,17 @@
       "team_slug": "dal",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "RB",
+        "college_position": null,
+        "college": "Illinois State",
+        "birth_year": 1990,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Mike Zimmer",
         "pfr_from": 2014,
@@ -1985,9 +2394,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -2003,7 +2414,7 @@
       "role_fit_evidence": [
         "Winning pedigree \u2014 understands what it takes to win"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2011,6 +2422,17 @@
       "team_slug": "nyg",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "Rochester",
+        "birth_year": 1975,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Brian Daboll",
         "pfr_from": 2022,
@@ -2030,6 +2452,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -2046,7 +2469,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2054,6 +2477,7 @@
       "team_slug": "nyg",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Mike Kafka",
         "pfr_from": 2025,
@@ -2085,7 +2509,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2093,6 +2517,7 @@
       "team_slug": "nyg",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -2112,7 +2537,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2120,6 +2545,17 @@
       "team_slug": "phi",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "Mount Union",
+        "birth_year": 1981,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Nick Sirianni",
         "pfr_from": 2021,
@@ -2138,7 +2574,9 @@
         "tf": "T",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background"
+        ],
         "tf_evidence": [
           "0.644 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
           "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
@@ -2158,7 +2596,7 @@
         "Elite W-L% (0.644) \u2014 proven results",
         "1 Super Bowl(s) \u2014 peak performance validated"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2166,6 +2604,17 @@
       "team_slug": "phi",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "QB",
+        "college_position": null,
+        "college": "Boise State",
+        "birth_year": 1988,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Kellen Moore",
         "pfr_from": 2025,
@@ -2185,9 +2634,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2201,7 +2653,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2209,6 +2661,17 @@
       "team_slug": "phi",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Vic Fangio",
         "pfr_from": 2019,
@@ -2228,9 +2691,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2242,7 +2708,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2250,6 +2716,17 @@
       "team_slug": "wsh",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "DL",
+        "college": "Salisbury",
+        "birth_year": 1970,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Dan Quinn",
         "pfr_from": 2015,
@@ -2269,6 +2746,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (DL) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -2285,7 +2763,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 55,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2293,6 +2771,17 @@
       "team_slug": "wsh",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Klint Kubiak",
         "pfr_from": 2026,
@@ -2311,8 +2800,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2324,7 +2817,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2332,6 +2825,7 @@
       "team_slug": "wsh",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -2351,7 +2845,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2359,6 +2853,17 @@
       "team_slug": "chi",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "TE",
+        "college": "Michigan",
+        "birth_year": 1986,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Ben Johnson",
         "pfr_from": 2025,
@@ -2378,9 +2883,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -2396,7 +2903,7 @@
       "role_fit_evidence": [
         "Elite W-L% (0.679) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2404,6 +2911,7 @@
       "team_slug": "chi",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Thomas Brown",
         "pfr_from": 2024,
@@ -2435,7 +2943,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2443,6 +2951,17 @@
       "team_slug": "chi",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Dennis Allen",
         "pfr_from": 2012,
@@ -2462,9 +2981,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2476,7 +2998,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2484,6 +3006,17 @@
       "team_slug": "det",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "TE",
+        "college_position": null,
+        "college": "Texas A&M",
+        "birth_year": 1976,
+        "nfl_draft_year": 1999,
+        "nfl_draft_round": 3,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Dan Campbell",
         "pfr_from": 2015,
@@ -2503,9 +3036,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -2519,7 +3054,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 55,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2527,6 +3062,7 @@
       "team_slug": "det",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -2546,7 +3082,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2554,6 +3090,17 @@
       "team_slug": "det",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "DB",
+        "college_position": null,
+        "college": "Texas A&M; Navarro",
+        "birth_year": 1972,
+        "nfl_draft_year": 1994,
+        "nfl_draft_round": 1,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Aaron Glenn",
         "pfr_from": 2025,
@@ -2573,9 +3120,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2587,7 +3137,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2595,6 +3145,17 @@
       "team_slug": "gb",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Saginaw Valley",
+        "birth_year": 1979,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Matt LaFleur",
         "pfr_from": 2019,
@@ -2613,7 +3174,9 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background"
+        ],
         "tf_evidence": [],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
@@ -2628,7 +3191,7 @@
       "role_fit_evidence": [
         "Elite W-L% (0.629) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2636,6 +3199,7 @@
       "team_slug": "gb",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -2655,7 +3219,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2663,6 +3227,17 @@
       "team_slug": "gb",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Jeff Hafley",
         "pfr_from": 2026,
@@ -2681,8 +3256,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2694,7 +3273,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2702,6 +3281,17 @@
       "team_slug": "min",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "QB",
+        "college_position": null,
+        "college": "San Diego State",
+        "birth_year": 1985,
+        "nfl_draft_year": 2008,
+        "nfl_draft_round": 3,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Kevin O'Connell",
         "pfr_from": 2022,
@@ -2721,9 +3311,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -2739,7 +3331,7 @@
       "role_fit_evidence": [
         "Elite W-L% (0.633) \u2014 proven results"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2747,6 +3339,7 @@
       "team_slug": "min",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Bum Phillips",
         "pfr_from": 1975,
@@ -2784,7 +3377,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2792,6 +3385,17 @@
       "team_slug": "min",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Brian Flores",
         "pfr_from": 2019,
@@ -2811,9 +3415,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -2825,7 +3432,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2833,6 +3440,17 @@
       "team_slug": "atl",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "DB",
+        "college": "Hofstra",
+        "birth_year": 1976,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Raheem Morris",
         "pfr_from": 2009,
@@ -2852,6 +3470,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (DB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [],
@@ -2866,7 +3485,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2874,6 +3493,7 @@
       "team_slug": "atl",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "John Robinson",
         "pfr_from": 1983,
@@ -2907,7 +3527,7 @@
       "mbti_type": "??F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2915,6 +3535,7 @@
       "team_slug": "atl",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -2934,7 +3555,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2942,6 +3563,17 @@
       "team_slug": "car",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "Cal State LA",
+        "birth_year": 1980,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Dave Canales",
         "pfr_from": 2024,
@@ -2961,6 +3593,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -2977,7 +3610,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -2985,6 +3618,7 @@
       "team_slug": "car",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3004,7 +3638,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3012,6 +3646,7 @@
       "team_slug": "car",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3031,7 +3666,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3039,6 +3674,17 @@
       "team_slug": "no",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "QB",
+        "college_position": null,
+        "college": "Boise State",
+        "birth_year": 1988,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Kellen Moore",
         "pfr_from": 2025,
@@ -3058,9 +3704,12 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
-        "tf_evidence": [],
+        "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -3072,7 +3721,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3080,6 +3729,17 @@
       "team_slug": "no",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Klint Kubiak",
         "pfr_from": 2026,
@@ -3098,8 +3758,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -3111,7 +3775,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3119,6 +3783,7 @@
       "team_slug": "no",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3138,7 +3803,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3146,6 +3811,17 @@
       "team_slug": "tb",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": true,
+        "played_college": true,
+        "nfl_position": "DB",
+        "college_position": null,
+        "college": "Temple",
+        "birth_year": 1963,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "nflverse_match"
+      },
       "pfr_record": {
         "name": "Todd Bowles",
         "pfr_from": 2011,
@@ -3165,9 +3841,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played in NFL \u2014 understands physical demands from inside the game",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "NFL playing experience \u2014 analytical understanding of player reality",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -3181,7 +3859,7 @@
       "mbti_type": "E?F?",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3189,6 +3867,17 @@
       "team_slug": "tb",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "QB",
+        "college": "Maine",
+        "birth_year": 1986,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Liam Coen",
         "pfr_from": 2025,
@@ -3208,6 +3897,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (QB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
@@ -3227,7 +3917,7 @@
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively",
         "Winning pedigree as HC \u2014 understands full game context"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3235,6 +3925,7 @@
       "team_slug": "tb",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3254,7 +3945,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3262,6 +3953,17 @@
       "team_slug": "ari",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "DB",
+        "college": "Louisville",
+        "birth_year": 1981,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Jonathan Gannon",
         "pfr_from": 2023,
@@ -3281,6 +3983,7 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "Played college football (DB) \u2014 competitive playing background",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [],
@@ -3295,7 +3998,7 @@
       "mbti_type": "E???",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3303,6 +4006,7 @@
       "team_slug": "ari",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3322,7 +4026,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3330,6 +4034,7 @@
       "team_slug": "ari",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3349,7 +4054,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3357,6 +4062,17 @@
       "team_slug": "lar",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "Miami OH",
+        "birth_year": 1986,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Sean McVay",
         "pfr_from": 2017,
@@ -3375,7 +4091,9 @@
         "tf": "T",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background"
+        ],
         "tf_evidence": [
           "0.617 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
           "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
@@ -3395,7 +4113,7 @@
         "Elite W-L% (0.617) \u2014 proven results",
         "1 Super Bowl(s) \u2014 peak performance validated"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3403,6 +4121,17 @@
       "team_slug": "lar",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": null,
+        "birth_year": null,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "needs_manual"
+      },
       "pfr_record": {
         "name": "Mike LaFleur",
         "pfr_from": 2026,
@@ -3421,8 +4150,12 @@
         "tf": null,
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
-        "tf_evidence": [],
+        "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path"
+        ],
+        "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare"
+        ],
         "sn_evidence": [
           "Accumulating \u2014 needs week-by-week stat variance data"
         ],
@@ -3434,7 +4167,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3442,6 +4175,7 @@
       "team_slug": "lar",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": {
         "name": "Don Shula",
         "pfr_from": 1963,
@@ -3482,7 +4216,7 @@
         "Internal focus \u2014 preparation over reaction",
         "Winning pedigree \u2014 understands what it takes to win"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3490,6 +4224,17 @@
       "team_slug": "sf",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": true,
+        "nfl_position": null,
+        "college_position": "WR",
+        "college": "Texas",
+        "birth_year": 1979,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Kyle Shanahan",
         "pfr_from": 2017,
@@ -3508,7 +4253,9 @@
         "tf": "F",
         "sn": null,
         "jp": null,
-        "ie_evidence": [],
+        "ie_evidence": [
+          "Played college football (WR) \u2014 competitive playing background"
+        ],
         "tf_evidence": [
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
@@ -3525,7 +4272,7 @@
       "role_fit_evidence": [
         "Feeling profile may struggle with cold analytical decisions under pressure"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3533,6 +4280,17 @@
       "team_slug": "sf",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": "Yale",
+        "birth_year": 1983,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Mike McDaniel",
         "pfr_from": 2022,
@@ -3552,9 +4310,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
         ],
         "sn_evidence": [
@@ -3570,7 +4330,7 @@
       "role_fit_evidence": [
         "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3578,6 +4338,7 @@
       "team_slug": "sf",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3597,7 +4358,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3605,6 +4366,17 @@
       "team_slug": "sea",
       "role": "hc",
       "role_label": "Head Coach",
+      "playing_career": {
+        "played_nfl": false,
+        "played_college": false,
+        "nfl_position": null,
+        "college_position": null,
+        "college": "Cincinnati",
+        "birth_year": 1987,
+        "nfl_draft_year": null,
+        "nfl_draft_round": null,
+        "career_source": "manual_seed"
+      },
       "pfr_record": {
         "name": "Mike Macdonald",
         "pfr_from": 2024,
@@ -3624,9 +4396,11 @@
         "sn": null,
         "jp": null,
         "ie_evidence": [
+          "No playing background \u2014 pure schemer/analyst path",
           "Early career \u2014 insufficient data for I/E inference"
         ],
         "tf_evidence": [
+          "No playing experience \u2014 may over-index on scheme vs player welfare",
           "0.702 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
           "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
         ],
@@ -3645,7 +4419,7 @@
         "Elite W-L% (0.702) \u2014 proven results",
         "1 Super Bowl(s) \u2014 peak performance validated"
       ],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3653,6 +4427,7 @@
       "team_slug": "sea",
       "role": "oc",
       "role_label": "Offensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3672,7 +4447,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     },
     {
@@ -3680,6 +4455,7 @@
       "team_slug": "sea",
       "role": "dc",
       "role_label": "Defensive Coordinator",
+      "playing_career": null,
       "pfr_record": null,
       "mbti_signals": {
         "ie": null,
@@ -3699,7 +4475,7 @@
       "mbti_type": "????",
       "role_fit_score": 50,
       "role_fit_evidence": [],
-      "last_updated": "2026-11-18 20:03:47 UTC",
+      "last_updated": "2026-11-18 20:34:02 UTC",
       "pfr_source": "https://www.pro-football-reference.com/coaches/"
     }
   ]
