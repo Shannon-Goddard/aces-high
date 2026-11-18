@@ -362,7 +362,9 @@ function renderCard(p) {
       ${p.layer1_body?.age_label ? `<div class="text-muted" style="font-size:0.7rem">${p.layer1_body.age_label.replace(/_/g,' ')} &middot; ${p.layer1_body.career_label?.replace(/_/g,' ') || ''}</div>` : ''}
       <div id="${id}-compat" style="display:none"></div>
     </div>`;
-}   = [];
+}
+
+let allPlayers   = [];
 let filtered     = [];
 let displayCount = PAGE_SIZE;
 let _playersByTeam = {};
