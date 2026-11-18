@@ -16,31 +16,26 @@
     <div class="page-sub">What the data has proven. What's still a hypothesis. What got cut.</div>
   </div>
 
-  <!-- Status tiles -->
   <div class="summary-grid" id="findings-tiles"></div>
 
-  <!-- Validated -->
   <div class="section-block">
     <div class="section-label">Validated — Earned Their Weight</div>
-    <div class="page-sub" style="margin-bottom:0.875rem">Modifiers with ≥10 data points and ≥55% accuracy. These move the composite score.</div>
+    <div class="page-sub" style="margin-bottom:0.875rem">≥10 data points and ≥55% accuracy. These move the composite score.</div>
     <div id="validated-list"></div>
   </div>
 
-  <!-- Active Hypotheses -->
   <div class="section-block">
     <div class="section-label">Active Hypotheses — Accumulating Data</div>
-    <div class="page-sub" style="margin-bottom:0.875rem">Applied to predictions but not yet validated. Need 10+ data points before weight is confirmed.</div>
+    <div class="page-sub" style="margin-bottom:0.875rem">Applied to predictions. Need 10+ data points before weight is confirmed or cut.</div>
     <div id="hypothesis-list"></div>
   </div>
 
-  <!-- Cut -->
   <div class="section-block" id="cut-section" style="display:none">
     <div class="section-label">Cut — Failed Validation</div>
     <div class="page-sub" style="margin-bottom:0.875rem">Reached 10+ data points but accuracy below 55%. Removed from the model.</div>
     <div id="cut-list"></div>
   </div>
 
-  <!-- The 12 Layer System status -->
   <div class="section-block">
     <div class="section-label">12 Layer System — Build Status</div>
     <div id="layer-status"></div>
@@ -56,87 +51,149 @@
 <script>
 const ROOT = '../';
 
+// ── ALL KNOWN MODIFIERS ───────────────────────────────────────────────────────
+// Single source of truth. stats.json modifier_accuracy keys match these names
+// (lowercased, spaces→underscores). When a modifier fires and an outcome is
+// recorded, record_outcome.py writes to modifier_accuracy — it shows up here
+// automatically. Modifiers not yet in stats.json show as 0/10 data points.
+const ALL_MODIFIERS = [
+  // Layer 1 — Body
+  { name:'Injury Flag',              weight:'−0.15',   layer:'L1', note:'Practice trajectory score, graduated by concern level' },
+  { name:'Snap% Drop Warning',       weight:'concern=40', layer:'L1', note:'>15pt drop, no injury report — treated as questionable' },
+  // Layer 2 — Skill
+  { name:'Momentum Score',           weight:'×0.10',   layer:'L2', note:'Rolling 3-week weighted snap%, QB double-weighted' },
+  // Layer 3 — Hunger / Distraction
+  { name:'Hunger Index',             weight:'×0.10',   layer:'L3', note:'Draft seed as adversity proxy, UDFA flag' },
+  { name:'Silence Bonus',            weight:'×0.10',   layer:'L3', note:'No negative headlines = locked in' },
+  { name:'Distraction Flag',         weight:'−0.10',   layer:'L3', note:'News keywords: legal, drama, trade demand' },
+  { name:'Contract Year',            weight:'hunger+15', layer:'L3', note:'Final rookie deal year — prove-it motivation spike' },
+  // Layer 4 — Personality
+  { name:'Personality Compat',       weight:'±10%',    layer:'L4', note:'Team compat score, QB↔HC double-weighted' },
+  { name:'Role Fit (veteran drain)', weight:'±10%',    layer:'L4', note:'Position demand vs MBTI, compounds with years_exp' },
+  { name:'Scheme Transition',        weight:'rf→50',   layer:'L4', note:'New coordinator — role fit suspended 3 weeks' },
+  { name:'HC Market Fit',            weight:'±3%',     layer:'L4', note:'I/E vs market pressure + tenure + roster compat avg' },
+  // Layer 6 — Team Chemistry / Situational
+  { name:'Divisional Game',          weight:'×0.97',   layer:'L6', note:'Favorite edge trimmed — familiarity tightens line' },
+  { name:'Rematch',                  weight:'×0.95',   layer:'L6', note:'Second matchup same season — film cuts both ways' },
+  // Weather
+  { name:'Wind >20mph',              weight:'×0.75',   layer:'WX', note:'Applied to passing/skill component' },
+  { name:'Rain / Snow',              weight:'×0.85',   layer:'WX', note:'Applied to passing/skill component' },
+  { name:'Temp <20°F (kicker)',      weight:'×0.80',   layer:'WX', note:'Kicker accuracy in extreme cold' },
+  { name:'Chronic Joint (cold)',     weight:'−0.30',   layer:'WX', note:'Temp <40°F + joint injury history on player' },
+  // Situational (planned / hypothesis)
+  { name:'Revenge Game',             weight:'×1.10',   layer:'L5', note:'Playing former team or coach' },
+  { name:'Coach Public Callout',     weight:'×0.85',   layer:'L6', note:'Player embarrassed publicly by HC' },
+  { name:'Short Week (Thu game)',    weight:'×0.93',   layer:'L7', note:'Compressed schedule fatigue' },
+  { name:'Coming Off Bye',           weight:'×1.03',   layer:'L7', note:'Rest advantage' },
+  { name:'Vegas Sharp Signal',       weight:'signal',  layer:'L7', note:'Line movement vs public divergence' },
+];
+
+// ── LAYER STATUS ──────────────────────────────────────────────────────────────
 const LAYERS = [
-  { num:1,  name:'Body',              status:'live',      note:'Age, weight, snap%, career stage, combine athleticism' },
-  { num:2,  name:'Skill',             status:'live',      note:'Position-ranked stats, EPA, proxy for OL/ST' },
-  { num:3,  name:'Mind / Hunger',     status:'live',      note:'Draft seed as hunger proxy, UDFA flag' },
-  { num:3,  name:'Mind / Distraction',status:'live',      note:'Daily news scan — injury/distraction/silence flags' },
-  { num:4,  name:'Personality',       status:'planned',   note:'Inferred MBTI from press conference + behavioral data' },
-  { num:5,  name:'Relationships',     status:'planned',   note:'Player relationship web — friend/rival/beef/mentor' },
-  { num:6,  name:'Team Chemistry',    status:'planned',   note:'Coach scores, roster continuity, coordinator stability' },
-  { num:7,  name:'Matchup',           status:'planned',   note:'Direct position matchup scoring, scheme vs scheme' },
-  { num:8,  name:'Prediction',        status:'live',      note:'L1+L2+L3+weather+practice+odds modifiers combined' },
-  { num:9,  name:'Outcome',           status:'live',      note:'record_outcome.py — closes bets, writes post-mortems' },
-  { num:10, name:'Learning',          status:'waiting',   note:'stats.json populates as outcomes accumulate' },
-  { num:11, name:'Humility',          status:'live',      note:'Blind spots + flip conditions in every prediction' },
-  { num:12, name:'Anti-Bias',         status:'planned',   note:'Narrative trap detector + recency bias protection' },
+  { num:1,  name:'Body',                  status:'live',    note:'Age, weight, snap%, career stage, combine athleticism' },
+  { num:2,  name:'Skill',                 status:'live',    note:'Position-ranked stats, EPA, proxy for OL/ST' },
+  { num:2,  name:'Skill / Momentum',      status:'live',    note:'Rolling 3-week weighted snap% — form over season aggregate' },
+  { num:3,  name:'Mind / Hunger',         status:'live',    note:'Draft seed + contract year flag + UDFA hunger proxy' },
+  { num:3,  name:'Mind / Distraction',    status:'live',    note:'Daily news scan — injury/distraction/silence flags' },
+  { num:4,  name:'Personality',           status:'live',    note:'MBTI inferred for all 3,216 players + 96 coaches' },
+  { num:4,  name:'Personality / Compat',  status:'live',    note:'Team compat score per player, QB↔HC double-weighted' },
+  { num:4,  name:'Personality / Role Fit',status:'live',    note:'Position demand vs MBTI, veteran drain multiplier' },
+  { num:4,  name:'Personality / Market',  status:'live',    note:'HC market fit — I/E vs market pressure + tenure' },
+  { num:5,  name:'Relationships',         status:'planned', note:'Player relationship web — friend/rival/beef/mentor' },
+  { num:6,  name:'Team Chemistry',        status:'partial', note:'Coach↔player compat live. Coordinator change tracker live. Unit cohesion pending.' },
+  { num:7,  name:'Matchup',               status:'planned', note:'Direct position matchup scoring — QB vs DB, OL vs DL' },
+  { num:8,  name:'Prediction',            status:'live',    note:'L1+L2+L3+L4+weather+practice+odds — full modifier stack' },
+  { num:9,  name:'Outcome',               status:'live',    note:'record_outcome.py — closes bets, writes post-mortems, captures lessons' },
+  { num:10, name:'Learning',              status:'waiting', note:'stats.json populates as outcomes accumulate — calibration dashboard live' },
+  { num:11, name:'Humility',              status:'live',    note:'Blind spots + flip conditions in every prediction' },
+  { num:12, name:'Anti-Bias',             status:'planned', note:'Narrative trap detector + recency bias protection' },
 ];
 
-const STARTING_HYPOTHESES = [
-  { name:'Wind >20mph',           weight:'×0.75', layer:'WX', note:'Applied to passing/skill component' },
-  { name:'Rain / Snow',           weight:'×0.85', layer:'WX', note:'Applied to passing/skill component' },
-  { name:'Temp <20°F (kicker)',   weight:'×0.80', layer:'WX', note:'Kicker accuracy in extreme cold' },
-  { name:'Chronic Joint (cold)',  weight:'−0.30', layer:'WX', note:'Temp <40°F + joint injury history' },
-  { name:'Hunger Index',          weight:'×1.10', layer:'L3', note:'Draft position, contract, adversity' },
-  { name:'Silence Bonus',         weight:'×1.05', layer:'L3', note:'No negative headlines = locked in' },
-  { name:'Distraction Flag',      weight:'×0.85', layer:'L3', note:'News keywords: legal, drama, trade' },
-  { name:'Practice Trajectory',   weight:'scaled', layer:'L1', note:'DNP→out 85, trending full→5' },
-  { name:'Revenge Game',          weight:'×1.10', layer:'L5', note:'Playing former team / coach' },
-  { name:'Opposite Team Beef',    weight:'×1.10', layer:'L5', note:'Personal rivalry across teams' },
-  { name:'Same Team Beef',        weight:'×0.90', layer:'L5', note:'Unresolved locker room conflict' },
-  { name:'Coach Public Callout',  weight:'×0.85', layer:'L6', note:'Player embarrassed publicly' },
-  { name:'Short Week',            weight:'×0.93', layer:'L7', note:'Thursday game fatigue' },
-  { name:'Coming Off Bye',        weight:'×1.03', layer:'L7', note:'Rest advantage' },
-  { name:'Vegas Sharp Signal',    weight:'signal', layer:'L7', note:'Line movement vs public divergence' },
-];
+// ── MODIFIER ROW ──────────────────────────────────────────────────────────────
+const LAYER_COLOR = {
+  L1:'var(--blue)', L2:'var(--purple)', L3:'var(--gold)',
+  L4:'#a78bfa',     L5:'var(--green)',  L6:'var(--yellow)',
+  L7:'var(--text-dim)', WX:'var(--blue)',
+};
 
-function modifierRow(m, dataPoints, accuracy, status) {
-  const pct      = accuracy !== null ? accuracy : null;
-  const barColor = pct === null ? 'fill-gold' : pct >= 55 ? 'fill-green' : 'fill-red';
-  const txtColor = pct === null ? 'text-muted' : pct >= 55 ? 'text-green' : 'text-red';
-  const layerColor = { L1:'var(--blue)', L2:'var(--purple)', L3:'var(--gold)', L5:'var(--green)', L6:'var(--yellow)', L7:'var(--text-dim)', WX:'var(--blue)' };
+function modifierRow(mod, dataPoints, accuracy) {
+  const hasData  = dataPoints > 0;
+  const barWidth = hasData && accuracy !== null ? accuracy : 0;
+  const barColor = !hasData ? '' : accuracy >= 55 ? 'fill-green' : 'fill-red';
+  const txtColor = !hasData ? 'text-muted' : accuracy >= 55 ? 'text-green' : 'text-red';
+  const progress = dataPoints >= 10
+    ? `<div class="progress-bar" style="flex:1;min-width:100px;max-width:180px">
+         <div class="progress-fill ${barColor}" style="width:${barWidth}%"></div>
+       </div>
+       <span class="${txtColor}" style="font-size:0.8rem;font-weight:700;min-width:38px;text-align:right">${accuracy}%</span>`
+    : `<div style="flex:1;min-width:100px;max-width:180px">
+         <div style="height:6px;border-radius:3px;background:var(--bg3);position:relative;overflow:hidden">
+           ${dataPoints > 0 ? `<div style="position:absolute;left:0;top:0;height:100%;width:${Math.round(dataPoints/10*100)}%;background:var(--border)"></div>` : ''}
+         </div>
+       </div>
+       <span class="text-muted" style="font-size:0.75rem;min-width:38px;text-align:right">${dataPoints}/10</span>`;
 
   return `
-    <div style="display:flex;align-items:center;gap:1rem;padding:0.6rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
-      <div style="min-width:180px;flex:1">
-        <div style="font-size:0.85rem;font-weight:600">${m.name}</div>
-        <div style="font-size:0.72rem;color:var(--text-muted)">${m.note}</div>
+    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.55rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
+      <div style="min-width:190px;flex:1">
+        <div style="font-size:0.84rem;font-weight:600">${mod.name}</div>
+        <div style="font-size:0.7rem;color:var(--text-muted)">${mod.note}</div>
       </div>
-      <span style="font-size:0.72rem;font-weight:700;color:${layerColor[m.layer]||'var(--text-dim)'};min-width:28px">${m.layer}</span>
-      <span style="font-family:monospace;font-size:0.8rem;color:var(--text-dim);min-width:50px">${m.weight}</span>
-      <div style="flex:1;min-width:120px;max-width:200px">
-        <div class="progress-bar">
-          <div class="progress-fill ${barColor}" style="width:${pct || 50}%"></div>
-        </div>
-      </div>
-      <span class="${txtColor}" style="font-size:0.8rem;font-weight:700;min-width:40px;text-align:right">
-        ${pct !== null ? pct + '%' : '—'}
-      </span>
-      <span style="font-size:0.72rem;color:var(--text-muted);min-width:70px;text-align:right">${dataPoints} / 10 pts</span>
+      <span style="font-size:0.68rem;font-weight:700;color:${LAYER_COLOR[mod.layer]||'var(--text-dim)'};min-width:26px">${mod.layer}</span>
+      <span style="font-family:monospace;font-size:0.78rem;color:var(--text-dim);min-width:60px">${mod.weight}</span>
+      ${progress}
     </div>`;
 }
 
+// ── INIT ──────────────────────────────────────────────────────────────────────
 async function init() {
   const [statsRes, metaRes] = await Promise.all([
     fetch(`${ROOT}data/stats.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})),
     fetch(`${ROOT}data/metadata.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})),
   ]);
 
-  const modAcc   = statsRes.modifier_accuracy || {};
-  const allMods  = Object.entries(modAcc);
+  const modAcc = statsRes.modifier_accuracy || {};
 
-  const validated = allMods.filter(([, v]) => v.status === 'validated');
-  const weak      = allMods.filter(([, v]) => v.status === 'weak');
-  const hyps      = allMods.filter(([, v]) => v.status === 'hypothesis');
+  // Merge stats data into ALL_MODIFIERS
+  // stats.json keys are lowercased with underscores — normalize for lookup
+  const normalize = s => s.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_');
+  const accByKey  = {};
+  for (const [k, v] of Object.entries(modAcc)) {
+    accByKey[normalize(k)] = v;
+  }
 
-  // Tiles
+  const enriched = ALL_MODIFIERS.map(mod => {
+    const key  = normalize(mod.name);
+    const acc  = accByKey[key] || { data_points: 0, accuracy: null, status: 'hypothesis' };
+    return { ...mod, data_points: acc.data_points, accuracy: acc.accuracy, status: acc.status };
+  });
+
+  // Also pick up any modifiers in stats.json not in ALL_MODIFIERS (future-proof)
+  const knownKeys = new Set(ALL_MODIFIERS.map(m => normalize(m.name)));
+  for (const [k, v] of Object.entries(modAcc)) {
+    if (!knownKeys.has(normalize(k))) {
+      enriched.push({
+        name: k.replace(/_/g, ' '),
+        weight: '—', layer: '—', note: '',
+        data_points: v.data_points, accuracy: v.accuracy, status: v.status,
+      });
+    }
+  }
+
+  const validated = enriched.filter(m => m.status === 'validated');
+  const weak      = enriched.filter(m => m.status === 'weak');
+  const hyps      = enriched.filter(m => m.status === 'hypothesis')
+                             .sort((a, b) => b.data_points - a.data_points);
+
+  // ── Tiles ──
+  const totalHyps = hyps.length;
   document.getElementById('findings-tiles').innerHTML = `
     <div class="summary-tile">
       <div class="tile-value text-green">${validated.length}</div>
       <div class="tile-label">Validated</div>
     </div>
     <div class="summary-tile">
-      <div class="tile-value text-gold">${hyps.length + (STARTING_HYPOTHESES.length - allMods.length > 0 ? STARTING_HYPOTHESES.length - allMods.length : 0)}</div>
+      <div class="tile-value text-gold">${totalHyps}</div>
       <div class="tile-label">Hypotheses</div>
     </div>
     <div class="summary-tile">
@@ -148,57 +205,37 @@ async function init() {
       <div class="tile-label">Current Week</div>
     </div>`;
 
-  // Validated
+  // ── Validated ──
   const valEl = document.getElementById('validated-list');
-  if (!validated.length) {
-    valEl.innerHTML = `<div class="text-muted" style="font-size:0.82rem;padding:0.75rem 0">None yet — need 10+ data points per modifier. Check back after Week ${(metaRes.week||0)+2}.</div>`;
-  } else {
-    valEl.innerHTML = validated.map(([name, v]) => {
-      const def = STARTING_HYPOTHESES.find(h => h.name.toLowerCase() === name.toLowerCase()) || { weight:'—', layer:'—', note:'' };
-      return modifierRow({ name, weight: def.weight, layer: def.layer, note: def.note || v.note || '' }, v.data_points, v.accuracy, v.status);
-    }).join('');
-  }
+  valEl.innerHTML = validated.length
+    ? validated.map(m => modifierRow(m, m.data_points, m.accuracy)).join('')
+    : `<div class="text-muted" style="font-size:0.82rem;padding:0.75rem 0">
+         None yet — need 10+ data points per modifier.
+         Check back after Week ${(metaRes.week || 0) + 2}.
+       </div>`;
 
-  // Hypotheses — merge stats data with starting list
-  const hypEl = document.getElementById('hypothesis-list');
-  // Build unified list: starting hypotheses + any in stats not yet validated
-  const seen = new Set(allMods.map(([k]) => k.toLowerCase()));
-  const allHyps = [
-    ...hyps.map(([name, v]) => {
-      const def = STARTING_HYPOTHESES.find(h => h.name.toLowerCase() === name.toLowerCase()) || { weight:'—', layer:'—', note:'' };
-      return { name, weight: def.weight, layer: def.layer, note: def.note || '', data_points: v.data_points, accuracy: v.accuracy };
-    }),
-    ...STARTING_HYPOTHESES.filter(h => !seen.has(h.name.toLowerCase())).map(h => ({
-      ...h, data_points: 0, accuracy: null
-    }))
-  ].sort((a, b) => b.data_points - a.data_points);
+  // ── Hypotheses ──
+  document.getElementById('hypothesis-list').innerHTML =
+    hyps.map(m => modifierRow(m, m.data_points, m.accuracy)).join('');
 
-  hypEl.innerHTML = allHyps.map(h =>
-    modifierRow(h, h.data_points, h.accuracy, 'hypothesis')
-  ).join('');
-
-  // Cut
+  // ── Cut ──
   if (weak.length) {
     document.getElementById('cut-section').style.display = 'block';
-    document.getElementById('cut-list').innerHTML = weak.map(([name, v]) => {
-      const def = STARTING_HYPOTHESES.find(h => h.name.toLowerCase() === name.toLowerCase()) || { weight:'—', layer:'—', note:'' };
-      return modifierRow({ name, weight: def.weight, layer: def.layer, note: def.note || '' }, v.data_points, v.accuracy, 'weak');
-    }).join('');
+    document.getElementById('cut-list').innerHTML =
+      weak.map(m => modifierRow(m, m.data_points, m.accuracy)).join('');
   }
 
-  // Layer status
-  const statusIcon  = { live:'✅', waiting:'⏳', planned:'⬜' };
-  const statusColor = { live:'var(--green)', waiting:'var(--yellow)', planned:'var(--text-muted)' };
-  document.getElementById('layer-status').innerHTML = `
-    <div style="display:flex;flex-direction:column;gap:0.1rem">
-      ${LAYERS.map(l => `
-        <div style="display:flex;align-items:flex-start;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
-          <span style="font-size:0.72rem;font-weight:700;color:var(--text-muted);min-width:20px;padding-top:0.1rem">L${l.num}</span>
-          <span style="font-size:0.85rem;font-weight:600;min-width:160px">${l.name}</span>
-          <span style="font-size:0.75rem;color:${statusColor[l.status]};min-width:60px">${statusIcon[l.status]} ${l.status}</span>
-          <span style="font-size:0.78rem;color:var(--text-muted);flex:1">${l.note}</span>
-        </div>`).join('')}
-    </div>`;
+  // ── Layer status ──
+  const statusIcon  = { live:'✅', waiting:'⏳', planned:'⬜', partial:'🔶' };
+  const statusColor = { live:'var(--green)', waiting:'var(--gold)', planned:'var(--text-muted)', partial:'var(--gold)' };
+  document.getElementById('layer-status').innerHTML =
+    LAYERS.map(l => `
+      <div style="display:flex;align-items:flex-start;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:0.7rem;font-weight:700;color:var(--text-muted);min-width:20px;padding-top:0.1rem">L${l.num}</span>
+        <span style="font-size:0.84rem;font-weight:600;min-width:170px">${l.name}</span>
+        <span style="font-size:0.74rem;color:${statusColor[l.status]};min-width:65px">${statusIcon[l.status]} ${l.status}</span>
+        <span style="font-size:0.77rem;color:var(--text-muted);flex:1">${l.note}</span>
+      </div>`).join('');
 }
 
 init();
