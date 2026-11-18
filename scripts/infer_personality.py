@@ -16,9 +16,27 @@ import json
 import os
 from datetime import datetime, timezone
 
-DATA_DIR     = os.path.join(os.path.dirname(__file__), '..', 'data')
-PLAYERS_FILE = os.path.join(DATA_DIR, 'players.json')
-META_FILE    = os.path.join(DATA_DIR, 'metadata.json')
+DATA_DIR      = os.path.join(os.path.dirname(__file__), '..', 'data')
+PLAYERS_FILE  = os.path.join(DATA_DIR, 'players.json')
+COACHES_FILE  = os.path.join(DATA_DIR, 'coaches.json')
+META_FILE     = os.path.join(DATA_DIR, 'metadata.json')
+
+# ── COMMUNICATION MAP (mirrors players.html) ─────────────────────────────────
+COMM_MAP = {
+    'QB':  ['WR', 'TE', 'RB', 'OL'],
+    'WR':  ['QB'],
+    'TE':  ['QB'],
+    'RB':  ['QB', 'OL'],
+    'OL':  ['QB', 'RB'],
+    'LB':  ['DL', 'DB'],
+    'DB':  ['LB', 'DB'],
+    'DL':  ['LB'],
+}
+COACH_MAP  = {
+    'QB': 'oc', 'WR': 'oc', 'TE': 'oc', 'RB': 'oc', 'OL': 'oc',
+    'LB': 'dc', 'DB': 'dc', 'DL': 'dc',
+}
+HC_DIRECT = {'QB', 'LB'}   # HC talks directly to these position groups
 
 # ── POSITION ARCHETYPES ───────────────────────────────────────────────────────
 # S = Sensing (detail, execution, physical, present-focused)
@@ -54,6 +72,94 @@ ELITE_PROGRAMS = {
 def load_json(path):
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+# ── COMPAT SCORING (mirrors players.html compatScore) ─────────────────────────
+def compat_score(type_a, type_b):
+    """Return 0-100 compat score between two MBTI type strings."""
+    if not type_a or not type_b:
+        return 50
+    def parse(t):
+        return {
+            'ie': t[0] if t[0] != '?' else None,
+            'sn': t[1] if t[1] != '?' else None,
+            'tf': t[2] if t[2] != '?' else None,
+            'jp': t[3] if t[3] != '?' else None,
+        }
+    a, b = parse(type_a), parse(type_b)
+    score = 50
+    if a['ie'] and b['ie']:
+        score += 5 if a['ie'] == b['ie'] else 0
+    if a['sn'] and b['sn']:
+        score += 10 if a['sn'] == b['sn'] else -10
+    if a['tf'] and b['tf']:
+        if   a['tf'] == 'T' and b['tf'] == 'F': score -= 15
+        elif a['tf'] == 'F' and b['tf'] == 'T': score -= 5
+        else:                                    score += 10
+    if a['jp'] and b['jp']:
+        if   a['jp'] == 'J' and b['jp'] == 'P': score -= 10
+        elif a['jp'] == a['jp']:                 score += 5
+    return max(0, min(100, score))
+
+
+def compute_team_compat(player, team_players, coaches_by_slug):
+    """
+    Weighted compat score for a player within their communication chain.
+    HC (if direct) × 0.35 + coordinator × 0.25 + position partners × 0.40
+    Returns 0-100 float, or None if no data available.
+    """
+    pos      = (player.get('position') or '').upper()
+    my_type  = (player.get('layer4_personality') or {}).get('mbti_type')
+    if not my_type:
+        return None
+
+    abbr     = (player.get('team') or '').upper()
+    slug_map = {
+        'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+        'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+        'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+        'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+        'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+        'SF':'sf','SEA':'sea',
+    }
+    slug     = slug_map.get(abbr)
+    coaches  = coaches_by_slug.get(slug, []) if slug else []
+    hc       = next((c for c in coaches if c.get('role') == 'hc'), None)
+    coord_role = COACH_MAP.get(pos)
+    coord    = next((c for c in coaches if c.get('role') == coord_role), None) if coord_role else None
+
+    scores, weights = [], []
+
+    # HC — direct authority link (higher weight for QB/LB, still present for others)
+    if hc and hc.get('mbti_type'):
+        hc_w = 0.35 if pos in HC_DIRECT else 0.20
+        scores.append(compat_score(hc.get('mbti_type'), my_type))
+        weights.append(hc_w)
+
+    # Coordinator — direct play-caller
+    if coord and coord.get('mbti_type') and coord is not hc:
+        scores.append(compat_score(coord.get('mbti_type'), my_type))
+        weights.append(0.25)
+
+    # Position communication partners
+    comm_positions = COMM_MAP.get(pos, [])
+    if comm_positions:
+        partner_scores = [
+            compat_score(my_type, (p.get('layer4_personality') or {}).get('mbti_type'))
+            for p in team_players
+            if p.get('name') != player.get('name')
+            and (p.get('position') or '').upper() in comm_positions
+            and (p.get('layer4_personality') or {}).get('mbti_type')
+        ]
+        if partner_scores:
+            scores.append(sum(partner_scores) / len(partner_scores))
+            weights.append(0.40)
+
+    if not scores:
+        return None
+
+    total_w = sum(weights)
+    return round(sum(s * w for s, w in zip(scores, weights)) / total_w, 1)
 
 
 def save_json(path, data):
@@ -277,16 +383,31 @@ def main():
     players = data.get('players', [])
     print(f'  {len(players)} players loaded')
 
+    # Load coaches for compat scoring
+    coaches_data = load_json(COACHES_FILE) if os.path.exists(COACHES_FILE) else {}
+    coaches_by_slug = {}
+    for c in coaches_data.get('coaches', []):
+        slug = c.get('team_slug')
+        if slug:
+            coaches_by_slug.setdefault(slug, []).append(c)
+
+    # Index players by team for partner lookups
+    players_by_team = {}
+    for p in players:
+        abbr = (p.get('team') or '').upper()
+        players_by_team.setdefault(abbr, []).append(p)
+
     updated = 0
     type_counts = {}
 
+    # Pass 1 — infer MBTI axes for all players first
     for player in players:
         ie, ie_ev = infer_ie(player)
         tf, tf_ev = infer_tf(player)
         sn, sn_ev = infer_sn(player)
         jp, jp_ev = infer_jp(player)
 
-        mbti_type = infer_type_string(ie, tf, sn, jp)
+        mbti_type  = infer_type_string(ie, tf, sn, jp)
         confidence = confidence_level(ie, tf, sn, jp)
 
         player['layer4_personality'] = {
@@ -303,9 +424,18 @@ def main():
             'method':       'statistical_inference',
             'last_updated': now_str,
         }
-
         type_counts[mbti_type] = type_counts.get(mbti_type, 0) + 1
         updated += 1
+
+    # Pass 2 — compute team_compat_score now that all types are set
+    compat_computed = 0
+    for player in players:
+        abbr        = (player.get('team') or '').upper()
+        team_players = players_by_team.get(abbr, [])
+        score = compute_team_compat(player, team_players, coaches_by_slug)
+        if score is not None:
+            player['layer4_personality']['team_compat_score'] = score
+            compat_computed += 1
 
     data['players']      = players
     data['last_updated'] = now_str
@@ -315,12 +445,14 @@ def main():
     meta = load_json(META_FILE)
     meta['last_personality_inference'] = now_str
     meta['personality_summary'] = {
-        'total_players': updated,
+        'total_players':    updated,
+        'compat_computed':  compat_computed,
         'type_distribution': dict(sorted(type_counts.items(), key=lambda x: -x[1])[:10]),
     }
     save_json(META_FILE, meta)
 
     print(f'  layer4_personality written for {updated} players')
+    print(f'  team_compat_score computed for {compat_computed} players')
     print(f'  Top types: {dict(sorted(type_counts.items(), key=lambda x: -x[1])[:8])}')
 
 

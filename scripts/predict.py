@@ -118,7 +118,26 @@ def team_skill_score(players_on_team):
     return round(total_s / total_w, 1) if total_w else 50.0
 
 
-def team_hunger_score(players_on_team):
+def team_compat_score(players_on_team):
+    """
+    Snap-weighted team compat score from layer4_personality.team_compat_score.
+    QB compat gets double weight — QB↔HC is the most predictive link.
+    Returns 0-100, defaults to 50 (neutral) if no data.
+    """
+    total_w, total_s = 0.0, 0.0
+    for p in players_on_team:
+        score = (p.get('layer4_personality') or {}).get('team_compat_score')
+        if score is None:
+            continue
+        w = _starter_weight(p)
+        if (p.get('position') or '').upper() == 'QB':
+            w *= 2.0   # QB↔HC is the anchor relationship
+        total_s += score * w
+        total_w += w
+    return round(total_s / total_w, 1) if total_w else 50.0
+
+
+
     """Snap-weighted hunger — starters' chip matters more than depth."""
     total_w, total_s = 0.0, 0.0
     for p in players_on_team:
@@ -247,6 +266,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     body         = team_body_score(players)
     skill        = team_skill_score(players)
     hunger       = team_hunger_score(players)
+    compat       = team_compat_score(players)
     injury       = team_injury_flag(players, practice_index)
     joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
@@ -257,6 +277,10 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     adjusted_skill = skill - weather_skill_penalty - (joint_pen * 0.3)
     adjusted_skill = max(0.0, adjusted_skill)
 
+    # Personality compat modifier: (compat - 50) / 500 = ±10% max on raw score
+    # Only meaningful when compat deviates from neutral (50)
+    compat_mult = 1.0 + (compat - 50.0) / 500.0
+
     raw = (
         body              * WEIGHTS['body'] +
         adjusted_skill    * WEIGHTS['skill'] +
@@ -264,7 +288,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         silence * 100     * WEIGHTS['silence_bonus'] +
         injury            * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
-    )
+    ) * compat_mult
     raw = max(0.0, min(100.0, raw))
     composite = normalize(raw)
 
@@ -275,6 +299,8 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "skill":              round(skill, 1),
         "adjusted_skill":     round(adjusted_skill, 1),
         "hunger":             round(hunger, 1),
+        "compat":             round(compat, 1),
+        "compat_mult":        round(compat_mult, 4),
         "injury_penalty":     round(injury, 1),
         "joint_penalty":      round(joint_pen, 1),
         "silence_bonus":      bool(silence),

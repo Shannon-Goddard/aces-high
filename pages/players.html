@@ -304,6 +304,7 @@ function renderCard(p) {
   const exp     = p.layer1_body?.years_exp ?? '—';
   const snap    = p.layer1_body?.snap_pct != null ? Math.round(p.layer1_body.snap_pct * 100) + '%' : '—';
   const mbti    = p.layer4_personality?.mbti_type;
+  const compat  = p.layer4_personality?.team_compat_score ?? null;
   const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
 
   const skillBar = skill !== null ? `
@@ -325,6 +326,13 @@ function renderCard(p) {
       <span style="font-size:0.7rem;color:var(--text-muted);min-width:42px">Hunger</span>
       <div class="progress-bar"><div class="progress-fill ${scoreClass(hunger,100)}" style="width:${hunger}%"></div></div>
       <span class="progress-label" style="font-size:0.72rem">${hunger}</span>
+    </div>` : '';
+
+  const compatBar = compat !== null && hasCompat ? `
+    <div class="progress-wrap" style="margin-bottom:0.2rem" onclick="event.stopPropagation();toggleCompat('${pid(p)}')" style="cursor:pointer">
+      <span style="font-size:0.7rem;color:var(--gold);min-width:42px">Compat</span>
+      <div class="progress-bar"><div class="progress-fill ${scoreClass(compat, 100)}" style="width:${compat}%"></div></div>
+      <span class="progress-label" style="font-size:0.72rem;color:var(--gold)">${compat.toFixed(0)}</span>
     </div>` : '';
 
   const id = pid(p);
@@ -350,13 +358,11 @@ function renderCard(p) {
           ${mbti && hasCompat ? `<div style="font-size:0.62rem;color:var(--gold);margin-top:0.2rem;font-weight:700">${mbti}</div>` : ''}
         </div>
       </div>
-      ${skillBar}${bodyBar}${hungerBar}
+      ${skillBar}${bodyBar}${hungerBar}${compatBar}
       ${p.layer1_body?.age_label ? `<div class="text-muted" style="font-size:0.7rem">${p.layer1_body.age_label.replace(/_/g,' ')} &middot; ${p.layer1_body.career_label?.replace(/_/g,' ') || ''}</div>` : ''}
       <div id="${id}-compat" style="display:none"></div>
     </div>`;
-}
-
-let allPlayers   = [];
+}   = [];
 let filtered     = [];
 let displayCount = PAGE_SIZE;
 let _playersByTeam = {};
