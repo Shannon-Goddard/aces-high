@@ -214,7 +214,6 @@ def update_summary(ledger):
 def build_blog_entry(bet, prediction):
     home  = bet['home_team']
     away  = bet['away_team']
-    score = bet.get('actual_score', '')
     pnl   = bet.get('flat_net_pnl', 0)
     result_str = 'Won' if pnl > 0 else 'Lost' if pnl < 0 else 'Push'
     return {
@@ -225,10 +224,10 @@ def build_blog_entry(bet, prediction):
         'title':       f"{away} @ {home} — Week {bet['week']}: We {result_str} ${abs(pnl):.0f}",
         'result':      result_str,
         'confidence':  bet.get('confidence'),
-        'reasoning':   prediction.get('prediction', {}).get('primary_reasoning', []),
-        'modifiers':   list(prediction.get('prediction', {}).get('hypothesis_modifiers', [])),
-        'blind_spots': prediction.get('prediction', {}).get('blind_spots', []),
+        'pick':        prediction.get('pick', ''),
+        'edge_score':  prediction.get('edge_score'),
         'lesson':      bet.get('lesson', ''),
+        'actual_score': bet.get('actual_score', ''),
         'youtube_id':  None,
         'published':   True
     }

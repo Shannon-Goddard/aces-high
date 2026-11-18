@@ -7,122 +7,247 @@
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+
 <div id="nav-root"></div>
+
 <div class="page">
   <div class="page-header">
     <div class="page-title">Ledger</div>
-    <div class="page-sub">Every prediction. Every result. Full reasoning attached.</div>
+    <div class="page-sub" id="ledger-sub">Loading...</div>
   </div>
 
-  <div class="summary-grid" id="ledger-summary"></div>
+  <!-- Season summary tiles -->
+  <div class="summary-grid" id="summary-tiles"></div>
 
   <!-- Confidence calibration -->
-  <div class="card mb-2" id="calibration-card" style="display:none">
-    <div class="text-dim mb-2" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Confidence Calibration — Is our score worth anything?</div>
+  <div id="calibration-section" style="display:none;margin-bottom:2rem">
+    <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">
+      Confidence Calibration
+    </div>
     <div id="calibration-bars"></div>
-    <div class="text-muted mt-1" style="font-size:0.75rem">80% confidence picks should win ~80% of the time. Minimum 10 data points per bucket before drawing conclusions.</div>
   </div>
 
-  <!-- Bet table -->
-  <div class="card">
+  <!-- Bet history table -->
+  <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">
+    Bet History
+  </div>
+  <div class="table-wrap">
+    <table id="ledger-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Matchup</th>
+          <th>Pick</th>
+          <th>Conf</th>
+          <th>Result</th>
+          <th>Score</th>
+          <th class="text-right">Flat P&amp;L</th>
+          <th class="text-right">Wtd P&amp;L</th>
+          <th>Lesson</th>
+        </tr>
+      </thead>
+      <tbody id="ledger-body"></tbody>
+    </table>
+  </div>
+
+  <div id="open-section" style="margin-top:2rem">
+    <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">
+      Open Bets This Week
+    </div>
     <div class="table-wrap">
-      <table id="ledger-table">
+      <table>
         <thead>
           <tr>
-            <th>Wk</th>
+            <th>Week</th>
             <th>Matchup</th>
-            <th>Our Pick</th>
+            <th>Pick</th>
+            <th>Spread</th>
             <th>Conf</th>
-            <th>Line</th>
-            <th>Result</th>
-            <th>Flat P&L</th>
-            <th>Wtd Wager</th>
-            <th>Wtd P&L</th>
-            <th>Lesson</th>
+            <th>Edge</th>
+            <th>Status</th>
           </tr>
         </thead>
-        <tbody id="ledger-body"></tbody>
+        <tbody id="open-body"></tbody>
       </table>
     </div>
   </div>
 </div>
+
 <footer>
-  <div>Ace's High — Not betting advice. Research only. <a href="./legal.html">Legal</a></div>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
 </footer>
+
 <script src="../components/nav.js"></script>
 <script>
 const ROOT = '../';
 
-function pnlClass(v) { return v > 0 ? 'pnl-pos' : v < 0 ? 'pnl-neg' : 'push'; }
-function pnlStr(v)   { return v === undefined || v === null ? '—' : (v >= 0 ? '+' : '') + '$' + Math.abs(v).toFixed(2); }
+const TEAM_SLUGS = {
+  'Buffalo Bills':'buf','Miami Dolphins':'mia','New England Patriots':'ne',
+  'New York Jets':'nyj','Baltimore Ravens':'bal','Cincinnati Bengals':'cin',
+  'Cleveland Browns':'cle','Pittsburgh Steelers':'pit','Houston Texans':'hou',
+  'Indianapolis Colts':'ind','Jacksonville Jaguars':'jax','Tennessee Titans':'ten',
+  'Denver Broncos':'den','Kansas City Chiefs':'kc','Las Vegas Raiders':'lv',
+  'Los Angeles Chargers':'lac','Dallas Cowboys':'dal','New York Giants':'nyg',
+  'Philadelphia Eagles':'phi','Washington Commanders':'wsh','Chicago Bears':'chi',
+  'Detroit Lions':'det','Green Bay Packers':'gb','Minnesota Vikings':'min',
+  'Atlanta Falcons':'atl','Carolina Panthers':'car','New Orleans Saints':'no',
+  'Tampa Bay Buccaneers':'tb','Arizona Cardinals':'ari','Los Angeles Rams':'lar',
+  'San Francisco 49ers':'sf','Seattle Seahawks':'sea'
+};
+function slugFor(name) {
+  return TEAM_SLUGS[name] || name.toLowerCase().replace(/\s+/g,'').slice(0,3);
+}
+function teamLogo(slug, size=20) {
+  return `<img src="https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png" style="width:${size}px;height:${size}px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'">`;
+}
+function pnlCell(v) {
+  if (v === null || v === undefined) return '<td class="text-right text-muted">—</td>';
+  const cls = v > 0 ? 'pnl-pos' : v < 0 ? 'pnl-neg' : '';
+  return `<td class="text-right ${cls}">${v >= 0 ? '+' : ''}$${Math.abs(v).toFixed(0)}</td>`;
+}
+function resultCell(r) {
+  if (!r) return '<td class="text-muted">—</td>';
+  const cls = r === 'win' ? 'win' : r === 'loss' ? 'loss' : 'push';
+  return `<td class="${cls}">${r.toUpperCase()}</td>`;
+}
 
 async function init() {
-  const ledger = await fetch(`${ROOT}data/ledger.json`).then(r => r.json()).catch(() => null);
-  if (!ledger) return;
+  const [ledgerRes, predRes] = await Promise.all([
+    fetch(`${ROOT}data/ledger.json`).then(r => r.json()).catch(() => null),
+    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] }))
+  ]);
 
-  const s = ledger.summary;
-  const f = s.flat;
-  const w = s.confidence_weighted;
-
-  // Summary tiles
-  document.getElementById('ledger-summary').innerHTML = `
-    <div class="summary-tile"><div class="tile-value">${f.wins}-${f.losses}${f.pushes?'-'+f.pushes:''}</div><div class="tile-label">Flat Record</div></div>
-    <div class="summary-tile"><div class="tile-value ${f.net_pnl>=0?'text-green':'text-red'}">${pnlStr(f.net_pnl)}</div><div class="tile-label">Flat Net P&L</div></div>
-    <div class="summary-tile"><div class="tile-value ${f.roi_pct>=0?'text-green':'text-red'}">${f.roi_pct>=0?'+':''}${f.roi_pct}%</div><div class="tile-label">Flat ROI</div></div>
-    <div class="summary-tile"><div class="tile-value">${w.wins}-${w.losses}${w.pushes?'-'+w.pushes:''}</div><div class="tile-label">Weighted Record</div></div>
-    <div class="summary-tile"><div class="tile-value ${w.net_pnl>=0?'text-green':'text-red'}">${pnlStr(w.net_pnl)}</div><div class="tile-label">Weighted Net P&L</div></div>
-    <div class="summary-tile"><div class="tile-value ${w.roi_pct>=0?'text-green':'text-red'}">${w.roi_pct>=0?'+':''}${w.roi_pct}%</div><div class="tile-label">Weighted ROI</div></div>
-    <div class="summary-tile"><div class="tile-value text-gold">${s.delta.which_outperforms||'—'}</div><div class="tile-label">Outperforming</div></div>
-    <div class="summary-tile"><div class="tile-value">${f.total_bets}</div><div class="tile-label">Total Bets</div></div>
-  `;
-
-  // Calibration
-  const cal = s.confidence_calibration?.buckets || {};
-  const calEntries = Object.entries(cal).filter(([,v]) => v.bets > 0);
-  if (calEntries.length) {
-    document.getElementById('calibration-card').style.display = 'block';
-    document.getElementById('calibration-bars').innerHTML = calEntries.map(([bucket, v]) => {
-      const winPct = v.bets ? Math.round(v.wins / v.bets * 100) : 0;
-      const expected = parseInt(bucket.split('_')[0]) + 5;
-      const diff = winPct - expected;
-      return `
-        <div class="stat-row">
-          <span class="stat-label">${bucket.replace('_','-')}% confidence (${v.bets} bets)</span>
-          <div style="flex:1;margin:0 1rem;">
-            <div class="progress-bar"><div class="progress-fill ${winPct>=expected?'fill-green':'fill-red'}" style="width:${winPct}%"></div></div>
-          </div>
-          <span class="stat-value ${diff>=0?'text-green':'text-red'}">${winPct}% actual ${diff>=0?'(+'+diff+'%)':'('+diff+'%)'}</span>
-        </div>`;
-    }).join('');
-  }
-
-  // Bet rows
-  const bets = (ledger.bets || []).slice().reverse();
-  if (!bets.length) {
-    document.getElementById('ledger-body').innerHTML =
-      `<tr><td colspan="10" class="text-center text-muted" style="padding:2rem">No bets recorded yet.</td></tr>`;
+  if (!ledgerRes) {
+    document.getElementById('ledger-sub').textContent = 'No ledger data yet.';
     return;
   }
 
-  document.getElementById('ledger-body').innerHTML = bets.map(b => {
-    const result = b.spread_result || b.moneyline_result || '—';
-    const flatPnl = b.flat_net_pnl;
-    const wtdPnl  = b.weighted_net_pnl;
-    const wager   = b.confidence_wager;
-    return `
-      <tr>
-        <td>${b.week||'—'}</td>
-        <td>${b.away_team||''} @ ${b.home_team||''}</td>
-        <td>${b.spread_pick||b.moneyline_pick||'—'}</td>
-        <td><span class="${result==='win'?'text-green':result==='loss'?'text-red':'text-dim'}">${b.confidence||'—'}</span></td>
-        <td>${b.spread_value!==undefined?b.spread_value:'—'}</td>
-        <td class="${result==='win'?'win':result==='loss'?'loss':'push'}">${result.toUpperCase()}</td>
-        <td class="${pnlClass(flatPnl)}">${pnlStr(flatPnl)}</td>
-        <td>${wager?'$'+wager:'—'}</td>
-        <td class="${pnlClass(wtdPnl)}">${pnlStr(wtdPnl)}</td>
-        <td style="font-size:0.78rem;color:var(--text-dim);max-width:200px">${b.lesson||'—'}</td>
+  const s    = ledgerRes.summary;
+  const flat = s.flat;
+  const wtd  = s.confidence_weighted;
+
+  // Sub-header
+  document.getElementById('ledger-sub').textContent =
+    `Season ${ledgerRes.season} · $${ledgerRes.flat_bet_amount} flat bet · Threshold: ${ledgerRes.confidence_threshold}+ confidence`;
+
+  // Summary tiles
+  const hasClosed = flat.total_bets > 0;
+  document.getElementById('summary-tiles').innerHTML = `
+    <div class="summary-tile">
+      <div class="tile-value">${flat.wins}-${flat.losses}${flat.pushes ? '-'+flat.pushes : ''}</div>
+      <div class="tile-label">Flat Record</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${flat.roi_pct >= 0 ? 'text-green' : 'text-red'}">${flat.roi_pct >= 0 ? '+' : ''}${flat.roi_pct}%</div>
+      <div class="tile-label">Flat ROI</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${wtd.wins}-${wtd.losses}${wtd.pushes ? '-'+wtd.pushes : ''}</div>
+      <div class="tile-label">Weighted Record</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${wtd.roi_pct >= 0 ? 'text-green' : 'text-red'}">${wtd.roi_pct >= 0 ? '+' : ''}${wtd.roi_pct}%</div>
+      <div class="tile-label">Weighted ROI</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${flat.net_pnl >= 0 ? 'text-green' : 'text-red'}">${flat.net_pnl >= 0 ? '+' : ''}$${Math.abs(flat.net_pnl).toFixed(0)}</div>
+      <div class="tile-label">Flat Net P&amp;L</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value text-gold">${s.delta.which_outperforms || '—'}</div>
+      <div class="tile-label">Outperforming</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${flat.total_bets}</div>
+      <div class="tile-label">Closed Bets</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${ledgerRes.bets.filter(b => b.status === 'open').length}</div>
+      <div class="tile-label">Open Bets</div>
+    </div>
+  `;
+
+  // Calibration bars (only if we have closed bets)
+  const buckets = s.confidence_calibration.buckets;
+  const hasBucketData = Object.values(buckets).some(b => b.bets > 0);
+  if (hasBucketData) {
+    document.getElementById('calibration-section').style.display = 'block';
+    document.getElementById('calibration-bars').innerHTML = Object.entries(buckets).map(([range, b]) => {
+      const label   = range.replace('_', '-');
+      const winPct  = b.bets > 0 ? Math.round(b.wins / b.bets * 100) : null;
+      const midConf = parseInt(range.split('_')[0]) + 5;
+      const bar     = winPct !== null
+        ? `<div class="progress-wrap">
+             <div class="progress-bar"><div class="progress-fill ${winPct >= midConf ? 'fill-green' : 'fill-red'}" style="width:${winPct}%"></div></div>
+             <span class="progress-label ${winPct >= midConf ? 'text-green' : 'text-red'}">${winPct}%</span>
+           </div>`
+        : `<span class="text-muted" style="font-size:0.78rem">No data</span>`;
+      return `<div class="stat-row">
+        <span class="stat-label" style="min-width:70px">${label}</span>
+        <span class="text-muted" style="font-size:0.78rem;min-width:60px">${b.wins}/${b.bets}</span>
+        <div style="flex:1">${bar}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Closed bets table
+  const closed = ledgerRes.bets.filter(b => b.status === 'closed')
+    .sort((a, b) => (b.game_date || '').localeCompare(a.game_date || ''));
+
+  const tbody = document.getElementById('ledger-body');
+  if (!closed.length) {
+    tbody.innerHTML = `<tr><td colspan="9" class="text-muted" style="text-align:center;padding:2rem">No closed bets yet — results will appear here after games finish.</td></tr>`;
+  } else {
+    tbody.innerHTML = closed.map(b => {
+      const homeSlug = b.home_slug || slugFor(b.home_team);
+      const awaySlug = b.away_slug || slugFor(b.away_team);
+      const pickSlug = b.pick_side === 'home' ? homeSlug : awaySlug;
+      const result   = b.spread_result || b.moneyline_result || null;
+      return `<tr>
+        <td>${b.week}</td>
+        <td>${teamLogo(awaySlug)} ${b.away_team} @ ${teamLogo(homeSlug)} ${b.home_team}</td>
+        <td>${teamLogo(pickSlug)} <strong>${b.pick_team}</strong></td>
+        <td><span class="${b.confidence >= 70 ? 'text-green' : b.confidence >= 50 ? 'text-yellow' : 'text-red'}">${b.confidence}</span></td>
+        ${resultCell(result)}
+        <td class="text-muted" style="font-size:0.8rem">${b.actual_score || '—'}</td>
+        ${pnlCell(b.flat_net_pnl)}
+        ${pnlCell(b.weighted_net_pnl)}
+        <td class="text-muted" style="font-size:0.78rem;max-width:200px">${b.lesson || '—'}</td>
       </tr>`;
-  }).join('');
+    }).join('');
+  }
+
+  // Open bets table
+  const open = ledgerRes.bets.filter(b => b.status === 'open')
+    .sort((a, b) => (a.game_date || '').localeCompare(b.game_date || ''));
+
+  const predMap = {};
+  for (const p of (predRes.predictions || [])) predMap[p.game_id] = p;
+
+  const openBody = document.getElementById('open-body');
+  if (!open.length) {
+    openBody.innerHTML = `<tr><td colspan="7" class="text-muted" style="text-align:center;padding:1.5rem">No open bets.</td></tr>`;
+  } else {
+    openBody.innerHTML = open.map(b => {
+      const homeSlug = b.home_slug || slugFor(b.home_team);
+      const awaySlug = b.away_slug || slugFor(b.away_team);
+      const pickSlug = b.pick_side === 'home' ? homeSlug : awaySlug;
+      const pred     = predMap[b.game_id] || {};
+      const spread   = pred.spread !== undefined
+        ? `${pred.home_team} ${pred.spread > 0 ? '+' : ''}${pred.spread}`
+        : '—';
+      return `<tr>
+        <td>${b.week}</td>
+        <td>${teamLogo(awaySlug)} ${b.away_team} @ ${teamLogo(homeSlug)} ${b.home_team}</td>
+        <td>${teamLogo(pickSlug)} <strong>${b.pick_team}</strong></td>
+        <td class="text-dim">${spread}</td>
+        <td><span class="${b.confidence >= 70 ? 'text-green' : b.confidence >= 50 ? 'text-yellow' : 'text-red'}">${b.confidence}</span></td>
+        <td><span class="${b.edge_score >= 0 ? 'text-green' : 'text-red'}">${b.edge_score >= 0 ? '+' : ''}${b.edge_score}</span></td>
+        <td><span class="badge-bet">OPEN</span></td>
+      </tr>`;
+    }).join('');
+  }
 }
 
 init();
