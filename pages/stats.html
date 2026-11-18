@@ -19,6 +19,13 @@
   <!-- Overall record tiles -->
   <div class="summary-grid" id="overall-tiles"></div>
 
+  <!-- Open bets tracker -->
+  <div class="section-block">
+    <div class="section-label">Open Bets — Tracking</div>
+    <div class="page-sub" style="margin-bottom:0.75rem">All pending predictions. Updates automatically when odds refresh.</div>
+    <div id="open-bets"></div>
+  </div>
+
   <!-- Active flags this week -->
   <div class="section-block">
     <div class="section-label">Active Flags This Week</div>
@@ -70,26 +77,82 @@
 const ROOT = '../';
 
 const MODIFIER_WEIGHTS = [
-  { name: 'Body Score',              weight: '×0.20', layer: 'L1', status: 'active',     note: 'Age, weight, snap%, longevity' },
-  { name: 'Skill Score',             weight: '×0.30', layer: 'L2', status: 'active',     note: 'EPA, percentile vs position peers' },
-  { name: 'Hunger Index',            weight: '×0.10', layer: 'L3', status: 'hypothesis', note: 'Draft position, contract, adversity' },
-  { name: 'Silence Bonus',           weight: '×0.10', layer: 'L3', status: 'hypothesis', note: 'No negative headlines = locked in' },
-  { name: 'Injury Flag',             weight: '−0.15', layer: 'L1', status: 'active',     note: 'Practice trajectory score, graduated' },
-  { name: 'Distraction Flag',        weight: '−0.10', layer: 'L3', status: 'hypothesis', note: 'News keywords: legal, drama, trade' },
-  { name: 'Wind >20mph',             weight: '×0.75', layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
-  { name: 'Rain / Snow',             weight: '×0.85', layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
-  { name: 'Temp <20°F (kicker)',     weight: '×0.80', layer: 'WX', status: 'hypothesis', note: 'Kicker accuracy in extreme cold' },
-  { name: 'Chronic Joint (cold)',    weight: '−0.30', layer: 'WX', status: 'hypothesis', note: 'Temp <40°F + joint injury history' },
-  { name: 'Dome (immunity)',         weight: '×1.00', layer: 'WX', status: 'active',     note: 'No weather impact in dome stadiums' },
-  { name: 'Practice Trajectory',     weight: 'scaled', layer: 'L1', status: 'active',    note: 'DNP→out 85, trending full→5' },
-  { name: 'Revenge Game',            weight: '×1.10', layer: 'L5', status: 'hypothesis', note: 'Playing former team / coach' },
-  { name: 'Opposite Team Beef',      weight: '×1.10', layer: 'L5', status: 'hypothesis', note: 'Personal rivalry across teams' },
-  { name: 'Same Team Beef',          weight: '×0.90', layer: 'L5', status: 'hypothesis', note: 'Unresolved locker room conflict' },
-  { name: 'Coach Public Callout',    weight: '×0.85', layer: 'L6', status: 'hypothesis', note: 'Player embarrassed publicly' },
-  { name: 'Short Week (Thu game)',   weight: '×0.93', layer: 'L7', status: 'hypothesis', note: 'Fatigue from compressed schedule' },
-  { name: 'Coming Off Bye',          weight: '×1.03', layer: 'L7', status: 'hypothesis', note: 'Rest advantage' },
-  { name: 'Vegas Sharp Signal',      weight: 'signal', layer: 'L7', status: 'hypothesis', note: 'Line movement vs public divergence' },
+  { name: 'Body Score',              weight: '×0.20',   layer: 'L1', status: 'active',     note: 'Age, weight, snap%, longevity' },
+  { name: 'Skill Score',             weight: '×0.30',   layer: 'L2', status: 'active',     note: 'EPA, percentile vs position peers' },
+  { name: 'Hunger Index',            weight: '×0.10',   layer: 'L3', status: 'hypothesis', note: 'Draft position, contract, adversity' },
+  { name: 'Silence Bonus',           weight: '×0.10',   layer: 'L3', status: 'hypothesis', note: 'No negative headlines = locked in' },
+  { name: 'Injury Flag',             weight: '−0.15',   layer: 'L1', status: 'active',     note: 'Practice trajectory score, graduated' },
+  { name: 'Distraction Flag',        weight: '−0.10',   layer: 'L3', status: 'hypothesis', note: 'News keywords: legal, drama, trade' },
+  { name: 'Personality Compat',      weight: '±10%',    layer: 'L4', status: 'hypothesis', note: 'Team compat score, QB↔HC double-weighted' },
+  { name: 'Role Fit (veteran drain)',weight: '±10%',    layer: 'L4', status: 'hypothesis', note: 'Position demand vs MBTI, compounds with exp' },
+  { name: 'Wind >20mph',             weight: '×0.75',   layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
+  { name: 'Rain / Snow',             weight: '×0.85',   layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
+  { name: 'Temp <20°F (kicker)',     weight: '×0.80',   layer: 'WX', status: 'hypothesis', note: 'Kicker accuracy in extreme cold' },
+  { name: 'Chronic Joint (cold)',    weight: '−0.30',   layer: 'WX', status: 'hypothesis', note: 'Temp <40°F + joint injury history' },
+  { name: 'Dome (immunity)',         weight: '×1.00',   layer: 'WX', status: 'active',     note: 'No weather impact in dome stadiums' },
+  { name: 'Practice Trajectory',     weight: 'scaled',  layer: 'L1', status: 'active',     note: 'DNP→out 85, trending full→5' },
+  { name: 'Momentum (last 3 wks)',   weight: 'planned', layer: 'L2', status: 'planned',    note: 'Rolling weighted skill score' },
+  { name: 'Contract Year',           weight: 'planned', layer: 'L3', status: 'planned',    note: 'Final year hunger spike +15' },
+  { name: 'Snap% Drop Warning',      weight: 'planned', layer: 'L1', status: 'planned',    note: '>15pt drop, no injury report = early warning' },
+  { name: 'Divisional Game',         weight: 'planned', layer: 'L7', status: 'planned',    note: '×0.97 on favorite edge — familiarity tightens' },
+  { name: 'Coordinator Change',      weight: 'planned', layer: 'L6', status: 'planned',    note: 'Role fit →50 for 3 weeks post-change' },
+  { name: 'Coach Market Fit',        weight: 'planned', layer: 'L6', status: 'planned',    note: 'I/E vs market size, tenure, ownership stability' },
+  { name: 'Revenge Game',            weight: '×1.10',   layer: 'L5', status: 'hypothesis', note: 'Playing former team / coach' },
+  { name: 'Coach Public Callout',    weight: '×0.85',   layer: 'L6', status: 'hypothesis', note: 'Player embarrassed publicly' },
+  { name: 'Short Week (Thu game)',   weight: '×0.93',   layer: 'L7', status: 'hypothesis', note: 'Fatigue from compressed schedule' },
+  { name: 'Coming Off Bye',          weight: '×1.03',   layer: 'L7', status: 'hypothesis', note: 'Rest advantage' },
+  { name: 'Vegas Sharp Signal',      weight: 'signal',  layer: 'L7', status: 'hypothesis', note: 'Line movement vs public divergence' },
 ];
+
+function renderOpenBets(ledger) {
+  const el   = document.getElementById('open-bets');
+  const bets = (ledger.bets || []).filter(b => b.status === 'open')
+    .sort((a, b) => b.confidence - a.confidence);
+  if (!bets.length) { el.innerHTML = empty('No open bets.'); return; }
+
+  const confColor = c => c >= 70 ? 'text-green' : c >= 55 ? 'text-yellow' : 'text-red';
+  const typeLabel = t => t === 'favorite' ? '<span style="font-size:0.65rem;color:var(--text-muted)">FAV</span>'
+                                          : '<span style="font-size:0.65rem;color:var(--gold)">DOG</span>';
+
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Matchup</th>
+            <th>Pick</th>
+            <th>Spread</th>
+            <th>Type</th>
+            <th>Conf</th>
+            <th>Edge</th>
+            <th>Week</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${bets.map(b => {
+            const spread = b.spread_value != null
+              ? `${b.spread_value > 0 ? '+' : ''}${b.spread_value}` : '—';
+            const pick   = b.pick_team || (b.spread_pick === 'home' ? b.home_team : b.away_team);
+            return `
+              <tr>
+                <td style="font-size:0.8rem">
+                  ${teamLogo(b.away_slug)} ${b.away_team.split(' ').pop()}
+                  <span class="text-muted"> @ </span>
+                  ${teamLogo(b.home_slug)} ${b.home_team.split(' ').pop()}
+                </td>
+                <td style="font-weight:600;font-size:0.82rem">${pick.split(' ').pop()}</td>
+                <td style="font-family:monospace;font-size:0.82rem">${spread}</td>
+                <td>${typeLabel(b.pick_type)}</td>
+                <td><span class="${confColor(b.confidence)}" style="font-weight:700">${b.confidence}</span></td>
+                <td style="font-size:0.8rem;color:${b.edge_score >= 0 ? 'var(--green)' : 'var(--red)'}">${b.edge_score >= 0 ? '+' : ''}${b.edge_score}</td>
+                <td style="font-size:0.78rem;color:var(--text-muted)">${b.week}</td>
+              </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.5rem">${bets.length} open · ${bets.filter(b=>b.confidence>=70).length} high confidence · ${bets.filter(b=>b.pick_type==='underdog').length} dogs</div>`;
+}
 
 function empty(msg) {
   return `<div class="text-muted" style="font-size:0.82rem;padding:0.75rem 0">${msg}</div>`;
@@ -250,6 +313,8 @@ function renderModifierWeights() {
               <td>
                 ${m.status === 'active'
                   ? '<span class="flag flag-silence" style="font-size:0.68rem">active</span>'
+                  : m.status === 'planned'
+                  ? '<span class="flag" style="font-size:0.68rem;background:rgba(99,102,241,0.12);color:#818cf8">planned</span>'
                   : '<span class="flag flag-hypothesis" style="font-size:0.68rem">hypothesis</span>'}
               </td>
               <td style="font-size:0.78rem;color:var(--text-dim)">${m.note}</td>
@@ -302,6 +367,9 @@ async function init() {
       <div class="tile-value">${(predRes.predictions||[]).filter(p=>p.status==='open').length}</div>
       <div class="tile-label">Open Bets</div>
     </div>`;
+
+  // Open bets
+  renderOpenBets(ledgerRes);
 
   // Active flags
   renderActiveFlags(predRes, practiceRes, weatherRes);

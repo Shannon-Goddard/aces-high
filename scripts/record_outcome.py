@@ -153,22 +153,74 @@ def update_summary(ledger):
         )
     }
 
-# ── AUTO LESSON ────────────────────────────────────────────────────────────
+# ── AUTO LESSON ──────────────────────────────────────────────────────────────────────
 
-def auto_lesson(bet, spread_result, ml_result):
-    home  = bet['home_team']
-    away  = bet['away_team']
-    pick  = bet.get('spread_pick', '')
-    team  = home if pick == 'home' else away
-    score = bet.get('actual_score', '')
+def auto_lesson(bet, spread_result, ml_result, prediction=None):
+    """
+    Generate a meaningful lesson from a closed bet.
+    Captures: result, score delta vs our prediction, which modifiers fired,
+    and what the system missed. This is the learning layer.
+    """
+    home       = bet['home_team']
+    away       = bet['away_team']
+    pick_side  = bet.get('spread_pick', '')
+    pick_team  = home if pick_side == 'home' else away
+    score      = bet.get('actual_score', '')
+    confidence = bet.get('confidence', 50)
+    result     = spread_result or ml_result
 
-    if spread_result == 'win':
-        return f"{team} covered as predicted. Final: {score}."
-    elif spread_result == 'loss':
-        return f"{team} failed to cover. Final: {score}."
-    elif spread_result == 'push':
-        return f"Push on the spread. Final: {score}."
-    return f"Game complete. Final: {score}."
+    parts = []
+
+    # Result
+    if result == 'win':
+        parts.append(f"{pick_team} covered as predicted (conf {confidence}). Final: {score}.")
+    elif result == 'loss':
+        parts.append(f"{pick_team} failed to cover (conf {confidence}). Final: {score}.")
+    elif result == 'push':
+        parts.append(f"Push on the spread (conf {confidence}). Final: {score}.")
+    else:
+        parts.append(f"Game complete. Final: {score}.")
+
+    # Score delta vs our prediction
+    if prediction:
+        our_home = prediction.get('home_score', 0)
+        our_away = prediction.get('away_score', 0)
+        our_diff = round(our_home - our_away, 1)
+        actual   = bet.get('actual_spread', 0)
+        delta    = round(actual - our_diff, 1)
+        direction = 'overestimated home' if delta < -3 else 'underestimated home' if delta > 3 else 'close to predicted'
+        parts.append(
+            f"Score delta: predicted home {'+' if our_diff >= 0 else ''}{our_diff}, "
+            f"actual home {'+' if actual >= 0 else ''}{actual} "
+            f"({direction}, off by {abs(delta):.1f} pts)."
+        )
+
+        # Which modifiers fired
+        bd    = prediction.get('home_breakdown') or {}
+        fired = []
+        if bd.get('injury_flag'):      fired.append('injury flag')
+        if bd.get('silence_bonus'):    fired.append('silence bonus')
+        if bd.get('distraction_flag'): fired.append('distraction flag')
+        wx = (prediction.get('modifiers_applied') or {}).get('weather') or {}
+        if wx.get('wind_flag'):        fired.append('wind flag')
+        if wx.get('precip_flag'):      fired.append('precip flag')
+        if wx.get('cold_flag'):        fired.append('cold flag')
+        compat = bd.get('compat')
+        rf     = bd.get('role_fit_mult')
+        if compat is not None and abs(compat - 50) > 10:
+            fired.append(f"compat {compat:.0f}")
+        if rf is not None and abs(rf - 1.0) > 0.02:
+            fired.append(f"role fit {rf:.3f}")
+        if fired:
+            parts.append(f"Modifiers fired: {', '.join(fired)}.")
+
+    # Flag high-confidence misses — most valuable lessons
+    if result == 'loss' and confidence >= 70:
+        parts.append("HIGH CONFIDENCE MISS — review what the system didn't see.")
+    elif result == 'loss' and confidence >= 55:
+        parts.append("Moderate confidence miss — check if a modifier was absent or misfired.")
+
+    return ' '.join(parts)
 
 # ── BLOG ───────────────────────────────────────────────────────────────────
 
@@ -296,7 +348,8 @@ def main():
         ), 2)
 
         ml_result      = bet.get('moneyline_result')
-        bet['lesson']  = auto_lesson(bet, spread_result, ml_result)
+        prediction     = pred_by_game.get(bet['game_id'], {})
+        bet['lesson']  = auto_lesson(bet, spread_result, ml_result, prediction)
         bet['closed_at'] = now_str
         bet['status']    = 'closed'
 
