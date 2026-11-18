@@ -41,8 +41,18 @@ def load_json(path):
         return json.load(f)
 
 def save_json(path, data):
+    # Use allow_nan=False to catch NaN early, but first sanitize via re-encode
+    import math
+    def sanitize(obj):
+        if isinstance(obj, float) and math.isnan(obj):
+            return None
+        if isinstance(obj, dict):
+            return {k: sanitize(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [sanitize(v) for v in obj]
+        return obj
     with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, default=str)
+        json.dump(sanitize(data), f, indent=2)
 
 def safe_float(val):
     try:
