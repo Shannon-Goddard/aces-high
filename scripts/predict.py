@@ -248,6 +248,10 @@ def team_injury_flag(players_on_team, practice_index=None):
             status  = (str(inj.get('report_status') or '')).lower()
             concern = STATUS_FALLBACK.get(status, 0)
 
+        # Snap drop without injury report — treat as questionable-level concern
+        if not concern and (p.get('layer1_body') or {}).get('snap_drop_flag'):
+            concern = 40
+
         if concern < 25:
             continue
 

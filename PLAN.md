@@ -447,6 +447,7 @@ itself before we add more signals. Wrong order = we build on sand.
 | Communication chain drives compat partners | QB talks to WR/TE/RB/OL — not to the DC. Chain mirrors real football structure | 2026 |
 | Momentum over season aggregate | A 4-8 team and a team on a 4-game win streak have the same season stats but play completely differently | 2026 |
 | Contract year as hunger spike | Final year players are playing for their next contract — real, measurable, underpriced by the market | 2026 |
+| Contract year proxy via draft round + years_exp | No contracts API yet — swap `is_contract_year()` with real data when one is added, all downstream logic stays the same | 2026 |
 | Snap% drop as early injury signal | A player losing snaps without an injury report is hiding something — the data knows before the report does | 2026 |
 | Divisional familiarity as favorite penalty | Second matchup tightens — the underdog has film now, the market doesn't fully price this | 2026 |
 | Coordinator change invalidates role fit | A player's role fit score is scheme-specific — new OC means new demands, 3-week reset is honest | 2026 |

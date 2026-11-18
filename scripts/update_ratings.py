@@ -211,6 +211,19 @@ def build_layer1(player_row, snap_pcts, age):
     longevity_score, career_label = score_career_longevity(years_exp, pos)
     snap_pct, snap_trend         = calc_snap_trend(snap_pcts)
 
+    # Snap drop flag — losing 15+ snap% points over 3 weeks without an injury report
+    # The data knows before the report does.
+    snap_drop_flag = False
+    if len(snap_pcts) >= 2:
+        valid = [v for v in snap_pcts if v is not None]
+        if len(valid) >= 2:
+            recent  = valid[0]   # most recent week (0-1 scale)
+            earlier = valid[-1]  # oldest in window
+            drop_pts = (earlier - recent) * 100  # convert to percentage points
+            inj_status = (player_row.get('injury') or {}).get('report_status') or ''
+            if drop_pts >= 15 and not inj_status:
+                snap_drop_flag = True
+
     # Composite body score — weighted average of available components
     components = [s for s in [age_score, weight_score, longevity_score] if s is not None]
     body_score = round(sum(components) / len(components), 1) if components else None
@@ -227,7 +240,8 @@ def build_layer1(player_row, snap_pcts, age):
         'longevity_score': longevity_score,
         'career_label':    career_label,
         'snap_pct':        snap_pct,
-        'snap_trend':      snap_trend
+        'snap_trend':      snap_trend,
+        'snap_drop_flag':  snap_drop_flag,
     }
 
 # ── LAYER 2: SKILL SCORE ───────────────────────────────────────────────────
