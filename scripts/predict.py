@@ -169,15 +169,36 @@ def get_weather_modifiers(game_id, weather_index):
     entry = weather_index.get(game_id, {})
     mods  = entry.get('modifiers', {})
     return {
-        'dome':         mods.get('dome', False),
-        'passing_mult': mods.get('passing_mult', 1.0),
-        'kicker_mult':  mods.get('kicker_mult', 1.0),
-        'wind_flag':    mods.get('wind_flag', False),
-        'precip_flag':  mods.get('precip_flag', False),
-        'cold_flag':    mods.get('cold_flag', False),
-        'notes':        mods.get('notes', []),
-        'weather':      entry.get('weather'),
+        'dome':            mods.get('dome', False),
+        'passing_mult':    mods.get('passing_mult', 1.0),
+        'kicker_mult':     mods.get('kicker_mult', 1.0),
+        'wind_flag':       mods.get('wind_flag', False),
+        'precip_flag':     mods.get('precip_flag', False),
+        'cold_flag':       mods.get('cold_flag', False),
+        'cold_joint_flag': mods.get('cold_joint_flag', False),
+        'notes':           mods.get('notes', []),
+        'weather':         entry.get('weather'),
     }
+
+
+def team_chronic_joint_penalty(players_on_team, cold_joint_flag):
+    """
+    Extra skill penalty for players with chronic_joint_issue=True in cold weather.
+    Triggers at temp < 40F. Hypothesis modifier — capped at 50 (less severe than full injury).
+    QB with bad shoulder in cold = significant. Depth OL = minimal.
+    """
+    if not cold_joint_flag:
+        return 0.0
+    penalty = 0.0
+    for p in players_on_team:
+        if not p.get('chronic_joint_issue'):
+            continue
+        pos   = (p.get('position') or '').upper()
+        snap  = (p.get('layer1_body') or {}).get('snap_pct') or 0.0
+        skill = ((p.get('layer2_skill') or {}).get('skill_score') or 50.0) / 100.0
+        pos_mult = 2.0 if pos == 'QB' else 1.3 if pos in KEY_POSITIONS else 0.4
+        penalty += snap * skill * pos_mult * 100.0
+    return round(min(50.0, penalty), 1)
 
 
 # Normalization bounds — set from first full run, updated each season
@@ -202,42 +223,45 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None):
     if weather_mods is None:
         weather_mods = {'passing_mult': 1.0, 'kicker_mult': 1.0, 'dome': False}
 
-    players = team_index.get(slug, [])
-    body    = team_body_score(players)
-    skill   = team_skill_score(players)
-    hunger  = team_hunger_score(players)
-    injury  = team_injury_flag(players)
+    players      = team_index.get(slug, [])
+    body         = team_body_score(players)
+    skill        = team_skill_score(players)
+    hunger       = team_hunger_score(players)
+    injury       = team_injury_flag(players)
+    joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
 
-    # Apply weather to skill — passing game takes the hit, not blocking/running
-    # Dome teams are immune. passing_mult already 1.0 for domes.
-    weather_skill_penalty = skill * (1.0 - weather_mods['passing_mult'])  # how much skill is reduced
-    adjusted_skill = skill - weather_skill_penalty
+    # Weather: passing game takes the hit from wind/precip
+    weather_skill_penalty = skill * (1.0 - weather_mods['passing_mult'])
+    # Chronic joint: additional skill reduction for flagged players in cold
+    adjusted_skill = skill - weather_skill_penalty - (joint_pen * 0.3)
+    adjusted_skill = max(0.0, adjusted_skill)
 
     raw = (
-        body            * WEIGHTS['body'] +
-        adjusted_skill  * WEIGHTS['skill'] +
-        hunger          * WEIGHTS['hunger'] +
-        silence * 100   * WEIGHTS['silence_bonus'] +
-        injury          * WEIGHTS['injury_flag'] +
+        body              * WEIGHTS['body'] +
+        adjusted_skill    * WEIGHTS['skill'] +
+        hunger            * WEIGHTS['hunger'] +
+        silence * 100     * WEIGHTS['silence_bonus'] +
+        injury            * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
     )
     raw = max(0.0, min(100.0, raw))
     composite = normalize(raw)
 
     return {
-        "composite":        round(composite, 1),
-        "raw":              round(raw, 1),
-        "body":             round(body, 1),
-        "skill":            round(skill, 1),
-        "adjusted_skill":   round(adjusted_skill, 1),
-        "hunger":           round(hunger, 1),
-        "injury_penalty":   round(injury, 1),
-        "silence_bonus":    bool(silence),
-        "injury_flag":      injury > 0,
-        "distraction_flag": bool(distraction),
-        "weather_notes":    weather_mods.get('notes', []),
-        "player_count":     len(players),
+        "composite":          round(composite, 1),
+        "raw":                round(raw, 1),
+        "body":               round(body, 1),
+        "skill":              round(skill, 1),
+        "adjusted_skill":     round(adjusted_skill, 1),
+        "hunger":             round(hunger, 1),
+        "injury_penalty":     round(injury, 1),
+        "joint_penalty":      round(joint_pen, 1),
+        "silence_bonus":      bool(silence),
+        "injury_flag":        injury > 0,
+        "distraction_flag":   bool(distraction),
+        "weather_notes":      weather_mods.get('notes', []),
+        "player_count":       len(players),
     }
 
 
@@ -344,14 +368,15 @@ def predict_game(game, team_index, news_index, weather_index=None):
         # Placeholders for Phase 2 layers
         "modifiers_applied": {
             "weather": {
-                "dome":         weather_mods.get('dome'),
-                "passing_mult": weather_mods.get('passing_mult'),
-                "kicker_mult":  weather_mods.get('kicker_mult'),
-                "wind_flag":    weather_mods.get('wind_flag'),
-                "precip_flag":  weather_mods.get('precip_flag'),
-                "cold_flag":    weather_mods.get('cold_flag'),
-                "conditions":   weather_mods.get('weather'),
-                "notes":        weather_mods.get('notes'),
+                "dome":            weather_mods.get('dome'),
+                "passing_mult":    weather_mods.get('passing_mult'),
+                "kicker_mult":     weather_mods.get('kicker_mult'),
+                "wind_flag":       weather_mods.get('wind_flag'),
+                "precip_flag":     weather_mods.get('precip_flag'),
+                "cold_flag":       weather_mods.get('cold_flag'),
+                "cold_joint_flag": weather_mods.get('cold_joint_flag'),
+                "conditions":      weather_mods.get('weather'),
+                "notes":           weather_mods.get('notes'),
             },
             "practice_trajectory": None,
             "mbti_adjustment":     None,

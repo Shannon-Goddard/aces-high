@@ -55,4 +55,20 @@
   document.getElementById('nav-toggle').addEventListener('click', () => {
     document.getElementById('nav-links').classList.toggle('open');
   });
+
+  // Back to top button
+  const btn = document.createElement('a');
+  btn.className = 'back-to-top';
+  btn.href = '#';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML = '&#8679;';
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
 })();

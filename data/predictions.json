@@ -24,6 +24,7 @@
         "adjusted_skill": 60.1,
         "hunger": 54.6,
         "injury_penalty": 23.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -40,6 +41,7 @@
         "adjusted_skill": 63.9,
         "hunger": 55.4,
         "injury_penalty": 31.2,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -53,7 +55,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -62,6 +64,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -97,6 +100,7 @@
         "adjusted_skill": 68.6,
         "hunger": 54.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -111,6 +115,7 @@
         "adjusted_skill": 63.3,
         "hunger": 57.7,
         "injury_penalty": 44.5,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -122,7 +127,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -131,6 +136,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -164,6 +170,7 @@
         "adjusted_skill": 56.1,
         "hunger": 58.9,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -178,6 +185,7 @@
         "adjusted_skill": 72.0,
         "hunger": 50.8,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -189,7 +197,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -198,6 +206,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -231,6 +240,7 @@
         "adjusted_skill": 61.8,
         "hunger": 55.5,
         "injury_penalty": 47.9,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -245,6 +255,7 @@
         "adjusted_skill": 63.1,
         "hunger": 57.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -256,7 +267,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -265,6 +276,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -298,6 +310,7 @@
         "adjusted_skill": 65.2,
         "hunger": 53.0,
         "injury_penalty": 0.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": false,
         "distraction_flag": false,
@@ -312,6 +325,7 @@
         "adjusted_skill": 62.0,
         "hunger": 56.5,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -323,7 +337,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -332,6 +346,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -365,6 +380,7 @@
         "adjusted_skill": 59.1,
         "hunger": 56.6,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -381,6 +397,7 @@
         "adjusted_skill": 53.6,
         "hunger": 57.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -394,7 +411,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -403,6 +420,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -438,6 +456,7 @@
         "adjusted_skill": 67.1,
         "hunger": 54.1,
         "injury_penalty": 42.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -454,6 +473,7 @@
         "adjusted_skill": 65.9,
         "hunger": 56.6,
         "injury_penalty": 68.4,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -467,7 +487,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -476,6 +496,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -511,6 +532,7 @@
         "adjusted_skill": 68.9,
         "hunger": 50.4,
         "injury_penalty": 74.4,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -525,6 +547,7 @@
         "adjusted_skill": 58.2,
         "hunger": 55.3,
         "injury_penalty": 0.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": false,
         "distraction_flag": true,
@@ -536,7 +559,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -545,6 +568,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -578,6 +602,7 @@
         "adjusted_skill": 66.8,
         "hunger": 55.6,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -594,6 +619,7 @@
         "adjusted_skill": 66.3,
         "hunger": 54.4,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -607,7 +633,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -616,6 +642,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -651,6 +678,7 @@
         "adjusted_skill": 64.3,
         "hunger": 58.6,
         "injury_penalty": 5.7,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -665,6 +693,7 @@
         "adjusted_skill": 62.3,
         "hunger": 58.5,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -676,7 +705,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -685,6 +714,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -718,6 +748,7 @@
         "adjusted_skill": 60.7,
         "hunger": 56.7,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -732,6 +763,7 @@
         "adjusted_skill": 60.9,
         "hunger": 50.7,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -743,7 +775,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -752,6 +784,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -785,6 +818,7 @@
         "adjusted_skill": 62.4,
         "hunger": 57.9,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -799,6 +833,7 @@
         "adjusted_skill": 62.2,
         "hunger": 51.9,
         "injury_penalty": 46.3,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -810,7 +845,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -819,6 +854,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -852,6 +888,7 @@
         "adjusted_skill": 67.9,
         "hunger": 54.3,
         "injury_penalty": 86.2,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -866,6 +903,7 @@
         "adjusted_skill": 62.3,
         "hunger": 54.8,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -877,7 +915,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -886,6 +924,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -919,6 +958,7 @@
         "adjusted_skill": 56.9,
         "hunger": 62.5,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -935,6 +975,7 @@
         "adjusted_skill": 66.4,
         "hunger": 56.1,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -948,7 +989,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -957,6 +998,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -992,6 +1034,7 @@
         "adjusted_skill": 67.1,
         "hunger": 54.1,
         "injury_penalty": 42.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1008,6 +1051,7 @@
         "adjusted_skill": 65.2,
         "hunger": 53.0,
         "injury_penalty": 0.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": false,
         "distraction_flag": false,
@@ -1021,7 +1065,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1030,6 +1074,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1065,6 +1110,7 @@
         "adjusted_skill": 59.1,
         "hunger": 56.6,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1081,6 +1127,7 @@
         "adjusted_skill": 68.9,
         "hunger": 50.4,
         "injury_penalty": 74.4,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1094,7 +1141,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1103,6 +1150,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1138,6 +1186,7 @@
         "adjusted_skill": 61.8,
         "hunger": 55.5,
         "injury_penalty": 47.9,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1152,6 +1201,7 @@
         "adjusted_skill": 68.6,
         "hunger": 54.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1163,7 +1213,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1172,6 +1222,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1205,6 +1256,7 @@
         "adjusted_skill": 58.2,
         "hunger": 55.3,
         "injury_penalty": 0.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": false,
         "distraction_flag": true,
@@ -1219,6 +1271,7 @@
         "adjusted_skill": 64.3,
         "hunger": 58.6,
         "injury_penalty": 5.7,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1230,7 +1283,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1239,6 +1292,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1272,6 +1326,7 @@
         "adjusted_skill": 62.2,
         "hunger": 51.9,
         "injury_penalty": 46.3,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1288,6 +1343,7 @@
         "adjusted_skill": 64.7,
         "hunger": 56.1,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1301,7 +1357,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1310,6 +1366,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1345,6 +1402,7 @@
         "adjusted_skill": 60.1,
         "hunger": 54.6,
         "injury_penalty": 23.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1361,6 +1419,7 @@
         "adjusted_skill": 72.0,
         "hunger": 50.8,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1374,7 +1433,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1383,6 +1442,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1418,6 +1478,7 @@
         "adjusted_skill": 62.3,
         "hunger": 54.8,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1432,6 +1493,7 @@
         "adjusted_skill": 62.0,
         "hunger": 56.5,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1443,7 +1505,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1452,6 +1514,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1485,6 +1548,7 @@
         "adjusted_skill": 63.9,
         "hunger": 55.4,
         "injury_penalty": 31.2,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1501,6 +1565,7 @@
         "adjusted_skill": 60.7,
         "hunger": 56.7,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1514,7 +1579,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1523,6 +1588,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1558,6 +1624,7 @@
         "adjusted_skill": 60.9,
         "hunger": 50.7,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1572,6 +1639,7 @@
         "adjusted_skill": 53.6,
         "hunger": 57.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1583,7 +1651,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1592,6 +1660,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1625,6 +1694,7 @@
         "adjusted_skill": 63.1,
         "hunger": 57.2,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1639,6 +1709,7 @@
         "adjusted_skill": 66.3,
         "hunger": 54.4,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1650,7 +1721,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1659,6 +1730,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1692,6 +1764,7 @@
         "adjusted_skill": 66.8,
         "hunger": 55.6,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1708,6 +1781,7 @@
         "adjusted_skill": 51.6,
         "hunger": 57.8,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1721,7 +1795,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1730,6 +1804,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1765,6 +1840,7 @@
         "adjusted_skill": 63.3,
         "hunger": 57.7,
         "injury_penalty": 44.5,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1781,6 +1857,7 @@
         "adjusted_skill": 67.9,
         "hunger": 54.3,
         "injury_penalty": 86.2,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1794,7 +1871,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": true,
@@ -1803,6 +1880,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": [
             "dome \u2014 no weather impact"
@@ -1838,6 +1916,7 @@
         "adjusted_skill": 62.4,
         "hunger": 57.9,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1852,6 +1931,7 @@
         "adjusted_skill": 62.0,
         "hunger": 54.2,
         "injury_penalty": 94.2,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1863,7 +1943,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1872,6 +1952,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1905,6 +1986,7 @@
         "adjusted_skill": 55.7,
         "hunger": 53.0,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1919,6 +2001,7 @@
         "adjusted_skill": 62.3,
         "hunger": 58.5,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1930,7 +2013,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -1939,6 +2022,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },
@@ -1972,6 +2056,7 @@
         "adjusted_skill": 65.9,
         "hunger": 56.6,
         "injury_penalty": 68.4,
+        "joint_penalty": 0.0,
         "silence_bonus": true,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1986,6 +2071,7 @@
         "adjusted_skill": 56.1,
         "hunger": 58.9,
         "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
         "silence_bonus": false,
         "injury_flag": true,
         "distraction_flag": false,
@@ -1997,7 +2083,7 @@
       "status": "open",
       "result": null,
       "lesson": null,
-      "predicted_at": "2026-11-18 05:04 UTC",
+      "predicted_at": "2026-11-18 05:07 UTC",
       "modifiers_applied": {
         "weather": {
           "dome": false,
@@ -2006,6 +2092,7 @@
           "wind_flag": false,
           "precip_flag": false,
           "cold_flag": false,
+          "cold_joint_flag": false,
           "conditions": null,
           "notes": []
         },

@@ -162,6 +162,7 @@ def build_modifiers(stadium, weather):
             'wind_flag':       False,
             'precip_flag':     False,
             'cold_flag':       False,
+            'cold_joint_flag': False,
             'notes':           ['dome — no weather impact'],
         }
 
@@ -174,9 +175,10 @@ def build_modifiers(stadium, weather):
     precip_in = weather.get('precip_in') or 0.0
     condition = weather.get('condition', 'clear')
 
-    wind_flag   = wind_mph > 20
-    precip_flag = condition in ('rain', 'snow', 'thunderstorm') or precip_in > 0.1
-    cold_flag   = temp_f < 20
+    wind_flag       = wind_mph > 20
+    precip_flag     = condition in ('rain', 'snow', 'thunderstorm') or precip_in > 0.1
+    cold_flag       = temp_f < 20
+    cold_joint_flag = temp_f < 40   # chronic joint issues start below 40°F
 
     if wind_flag:
         passing_mult *= 0.75
@@ -190,17 +192,21 @@ def build_modifiers(stadium, weather):
         kicker_mult *= 0.80
         notes.append(f'temp {temp_f:.0f}°F → kicker ×0.80')
 
+    if cold_joint_flag and not cold_flag:
+        notes.append(f'temp {temp_f:.0f}°F → chronic joint flag active')
+
     if not notes:
         notes.append('no significant weather impact')
 
     return {
-        'dome':          False,
-        'passing_mult':  round(passing_mult, 4),
-        'kicker_mult':   round(kicker_mult, 4),
-        'wind_flag':     wind_flag,
-        'precip_flag':   precip_flag,
-        'cold_flag':     cold_flag,
-        'notes':         notes,
+        'dome':           False,
+        'passing_mult':   round(passing_mult, 4),
+        'kicker_mult':    round(kicker_mult, 4),
+        'wind_flag':      wind_flag,
+        'precip_flag':    precip_flag,
+        'cold_flag':      cold_flag,
+        'cold_joint_flag': cold_joint_flag,
+        'notes':          notes,
     }
 
 
