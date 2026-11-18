@@ -10,11 +10,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.7,
+        "spread": -12.5,
+        "spread_juice": -108.7,
         "total": 44.5,
-        "total_juice": -109.5,
-        "home_ml": null
+        "total_juice": -106.7,
+        "home_ml": -740.0
       },
       "bookmakers": {
         "draftkings": {
@@ -142,11 +142,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
+        "spread": -16.0,
         "spread_juice": -110.0,
         "total": 41.3,
-        "total_juice": -76.2,
-        "home_ml": null
+        "total_juice": -40.0,
+        "home_ml": -1450.0
       },
       "bookmakers": {
         "draftkings": {
@@ -274,11 +274,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.5,
+        "spread": -2.5,
+        "spread_juice": -112.3,
         "total": 44.3,
-        "total_juice": -76.3,
-        "home_ml": null
+        "total_juice": -38.3,
+        "home_ml": -141.0
       },
       "bookmakers": {
         "draftkings": {
@@ -406,11 +406,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.7,
+        "spread": -16.5,
+        "spread_juice": -109.3,
         "total": 45.3,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -108.3,
+        "home_ml": -1483.3
       },
       "bookmakers": {
         "draftkings": {
@@ -538,11 +538,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.7,
+        "spread": -11.5,
+        "spread_juice": -110.7,
         "total": 49.0,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -110.0,
+        "home_ml": -641.7
       },
       "bookmakers": {
         "draftkings": {
@@ -670,11 +670,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.7,
+        "spread": -8.0,
+        "spread_juice": -109.3,
         "total": 54.7,
-        "total_juice": -43.3,
-        "home_ml": null
+        "total_juice": -116.7,
+        "home_ml": -423.3
       },
       "bookmakers": {
         "draftkings": {
@@ -802,11 +802,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -76.2,
+        "spread": -7.2,
+        "spread_juice": -41.3,
         "total": 44.0,
-        "total_juice": -76.3,
-        "home_ml": null
+        "total_juice": -42.0,
+        "home_ml": -328.3
       },
       "bookmakers": {
         "draftkings": {
@@ -934,11 +934,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -109.7,
+        "spread": 4.5,
+        "spread_juice": -109.3,
         "total": 38.5,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -108.7,
+        "home_ml": 178.7
       },
       "bookmakers": {
         "draftkings": {
@@ -1066,11 +1066,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": -3.5,
+        "spread_juice": -103.0,
         "total": 41.3,
-        "total_juice": -109.5,
-        "home_ml": null
+        "total_juice": -107.3,
+        "home_ml": -183.0
       },
       "bookmakers": {
         "draftkings": {
@@ -1198,11 +1198,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -76.3,
+        "spread": -9.8,
+        "spread_juice": -114.0,
         "total": 40.5,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -108.3,
+        "home_ml": -591.7
       },
       "bookmakers": {
         "draftkings": {
@@ -1330,11 +1330,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -76.2,
+        "spread": 5.7,
+        "spread_juice": -38.3,
         "total": 46.5,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -110.0,
+        "home_ml": 213.3
       },
       "bookmakers": {
         "draftkings": {
@@ -1462,11 +1462,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -76.3,
+        "spread": -3.0,
+        "spread_juice": -114.0,
         "total": 45.8,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -109.0,
+        "home_ml": -163.7
       },
       "bookmakers": {
         "draftkings": {
@@ -1594,11 +1594,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -76.3,
+        "spread": 6.2,
+        "spread_juice": -42.7,
         "total": 53.7,
-        "total_juice": -109.7,
-        "home_ml": null
+        "total_juice": -111.0,
+        "home_ml": 236.7
       },
       "bookmakers": {
         "draftkings": {
@@ -1726,11 +1726,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -10.0,
+        "spread": -3.5,
+        "spread_juice": -120.0,
         "total": 46.0,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": -206.5
       },
       "bookmakers": {
         "draftkings": {
@@ -1820,11 +1820,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": 2.0,
+        "spread_juice": -2.5,
         "total": 54.5,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": 117.0
       },
       "bookmakers": {
         "draftkings": {
@@ -1914,11 +1914,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": -8.0,
+        "spread_juice": -115.0,
         "total": 47.5,
-        "total_juice": -110.0,
-        "home_ml": null
+        "total_juice": -107.5,
+        "home_ml": -442.5
       },
       "bookmakers": {
         "draftkings": {
@@ -2008,11 +2008,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
+        "spread": -2.8,
         "spread_juice": -10.0,
         "total": 50.5,
-        "total_juice": -60.0,
-        "home_ml": null
+        "total_juice": -5.0,
+        "home_ml": -154.5
       },
       "bookmakers": {
         "draftkings": {
@@ -2102,11 +2102,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
+        "spread": 2.0,
         "spread_juice": -110.0,
         "total": 41.0,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": 110.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2196,11 +2196,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": -7.0,
+        "spread_juice": -112.5,
         "total": 42.5,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": -355.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2290,11 +2290,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": -5.8,
+        "spread_juice": -115.0,
         "total": 44.0,
-        "total_juice": -60.0,
-        "home_ml": null
+        "total_juice": -115.0,
+        "home_ml": -265.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2384,11 +2384,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": -10.2,
+        "spread_juice": -5.0,
         "total": 52.5,
-        "total_juice": -60.0,
-        "home_ml": null
+        "total_juice": -115.0,
+        "home_ml": -562.5
       },
       "bookmakers": {
         "draftkings": {
@@ -2478,11 +2478,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": 4.0,
+        "spread_juice": -112.5,
         "total": 44.5,
-        "total_juice": -110.0,
-        "home_ml": null
+        "total_juice": -107.5,
+        "home_ml": 165.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2572,11 +2572,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": -14.5,
+        "spread_juice": -107.5,
         "total": 47.5,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": -1150.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2666,11 +2666,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": 3.0,
+        "spread_juice": -1.0,
         "total": 41.5,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": 148.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2760,11 +2760,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": -4.5,
+        "spread_juice": -115.0,
         "total": 40.5,
-        "total_juice": -60.0,
-        "home_ml": null
+        "total_juice": -5.0,
+        "home_ml": -236.5
       },
       "bookmakers": {
         "draftkings": {
@@ -2854,11 +2854,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": 6.2,
+        "spread_juice": -107.5,
         "total": 42.0,
-        "total_juice": -110.0,
-        "home_ml": null
+        "total_juice": -112.5,
+        "home_ml": 240.0
       },
       "bookmakers": {
         "draftkings": {
@@ -2948,11 +2948,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -60.0,
+        "spread": -2.8,
+        "spread_juice": -112.5,
         "total": 46.5,
-        "total_juice": -60.0,
-        "home_ml": null
+        "total_juice": -115.0,
+        "home_ml": -154.5
       },
       "bookmakers": {
         "draftkings": {
@@ -3042,11 +3042,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -110.0,
+        "spread": -4.0,
+        "spread_juice": -112.5,
         "total": 41.5,
-        "total_juice": -110.0,
-        "home_ml": null
+        "total_juice": -107.5,
+        "home_ml": -200.0
       },
       "bookmakers": {
         "draftkings": {
@@ -3136,11 +3136,11 @@
       "snapshot_type": "opening",
       "fetched_at": "2026-11-18 03:49:50 UTC",
       "consensus": {
-        "spread": 0.0,
-        "spread_juice": -10.0,
+        "spread": -2.0,
+        "spread_juice": -120.0,
         "total": 43.5,
         "total_juice": -110.0,
-        "home_ml": null
+        "home_ml": -140.0
       },
       "bookmakers": {
         "draftkings": {

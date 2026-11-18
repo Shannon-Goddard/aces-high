@@ -47,9 +47,12 @@ def fetch_odds():
         print(f"  Fetch failed: {e}")
         return None, None
 
-def consensus_line(bookmakers, market_key):
+def consensus_line(bookmakers, market_key, home_team=None):
     """
     Average the line across all bookmakers for a consensus number.
+    For spreads: only use the home team's point (negative = home favored).
+    For totals: only use the Over point.
+    For h2h: only use the home team's price.
     Returns consensus value and juice.
     """
     values = []
@@ -62,13 +65,38 @@ def consensus_line(bookmakers, market_key):
             for o in outcomes:
                 price = o.get('price')
                 point = o.get('point')
-                if price is not None:
-                    juices.append(price)
-                if point is not None:
-                    values.append(point)
+                name  = o.get('name', '')
+
+                if market_key == 'spreads':
+                    # Only take home team side to get signed spread
+                    if home_team and name != home_team:
+                        continue
+                    if point is not None:
+                        values.append(point)
+                    if price is not None:
+                        juices.append(price)
+
+                elif market_key == 'totals':
+                    # Only take Over to get the total number
+                    if name != 'Over':
+                        continue
+                    if point is not None:
+                        values.append(point)
+                    if price is not None:
+                        juices.append(price)
+
+                elif market_key == 'h2h':
+                    # Only take home team ML
+                    if home_team and name != home_team:
+                        continue
+                    if price is not None:
+                        values.append(price)
+
     if not values:
         return None, None
-    return round(sum(values) / len(values), 1), round(sum(juices) / len(juices), 1) if juices else None
+    avg = round(sum(values) / len(values), 1)
+    avg_juice = round(sum(juices) / len(juices), 1) if juices else None
+    return avg, avg_juice
 
 def build_game_entry(raw_game, snapshot_type, fetched_at):
     game_id      = raw_game.get('id', '')
@@ -77,9 +105,9 @@ def build_game_entry(raw_game, snapshot_type, fetched_at):
     commence     = raw_game.get('commence_time', '')
     bookmakers   = raw_game.get('bookmakers', [])
 
-    spread, spread_juice   = consensus_line(bookmakers, 'spreads')
-    total, total_juice     = consensus_line(bookmakers, 'totals')
-    home_ml, _             = consensus_line(bookmakers, 'h2h')
+    spread, spread_juice   = consensus_line(bookmakers, 'spreads', home)
+    total, total_juice     = consensus_line(bookmakers, 'totals', home)
+    home_ml, _             = consensus_line(bookmakers, 'h2h', home)
 
     # Per bookmaker breakdown
     books = {}

@@ -112,7 +112,7 @@ def team_injury_flag(players_on_team):
     """Returns 1 if any player is Out/Doubtful, 0 otherwise."""
     for p in players_on_team:
         inj = p.get('injury') or {}
-        status = (inj.get('report_status') or '').lower()
+        status = (str(inj.get('report_status') or '')).lower()
         if status in ('out', 'doubtful'):
             return 1
     return 0
@@ -267,6 +267,9 @@ def predict_game(game, team_index, news_index):
 
 
 def main():
+    import sys
+    reset = '--reset' in sys.argv
+
     odds_data = load('odds.json')
     players_data = load('players.json')
     news_data = load('news.json')
@@ -277,8 +280,8 @@ def main():
     team_index = build_team_index(players_data['players'])
     news_index = {t['team_slug']: t for t in news_data['news']}
 
-    # Track existing game_ids to avoid duplicates
-    existing_ids = {p['game_id'] for p in existing.get('predictions', [])}
+    # Track existing game_ids to avoid duplicates (skip if reset)
+    existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
 
     new_predictions = []
     for game in odds_data.get('games', []):
