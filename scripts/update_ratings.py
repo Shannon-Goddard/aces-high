@@ -167,6 +167,40 @@ def calc_snap_trend(snap_rows):
     else:
         return round(avg_second_half, 1), 'flat'
 
+
+def compute_momentum(snap_pcts_recent):
+    """
+    Rolling 3-week weighted snap% momentum.
+    Weights: week N×0.5, N-1×0.3, N-2×0.2 (most recent first).
+    Returns (momentum_score 0-100, momentum_direction).
+    Snap% is 0-100 scale (multiply raw 0-1 values by 100).
+    """
+    # snap_pcts_recent is ordered most-recent-first, raw 0-1 values
+    vals = [v * 100.0 for v in snap_pcts_recent if v is not None]
+    if not vals:
+        return None, 'unknown'
+
+    weights = [0.5, 0.3, 0.2]
+    weighted_sum, weight_total = 0.0, 0.0
+    for i, w in enumerate(weights):
+        if i >= len(vals):
+            break
+        weighted_sum += vals[i] * w
+        weight_total += w
+
+    momentum_score = round(weighted_sum / weight_total, 1) if weight_total else None
+
+    # Direction: compare weighted recent vs simple average of older weeks
+    if len(vals) >= 2:
+        recent = vals[0]
+        older_avg = sum(vals[1:]) / len(vals[1:])
+        delta = recent - older_avg
+        direction = 'up' if delta > 5 else 'down' if delta < -5 else 'flat'
+    else:
+        direction = 'flat'
+
+    return momentum_score, direction
+
 def build_layer1(player_row, snap_pcts, age):
     pos = str(player_row.get('position', '') or '').upper()
     weight = safe_float(player_row.get('weight'))
@@ -662,6 +696,12 @@ def main():
             draft_round=(draft or {}).get('draft_round'),
             peer_snaps=peer_snaps
         )
+
+        # Momentum — rolling 3-week weighted snap% score
+        if layer2 is not None:
+            momentum_score, momentum_direction = compute_momentum(snap_pcts)
+            layer2['momentum_score']     = momentum_score
+            layer2['momentum_direction'] = momentum_direction
 
         # Combine profile
         combine_row = combine_by_name.get(name.lower())

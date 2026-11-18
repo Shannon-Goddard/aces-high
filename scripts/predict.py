@@ -38,8 +38,9 @@ ABBR_TO_SLUG = {
 
 # Weights — all hypothesis until 10+ data points validate them
 WEIGHTS = {
-    "body":          0.20,
-    "skill":         0.30,
+    "body":          0.15,
+    "skill":         0.20,
+    "momentum":      0.10,
     "hunger":        0.10,
     "silence_bonus": 0.10,
     "injury_flag":  -0.15,  # penalty
@@ -185,6 +186,25 @@ def team_role_fit_score(players_on_team):
     return round(1.0 + max(-0.10, min(0.10, avg_mod)), 4)
 
 
+def team_momentum_score(players_on_team):
+    """
+    Snap-weighted momentum score from layer2_skill.momentum_score.
+    QB momentum gets double weight — QB form is the highest-leverage signal.
+    Returns 0-100, defaults to 50 (neutral) if no data.
+    """
+    total_w, total_s = 0.0, 0.0
+    for p in players_on_team:
+        score = (p.get('layer2_skill') or {}).get('momentum_score')
+        if score is None:
+            continue
+        w = _starter_weight(p)
+        if (p.get('position') or '').upper() == 'QB':
+            w *= 2.0
+        total_s += score * w
+        total_w += w
+    return round(total_s / total_w, 1) if total_w else 50.0
+
+
 def team_hunger_score(players_on_team):
     """Snap-weighted hunger — starters' chip matters more than depth."""
     total_w, total_s = 0.0, 0.0
@@ -313,6 +333,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     players      = team_index.get(slug, [])
     body         = team_body_score(players)
     skill        = team_skill_score(players)
+    momentum     = team_momentum_score(players)
     hunger       = team_hunger_score(players)
     compat       = team_compat_score(players)
     role_fit_mult = team_role_fit_score(players)
@@ -334,6 +355,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     raw = (
         body              * WEIGHTS['body'] +
         adjusted_skill    * WEIGHTS['skill'] +
+        momentum          * WEIGHTS['momentum'] +
         hunger            * WEIGHTS['hunger'] +
         silence * 100     * WEIGHTS['silence_bonus'] +
         injury            * WEIGHTS['injury_flag'] +
@@ -347,6 +369,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "raw":                round(raw, 1),
         "body":               round(body, 1),
         "skill":              round(skill, 1),
+        "momentum":           round(momentum, 1),
         "adjusted_skill":     round(adjusted_skill, 1),
         "hunger":             round(hunger, 1),
         "compat":             round(compat, 1),
