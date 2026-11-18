@@ -161,6 +161,9 @@ def team_role_fit_score(players_on_team):
         rf_score   = l4.get('role_fit_score')
         if rf_score is None:
             continue
+        # Scheme transition: new coordinator means role demands are unknown for 3 weeks
+        if l4.get('scheme_transition'):
+            rf_score = 50  # treat as Adequate — can't score fit against a scheme we haven't seen
         years_exp  = (p.get('layer1_body') or {}).get('years_exp') or 0
         pos        = (p.get('position') or '').upper()
 
@@ -350,6 +353,13 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
 
+    # Flag whether any starter is in scheme transition (for record_outcome.py lesson capture)
+    scheme_transition_active = any(
+        (p.get('layer4_personality') or {}).get('scheme_transition')
+        for p in players
+        if (p.get('layer1_body') or {}).get('snap_pct', 0) >= 0.40
+    )
+
     # Weather: passing game takes the hit from wind/precip
     weather_skill_penalty = skill * (1.0 - weather_mods['passing_mult'])
     # Chronic joint: additional skill reduction for flagged players in cold
@@ -389,6 +399,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "silence_bonus":      bool(silence),
         "injury_flag":        injury > 0,
         "distraction_flag":   bool(distraction),
+        "scheme_transition_active": scheme_transition_active,
         "weather_notes":      weather_mods.get('notes', []),
         "player_count":       len(players),
     }

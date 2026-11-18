@@ -215,6 +215,10 @@ def auto_lesson(bet, spread_result, ml_result, prediction=None):
             fired.append('divisional game')
         if prediction.get('rematch'):
             fired.append('rematch')
+        # Scheme transition: check if any player on home team was in transition
+        home_bd = prediction.get('home_breakdown') or {}
+        if home_bd.get('scheme_transition_active'):
+            fired.append('scheme transition')
         if fired:
             parts.append(f"Modifiers fired: {', '.join(fired)}.")
 

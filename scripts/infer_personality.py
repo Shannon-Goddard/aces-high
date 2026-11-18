@@ -587,6 +587,54 @@ def main():
             player['layer4_personality']['team_compat_score'] = score
             compat_computed += 1
 
+    # Pass 3 — apply scheme_transition flag from coordinator_changes
+    current_week = meta.get('week', 1) if (meta := load_json(META_FILE)) else 1
+    coord_changes = coaches_data.get('coordinator_changes', [])
+
+    # Build lookup: (team_slug, role) → week_detected
+    ABBR_TO_SLUG_LOCAL = {
+        'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+        'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+        'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+        'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+        'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+        'SF':'sf','SEA':'sea',
+    }
+    # role → which player positions are affected
+    COORD_POSITIONS = {'oc': {'QB','WR','TE','RB','OL'}, 'dc': {'LB','DB','DL'}}
+
+    # Build active transition set: slug → set of affected positions
+    active_transitions = {}  # slug → {role: week_detected}
+    for change in coord_changes:
+        slug = change['team_slug']
+        role = change['role']
+        week = change['week_detected']
+        if current_week - week < 3:   # still within 3-week window
+            active_transitions.setdefault(slug, {})[role] = week
+
+    scheme_flagged = 0
+    for player in players:
+        abbr = (player.get('team') or '').upper()
+        slug = ABBR_TO_SLUG_LOCAL.get(abbr)
+        pos  = (player.get('position') or '').upper()
+        l4   = player.get('layer4_personality') or {}
+
+        # Determine if this player is affected by an active coordinator change
+        in_transition = False
+        transition_week = None
+        if slug and slug in active_transitions:
+            for role, week in active_transitions[slug].items():
+                if pos in COORD_POSITIONS.get(role, set()):
+                    in_transition = True
+                    transition_week = week
+                    break
+
+        l4['scheme_transition']      = in_transition
+        l4['scheme_transition_week'] = transition_week if in_transition else None
+        player['layer4_personality'] = l4
+        if in_transition:
+            scheme_flagged += 1
+
     data['players']      = players
     data['last_updated'] = now_str
     save_json(PLAYERS_FILE, data)
@@ -597,12 +645,14 @@ def main():
     meta['personality_summary'] = {
         'total_players':    updated,
         'compat_computed':  compat_computed,
+        'scheme_flagged':   scheme_flagged,
         'type_distribution': dict(sorted(type_counts.items(), key=lambda x: -x[1])[:10]),
     }
     save_json(META_FILE, meta)
 
     print(f'  layer4_personality written for {updated} players')
     print(f'  team_compat_score computed for {compat_computed} players')
+    print(f'  scheme_transition flagged for {scheme_flagged} players')
     print(f'  Top types: {dict(sorted(type_counts.items(), key=lambda x: -x[1])[:8])}')
 
 

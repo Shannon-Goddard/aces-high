@@ -473,15 +473,52 @@ def main():
             pfr_str = f'{pfr_rec["reg_wins"]}-{pfr_rec["reg_losses"]} ({pfr_rec["reg_wl_pct"]:.3f})' if pfr_rec else 'no PFR record'
             print(f'  [{slug.upper():3}] {coach_name:<28} {ROLE_LABELS[role]:<25} {pfr_str:<20} {status}')
 
+    # ── COORDINATOR CHANGE DETECTION ─────────────────────────────────────────
+    # Compare new staff against previous coaches.json to detect OC/DC changes.
+    # Writes coordinator_changes list — consumed by infer_personality.py.
+    prev_coaches = load_json(COACHES_FILE)
+    prev_by_key  = {(c['team_slug'], c['role']): c['name'] for c in prev_coaches.get('coaches', [])}
+
+    metadata     = load_json(META_FILE)
+    current_week = metadata.get('week', 1)
+
+    # Carry forward uncleared changes from previous run
+    prev_coord_changes = prev_coaches.get('coordinator_changes', [])
+
+    new_coord_changes = []
+    for slug, staff in CURRENT_STAFF.items():
+        for role in ('oc', 'dc'):
+            new_name  = staff.get(role)
+            prev_name = prev_by_key.get((slug, role))
+            if prev_name and new_name and prev_name != new_name:
+                new_coord_changes.append({
+                    'team_slug':    slug,
+                    'role':         role,
+                    'old_name':     prev_name,
+                    'new_name':     new_name,
+                    'week_detected': current_week,
+                })
+                print(f'  ⚠ COORDINATOR CHANGE [{slug.upper()}] {role.upper()}: {prev_name} → {new_name} (week {current_week})')
+
+    # Merge: keep prior changes not yet expired (expiry handled in infer_personality.py)
+    # Deduplicate by (team_slug, role) — new change wins
+    merged_changes = {(c['team_slug'], c['role']): c for c in prev_coord_changes}
+    for c in new_coord_changes:
+        merged_changes[(c['team_slug'], c['role'])] = c
+    coordinator_changes = list(merged_changes.values())
+
+    if not new_coord_changes:
+        print('  No coordinator changes detected.')
+
     save_json(COACHES_FILE, {
-        'last_updated':    now_str,
-        'pfr_source':      'https://www.pro-football-reference.com/coaches/',
-        'pfr_citation':    'When using SR data, please cite us and provide a link and/or a mention.',
-        'change_flags':    changes,
-        'coaches':         coaches_out,
+        'last_updated':        now_str,
+        'pfr_source':          'https://www.pro-football-reference.com/coaches/',
+        'pfr_citation':        'When using SR data, please cite us and provide a link and/or a mention.',
+        'change_flags':        changes,
+        'coordinator_changes': coordinator_changes,
+        'coaches':             coaches_out,
     })
 
-    metadata = load_json(META_FILE)
     metadata['last_coaches_fetch'] = now_str
     save_json(META_FILE, metadata)
 

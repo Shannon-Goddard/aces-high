@@ -333,6 +333,7 @@ function renderCard(p) {
   const momentumDir = p.layer2_skill?.momentum_direction || '';
   const contractYear = p.layer4_personality?.contract_year || false;
   const snapDrop = p.layer1_body?.snap_drop_flag || false;
+  const schemeTransition = p.layer4_personality?.scheme_transition || false;
   const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
 
   function rfClass(s) {
@@ -386,6 +387,7 @@ function renderCard(p) {
             ${injury && injuryTier(status) !== 'active' ? `<span class="text-muted" style="font-size:0.7rem">${injury}</span>` : ''}
             ${contractYear ? `<span class="flag" style="font-size:0.62rem;padding:0.1rem 0.35rem;background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);border-radius:3px">CY</span>` : ''}
             ${snapDrop ? `<span class="flag" style="font-size:0.62rem;padding:0.1rem 0.35rem;background:rgba(248,113,113,0.12);color:var(--red);border:1px solid rgba(248,113,113,0.3);border-radius:3px" title="Snap% dropped 15+ pts, no injury report">&#9660; snaps</span>` : ''}
+            ${schemeTransition ? `<span class="flag" style="font-size:0.62rem;padding:0.1rem 0.35rem;background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.4);border-radius:3px" title="New coordinator — role fit score suspended for 3 weeks">New scheme</span>` : ''}
           </div>
         </div>
         <div style="text-align:right;flex-shrink:0">
