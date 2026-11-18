@@ -331,6 +331,7 @@ function renderCard(p) {
   const rfLabel = p.layer4_personality?.role_fit_label || '';
   const momentum = p.layer2_skill?.momentum_score ?? null;
   const momentumDir = p.layer2_skill?.momentum_direction || '';
+  const contractYear = p.layer4_personality?.contract_year || false;
   const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
 
   function rfClass(s) {
@@ -382,6 +383,7 @@ function renderCard(p) {
           <div class="player-flags">
             ${injuryBadge(status)}
             ${injury && injuryTier(status) !== 'active' ? `<span class="text-muted" style="font-size:0.7rem">${injury}</span>` : ''}
+            ${contractYear ? `<span class="flag" style="font-size:0.62rem;padding:0.1rem 0.35rem;background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);border-radius:3px">CY</span>` : ''}
           </div>
         </div>
         <div style="text-align:right;flex-shrink:0">

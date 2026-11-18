@@ -206,12 +206,17 @@ def team_momentum_score(players_on_team):
 
 
 def team_hunger_score(players_on_team):
-    """Snap-weighted hunger — starters' chip matters more than depth."""
+    """Snap-weighted hunger — starters' chip matters more than depth.
+    Contract year players get a +15 hunger boost (prove-it motivation).
+    """
     total_w, total_s = 0.0, 0.0
     for p in players_on_team:
         seed = (p.get('draft') or {}).get('hunger_seed')
         if seed is None:
             continue
+        # Contract year boost
+        if (p.get('layer4_personality') or {}).get('contract_year'):
+            seed = min(100, seed + 15)
         w = _starter_weight(p)
         total_s += seed * w
         total_w += w

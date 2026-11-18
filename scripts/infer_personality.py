@@ -320,12 +320,45 @@ def infer_ie(player):
     return signal, evidence
 
 
+def is_contract_year(player):
+    """
+    Detect likely contract year from draft round + years_exp.
+    Rookie deals: rounds 1-3 = 4yr + team option yr 5; rounds 4-7 = 4yr flat.
+    Flags year 4 (final guaranteed year) and year 5 (option year for top picks).
+    Returns (bool, reason_str).
+    """
+    draft      = player.get('draft') or {}
+    l1         = player.get('layer1_body') or {}
+    draft_round = draft.get('draft_round')
+    years_exp   = l1.get('years_exp') or 0
+
+    if draft_round is None:
+        # Undrafted — typically on 1-yr deals, always contract year after yr 1
+        if years_exp >= 1:
+            return True, 'undrafted — likely on short-term deal'
+        return False, ''
+
+    if draft_round <= 3:
+        # 4yr rookie + possible 5th-yr option
+        if years_exp == 4:
+            return True, f'round {draft_round} pick, year 4 — final rookie deal year'
+        if draft_round == 1 and years_exp == 5:
+            return True, 'round 1 pick, year 5 — 5th-year option'
+    else:
+        # Rounds 4-7: 4yr rookie deal
+        if years_exp == 4:
+            return True, f'round {draft_round} pick, year 4 — final rookie deal year'
+
+    return False, ''
+
+
 def infer_tf(player):
     """
     T/F from draft slot vs current performance delta.
     Outperforming draft slot = T (analytical, self-driven improvement).
     Underperforming = F (possible distraction, emotional, or circumstantial).
     Also: hunger_seed as proxy — high hunger (late round) + high skill = T grinder.
+    Contract year = T boost (prove-it motivation).
     """
     evidence = []
     signal = None
@@ -381,6 +414,12 @@ def infer_tf(player):
         evidence.append(f'High hunger seed ({hunger_seed}) confirms T drive — adversity as fuel')
     elif hunger_seed <= 30 and signal == 'F':
         evidence.append(f'Low hunger seed ({hunger_seed}) + underperformance — F pattern consistent')
+
+    # Contract year — prove-it motivation overrides F signal if performing
+    cy, cy_reason = is_contract_year(player)
+    if cy and skill_score >= 45:
+        signal = 'T'
+        evidence.append(f'Contract year ({cy_reason}) — prove-it motivation spike')
 
     return signal, evidence
 
@@ -529,6 +568,11 @@ def main():
             player['layer4_personality']['role_fit_score'] = rf_score
             player['layer4_personality']['role_fit_label'] = rf_label
             player['layer4_personality']['role_fit_evidence'] = rf_ev
+
+        # Contract year flag
+        cy, cy_reason = is_contract_year(player)
+        player['layer4_personality']['contract_year']        = cy
+        player['layer4_personality']['contract_year_reason'] = cy_reason if cy else None
 
         type_counts[mbti_type] = type_counts.get(mbti_type, 0) + 1
         updated += 1
