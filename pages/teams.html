@@ -24,6 +24,14 @@
   </div>
 </div>
 
+<!-- Stat modal -->
+<div id="stat-modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;overflow-y:auto">
+  <div id="stat-modal" onclick="event.stopPropagation()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-width:560px;width:90%;margin:4rem auto;padding:1.5rem;position:relative">
+    <button onclick="closeModal()" style="position:absolute;top:0.75rem;right:0.75rem;background:none;border:none;color:var(--text-muted);font-size:1.1rem;cursor:pointer">✕</button>
+    <div id="stat-modal-body"></div>
+  </div>
+</div>
+
 <footer>
   <div>Ace's High — NFL human performance intelligence system.</div>
   <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
@@ -83,6 +91,8 @@ function scoreClass(s) {
   return 'score-low';
 }
 
+function hs(url) { return (url && url !== 'nan') ? url : ''; }
+
 function injuryClass(status) {
   if (!status || status === 'nan') return '';
   const s = status.toLowerCase();
@@ -92,12 +102,14 @@ function injuryClass(status) {
   return '';
 }
 
-function bar(label, value, max, cls) {
+function bar(label, value, max, modalType) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   const fill = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
+  const clickable = modalType ? `onclick="openModal(_currentSlug,'${modalType}')" style="cursor:pointer" title="Click for details"` : '';
+  const infoIcon  = modalType ? ` <span style="color:var(--text-muted);font-size:0.65rem">ⓘ</span>` : '';
   return `
-    <div class="stat-row">
-      <span class="stat-label" style="min-width:70px">${label}</span>
+    <div class="stat-row${modalType?' stat-row-clickable':''}" ${clickable}>
+      <span class="stat-label" style="min-width:70px">${label}${infoIcon}</span>
       <div class="progress-wrap" style="flex:1;margin-left:0.75rem">
         <div class="progress-bar">
           <div class="progress-fill ${fill}" style="width:${pct}%"></div>
@@ -107,9 +119,157 @@ function bar(label, value, max, cls) {
     </div>`;
 }
 
+let _currentSlug = null;
+
 let selectedSlug = null;
 let teamScores   = {};   // slug → { composite, body, skill, hunger, silence_bonus, injury_flag }
 let rosterBySlug = {};   // slug → [players]
+
+// Lazy-loaded caches
+let _playersCache  = null;
+let _practiceCache = null;
+
+async function getPlayers() {
+  if (!_playersCache) {
+    const r = await fetch(`${ROOT}data/players.json`).then(x => x.json()).catch(() => ({}));
+    _playersCache = Array.isArray(r) ? r : (r.players || []);
+  }
+  return _playersCache;
+}
+
+async function getPractice() {
+  if (!_practiceCache) {
+    const r = await fetch(`${ROOT}data/practice.json`).then(x => x.json()).catch(() => ({}));
+    _practiceCache = r.players || {};
+  }
+  return _practiceCache;
+}
+
+function closeModal() {
+  document.getElementById('stat-modal-overlay').style.display = 'none';
+}
+
+async function openModal(slug, type) {
+  const overlay = document.getElementById('stat-modal-overlay');
+  const body    = document.getElementById('stat-modal-body');
+  body.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem">Loading…</div>';
+  overlay.style.display = 'block';
+
+  const [players, practice] = await Promise.all([getPlayers(), getPractice()]);
+  const roster = players.filter(p => {
+    const abbr = (p.team || '').toUpperCase();
+    const direct = TEAMS.find(t => t.abbr === abbr);
+    const s = direct ? direct.slug : (ABBR_EXTRA[abbr] || null);
+    return s === slug;
+  });
+
+  const team = TEAMS.find(t => t.slug === slug);
+  let html = `<div style="font-size:0.72rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">${team?.name || slug} — ${type}</div>`;
+
+  if (type === 'Injury Flag') {
+    const official = roster.filter(p => {
+      const s = (p.injury?.report_status || '').toLowerCase();
+      return s.includes('out') || s.includes('doubtful') || s.includes('question');
+    });
+    const practiceArr = Object.values(practice).filter(p => p.team_slug === slug && (p.practice_score || 0) >= 60);
+
+    if (!official.length && !practiceArr.length) {
+      html += '<div style="color:var(--text-muted);font-size:0.85rem">No injury concerns found.</div>';
+    } else {
+      if (official.length) {
+        html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.5rem">Official Report</div>`;
+        html += official.map(p => {
+          const inj = p.injury || {};
+          const statusCls = inj.report_status?.toLowerCase().includes('out') || inj.report_status?.toLowerCase().includes('doubtful') ? 'flag-injury' : 'flag-distract';
+          return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+            <img src="${hs(p.headshot)}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.visibility='hidden'">
+            <div style="flex:1">
+              <div style="font-size:0.85rem;font-weight:700">${p.name} <span style="color:var(--text-muted);font-weight:400">${p.position}</span></div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">${inj.primary_injury || '—'} · ${inj.practice_status || '—'}</div>
+            </div>
+            <span class="flag ${statusCls}" style="font-size:0.68rem">${inj.report_status}</span>
+          </div>`;
+        }).join('');
+      }
+      if (practiceArr.length) {
+        html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin:1rem 0 0.5rem">Practice Concerns (score ≥60)</div>`;
+        html += practiceArr.map(p => `
+          <div style="padding:0.5rem 0;border-bottom:1px solid var(--border)">
+            <div style="font-size:0.85rem;font-weight:700">${p.name} <span style="color:var(--text-muted);font-weight:400">${p.position}</span> <span style="color:var(--red);font-size:0.75rem">${p.practice_score}</span></div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">${(p.short_comment||'').slice(0,80)}${(p.short_comment||'').length>80?'…':''}</div>
+          </div>`).join('');
+      }
+    }
+
+  } else if (type === 'Skill') {
+    const top = [...roster].sort((a,b) => (b.layer2_skill?.skill_score||0) - (a.layer2_skill?.skill_score||0)).slice(0,8);
+    if (!top.length) { html += '<div style="color:var(--text-muted)">No skill data.</div>'; }
+    else html += top.map(p => {
+      const sk = p.layer2_skill || {};
+      const score = sk.skill_score ?? '—';
+      const method = (sk.sacks != null || sk.tackles != null || sk.yards != null) ? 'real stats' : 'proxy';
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+        <img src="${hs(p.headshot)}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.visibility='hidden'">
+        <span style="flex:1;font-size:0.85rem;font-weight:600">${p.name}</span>
+        <span style="font-size:0.75rem;color:var(--text-muted)">${p.position}</span>
+        <span style="font-size:0.75rem;color:var(--text-muted)">${method}</span>
+        <span class="score ${scoreClass(score/3.7)}" style="font-size:0.72rem">${typeof score==='number'?score.toFixed(0):score}</span>
+      </div>`;
+    }).join('');
+
+  } else if (type === 'Body') {
+    const sorted = [...roster].filter(p => p.layer1_body?.body_score != null)
+      .sort((a,b) => (b.layer1_body.body_score) - (a.layer1_body.body_score));
+    const top5 = sorted.slice(0,5);
+    const bot5 = sorted.slice(-5).reverse();
+    const row = p => {
+      const b = p.layer1_body;
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+        <img src="${hs(p.headshot)}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.visibility='hidden'">
+        <div style="flex:1">
+          <div style="font-size:0.85rem;font-weight:600">${p.name} <span style="color:var(--text-muted);font-weight:400">${p.position}</span></div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">Age ${b.age?.toFixed(1)} · ${b.weight_label||'—'} · ${b.career_label||'—'}</div>
+        </div>
+        <span class="score ${scoreClass(b.body_score/1.5)}" style="font-size:0.72rem">${b.body_score}</span>
+      </div>`;
+    };
+    html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.4rem">Top 5</div>`;
+    html += top5.map(row).join('');
+    html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin:1rem 0 0.4rem">Bottom 5</div>`;
+    html += bot5.map(row).join('');
+
+  } else if (type === 'Hunger') {
+    const drafted = roster.filter(p => p.draft?.draft_round);
+    const udfa    = roster.filter(p => !p.draft?.draft_round);
+    const byRound = {};
+    for (const p of drafted) {
+      const r = p.draft.draft_round;
+      if (!byRound[r]) byRound[r] = [];
+      byRound[r].push(p.draft.hunger_seed || 0);
+    }
+    html += Object.keys(byRound).sort((a,b)=>a-b).map(r => {
+      const seeds = byRound[r];
+      const avg = (seeds.reduce((s,x)=>s+x,0)/seeds.length).toFixed(1);
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.85rem">
+        <span style="min-width:60px;color:var(--text-muted)">Round ${r}</span>
+        <span style="flex:1">${seeds.length} player${seeds.length>1?'s':''}</span>
+        <span style="color:var(--text-dim)">avg seed ${avg}</span>
+      </div>`;
+    }).join('');
+    if (udfa.length) html += `<div style="padding:0.4rem 0;font-size:0.85rem;color:var(--text-muted)">UDFA: ${udfa.length} players</div>`;
+
+  } else if (type === 'Silence Bonus') {
+    const sc = teamScores[slug] || {};
+    const has = !!sc.silence_bonus;
+    html += `<div style="font-size:0.85rem;line-height:1.8;color:var(--text-dim)">`;
+    html += `<div style="margin-bottom:0.75rem">Status: <strong style="color:${has?'var(--green)':'var(--text-muted)'}">${has?'Active':'Not active'}</strong></div>`;
+    html += `<div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem">The silence bonus is awarded when a team has no injury news, no distraction flags, no trade rumors, and no coaching instability. It adds a small composite boost — a clean, focused team.</div>`;
+    if (!has) html += `<div style="font-size:0.78rem;color:var(--text-muted)">This team did not qualify this week — at least one noise condition was triggered.</div>`;
+    html += `</div>`;
+  }
+
+  body.innerHTML = html;
+}
 
 function buildRoster(players) {
   rosterBySlug = {};
@@ -172,6 +332,7 @@ function selectTeam(slug) {
 }
 
 function renderDetail(slug) {
+  _currentSlug = slug;
   const team    = TEAMS.find(t => t.slug === slug);
   const sc      = teamScores[slug] || {};
   const roster  = (rosterBySlug[slug] || []).sort((a, b) => {
@@ -226,7 +387,7 @@ function renderDetail(slug) {
             const injBadge = injCls ? `<span class="flag ${injCls}" style="font-size:0.65rem;padding:0.1rem 0.35rem">${status}</span>` : '';
             return `
               <div style="display:flex;align-items:center;gap:0.6rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
-                <img src="${p.headshot || ''}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0" onerror="this.src=''">
+                <img src="${hs(p.headshot)}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0" onerror="this.style.visibility='hidden'">
                 <span style="font-size:0.83rem;font-weight:600;flex:1">${p.name}</span>
                 ${injBadge}
                 ${skill !== null ? `<span class="score ${scoreClass(skill / 3.7)}" style="font-size:0.68rem">${skill.toFixed(0)}</span>` : ''}
@@ -248,17 +409,17 @@ function renderDetail(slug) {
     <!-- Composite breakdown bars -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.25rem">
       <div>
-        ${bar('Body', sc.body || 0, 40)}
-        ${bar('Skill', sc.skill || 0, 100)}
-        ${bar('Hunger', sc.hunger || 0, 100)}
+        ${bar('Body', sc.body || 0, 40, 'Body')}
+        ${bar('Skill', sc.skill || 0, 100, 'Skill')}
+        ${bar('Hunger', sc.hunger || 0, 100, 'Hunger')}
       </div>
       <div>
-        <div class="stat-row">
-          <span class="stat-label">Silence Bonus</span>
+        <div class="stat-row stat-row-clickable" onclick="openModal('${slug}','Silence Bonus')" style="cursor:pointer" title="Click for details">
+          <span class="stat-label">Silence Bonus <span style="color:var(--text-muted);font-size:0.65rem">ⓘ</span></span>
           <span class="stat-value ${sc.silence_bonus ? 'text-green' : 'text-muted'}">${sc.silence_bonus ? 'Yes' : 'No'}</span>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">Injury Flag</span>
+        <div class="stat-row stat-row-clickable" onclick="openModal('${slug}','Injury Flag')" style="cursor:pointer" title="Click for details">
+          <span class="stat-label">Injury Flag <span style="color:var(--text-muted);font-size:0.65rem">ⓘ</span></span>
           <span class="stat-value ${sc.injury_flag ? 'text-red' : 'text-green'}">${sc.injury_flag ? 'Active' : 'Clean'}</span>
         </div>
         <div class="stat-row">
@@ -291,6 +452,7 @@ async function init() {
 
   buildTeamScores(predictions);
   buildRoster(players);
+  _playersCache = players; // seed modal cache — no double fetch
 
   const scored = Object.keys(teamScores).length;
   document.getElementById('teams-sub').textContent =
@@ -312,6 +474,8 @@ init();
     grid-template-columns: 1fr !important;
   }
 }
+.stat-row-clickable:hover .stat-label { color: var(--gold); }
+.stat-row-clickable:hover { background: rgba(201,168,76,0.04); border-radius: 4px; }
 </style>
 </body>
 </html>

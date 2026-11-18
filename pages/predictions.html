@@ -137,7 +137,7 @@ function breakdownBar(label, value, max, drillType, teamName, slug) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   const cls = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
   const clickable = drillType
-    ? `onclick="drillDown('${drillType}','${teamName.replace(/'/g,"\\'")}',' ${slug}')" style="cursor:pointer" title="Click to see player breakdown"`
+    ? `onclick="drillDown('${drillType}','${teamName.replace(/'/g,"\\'")}','${slug}')" style="cursor:pointer" title="Click to see player breakdown"`
     : '';
   return `
     <div class="stat-row drill-row" ${clickable}>
@@ -224,11 +224,11 @@ function renderCard(p) {
             ${breakdownBar('Body', hb.body, 40, 'body', p.home_team, homeSlug)}
             ${breakdownBar('Skill', hb.skill, 100, 'skill', p.home_team, homeSlug)}
             ${breakdownBar('Hunger', hb.hunger, 100, 'hunger', p.home_team, homeSlug)}
-            <div class="stat-row drill-row" onclick="drillDown('silence','${p.home_team.replace(/'/g,"\\'")}',' ${homeSlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
+            <div class="stat-row drill-row" onclick="drillDown('silence','${p.home_team.replace(/'/g,"\\'")}','${homeSlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
               <span class="stat-label">Silence Bonus <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${hb.silence_bonus ? 'text-green' : 'text-muted'}">${hb.silence_bonus ? 'Yes' : 'No'}</span>
             </div>
-            <div class="stat-row drill-row" onclick="drillDown('injury','${p.home_team.replace(/'/g,"\\'")}',' ${homeSlug}')" style="cursor:pointer" title="Click to see injured players">
+            <div class="stat-row drill-row" onclick="drillDown('injury','${p.home_team.replace(/'/g,"\\'")}','${homeSlug}')" style="cursor:pointer" title="Click to see injured players">
               <span class="stat-label">Injury Flag <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${hb.injury_flag ? 'text-red' : 'text-green'}">${hb.injury_flag ? 'Yes' : 'No'}</span>
             </div>
@@ -246,11 +246,11 @@ function renderCard(p) {
             ${breakdownBar('Body', ab.body, 40, 'body', p.away_team, awaySlug)}
             ${breakdownBar('Skill', ab.skill, 100, 'skill', p.away_team, awaySlug)}
             ${breakdownBar('Hunger', ab.hunger, 100, 'hunger', p.away_team, awaySlug)}
-            <div class="stat-row drill-row" onclick="drillDown('silence','${p.away_team.replace(/'/g,"\\'")}',' ${awaySlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
+            <div class="stat-row drill-row" onclick="drillDown('silence','${p.away_team.replace(/'/g,"\\'")}','${awaySlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
               <span class="stat-label">Silence Bonus <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${ab.silence_bonus ? 'text-green' : 'text-muted'}">${ab.silence_bonus ? 'Yes' : 'No'}</span>
             </div>
-            <div class="stat-row drill-row" onclick="drillDown('injury','${p.away_team.replace(/'/g,"\\'")}',' ${awaySlug}')" style="cursor:pointer" title="Click to see injured players">
+            <div class="stat-row drill-row" onclick="drillDown('injury','${p.away_team.replace(/'/g,"\\'")}','${awaySlug}')" style="cursor:pointer" title="Click to see injured players">
               <span class="stat-label">Injury Flag <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${ab.injury_flag ? 'text-red' : 'text-green'}">${ab.injury_flag ? 'Yes' : 'No'}</span>
             </div>
@@ -302,6 +302,16 @@ function toggleAccordion(header) {
 let playerIndex = null;   // { slug: [players] }
 let practiceIndex = null; // { 'slug:name': entry }
 
+// maps players.json team abbr → prediction slug
+const ABBR_TO_SLUG = {
+  'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+  'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+  'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+  'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+  'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+  'LAR':'lar','SF':'sf','SEA':'sea'
+};
+
 async function ensurePlayerData() {
   if (playerIndex) return;
   const [pRes, prRes] = await Promise.all([
@@ -310,7 +320,7 @@ async function ensurePlayerData() {
   ]);
   playerIndex = {};
   for (const p of (pRes.players || [])) {
-    const s = p.team ? p.team.toLowerCase() : '';
+    const s = ABBR_TO_SLUG[(p.team||'').toUpperCase()] || (p.team||'').toLowerCase();
     if (!playerIndex[s]) playerIndex[s] = [];
     playerIndex[s].push(p);
   }
@@ -356,7 +366,7 @@ async function drillDown(type, teamName, slug) {
           const injury = inj.primary_injury || inj.practice_primary_injury || '—';
           const practice = inj.practice_status ? inj.practice_status.replace('Participation in Practice','').trim() : '—';
           return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
-            <img src="${p.headshot || ''}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
+            <img src="${(p.headshot&&p.headshot!=='nan'?p.headshot:'')}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
             <div style="flex:1;min-width:120px">
               <div style="font-weight:600;font-size:0.85rem">${p.name}</div>
               <div style="font-size:0.75rem;color:var(--text-muted)">${p.position} · ${injury}</div>
@@ -395,7 +405,7 @@ async function drillDown(type, teamName, slug) {
       const scoreCls = s.skill_score >= 80 ? 'text-green' : s.skill_score >= 50 ? 'text-yellow' : 'text-red';
       const source = s.source === 'fallback' ? 'proxy' : s.source === 'ol_proxy' ? 'OL proxy' : 'stats';
       return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
-        <img src="${p.headshot || ''}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
+        <img src="${(p.headshot&&p.headshot!=='nan'?p.headshot:'')}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
         <div style="flex:1">
           <div style="font-weight:600;font-size:0.85rem">${p.name}</div>
           <div style="font-size:0.75rem;color:var(--text-muted)">${p.position} · ${source}</div>
