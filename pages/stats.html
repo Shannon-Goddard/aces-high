@@ -13,35 +13,49 @@
 <div class="page">
   <div class="page-header">
     <div class="page-title">Stats</div>
-    <div class="page-sub" id="stats-sub">System performance analytics</div>
+    <div class="page-sub" id="stats-sub">System performance &amp; modifier intelligence</div>
   </div>
 
-  <!-- Overall record -->
+  <!-- Overall record tiles -->
   <div class="summary-grid" id="overall-tiles"></div>
 
-  <!-- Two column layout -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem" id="stats-body">
+  <!-- Active flags this week -->
+  <div class="section-block">
+    <div class="section-label">Active Flags This Week</div>
+    <div class="page-sub" style="margin-bottom:0.75rem">What the system is seeing right now — injury, weather, news signals firing on open predictions.</div>
+    <div id="active-flags"></div>
+  </div>
 
-    <!-- Situation breakdown -->
-    <div>
+  <!-- Current week prediction breakdown -->
+  <div class="section-block">
+    <div class="section-label">Current Week Breakdown</div>
+    <div id="week-breakdown"></div>
+  </div>
+
+  <!-- Two column: situation + modifier accuracy -->
+  <div class="stats-grid" id="stats-body">
+    <div class="section-block">
       <div class="section-label">By Situation</div>
       <div id="situation-list"></div>
     </div>
-
-    <!-- Modifier accuracy -->
-    <div>
+    <div class="section-block">
       <div class="section-label">Modifier Accuracy</div>
+      <div class="page-sub" style="margin-bottom:0.75rem;font-size:0.75rem">Minimum 10 data points before a modifier moves from hypothesis to validated.</div>
       <div id="modifier-list"></div>
     </div>
-
   </div>
 
-  <!-- Confidence calibration full width -->
-  <div style="margin-top:1.5rem">
+  <!-- Modifier weight table -->
+  <div class="section-block">
+    <div class="section-label">Modifier Weight Table</div>
+    <div class="page-sub" style="margin-bottom:0.75rem">All starting weights are hypotheses. They earn validation through outcomes or get cut.</div>
+    <div id="modifier-weights"></div>
+  </div>
+
+  <!-- Confidence calibration -->
+  <div class="section-block">
     <div class="section-label">Confidence Calibration</div>
-    <div class="text-muted" style="font-size:0.8rem;margin-bottom:0.75rem">
-      Are our confidence scores accurate? An 80-confidence pick should win ~80% of the time.
-    </div>
+    <div class="page-sub" style="margin-bottom:0.75rem">An 80-confidence pick should win ~80% of the time. Populates after results are recorded.</div>
     <div id="calibration-list"></div>
   </div>
 </div>
@@ -54,6 +68,28 @@
 <script src="../components/nav.js"></script>
 <script>
 const ROOT = '../';
+
+const MODIFIER_WEIGHTS = [
+  { name: 'Body Score',              weight: '×0.20', layer: 'L1', status: 'active',     note: 'Age, weight, snap%, longevity' },
+  { name: 'Skill Score',             weight: '×0.30', layer: 'L2', status: 'active',     note: 'EPA, percentile vs position peers' },
+  { name: 'Hunger Index',            weight: '×0.10', layer: 'L3', status: 'hypothesis', note: 'Draft position, contract, adversity' },
+  { name: 'Silence Bonus',           weight: '×0.10', layer: 'L3', status: 'hypothesis', note: 'No negative headlines = locked in' },
+  { name: 'Injury Flag',             weight: '−0.15', layer: 'L1', status: 'active',     note: 'Practice trajectory score, graduated' },
+  { name: 'Distraction Flag',        weight: '−0.10', layer: 'L3', status: 'hypothesis', note: 'News keywords: legal, drama, trade' },
+  { name: 'Wind >20mph',             weight: '×0.75', layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
+  { name: 'Rain / Snow',             weight: '×0.85', layer: 'WX', status: 'hypothesis', note: 'Applied to passing/skill component' },
+  { name: 'Temp <20°F (kicker)',     weight: '×0.80', layer: 'WX', status: 'hypothesis', note: 'Kicker accuracy in extreme cold' },
+  { name: 'Chronic Joint (cold)',    weight: '−0.30', layer: 'WX', status: 'hypothesis', note: 'Temp <40°F + joint injury history' },
+  { name: 'Dome (immunity)',         weight: '×1.00', layer: 'WX', status: 'active',     note: 'No weather impact in dome stadiums' },
+  { name: 'Practice Trajectory',     weight: 'scaled', layer: 'L1', status: 'active',    note: 'DNP→out 85, trending full→5' },
+  { name: 'Revenge Game',            weight: '×1.10', layer: 'L5', status: 'hypothesis', note: 'Playing former team / coach' },
+  { name: 'Opposite Team Beef',      weight: '×1.10', layer: 'L5', status: 'hypothesis', note: 'Personal rivalry across teams' },
+  { name: 'Same Team Beef',          weight: '×0.90', layer: 'L5', status: 'hypothesis', note: 'Unresolved locker room conflict' },
+  { name: 'Coach Public Callout',    weight: '×0.85', layer: 'L6', status: 'hypothesis', note: 'Player embarrassed publicly' },
+  { name: 'Short Week (Thu game)',   weight: '×0.93', layer: 'L7', status: 'hypothesis', note: 'Fatigue from compressed schedule' },
+  { name: 'Coming Off Bye',          weight: '×1.03', layer: 'L7', status: 'hypothesis', note: 'Rest advantage' },
+  { name: 'Vegas Sharp Signal',      weight: 'signal', layer: 'L7', status: 'hypothesis', note: 'Line movement vs public divergence' },
+];
 
 function empty(msg) {
   return `<div class="text-muted" style="font-size:0.82rem;padding:0.75rem 0">${msg}</div>`;
@@ -75,23 +111,172 @@ function recordBar(wins, losses, pushes) {
     </div>`;
 }
 
-async function init() {
-  const [statsRes, ledgerRes] = await Promise.all([
-    fetch(`${ROOT}data/stats.json`).then(r => r.json()).catch(() => null),
-    fetch(`${ROOT}data/ledger.json`).then(r => r.json()).catch(() => null)
-  ]);
+function teamLogo(slug) {
+  return `<img src="https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'">`;
+}
 
-  const stats  = statsRes  || {};
-  const ledger = ledgerRes || {};
-  const s      = ledger.summary || {};
-  const flat   = s.flat || {};
-  const wtd    = s.confidence_weighted || {};
+function renderActiveFlags(predictions, practice, weather) {
+  const el       = document.getElementById('active-flags');
+  const preds    = predictions.predictions || [];
+  const meta     = predictions;
+  const week     = preds.length ? Math.max(...preds.map(p => p.week)) : null;
+  const thisPreds = week ? preds.filter(p => p.week === week) : preds;
 
-  if (stats.last_updated) {
-    document.getElementById('stats-sub').textContent = `Last updated: ${stats.last_updated}`;
+  if (!thisPreds.length) { el.innerHTML = empty('No predictions loaded.'); return; }
+
+  const practPlayers = practice.players || {};
+  const weatherGames = weather.games   || {};
+
+  const rows = [];
+
+  for (const p of thisPreds) {
+    const flags = [];
+
+    // Injury flags from breakdown
+    const hInj = p.home_breakdown?.injury_flag;
+    const aInj = p.away_breakdown?.injury_flag;
+    if (hInj) flags.push({ type: 'injury', team: p.home_team, slug: p.home_slug, label: 'Injury flag' });
+    if (aInj) flags.push({ type: 'injury', team: p.away_team, slug: p.away_slug, label: 'Injury flag' });
+
+    // Distraction flags
+    if (p.home_breakdown?.distraction_flag) flags.push({ type: 'distract', team: p.home_team, slug: p.home_slug, label: 'Distraction' });
+    if (p.away_breakdown?.distraction_flag) flags.push({ type: 'distract', team: p.away_team, slug: p.away_slug, label: 'Distraction' });
+
+    // Silence bonus
+    if (p.home_breakdown?.silence_bonus) flags.push({ type: 'silence', team: p.home_team, slug: p.home_slug, label: 'Silence bonus' });
+    if (p.away_breakdown?.silence_bonus) flags.push({ type: 'silence', team: p.away_team, slug: p.away_slug, label: 'Silence bonus' });
+
+    // Weather flags
+    const wx = weatherGames[p.game_id]?.modifiers || {};
+    if (wx.wind_flag)       flags.push({ type: 'weather', team: `${p.away_team} @ ${p.home_team}`, slug: p.home_slug, label: `Wind flag` });
+    if (wx.precip_flag)     flags.push({ type: 'weather', team: `${p.away_team} @ ${p.home_team}`, slug: p.home_slug, label: `Precip flag` });
+    if (wx.cold_flag)       flags.push({ type: 'weather', team: `${p.away_team} @ ${p.home_team}`, slug: p.home_slug, label: `Extreme cold` });
+    if (wx.cold_joint_flag) flags.push({ type: 'joint',   team: `${p.away_team} @ ${p.home_team}`, slug: p.home_slug, label: `Cold joint flag` });
+
+    if (flags.length) {
+      rows.push({ matchup: `${p.away_team} @ ${p.home_team}`, home_slug: p.home_slug, away_slug: p.away_slug, flags, conf: p.confidence, pick: p.pick });
+    }
   }
 
-  // Overall tiles — pull from ledger since stats.json is populated by record_outcome
+  if (!rows.length) { el.innerHTML = empty('No active flags this week.'); return; }
+
+  const flagClass = { injury: 'flag-injury', distract: 'flag-distract', silence: 'flag-silence', weather: 'flag-hypothesis', joint: 'flag-hypothesis' };
+  const flagIcon  = { injury: '🚨', distract: '⚠️', silence: '🔇', weather: '🌬️', joint: '🦴' };
+
+  el.innerHTML = `<div style="display:flex;flex-direction:column;gap:0.5rem">` +
+    rows.map(r => `
+      <div class="card card-sm" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:0.5rem;min-width:220px">
+          ${teamLogo(r.away_slug)} ${r.matchup.split(' @ ')[0]}
+          <span class="text-muted">@</span>
+          ${teamLogo(r.home_slug)} ${r.matchup.split(' @ ')[1]}
+        </div>
+        <div style="display:flex;gap:0.35rem;flex-wrap:wrap;flex:1">
+          ${r.flags.map(f => `<span class="flag ${flagClass[f.type] || 'flag-hypothesis'}">${flagIcon[f.type] || '•'} ${f.label}${f.team !== r.matchup ? ' — ' + f.team.split(' ').pop() : ''}</span>`).join('')}
+        </div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Conf: <span class="${r.conf >= 70 ? 'text-green' : r.conf >= 50 ? 'text-yellow' : 'text-red'}">${r.conf}</span></div>
+      </div>`).join('') +
+  `</div>`;
+}
+
+function renderWeekBreakdown(predictions) {
+  const el    = document.getElementById('week-breakdown');
+  const preds = predictions.predictions || [];
+  if (!preds.length) { el.innerHTML = empty('No predictions loaded.'); return; }
+
+  const week     = Math.max(...preds.map(p => p.week));
+  const thisPreds = preds.filter(p => p.week === week);
+  const bets     = thisPreds.filter(p => p.confidence >= 40);
+  const watches  = thisPreds.filter(p => p.confidence < 40);
+  const favs     = bets.filter(p => p.pick_type === 'favorite');
+  const dogs     = bets.filter(p => p.pick_type === 'underdog');
+  const avgConf  = bets.length ? Math.round(bets.reduce((s, p) => s + p.confidence, 0) / bets.length) : 0;
+  const injFlags = thisPreds.filter(p => p.home_breakdown?.injury_flag || p.away_breakdown?.injury_flag).length;
+
+  el.innerHTML = `
+    <div class="summary-grid" style="margin-bottom:1rem">
+      <div class="summary-tile">
+        <div class="tile-value text-gold">${week}</div>
+        <div class="tile-label">Current Week</div>
+      </div>
+      <div class="summary-tile">
+        <div class="tile-value">${thisPreds.length}</div>
+        <div class="tile-label">Games Predicted</div>
+      </div>
+      <div class="summary-tile">
+        <div class="tile-value text-green">${bets.length}</div>
+        <div class="tile-label">BET Eligible</div>
+      </div>
+      <div class="summary-tile">
+        <div class="tile-value">${watches.length}</div>
+        <div class="tile-label">WATCH Only</div>
+      </div>
+      <div class="summary-tile">
+        <div class="tile-value">${favs.length} / ${dogs.length}</div>
+        <div class="tile-label">Favs / Dogs</div>
+      </div>
+      <div class="summary-tile">
+        <div class="tile-value text-red">${injFlags}</div>
+        <div class="tile-label">Injury Flags</div>
+      </div>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-dim)">
+      Avg confidence on BET picks: <span class="${avgConf >= 70 ? 'text-green' : avgConf >= 55 ? 'text-yellow' : 'text-red'}" style="font-weight:700">${avgConf}</span>
+    </div>`;
+}
+
+function renderModifierWeights() {
+  const el = document.getElementById('modifier-weights');
+  const layerColor = { L1: 'var(--blue)', L2: 'var(--purple)', L3: 'var(--gold)', L5: 'var(--green)', L6: 'var(--yellow)', L7: 'var(--text-dim)', WX: 'var(--blue)' };
+
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Modifier</th>
+            <th>Layer</th>
+            <th>Weight</th>
+            <th>Status</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${MODIFIER_WEIGHTS.map(m => `
+            <tr>
+              <td style="font-weight:600">${m.name}</td>
+              <td><span style="font-size:0.72rem;font-weight:700;color:${layerColor[m.layer] || 'var(--text-dim)'}">${m.layer}</span></td>
+              <td style="font-family:monospace;font-size:0.82rem">${m.weight}</td>
+              <td>
+                ${m.status === 'active'
+                  ? '<span class="flag flag-silence" style="font-size:0.68rem">active</span>'
+                  : '<span class="flag flag-hypothesis" style="font-size:0.68rem">hypothesis</span>'}
+              </td>
+              <td style="font-size:0.78rem;color:var(--text-dim)">${m.note}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+async function init() {
+  const [statsRes, ledgerRes, predRes, practiceRes, weatherRes] = await Promise.all([
+    fetch(`${ROOT}data/stats.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})),
+    fetch(`${ROOT}data/ledger.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})),
+    fetch(`${ROOT}data/predictions.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/practice.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({ players: {} })),
+    fetch(`${ROOT}data/weather.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({ games: {} })),
+  ]);
+
+  const s    = ledgerRes.summary || {};
+  const flat = s.flat || {};
+  const wtd  = s.confidence_weighted || {};
+
+  if (statsRes.last_updated) {
+    document.getElementById('stats-sub').textContent = `Last updated: ${statsRes.last_updated}`;
+  }
+
+  // Overall tiles
   document.getElementById('overall-tiles').innerHTML = `
     <div class="summary-tile">
       <div class="tile-value">${flat.wins || 0}-${flat.losses || 0}${flat.pushes ? '-'+flat.pushes : ''}</div>
@@ -114,17 +299,22 @@ async function init() {
       <div class="tile-label">Outperforming</div>
     </div>
     <div class="summary-tile">
-      <div class="tile-value">${s.delta?.confidence_score_value || '—'}</div>
-      <div class="tile-label">Confidence Value</div>
-    </div>
-  `;
+      <div class="tile-value">${(predRes.predictions||[]).filter(p=>p.status==='open').length}</div>
+      <div class="tile-label">Open Bets</div>
+    </div>`;
+
+  // Active flags
+  renderActiveFlags(predRes, practiceRes, weatherRes);
+
+  // Week breakdown
+  renderWeekBreakdown(predRes);
 
   // Situation breakdown
-  const situations = stats.by_situation || {};
-  const sitEl = document.getElementById('situation-list');
-  const sitEntries = Object.entries(situations);
+  const situations  = statsRes.by_situation || {};
+  const sitEl       = document.getElementById('situation-list');
+  const sitEntries  = Object.entries(situations);
   if (!sitEntries.some(([, v]) => v.wins + v.losses > 0)) {
-    sitEl.innerHTML = empty('No situational data yet — populates after results are recorded.');
+    sitEl.innerHTML = empty('Populates after results are recorded.');
   } else {
     sitEl.innerHTML = sitEntries.map(([key, v]) => `
       <div style="margin-bottom:0.75rem">
@@ -136,16 +326,16 @@ async function init() {
   }
 
   // Modifier accuracy
-  const mods  = stats.modifier_accuracy || {};
-  const modEl = document.getElementById('modifier-list');
+  const mods      = statsRes.modifier_accuracy || {};
+  const modEl     = document.getElementById('modifier-list');
   const modEntries = Object.entries(mods);
   if (!modEntries.length) {
-    modEl.innerHTML = empty('No modifier data yet — populates after Phase 2 modifiers are applied and results recorded.');
+    modEl.innerHTML = empty('Populates after Phase 2 modifiers are applied and results recorded.');
   } else {
     modEl.innerHTML = modEntries.map(([name, m]) => {
       const pct   = m.accuracy !== null ? m.accuracy : null;
       const color = pct === null ? 'text-muted' : pct >= 55 ? 'text-green' : 'text-red';
-      const fill  = pct === null ? 'fill-gold' : pct >= 55 ? 'fill-green' : 'fill-red';
+      const fill  = pct === null ? 'fill-gold'  : pct >= 55 ? 'fill-green' : 'fill-red';
       return `
         <div style="margin-bottom:0.75rem">
           <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.25rem">
@@ -159,20 +349,23 @@ async function init() {
     }).join('');
   }
 
+  // Modifier weight table
+  renderModifierWeights();
+
   // Confidence calibration
   const buckets = s.confidence_calibration?.buckets || {};
   const calEl   = document.getElementById('calibration-list');
   const hasCal  = Object.values(buckets).some(b => b.bets > 0);
   if (!hasCal) {
-    calEl.innerHTML = empty('No calibration data yet — populates after results are recorded.');
+    calEl.innerHTML = empty('Populates after results are recorded.');
   } else {
     calEl.innerHTML = Object.entries(buckets).map(([range, b]) => {
-      const label   = range.replace('_', '–');
-      const midConf = parseInt(range.split('_')[0]) + 5;
-      const winPct  = b.bets > 0 ? Math.round(b.wins / b.bets * 100) : null;
+      const label      = range.replace('_', '–');
+      const midConf    = parseInt(range.split('_')[0]) + 5;
+      const winPct     = b.bets > 0 ? Math.round(b.wins / b.bets * 100) : null;
       const calibrated = winPct !== null && winPct >= midConf - 10;
-      const fill    = winPct === null ? '' : calibrated ? 'fill-green' : 'fill-red';
-      const color   = winPct === null ? 'text-muted' : calibrated ? 'text-green' : 'text-red';
+      const fill       = winPct === null ? '' : calibrated ? 'fill-green' : 'fill-red';
+      const color      = winPct === null ? 'text-muted' : calibrated ? 'text-green' : 'text-red';
       return `
         <div class="stat-row">
           <span class="stat-label" style="min-width:60px">${label}</span>
@@ -203,10 +396,19 @@ init();
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.section-block {
+  margin-top: 2rem;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 @media (max-width: 640px) {
-  #stats-body { grid-template-columns: 1fr !important; }
+  .stats-grid { grid-template-columns: 1fr; }
 }
 </style>
 </body>
