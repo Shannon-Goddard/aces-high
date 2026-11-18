@@ -407,6 +407,34 @@ tr:hover td { background: var(--bg2); }
   color: var(--text-muted);
 }
 
+/* ── BET BADGES ──────────────────────────────────────────────────────── */
+.badge-bet {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(46,204,113,0.15);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.4);
+}
+.badge-nobet {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: var(--bg3);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.card-bet { border-color: rgba(46,204,113,0.25); }
+.card-bet:hover { border-color: rgba(46,204,113,0.5); }
+
 /* ── CONFIDENCE METER ─────────────────────────────────────────────────── */
 .confidence-wrap { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
 .confidence-label { color: var(--text-muted); }

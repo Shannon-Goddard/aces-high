@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Predictions</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Predictions</div>
+    <div class="page-sub" id="week-label">Loading...</div>
+  </div>
+
+  <!-- Filter tabs -->
+  <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+    <button class="filter-btn active" data-filter="bet" onclick="setFilter('bet',this)">BET Only</button>
+    <button class="filter-btn" data-filter="all" onclick="setFilter('all',this)">All Games</button>
+    <button class="filter-btn" data-filter="fav" onclick="setFilter('fav',this)">Favorites</button>
+    <button class="filter-btn" data-filter="dog" onclick="setFilter('dog',this)">Underdogs</button>
+  </div>
+
+  <div id="predictions-container">
+    <div class="empty">
+      <div class="empty-icon">&#127944;</div>
+      <div>No predictions loaded.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT = '../';
+
+const TEAM_SLUGS = {
+  'Buffalo Bills':'buf','Miami Dolphins':'mia','New England Patriots':'ne',
+  'New York Jets':'nyj','Baltimore Ravens':'bal','Cincinnati Bengals':'cin',
+  'Cleveland Browns':'cle','Pittsburgh Steelers':'pit','Houston Texans':'hou',
+  'Indianapolis Colts':'ind','Jacksonville Jaguars':'jax','Tennessee Titans':'ten',
+  'Denver Broncos':'den','Kansas City Chiefs':'kc','Las Vegas Raiders':'lv',
+  'Los Angeles Chargers':'lac','Dallas Cowboys':'dal','New York Giants':'nyg',
+  'Philadelphia Eagles':'phi','Washington Commanders':'wsh','Chicago Bears':'chi',
+  'Detroit Lions':'det','Green Bay Packers':'gb','Minnesota Vikings':'min',
+  'Atlanta Falcons':'atl','Carolina Panthers':'car','New Orleans Saints':'no',
+  'Tampa Bay Buccaneers':'tb','Arizona Cardinals':'ari','Los Angeles Rams':'lar',
+  'San Francisco 49ers':'sf','Seattle Seahawks':'sea'
+};
+
+function slugFor(name) {
+  return TEAM_SLUGS[name] || name.toLowerCase().replace(/\s+/g,'').slice(0,3);
+}
+function teamLogoUrl(slug) {
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png`;
+}
+function confidenceColor(c) {
+  return c >= 70 ? 'text-green' : c >= 50 ? 'text-yellow' : 'text-red';
+}
+
+let allPredictions = [];
+let currentFilter = 'bet';
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+}
+
+function filtered(preds) {
+  if (currentFilter === 'bet') return preds.filter(p => p.confidence >= 40);
+  if (currentFilter === 'fav') return preds.filter(p => p.pick_type === 'favorite');
+  if (currentFilter === 'dog') return preds.filter(p => p.pick_type === 'underdog');
+  return preds;
+}
+
+function spreadLabel(p) {
+  const s = p.spread;
+  if (s === null || s === undefined) return 'N/A';
+  return `${p.home_team} ${s > 0 ? '+' : ''}${s}`;
+}
+
+function pickLabel(p) {
+  if (p.spread === null || p.spread === undefined) return p.pick;
+  if (p.pick === p.home_team) {
+    return `${p.home_team} ${p.spread > 0 ? '+' : ''}${p.spread}`;
+  } else {
+    const awayLine = (-p.spread).toFixed(1);
+    return `${p.away_team} ${p.spread < 0 ? '+' : ''}${awayLine}`;
+  }
+}
+
+function breakdownBar(label, value, max) {
+  const pct = Math.min(100, Math.round((value / max) * 100));
+  const cls = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
+  return `
+    <div class="stat-row">
+      <span class="stat-label">${label}</span>
+      <div class="progress-wrap" style="flex:1;margin-left:1rem">
+        <div class="progress-bar">
+          <div class="progress-fill ${cls}" style="width:${pct}%"></div>
+        </div>
+        <span class="progress-label">${value}</span>
+      </div>
+    </div>`;
+}
+
+function renderCard(p) {
+  const conf     = p.confidence || 0;
+  const isBet    = conf >= 40;
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+  const awaySlug = p.away_slug || slugFor(p.away_team);
+  const hb       = p.home_breakdown || {};
+  const ab       = p.away_breakdown || {};
+
+  const gameDate = p.game_time
+    ? new Date(p.game_time).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
+    : '';
+
+  const statusBadge = p.result
+    ? `<span class="flag ${p.result === 'win' ? 'flag-silence' : p.result === 'loss' ? 'flag-injury' : 'flag-distract'}">${p.result.toUpperCase()}</span>`
+    : '';
+
+  return `
+    <div class="accordion${isBet ? ' accordion-bet' : ''}" id="${p.game_id}">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-title">
+          <img src="${teamLogoUrl(awaySlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'">
+          <span>${p.away_team}</span>
+          <span style="color:var(--text-muted);font-size:0.8rem">@</span>
+          <img src="${teamLogoUrl(homeSlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'">
+          <span>${p.home_team}</span>
+          ${statusBadge}
+        </div>
+        <div class="accordion-meta">
+          ${isBet ? '<span class="badge-bet">BET</span>' : '<span class="badge-nobet">WATCH</span>'}
+          <span class="${confidenceColor(conf)}" style="font-weight:700">${conf}</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <!-- Game info row -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
+          <div class="text-dim" style="font-size:0.82rem">${gameDate} &middot; Week ${p.week} &middot; ${p.snapshot_type || 'opening'}</div>
+          <div style="font-size:0.82rem">
+            <span class="text-muted">Spread:</span> ${spreadLabel(p)}
+            &nbsp;&middot;&nbsp;
+            <span class="text-muted">O/U:</span> ${p.total || '—'}
+          </div>
+        </div>
+
+        <!-- Pick + confidence -->
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
+          <div class="prediction-pick" style="font-size:1.15rem">&#9654; ${pickLabel(p)}</div>
+          <div style="flex:1;min-width:200px">
+            <div class="progress-wrap">
+              <span style="font-size:0.75rem;color:var(--text-muted);min-width:90px">Confidence</span>
+              <div class="progress-bar">
+                <div class="progress-fill ${conf >= 70 ? 'fill-green' : conf >= 50 ? 'fill-yellow' : 'fill-red'}" style="width:${conf}%"></div>
+              </div>
+              <span class="progress-label ${confidenceColor(conf)}">${conf}/100</span>
+            </div>
+          </div>
+          <div style="font-size:0.85rem">
+            <span class="text-muted">Edge:</span>
+            <span class="${p.edge_score >= 0 ? 'text-green' : 'text-red'}" style="font-weight:700">${p.edge_score >= 0 ? '+' : ''}${p.edge_score}</span>
+          </div>
+        </div>
+
+        <!-- Team breakdowns side by side -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+              <img src="${teamLogoUrl(homeSlug)}" style="width:20px;height:20px;object-fit:contain" onerror="this.style.display='none'">
+              <span style="font-weight:700;font-size:0.85rem">${p.home_team}</span>
+              <span class="score ${hb.composite >= 27 ? 'score-high' : hb.composite >= 24 ? 'score-mid' : 'score-low'}">${hb.composite}</span>
+            </div>
+            ${breakdownBar('Body', hb.body, 40)}
+            ${breakdownBar('Skill', hb.skill, 100)}
+            ${breakdownBar('Hunger', hb.hunger, 100)}
+            <div class="stat-row">
+              <span class="stat-label">Silence Bonus</span>
+              <span class="stat-value ${hb.silence_bonus ? 'text-green' : 'text-muted'}">${hb.silence_bonus ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Injury Flag</span>
+              <span class="stat-value ${hb.injury_flag ? 'text-red' : 'text-green'}">${hb.injury_flag ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Players</span>
+              <span class="stat-value">${hb.player_count || '—'}</span>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+              <img src="${teamLogoUrl(awaySlug)}" style="width:20px;height:20px;object-fit:contain" onerror="this.style.display='none'">
+              <span style="font-weight:700;font-size:0.85rem">${p.away_team}</span>
+              <span class="score ${ab.composite >= 27 ? 'score-high' : ab.composite >= 24 ? 'score-mid' : 'score-low'}">${ab.composite}</span>
+            </div>
+            ${breakdownBar('Body', ab.body, 40)}
+            ${breakdownBar('Skill', ab.skill, 100)}
+            ${breakdownBar('Hunger', ab.hunger, 100)}
+            <div class="stat-row">
+              <span class="stat-label">Silence Bonus</span>
+              <span class="stat-value ${ab.silence_bonus ? 'text-green' : 'text-muted'}">${ab.silence_bonus ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Injury Flag</span>
+              <span class="stat-value ${ab.injury_flag ? 'text-red' : 'text-green'}">${ab.injury_flag ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Players</span>
+              <span class="stat-value">${ab.player_count || '—'}</span>
+            </div>
+          </div>
+        </div>
+
+        ${p.lesson ? `<div class="blind-spots mt-2"><div class="blind-spots-title">Lesson</div><div>${p.lesson}</div></div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderList() {
+  const container = document.getElementById('predictions-container');
+  const preds = filtered(allPredictions).sort((a, b) => b.confidence - a.confidence);
+  if (!preds.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">&#127944;</div><div>No predictions match this filter.</div></div>`;
+    return;
+  }
+  container.innerHTML = preds.map(renderCard).join('');
+
+  // Auto-open if URL has anchor
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const el = document.getElementById(hash);
+    if (el) {
+      const header = el.querySelector('.accordion-header');
+      const body   = el.querySelector('.accordion-body');
+      if (header && body) {
+        header.classList.add('open');
+        body.classList.add('open');
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+  }
+}
+
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+async function init() {
+  const [predRes, metaRes] = await Promise.all([
+    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/metadata.json`).then(r => r.json()).catch(() => ({}))
+  ]);
+
+  const week   = metaRes.week || '—';
+  const season = metaRes.season || '2025';
+  document.getElementById('week-label').textContent =
+    `Season ${season} · Week ${week} · Last updated: ${metaRes.last_prediction || 'pending'}`;
+
+  allPredictions = (predRes.predictions || []).filter(p => p.week == week);
+  renderList();
+}
+
+init();
+</script>
+
+<style>
+.filter-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.filter-btn:hover { background: var(--bg3); color: var(--text); }
+.filter-btn.active { background: var(--bg3); color: var(--gold); border-color: var(--gold-dim); }
+.accordion-bet { border-color: rgba(46,204,113,0.25); }
+.accordion-bet:hover { border-color: rgba(46,204,113,0.45); }
+
+@media (max-width: 600px) {
+  .accordion-body > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+</body>
+</html>

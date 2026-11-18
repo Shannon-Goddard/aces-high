@@ -118,60 +118,65 @@ function renderSummary(ledger) {
   `;
 }
 
+function spreadLabel(p) {
+  const s = p.spread;
+  if (s === null || s === undefined) return 'N/A';
+  const sign = s > 0 ? '+' : '';
+  return `${p.home_team} ${sign}${s}`;
+}
+
 function renderPredictionCard(p) {
-  const pred   = p.prediction || {};
-  const home   = p.home_team || '';
-  const away   = p.away_team || '';
-  const conf   = pred.confidence || 0;
-  const reasoning = (pred.primary_reasoning || []).slice(0, 3);
-  const blindSpots = pred.blind_spots || [];
-  const hypotheses = pred.hypothesis_modifiers || [];
-  const homeSlug = slugFor(home);
-  const awaySlug = slugFor(away);
+  const conf     = p.confidence || 0;
+  const isBet    = conf >= 40;
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+  const awaySlug = p.away_slug || slugFor(p.away_team);
+  const pickSign = p.spread > 0 ? '+' : '';
+  const pickLine = p.pick === p.home_team
+    ? `${p.home_team} ${pickSign}${p.spread}`
+    : `${p.away_team} ${p.spread > 0 ? '' : '+'}${(-p.spread).toFixed(1)}`;
 
-  const reasoningHtml = reasoning.length
-    ? reasoning.map(r => `<div>&#8250; ${r}</div>`).join('')
-    : '<div class="text-muted">Reasoning pending</div>';
-
-  const blindHtml = blindSpots.length
-    ? `<div class="blind-spots">
-        <div class="blind-spots-title">&#9888; Blind Spots</div>
-        ${blindSpots.map(b => `<div>&#8250; ${b}</div>`).join('')}
-       </div>` : '';
-
-  const hypHtml = hypotheses.length
-    ? hypotheses.map(h => `<span class="flag flag-hypothesis">${h}</span>`).join('')
+  const gameDate = p.game_time
+    ? new Date(p.game_time).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' })
     : '';
 
   return `
-    <div class="prediction-card">
+    <div class="prediction-card${isBet ? ' card-bet' : ''}" id="${p.game_id}">
       <div class="prediction-matchup">
         <div class="prediction-teams">
-          <img src="${teamLogoUrl(awaySlug)}" alt="${away}" onerror="this.style.display='none'">
-          <span>${away}</span>
+          <img src="${teamLogoUrl(awaySlug)}" alt="${p.away_team}" onerror="this.style.display='none'">
+          <span>${p.away_team}</span>
           <span class="vs">@</span>
-          <img src="${teamLogoUrl(homeSlug)}" alt="${home}" onerror="this.style.display='none'">
-          <span>${home}</span>
+          <img src="${teamLogoUrl(homeSlug)}" alt="${p.home_team}" onerror="this.style.display='none'">
+          <span>${p.home_team}</span>
         </div>
-        <div class="text-dim" style="font-size:0.8rem">${p.date || ''} · Wk ${p.week || ''}</div>
+        <div class="text-dim" style="font-size:0.78rem">${gameDate} &middot; Wk ${p.week}</div>
       </div>
       <div class="prediction-body">
-        <div class="prediction-pick">
-          ${pred.spread_pick ? '&#9654; ' + pred.spread_pick : 'Prediction pending'}
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+          <div class="prediction-pick">&#9654; ${pickLine}</div>
+          ${isBet ? '<span class="badge-bet">BET</span>' : '<span class="badge-nobet">WATCH</span>'}
         </div>
-        <div class="prediction-reasoning">${reasoningHtml}</div>
-        ${hypHtml ? `<div class="player-flags mb-1">${hypHtml}</div>` : ''}
-        ${blindHtml}
+        <div class="text-dim" style="font-size:0.8rem;margin-bottom:0.5rem">
+          Spread: ${spreadLabel(p)} &nbsp;&middot;&nbsp; O/U: ${p.total || '—'}
+        </div>
+        <div class="progress-wrap" style="margin-bottom:0.25rem">
+          <span style="font-size:0.75rem;color:var(--text-muted);min-width:80px">Confidence</span>
+          <div class="progress-bar">
+            <div class="progress-fill ${conf >= 70 ? 'fill-green' : conf >= 50 ? 'fill-yellow' : 'fill-red'}" style="width:${conf}%"></div>
+          </div>
+          <span class="progress-label ${confidenceColor(conf)}">${conf}</span>
+        </div>
       </div>
       <div class="prediction-footer">
-        <div class="confidence-wrap">
-          <span class="confidence-label">Confidence:</span>
-          <span class="confidence-value ${confidenceColor(conf)}">${conf}/100</span>
+        <div style="font-size:0.78rem">
+          <span class="text-muted">Edge:</span>
+          <span class="${p.edge_score >= 0 ? 'text-green' : 'text-red'}">${p.edge_score >= 0 ? '+' : ''}${p.edge_score}</span>
         </div>
-        <div>
-          ${pred.over_under_pick ? `O/U: ${pred.over_under_pick}` : ''}
+        <div style="font-size:0.78rem">
+          <span class="text-muted">${p.home_team.split(' ').pop()}:</span> ${p.home_score}
+          &nbsp;<span class="text-muted">${p.away_team.split(' ').pop()}:</span> ${p.away_score}
         </div>
-        <a href="./pages/predictions.html#${p.game_id || ''}" style="font-size:0.78rem">Full breakdown &#8250;</a>
+        <a href="./pages/predictions.html#${p.game_id}" style="font-size:0.78rem">Details &#8250;</a>
       </div>
     </div>
   `;
@@ -190,12 +195,17 @@ async function init() {
   renderSummary(ledger);
 
   // This week's predictions
-  const thisWeek = (predictions.predictions || []).filter(p => p.week == week);
+  const all = predictions.predictions || [];
+  const thisWeek = all.filter(p => p.week == week);
   const container = document.getElementById('predictions-container');
 
   if (!thisWeek.length) return;
 
-  container.innerHTML = `<div class="grid-2">${thisWeek.map(renderPredictionCard).join('')}</div>`;
+  const bets = thisWeek.filter(p => p.confidence >= 40);
+  const sorted = [...bets, ...thisWeek.filter(p => p.confidence < 40)]
+    .sort((a, b) => b.confidence - a.confidence);
+
+  container.innerHTML = `<div class="grid-2">${sorted.map(renderPredictionCard).join('')}</div>`;
 }
 
 init();
