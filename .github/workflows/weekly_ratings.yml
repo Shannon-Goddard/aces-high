@@ -24,6 +24,9 @@ jobs:
       - name: Update ratings
         run: python scripts/update_ratings.py
 
+      - name: Fetch coaches
+        run: python scripts/fetch_coaches.py
+
       - name: Refresh predictions
         run: python scripts/predict.py
 
@@ -34,6 +37,6 @@ jobs:
         run: |
           git config user.name  "aces-high-bot"
           git config user.email "bot@aces-high"
-          git add data/players.json data/predictions.json data/metadata.json data/ledger.json
+          git add data/players.json data/predictions.json data/metadata.json data/ledger.json data/coaches.json
           git diff --staged --quiet || git commit -m "weekly ratings update — $(date -u '+%Y-%m-%d')"
           git pull --rebase && git push

@@ -1,4 +1,3706 @@
 {
-  "last_updated": null,
-  "coaches": []
+  "last_updated": "2026-11-18 20:03:47 UTC",
+  "pfr_source": "https://www.pro-football-reference.com/coaches/",
+  "pfr_citation": "When using SR data, please cite us and provide a link and/or a mention.",
+  "change_flags": [],
+  "coaches": [
+    {
+      "name": "Sean McDermott",
+      "team_slug": "buf",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Sean McDermott",
+        "pfr_from": 2017,
+        "pfr_to": 2025,
+        "pfr_yrs": 8,
+        "reg_wins": 106,
+        "reg_losses": 58,
+        "reg_wl_pct": 0.646,
+        "playoff_wins": 106,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "0.646 W-L% over 8 years \u2014 analytical consistency"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??T?",
+      "role_fit_score": 85,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Elite W-L% (0.646) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Joe Brady",
+      "team_slug": "buf",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Joe Brady",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 8,
+        "reg_losses": 1,
+        "reg_wl_pct": 0.889,
+        "playoff_wins": 8,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 60,
+      "role_fit_evidence": [
+        "Winning pedigree as HC \u2014 understands full game context"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Bobby Babich",
+      "team_slug": "buf",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike McDaniel",
+      "team_slug": "mia",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Mike McDaniel",
+        "pfr_from": 2022,
+        "pfr_to": 2025,
+        "pfr_yrs": 2,
+        "reg_wins": 35,
+        "reg_losses": 35,
+        "reg_wl_pct": 0.5,
+        "playoff_wins": 35,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 55,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Frank Smith",
+      "team_slug": "mia",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Lovie Smith",
+        "pfr_from": 2004,
+        "pfr_to": 2022,
+        "pfr_yrs": 3,
+        "reg_wins": 95,
+        "reg_losses": 103,
+        "reg_wl_pct": 0.48,
+        "playoff_wins": 95,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Anthony Weaver",
+      "team_slug": "mia",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Red Weaver",
+        "pfr_from": 1924,
+        "pfr_to": 1925,
+        "pfr_yrs": 0,
+        "reg_wins": 4,
+        "reg_losses": 13,
+        "reg_wl_pct": 0.235,
+        "playoff_wins": 4,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike Vrabel",
+      "team_slug": "ne",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Mike Vrabel",
+        "pfr_from": 2018,
+        "pfr_to": 2026,
+        "pfr_yrs": 4,
+        "reg_wins": 78,
+        "reg_losses": 57,
+        "reg_wl_pct": 0.578,
+        "playoff_wins": 78,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??F?",
+      "role_fit_score": 55,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Josh McDaniels",
+      "team_slug": "ne",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Josh McDaniels",
+        "pfr_from": 2009,
+        "pfr_to": 2023,
+        "pfr_yrs": 0,
+        "reg_wins": 20,
+        "reg_losses": 33,
+        "reg_wl_pct": 0.377,
+        "playoff_wins": 20,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "DeMarcus Covington",
+      "team_slug": "ne",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Aaron Glenn",
+      "team_slug": "nyj",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Aaron Glenn",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 5,
+        "reg_losses": 22,
+        "reg_wl_pct": 0.185,
+        "playoff_wins": 5,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Tanner Engstrand",
+      "team_slug": "nyj",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jeff Ulbrich",
+      "team_slug": "nyj",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Jeff Ulbrich",
+        "pfr_from": 2024,
+        "pfr_to": 2024,
+        "pfr_yrs": 0,
+        "reg_wins": 3,
+        "reg_losses": 9,
+        "reg_wl_pct": 0.25,
+        "playoff_wins": 3,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "John Harbaugh",
+      "team_slug": "bal",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "John Harbaugh",
+        "pfr_from": 2008,
+        "pfr_to": 2026,
+        "pfr_yrs": 12,
+        "reg_wins": 198,
+        "reg_losses": 127,
+        "reg_wl_pct": 0.609,
+        "playoff_wins": 198,
+        "super_bowls": 1,
+        "conf_titles": 1,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "12 years at .500+ \u2014 consistency over flash"
+        ],
+        "tf_evidence": [
+          "0.609 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "Elite W-L% (0.609) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated",
+        "12 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Todd Monken",
+      "team_slug": "bal",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Todd Monken",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 6,
+        "reg_losses": 4,
+        "reg_wl_pct": 0.6,
+        "playoff_wins": 6,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 60,
+      "role_fit_evidence": [
+        "Winning pedigree as HC \u2014 understands full game context"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Zach Orr",
+      "team_slug": "bal",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Zac Taylor",
+      "team_slug": "cin",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Zac Taylor",
+        "pfr_from": 2019,
+        "pfr_to": 2026,
+        "pfr_yrs": 2,
+        "reg_wins": 64,
+        "reg_losses": 67,
+        "reg_wl_pct": 0.489,
+        "playoff_wins": 64,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dan Pitcher",
+      "team_slug": "cin",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Al Golden",
+      "team_slug": "cin",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kevin Stefanski",
+      "team_slug": "cle",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Kevin Stefanski",
+        "pfr_from": 2020,
+        "pfr_to": 2026,
+        "pfr_yrs": 2,
+        "reg_wins": 49,
+        "reg_losses": 65,
+        "reg_wl_pct": 0.43,
+        "playoff_wins": 49,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Tommy Rees",
+      "team_slug": "cle",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jim Schwartz",
+      "team_slug": "cle",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Jim Schwartz",
+        "pfr_from": 2009,
+        "pfr_to": 2013,
+        "pfr_yrs": 1,
+        "reg_wins": 29,
+        "reg_losses": 52,
+        "reg_wl_pct": 0.358,
+        "playoff_wins": 29,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike Tomlin",
+      "team_slug": "pit",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Mike Tomlin",
+        "pfr_from": 2007,
+        "pfr_to": 2025,
+        "pfr_yrs": 13,
+        "reg_wins": 201,
+        "reg_losses": 126,
+        "reg_wl_pct": 0.614,
+        "playoff_wins": 201,
+        "super_bowls": 1,
+        "conf_titles": 2,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "13 years at .500+ \u2014 consistency over flash"
+        ],
+        "tf_evidence": [
+          "0.614 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "Elite W-L% (0.614) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated",
+        "13 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Arthur Smith",
+      "team_slug": "pit",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Arthur Smith",
+        "pfr_from": 2021,
+        "pfr_to": 2023,
+        "pfr_yrs": 0,
+        "reg_wins": 21,
+        "reg_losses": 30,
+        "reg_wl_pct": 0.412,
+        "playoff_wins": 21,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Teryl Austin",
+      "team_slug": "pit",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Bill Austin",
+        "pfr_from": 1966,
+        "pfr_to": 1970,
+        "pfr_yrs": 0,
+        "reg_wins": 17,
+        "reg_losses": 36,
+        "reg_wl_pct": 0.321,
+        "playoff_wins": 17,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "DeMeco Ryans",
+      "team_slug": "hou",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "DeMeco Ryans",
+        "pfr_from": 2023,
+        "pfr_to": 2026,
+        "pfr_yrs": 3,
+        "reg_wins": 38,
+        "reg_losses": 28,
+        "reg_wl_pct": 0.576,
+        "playoff_wins": 38,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 55,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Bobby Slowik",
+      "team_slug": "hou",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Matt Burke",
+      "team_slug": "hou",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Shane Steichen",
+      "team_slug": "ind",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Shane Steichen",
+        "pfr_from": 2023,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 28,
+        "reg_losses": 33,
+        "reg_wl_pct": 0.459,
+        "playoff_wins": 28,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Scottie Montgomery",
+      "team_slug": "ind",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Gus Bradley",
+      "team_slug": "ind",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Gus Bradley",
+        "pfr_from": 2013,
+        "pfr_to": 2016,
+        "pfr_yrs": 0,
+        "reg_wins": 14,
+        "reg_losses": 48,
+        "reg_wl_pct": 0.226,
+        "playoff_wins": 14,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Liam Coen",
+      "team_slug": "jax",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Liam Coen",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 1,
+        "reg_wins": 20,
+        "reg_losses": 7,
+        "reg_wl_pct": 0.741,
+        "playoff_wins": 20,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Elite W-L% (0.741) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Press Taylor",
+      "team_slug": "jax",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Zac Taylor",
+        "pfr_from": 2019,
+        "pfr_to": 2026,
+        "pfr_yrs": 2,
+        "reg_wins": 64,
+        "reg_losses": 67,
+        "reg_wl_pct": 0.489,
+        "playoff_wins": 64,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Ryan Nielsen",
+      "team_slug": "jax",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Brian Callahan",
+      "team_slug": "ten",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Brian Callahan",
+        "pfr_from": 2024,
+        "pfr_to": 2025,
+        "pfr_yrs": 0,
+        "reg_wins": 4,
+        "reg_losses": 19,
+        "reg_wl_pct": 0.174,
+        "playoff_wins": 4,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Nick Holz",
+      "team_slug": "ten",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dennard Wilson",
+      "team_slug": "ten",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "George Wilson",
+        "pfr_from": 1957,
+        "pfr_to": 1969,
+        "pfr_yrs": 1,
+        "reg_wins": 70,
+        "reg_losses": 84,
+        "reg_wl_pct": 0.455,
+        "playoff_wins": 70,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Sean Payton",
+      "team_slug": "den",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Sean Payton",
+        "pfr_from": 2006,
+        "pfr_to": 2026,
+        "pfr_yrs": 11,
+        "reg_wins": 201,
+        "reg_losses": 120,
+        "reg_wl_pct": 0.626,
+        "playoff_wins": 201,
+        "super_bowls": 1,
+        "conf_titles": 1,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "11 years at .500+ \u2014 consistency over flash"
+        ],
+        "tf_evidence": [
+          "0.626 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "Elite W-L% (0.626) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated",
+        "11 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Joe Lombardi",
+      "team_slug": "den",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Vince Lombardi",
+        "pfr_from": 1959,
+        "pfr_to": 1969,
+        "pfr_yrs": 6,
+        "reg_wins": 105,
+        "reg_losses": 35,
+        "reg_wl_pct": 0.75,
+        "playoff_wins": 105,
+        "super_bowls": 2,
+        "conf_titles": 2,
+        "championships": 5
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "0.750 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
+          "2 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??T?",
+      "role_fit_score": 70,
+      "role_fit_evidence": [
+        "Analytical \u2014 scheme design and play-calling under pressure",
+        "Winning pedigree as HC \u2014 understands full game context"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Vance Joseph",
+      "team_slug": "den",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Vance Joseph",
+        "pfr_from": 2017,
+        "pfr_to": 2018,
+        "pfr_yrs": 0,
+        "reg_wins": 11,
+        "reg_losses": 21,
+        "reg_wl_pct": 0.344,
+        "playoff_wins": 11,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Andy Reid",
+      "team_slug": "kc",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Andy Reid",
+        "pfr_from": 1999,
+        "pfr_to": 2026,
+        "pfr_yrs": 20,
+        "reg_wins": 314,
+        "reg_losses": 176,
+        "reg_wl_pct": 0.641,
+        "playoff_wins": 314,
+        "super_bowls": 3,
+        "conf_titles": 6,
+        "championships": 3
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "20 years, 0.641 W-L% \u2014 sustained excellence suggests internal drive over external validation"
+        ],
+        "tf_evidence": [
+          "0.641 W-L%, 6 conf title(s) \u2014 systematic approach, results-driven",
+          "3 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "Elite W-L% (0.641) \u2014 proven results",
+        "3 Super Bowl(s) \u2014 peak performance validated",
+        "20 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Matt Nagy",
+      "team_slug": "kc",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Matt Nagy",
+        "pfr_from": 2018,
+        "pfr_to": 2021,
+        "pfr_yrs": 2,
+        "reg_wins": 34,
+        "reg_losses": 33,
+        "reg_wl_pct": 0.507,
+        "playoff_wins": 34,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Steve Spagnuolo",
+      "team_slug": "kc",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Steve Spagnuolo",
+        "pfr_from": 2009,
+        "pfr_to": 2017,
+        "pfr_yrs": 0,
+        "reg_wins": 11,
+        "reg_losses": 41,
+        "reg_wl_pct": 0.212,
+        "playoff_wins": 11,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Pete Carroll",
+      "team_slug": "lv",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Pete Carroll",
+        "pfr_from": 1994,
+        "pfr_to": 2025,
+        "pfr_yrs": 12,
+        "reg_wins": 184,
+        "reg_losses": 145,
+        "reg_wl_pct": 0.559,
+        "playoff_wins": 184,
+        "super_bowls": 1,
+        "conf_titles": 2,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "12 years at .500+ \u2014 consistency over flash"
+        ],
+        "tf_evidence": [
+          "0.559 W-L% over 12 years \u2014 analytical consistency",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "1 Super Bowl(s) \u2014 peak performance validated",
+        "12 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Scott Turner",
+      "team_slug": "lv",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Norv Turner",
+        "pfr_from": 1994,
+        "pfr_to": 2012,
+        "pfr_yrs": 4,
+        "reg_wins": 118,
+        "reg_losses": 126,
+        "reg_wl_pct": 0.484,
+        "playoff_wins": 118,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Patrick Graham",
+      "team_slug": "lv",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Otto Graham",
+        "pfr_from": 1966,
+        "pfr_to": 1968,
+        "pfr_yrs": 0,
+        "reg_wins": 17,
+        "reg_losses": 22,
+        "reg_wl_pct": 0.436,
+        "playoff_wins": 17,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jim Harbaugh",
+      "team_slug": "lac",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Jim Harbaugh",
+        "pfr_from": 2011,
+        "pfr_to": 2026,
+        "pfr_yrs": 5,
+        "reg_wins": 72,
+        "reg_losses": 44,
+        "reg_wl_pct": 0.62,
+        "playoff_wins": 72,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "0.620 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??T?",
+      "role_fit_score": 85,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Elite W-L% (0.620) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Greg Roman",
+      "team_slug": "lac",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jesse Minter",
+      "team_slug": "lac",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Jesse Minter",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 4,
+        "reg_losses": 6,
+        "reg_wl_pct": 0.4,
+        "playoff_wins": 4,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike McCarthy",
+      "team_slug": "dal",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Mike McCarthy",
+        "pfr_from": 2006,
+        "pfr_to": 2026,
+        "pfr_yrs": 12,
+        "reg_wins": 191,
+        "reg_losses": 126,
+        "reg_wl_pct": 0.602,
+        "playoff_wins": 191,
+        "super_bowls": 1,
+        "conf_titles": 1,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "12 years at .500+ \u2014 consistency over flash"
+        ],
+        "tf_evidence": [
+          "0.602 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Internal drive \u2014 less susceptible to media/crowd pressure",
+        "Elite W-L% (0.602) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated",
+        "12 years experience \u2014 battle-tested"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Brian Schottenheimer",
+      "team_slug": "dal",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Brian Schottenheimer",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 11,
+        "reg_losses": 15,
+        "reg_wl_pct": 0.426,
+        "playoff_wins": 11,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike Zimmer",
+      "team_slug": "dal",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Mike Zimmer",
+        "pfr_from": 2014,
+        "pfr_to": 2021,
+        "pfr_yrs": 3,
+        "reg_wins": 74,
+        "reg_losses": 59,
+        "reg_wl_pct": 0.556,
+        "playoff_wins": 74,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 60,
+      "role_fit_evidence": [
+        "Winning pedigree \u2014 understands what it takes to win"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Brian Daboll",
+      "team_slug": "nyg",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Brian Daboll",
+        "pfr_from": 2022,
+        "pfr_to": 2025,
+        "pfr_yrs": 1,
+        "reg_wins": 21,
+        "reg_losses": 41,
+        "reg_wl_pct": 0.341,
+        "playoff_wins": 21,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike Kafka",
+      "team_slug": "nyg",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Mike Kafka",
+        "pfr_from": 2025,
+        "pfr_to": 2025,
+        "pfr_yrs": 0,
+        "reg_wins": 2,
+        "reg_losses": 5,
+        "reg_wl_pct": 0.286,
+        "playoff_wins": 2,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Shane Bowen",
+      "team_slug": "nyg",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Nick Sirianni",
+      "team_slug": "phi",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Nick Sirianni",
+        "pfr_from": 2021,
+        "pfr_to": 2026,
+        "pfr_yrs": 5,
+        "reg_wins": 67,
+        "reg_losses": 37,
+        "reg_wl_pct": 0.644,
+        "playoff_wins": 67,
+        "super_bowls": 1,
+        "conf_titles": 2,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "0.644 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Elite W-L% (0.644) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kellen Moore",
+      "team_slug": "phi",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Kellen Moore",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 9,
+        "reg_losses": 17,
+        "reg_wl_pct": 0.346,
+        "playoff_wins": 9,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Vic Fangio",
+      "team_slug": "phi",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Vic Fangio",
+        "pfr_from": 2019,
+        "pfr_to": 2021,
+        "pfr_yrs": 0,
+        "reg_wins": 19,
+        "reg_losses": 30,
+        "reg_wl_pct": 0.388,
+        "playoff_wins": 19,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dan Quinn",
+      "team_slug": "wsh",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Dan Quinn",
+        "pfr_from": 2015,
+        "pfr_to": 2026,
+        "pfr_yrs": 3,
+        "reg_wins": 68,
+        "reg_losses": 67,
+        "reg_wl_pct": 0.504,
+        "playoff_wins": 68,
+        "super_bowls": 0,
+        "conf_titles": 1,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 55,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Klint Kubiak",
+      "team_slug": "wsh",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Klint Kubiak",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 4,
+        "reg_losses": 6,
+        "reg_wl_pct": 0.4,
+        "playoff_wins": 4,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Joe Whitt Jr.",
+      "team_slug": "wsh",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Ben Johnson",
+      "team_slug": "chi",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Ben Johnson",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 1,
+        "reg_wins": 19,
+        "reg_losses": 9,
+        "reg_wl_pct": 0.679,
+        "playoff_wins": 19,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Elite W-L% (0.679) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Thomas Brown",
+      "team_slug": "chi",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Thomas Brown",
+        "pfr_from": 2024,
+        "pfr_to": 2024,
+        "pfr_yrs": 0,
+        "reg_wins": 1,
+        "reg_losses": 4,
+        "reg_wl_pct": 0.2,
+        "playoff_wins": 1,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dennis Allen",
+      "team_slug": "chi",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Dennis Allen",
+        "pfr_from": 2012,
+        "pfr_to": 2024,
+        "pfr_yrs": 0,
+        "reg_wins": 26,
+        "reg_losses": 53,
+        "reg_wl_pct": 0.329,
+        "playoff_wins": 26,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dan Campbell",
+      "team_slug": "det",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Dan Campbell",
+        "pfr_from": 2015,
+        "pfr_to": 2026,
+        "pfr_yrs": 2,
+        "reg_wins": 62,
+        "reg_losses": 47,
+        "reg_wl_pct": 0.568,
+        "playoff_wins": 62,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 55,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "John Morton",
+      "team_slug": "det",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Aaron Glenn",
+      "team_slug": "det",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Aaron Glenn",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 5,
+        "reg_losses": 22,
+        "reg_wl_pct": 0.185,
+        "playoff_wins": 5,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Matt LaFleur",
+      "team_slug": "gb",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Matt LaFleur",
+        "pfr_from": 2019,
+        "pfr_to": 2026,
+        "pfr_yrs": 6,
+        "reg_wins": 85,
+        "reg_losses": 50,
+        "reg_wl_pct": 0.629,
+        "playoff_wins": 85,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Elite W-L% (0.629) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Adam Stenavich",
+      "team_slug": "gb",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jeff Hafley",
+      "team_slug": "gb",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Jeff Hafley",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 1,
+        "reg_losses": 8,
+        "reg_wl_pct": 0.111,
+        "playoff_wins": 1,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kevin O'Connell",
+      "team_slug": "min",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Kevin O'Connell",
+        "pfr_from": 2022,
+        "pfr_to": 2026,
+        "pfr_yrs": 2,
+        "reg_wins": 50,
+        "reg_losses": 29,
+        "reg_wl_pct": 0.633,
+        "playoff_wins": 50,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Elite W-L% (0.633) \u2014 proven results"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Wes Phillips",
+      "team_slug": "min",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Bum Phillips",
+        "pfr_from": 1975,
+        "pfr_to": 1985,
+        "pfr_yrs": 3,
+        "reg_wins": 86,
+        "reg_losses": 80,
+        "reg_wl_pct": 0.518,
+        "playoff_wins": 86,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Brian Flores",
+      "team_slug": "min",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Brian Flores",
+        "pfr_from": 2019,
+        "pfr_to": 2021,
+        "pfr_yrs": 0,
+        "reg_wins": 24,
+        "reg_losses": 25,
+        "reg_wl_pct": 0.49,
+        "playoff_wins": 24,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Raheem Morris",
+      "team_slug": "atl",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Raheem Morris",
+        "pfr_from": 2009,
+        "pfr_to": 2025,
+        "pfr_yrs": 0,
+        "reg_wins": 37,
+        "reg_losses": 56,
+        "reg_wl_pct": 0.398,
+        "playoff_wins": 37,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Zac Robinson",
+      "team_slug": "atl",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "John Robinson",
+        "pfr_from": 1983,
+        "pfr_to": 1991,
+        "pfr_yrs": 6,
+        "reg_wins": 79,
+        "reg_losses": 74,
+        "reg_wl_pct": 0.516,
+        "playoff_wins": 79,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jimmy Lake",
+      "team_slug": "atl",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Dave Canales",
+      "team_slug": "car",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Dave Canales",
+        "pfr_from": 2024,
+        "pfr_to": 2026,
+        "pfr_yrs": 1,
+        "reg_wins": 17,
+        "reg_losses": 27,
+        "reg_wl_pct": 0.386,
+        "playoff_wins": 17,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Brad Idzik",
+      "team_slug": "car",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Ejiro Evero",
+      "team_slug": "car",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kellen Moore",
+      "team_slug": "no",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Kellen Moore",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 9,
+        "reg_losses": 17,
+        "reg_wl_pct": 0.346,
+        "playoff_wins": 9,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Klint Kubiak",
+      "team_slug": "no",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Klint Kubiak",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 4,
+        "reg_losses": 6,
+        "reg_wl_pct": 0.4,
+        "playoff_wins": 4,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Joe Woods",
+      "team_slug": "no",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Todd Bowles",
+      "team_slug": "tb",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Todd Bowles",
+        "pfr_from": 2011,
+        "pfr_to": 2026,
+        "pfr_yrs": 3,
+        "reg_wins": 65,
+        "reg_losses": 83,
+        "reg_wl_pct": 0.439,
+        "playoff_wins": 65,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Liam Coen",
+      "team_slug": "tb",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Liam Coen",
+        "pfr_from": 2025,
+        "pfr_to": 2026,
+        "pfr_yrs": 1,
+        "reg_wins": 20,
+        "reg_losses": 7,
+        "reg_wl_pct": 0.741,
+        "playoff_wins": 20,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 75,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively",
+        "Winning pedigree as HC \u2014 understands full game context"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kacy Rodgers",
+      "team_slug": "tb",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Jonathan Gannon",
+      "team_slug": "ari",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Jonathan Gannon",
+        "pfr_from": 2023,
+        "pfr_to": 2025,
+        "pfr_yrs": 0,
+        "reg_wins": 15,
+        "reg_losses": 36,
+        "reg_wl_pct": 0.294,
+        "playoff_wins": 15,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "E???",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Drew Petzing",
+      "team_slug": "ari",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Nick Rallis",
+      "team_slug": "ari",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Sean McVay",
+      "team_slug": "lar",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Sean McVay",
+        "pfr_from": 2017,
+        "pfr_to": 2026,
+        "pfr_yrs": 7,
+        "reg_wins": 108,
+        "reg_losses": 67,
+        "reg_wl_pct": 0.617,
+        "playoff_wins": 108,
+        "super_bowls": 1,
+        "conf_titles": 2,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "0.617 W-L%, 2 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??T?",
+      "role_fit_score": 100,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Elite W-L% (0.617) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike LaFleur",
+      "team_slug": "lar",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Mike LaFleur",
+        "pfr_from": 2026,
+        "pfr_to": 2026,
+        "pfr_yrs": 0,
+        "reg_wins": 3,
+        "reg_losses": 7,
+        "reg_wl_pct": 0.3,
+        "playoff_wins": 3,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Chris Shula",
+      "team_slug": "lar",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": {
+        "name": "Don Shula",
+        "pfr_from": 1963,
+        "pfr_to": 1995,
+        "pfr_yrs": 19,
+        "reg_wins": 347,
+        "reg_losses": 173,
+        "reg_wl_pct": 0.667,
+        "playoff_wins": 347,
+        "super_bowls": 2,
+        "conf_titles": 6,
+        "championships": 2
+      },
+      "mbti_signals": {
+        "ie": "I",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "19 years, 0.667 W-L% \u2014 sustained excellence suggests internal drive over external validation"
+        ],
+        "tf_evidence": [
+          "0.667 W-L%, 6 conf title(s) \u2014 systematic approach, results-driven",
+          "2 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "I?T?",
+      "role_fit_score": 90,
+      "role_fit_evidence": [
+        "Analytical profile \u2014 scheme recognition and in-game adjustments",
+        "Internal focus \u2014 preparation over reaction",
+        "Winning pedigree \u2014 understands what it takes to win"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Kyle Shanahan",
+      "team_slug": "sf",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Kyle Shanahan",
+        "pfr_from": 2017,
+        "pfr_to": 2026,
+        "pfr_yrs": 5,
+        "reg_wins": 99,
+        "reg_losses": 73,
+        "reg_wl_pct": 0.576,
+        "playoff_wins": 99,
+        "super_bowls": 0,
+        "conf_titles": 2,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": null,
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "??F?",
+      "role_fit_score": 50,
+      "role_fit_evidence": [
+        "Feeling profile may struggle with cold analytical decisions under pressure"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike McDaniel",
+      "team_slug": "sf",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": {
+        "name": "Mike McDaniel",
+        "pfr_from": 2022,
+        "pfr_to": 2025,
+        "pfr_yrs": 2,
+        "reg_wins": 35,
+        "reg_losses": 35,
+        "reg_wl_pct": 0.5,
+        "playoff_wins": 35,
+        "super_bowls": 0,
+        "conf_titles": 0,
+        "championships": 0
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "F",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "Multiple short tenures \u2014 possible emotional volatility or poor fit pattern"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?F?",
+      "role_fit_score": 65,
+      "role_fit_evidence": [
+        "Extrovert profile \u2014 communicates scheme to QB and skill players effectively"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Nick Sorensen",
+      "team_slug": "sf",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Mike Macdonald",
+      "team_slug": "sea",
+      "role": "hc",
+      "role_label": "Head Coach",
+      "pfr_record": {
+        "name": "Mike Macdonald",
+        "pfr_from": 2024,
+        "pfr_to": 2026,
+        "pfr_yrs": 1,
+        "reg_wins": 33,
+        "reg_losses": 14,
+        "reg_wl_pct": 0.702,
+        "playoff_wins": 33,
+        "super_bowls": 1,
+        "conf_titles": 1,
+        "championships": 1
+      },
+      "mbti_signals": {
+        "ie": "E",
+        "tf": "T",
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [
+          "Early career \u2014 insufficient data for I/E inference"
+        ],
+        "tf_evidence": [
+          "0.702 W-L%, 1 conf title(s) \u2014 systematic approach, results-driven",
+          "1 Super Bowl win(s) \u2014 elite systematic execution under pressure"
+        ],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "medium"
+      },
+      "mbti_type": "E?T?",
+      "role_fit_score": 95,
+      "role_fit_evidence": [
+        "Analytical profile fits HC decision-making demands",
+        "Elite W-L% (0.702) \u2014 proven results",
+        "1 Super Bowl(s) \u2014 peak performance validated"
+      ],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Ryan Grubb",
+      "team_slug": "sea",
+      "role": "oc",
+      "role_label": "Offensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    },
+    {
+      "name": "Aden Durde",
+      "team_slug": "sea",
+      "role": "dc",
+      "role_label": "Defensive Coordinator",
+      "pfr_record": null,
+      "mbti_signals": {
+        "ie": null,
+        "tf": null,
+        "sn": null,
+        "jp": null,
+        "ie_evidence": [],
+        "tf_evidence": [],
+        "sn_evidence": [
+          "Accumulating \u2014 needs week-by-week stat variance data"
+        ],
+        "jp_evidence": [
+          "Accumulating \u2014 needs press conference language patterns"
+        ],
+        "confidence": "low"
+      },
+      "mbti_type": "????",
+      "role_fit_score": 50,
+      "role_fit_evidence": [],
+      "last_updated": "2026-11-18 20:03:47 UTC",
+      "pfr_source": "https://www.pro-football-reference.com/coaches/"
+    }
+  ]
 }
