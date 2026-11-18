@@ -69,8 +69,172 @@
 
 <script src="../components/nav.js"></script>
 <script>
-const ROOT     = '../';
+const ROOT      = '../';
 const PAGE_SIZE = 60;
+
+// ── MBTI COMPATIBILITY (same logic as coaches page) ───────────────────────────
+function compatScore(typeA, typeB) {
+  if (!typeA || !typeB) return { score: 50, axes: [], label: '?' };
+  const parse = t => ({
+    ie: t[0] !== '?' ? t[0] : null,
+    sn: t[1] !== '?' ? t[1] : null,
+    tf: t[2] !== '?' ? t[2] : null,
+    jp: t[3] !== '?' ? t[3] : null,
+  });
+  const a = parse(typeA), b = parse(typeB);
+  let score = 50;
+  const axes = [];
+  if (a.ie && b.ie) {
+    if (a.ie === b.ie) { axes.push({ axis:'I/E', result:'match', note:`Both ${a.ie}` }); score += 5; }
+    else               { axes.push({ axis:'I/E', result:'neutral', note:`${a.ie}↔${b.ie}` }); }
+  }
+  if (a.sn && b.sn) {
+    if (a.sn === b.sn) { axes.push({ axis:'S/N', result:'match', note:`Both ${a.sn}` }); score += 10; }
+    else               { axes.push({ axis:'S/N', result:'clash', note:`${a.sn}↔${b.sn} scheme friction` }); score -= 10; }
+  }
+  if (a.tf && b.tf) {
+    if (a.tf === 'T' && b.tf === 'F') { axes.push({ axis:'T/F', result:'clash', note:'T↔F accountability tension' }); score -= 15; }
+    else if (a.tf === 'F' && b.tf === 'T') { axes.push({ axis:'T/F', result:'neutral', note:'F↔T may outgrow system' }); score -= 5; }
+    else { axes.push({ axis:'T/F', result:'match', note:`Both ${a.tf}` }); score += 10; }
+  }
+  if (a.jp && b.jp) {
+    if (a.jp === 'J' && b.jp === 'P') { axes.push({ axis:'J/P', result:'clash', note:'J↔P structure vs freedom' }); score -= 10; }
+    else if (a.jp === 'P' && b.jp === 'J') { axes.push({ axis:'J/P', result:'neutral', note:'P↔J player anchors' }); }
+    else { axes.push({ axis:'J/P', result:'match', note:`Both ${a.jp}` }); score += 5; }
+  }
+  score = Math.max(0, Math.min(100, score));
+  return { score, axes, label: score >= 70 ? 'Strong fit' : score >= 50 ? 'Workable' : 'Friction risk' };
+}
+
+// Position communication map — who does this position directly talk to?
+const COMM_MAP = {
+  QB:  ['WR','TE','RB','OL'],
+  WR:  ['QB'],
+  TE:  ['QB'],
+  RB:  ['QB','OL'],
+  OL:  ['QB','RB'],
+  LB:  ['DL','DB'],
+  DB:  ['LB','DB'],
+  DL:  ['LB'],
+};
+// Which coach talks directly to this position group?
+const COACH_MAP = {
+  QB:'oc', WR:'oc', TE:'oc', RB:'oc', OL:'oc',
+  LB:'dc', DB:'dc', DL:'dc',
+};
+// HC talks directly to QB and MLB (top LB by skill)
+const HC_DIRECT = ['QB','LB'];
+
+function ringClass(s) {
+  if (s >= 70) return 'ring-green';
+  if (s >= 50) return 'ring-yellow';
+  return 'ring-red';
+}
+
+function axisHtml(axes) {
+  return axes.slice(0,3).map(a => {
+    const cls = a.result === 'match' ? 'axis-match' : a.result === 'clash' ? 'axis-clash' : '';
+    return `<span class="axis-pill ${cls}">${a.axis} ${a.result}</span>`;
+  }).join(' ');
+}
+
+function compatRowHtml(label, sublabel, typeB, typeA, headshot) {
+  const c   = compatScore(typeA, typeB);
+  const rc  = ringClass(c.score);
+  const img = (headshot && headshot !== 'nan')
+    ? `<img src="${headshot}" style="width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.visibility='hidden'">`
+    : `<span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:inline-block;flex-shrink:0"></span>`;
+  return `
+    <div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
+      <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0">${c.score}</div>
+      ${img}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:0.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}</div>
+        <div style="font-size:0.68rem;color:var(--text-muted)">${sublabel}</div>
+      </div>
+      <div style="display:flex;gap:0.25rem;flex-wrap:wrap;justify-content:flex-end">${axisHtml(c.axes)}</div>
+    </div>`;
+}
+
+function buildExpandedPanel(player, teamPlayers, teamCoaches) {
+  const pos     = player.position;
+  const myType  = player.layer4_personality?.mbti_type || '????';
+  const commPos = COMM_MAP[pos] || [];
+  const coachRole = COACH_MAP[pos];
+  const isHCDirect = HC_DIRECT.includes(pos);
+
+  const hc  = teamCoaches.find(c => c.role === 'hc');
+  const oc  = teamCoaches.find(c => c.role === 'oc');
+  const dc  = teamCoaches.find(c => c.role === 'dc');
+  const coordinator = coachRole === 'oc' ? oc : coachRole === 'dc' ? dc : null;
+
+  // Coach chain rows
+  let coachRows = '';
+  if (isHCDirect && hc) {
+    coachRows += compatRowHtml(hc.name, `HC · ${hc.mbti_type}`, myType, hc.mbti_type, null);
+  }
+  if (coordinator) {
+    coachRows += compatRowHtml(coordinator.name, `${coachRole.toUpperCase()} · ${coordinator.mbti_type}`, myType, coordinator.mbti_type, null);
+  }
+  // If not HC_DIRECT but HC exists, still show HC one level up
+  if (!isHCDirect && hc && !coachRows) {
+    coachRows += compatRowHtml(hc.name, `HC · ${hc.mbti_type}`, myType, hc.mbti_type, null);
+  }
+
+  // Communication partner rows — sorted by compat score desc
+  let partnerRows = '';
+  if (commPos.length) {
+    const partners = teamPlayers
+      .filter(p => p.name !== player.name && commPos.includes(p.position))
+      .map(p => ({ p, c: compatScore(myType, p.layer4_personality?.mbti_type || '????') }))
+      .sort((a, b) => b.c.score - a.c.score);
+
+    partnerRows = partners.map(({ p, c }) => {
+      const pType = p.layer4_personality?.mbti_type || '????';
+      const rc    = ringClass(c.score);
+      const img   = (p.headshot && p.headshot !== 'nan')
+        ? `<img src="${p.headshot}" style="width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.visibility='hidden'">`
+        : `<span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:inline-block;flex-shrink:0"></span>`;
+      return `
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
+          <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0">${c.score}</div>
+          ${img}
+          <div style="flex:1;min-width:0">
+            <div style="font-size:0.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+            <div style="font-size:0.68rem;color:var(--text-muted)">${p.position} · ${pType}</div>
+          </div>
+          <div style="display:flex;gap:0.25rem;flex-wrap:wrap;justify-content:flex-end">${axisHtml(c.axes)}</div>
+        </div>`;
+    }).join('');
+  }
+
+  const noCoach    = !coachRows    ? '<div style="font-size:0.75rem;color:var(--text-muted)">No coach data.</div>' : '';
+  const noPartners = !partnerRows  ? '<div style="font-size:0.75rem;color:var(--text-muted)">No communication partners found.</div>' : '';
+
+  return `
+    <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)">
+      <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.4rem">Coach Chain</div>
+      ${coachRows}${noCoach}
+      ${commPos.length ? `
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0.75rem 0 0.4rem">Communication Partners</div>
+        ${partnerRows}${noPartners}
+      ` : ''}
+      <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">Types inferred from career data. ${myType} vs partners.</div>
+    </div>`;
+}
+
+// ── RING + AXIS STYLES (injected once) ───────────────────────────────────────
+const _style = document.createElement('style');
+_style.textContent = `
+  .compat-ring.ring-green { background:rgba(74,222,128,0.18);color:var(--green);border:1.5px solid var(--green); }
+  .compat-ring.ring-yellow { background:rgba(250,204,21,0.15);color:var(--gold);border:1.5px solid var(--gold); }
+  .compat-ring.ring-red { background:rgba(248,113,113,0.15);color:var(--red);border:1.5px solid var(--red); }
+  .axis-pill { font-size:0.6rem;padding:0.1rem 0.3rem;border-radius:3px;background:var(--bg3);color:var(--text-muted);white-space:nowrap; }
+  .axis-match { background:rgba(74,222,128,0.12);color:var(--green); }
+  .axis-clash { background:rgba(248,113,113,0.12);color:var(--red); }
+  .player-card-wrap.expanded { border-color:var(--gold); }
+`;
+document.head.appendChild(_style);
 
 const TEAM_NAMES = {
   'BUF':'Buffalo Bills','MIA':'Miami Dolphins','NE':'New England Patriots',
@@ -125,6 +289,9 @@ function hungerScore(p) {
   return p.draft?.hunger_seed ?? null;
 }
 
+// Safe player ID for DOM
+function pid(p) { return 'p-' + p.name.replace(/[^a-zA-Z0-9]/g,'_'); }
+
 function renderCard(p) {
   const abbr    = (p.team || '').toUpperCase();
   const slug    = SLUG_MAP[abbr] || abbr.toLowerCase();
@@ -136,6 +303,8 @@ function renderCard(p) {
   const age     = p.layer1_body?.age ? p.layer1_body.age.toFixed(1) : '—';
   const exp     = p.layer1_body?.years_exp ?? '—';
   const snap    = p.layer1_body?.snap_pct != null ? Math.round(p.layer1_body.snap_pct * 100) + '%' : '—';
+  const mbti    = p.layer4_personality?.mbti_type;
+  const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
 
   const skillBar = skill !== null ? `
     <div class="progress-wrap" style="margin-bottom:0.2rem">
@@ -158,8 +327,9 @@ function renderCard(p) {
       <span class="progress-label" style="font-size:0.72rem">${hunger}</span>
     </div>` : '';
 
+  const id = pid(p);
   return `
-    <div class="card card-sm" style="display:flex;flex-direction:column;gap:0.6rem">
+    <div class="card card-sm player-card-wrap" id="${id}" style="display:flex;flex-direction:column;gap:0.6rem;cursor:${hasCompat?'pointer':'default'}" ${hasCompat ? `onclick="toggleCompat('${id}')"` : ''}>
       <div class="player-header">
         <img class="player-headshot" src="${p.headshot || ''}"
           onerror="this.src=''" alt="${p.name}">
@@ -177,16 +347,51 @@ function renderCard(p) {
         <div style="text-align:right;flex-shrink:0">
           ${skill !== null ? `<div class="score ${scoreClass(skill,100)}" style="font-size:0.72rem">${skill.toFixed(0)}</div>` : ''}
           <div class="text-muted" style="font-size:0.65rem;margin-top:0.2rem">Snap ${snap}</div>
+          ${mbti && hasCompat ? `<div style="font-size:0.62rem;color:var(--gold);margin-top:0.2rem;font-weight:700">${mbti}</div>` : ''}
         </div>
       </div>
       ${skillBar}${bodyBar}${hungerBar}
       ${p.layer1_body?.age_label ? `<div class="text-muted" style="font-size:0.7rem">${p.layer1_body.age_label.replace(/_/g,' ')} &middot; ${p.layer1_body.career_label?.replace(/_/g,' ') || ''}</div>` : ''}
+      <div id="${id}-compat" style="display:none"></div>
     </div>`;
 }
 
 let allPlayers   = [];
 let filtered     = [];
 let displayCount = PAGE_SIZE;
+let _playersByTeam = {};
+let _coachesByTeam = {};
+
+const ABBR_TO_SLUG = {
+  'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+  'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+  'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+  'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+  'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+  'SF':'sf','SEA':'sea'
+};
+
+function toggleCompat(id) {
+  const wrap = document.getElementById(id);
+  const panel = document.getElementById(id + '-compat');
+  if (!wrap || !panel) return;
+  const isOpen = panel.style.display !== 'none';
+  if (isOpen) {
+    panel.style.display = 'none';
+    wrap.classList.remove('expanded');
+    return;
+  }
+  // Find the player by id
+  const player = allPlayers.find(p => pid(p) === id);
+  if (!player) return;
+  const abbr       = (player.team || '').toUpperCase();
+  const slug       = ABBR_TO_SLUG[abbr] || abbr.toLowerCase();
+  const teamPlayers = _playersByTeam[abbr] || [];
+  const teamCoaches = _coachesByTeam[slug] || [];
+  panel.innerHTML  = buildExpandedPanel(player, teamPlayers, teamCoaches);
+  panel.style.display = 'block';
+  wrap.classList.add('expanded');
+}
 
 function applyFilters() {
   const q      = document.getElementById('search').value.toLowerCase().trim();
@@ -235,8 +440,23 @@ function loadMore() {
 
 async function init() {
   const bust = `?v=${Date.now()}`;
-  const data = await fetch(`${ROOT}data/players.json${bust}`).then(r => r.json()).catch(e => { console.error('players.json:', e); return []; });
-  allPlayers = Array.isArray(data) ? data : (data.players || []);
+  const [playerData, coachData] = await Promise.all([
+    fetch(`${ROOT}data/players.json${bust}`).then(r => r.json()).catch(() => []),
+    fetch(`${ROOT}data/coaches.json${bust}`).then(r => r.json()).catch(() => ({ coaches: [] })),
+  ]);
+  allPlayers = Array.isArray(playerData) ? playerData : (playerData.players || []);
+
+  // Index players by team abbr
+  for (const p of allPlayers) {
+    const abbr = (p.team || '').toUpperCase();
+    if (!_playersByTeam[abbr]) _playersByTeam[abbr] = [];
+    _playersByTeam[abbr].push(p);
+  }
+  // Index coaches by team slug
+  for (const c of (coachData.coaches || [])) {
+    if (!_coachesByTeam[c.team_slug]) _coachesByTeam[c.team_slug] = [];
+    _coachesByTeam[c.team_slug].push(c);
+  }
 
   // Populate team dropdown
   const teams = [...new Set(allPlayers.map(p => (p.team || '').toUpperCase()).filter(Boolean))].sort();
