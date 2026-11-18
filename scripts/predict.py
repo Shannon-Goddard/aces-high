@@ -189,6 +189,21 @@ def team_role_fit_score(players_on_team):
     return round(1.0 + max(-0.10, min(0.10, avg_mod)), 4)
 
 
+def team_hc_market_fit(slug, hc_index):
+    """
+    Read coach_market_fit_score from the HC entry for this team.
+    Returns a multiplier: 1 + (score - 50) / 1667  (±3% max).
+    Defaults to 1.0 (neutral) if no data.
+    """
+    hc = hc_index.get(slug)
+    if not hc:
+        return 1.0
+    score = hc.get('coach_market_fit_score')
+    if score is None:
+        return 1.0
+    return round(1.0 + (score - 50.0) / 1667.0, 4)
+
+
 def team_momentum_score(players_on_team):
     """
     Snap-weighted momentum score from layer2_skill.momentum_score.
@@ -330,17 +345,21 @@ def normalize(score, lo=NORM_MIN, hi=NORM_MAX):
     return round(max(0.0, min(100.0, (score - lo) / (hi - lo) * 100.0)), 1)
 
 
-def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_index=None):
+def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_index=None,
+                   hc_index=None):
     """
     Compute a 0-100 normalized score for a team.
     weather_mods:   dict from get_weather_modifiers()
     practice_index: dict from practice.json players keyed by 'slug:name'
+    hc_index:       dict slug → HC coach entry (for market fit modifier)
     Returns dict with component breakdown.
     """
     if weather_mods is None:
         weather_mods = {'passing_mult': 1.0, 'kicker_mult': 1.0, 'dome': False, 'cold_joint_flag': False}
     if practice_index is None:
         practice_index = {}
+    if hc_index is None:
+        hc_index = {}
 
     players      = team_index.get(slug, [])
     body         = team_body_score(players)
@@ -369,8 +388,11 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     # Personality compat modifier: (compat - 50) / 500 = ±10% max
     compat_mult = 1.0 + (compat - 50.0) / 500.0
 
+    # HC market fit modifier: ±3% max — introvert in high-pressure market pays structural drain
+    hc_market_mult = team_hc_market_fit(slug, hc_index)
+
     # Role fit drain modifier: ±10% max, veteran Poor Fit compounds over time
-    # Both personality multipliers applied together before normalization
+    # All personality multipliers applied together before normalization
     raw = (
         body              * WEIGHTS['body'] +
         adjusted_skill    * WEIGHTS['skill'] +
@@ -379,7 +401,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         silence * 100     * WEIGHTS['silence_bonus'] +
         injury            * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
-    ) * compat_mult * role_fit_mult
+    ) * compat_mult * role_fit_mult * hc_market_mult
     raw = max(0.0, min(100.0, raw))
     composite = normalize(raw)
 
@@ -394,6 +416,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "compat":             round(compat, 1),
         "compat_mult":        round(compat_mult, 4),
         "role_fit_mult":      round(role_fit_mult, 4),
+        "hc_market_mult":     round(hc_market_mult, 4),
         "injury_penalty":     round(injury, 1),
         "joint_penalty":      round(joint_pen, 1),
         "silence_bonus":      bool(silence),
@@ -552,7 +575,7 @@ def apply_line_movement(confidence, edge, pick, home_team, line_movement):
 
 
 def predict_game(game, team_index, news_index, weather_index=None, practice_index=None,
-                 existing_predictions=None):
+                 existing_predictions=None, hc_index=None):
     """Generate a prediction for a single game."""
     if weather_index is None:
         weather_index = {}
@@ -560,6 +583,8 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
         practice_index = {}
     if existing_predictions is None:
         existing_predictions = []
+    if hc_index is None:
+        hc_index = {}
 
     home = game['home_team']
     away = game['away_team']
@@ -570,8 +595,8 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
         return None
 
     weather_mods = get_weather_modifiers(game['game_id'], weather_index)
-    home_data = raw_team_score(home_slug, team_index, news_index, weather_mods, practice_index)
-    away_data = raw_team_score(away_slug, team_index, news_index, weather_mods, practice_index)
+    home_data = raw_team_score(home_slug, team_index, news_index, weather_mods, practice_index, hc_index)
+    away_data = raw_team_score(away_slug, team_index, news_index, weather_mods, practice_index, hc_index)
 
     spread = game['consensus'].get('spread') or 0.0
     edge = spread_to_implied_edge(spread, home_data['composite'], away_data['composite'])
@@ -665,6 +690,7 @@ def main():
     weather_data   = load('weather.json')
     practice_data  = load('practice.json')
     existing       = load('predictions.json')
+    coaches_data   = load('coaches.json')
     metadata       = load('metadata.json')
 
     # Build indexes
@@ -672,6 +698,12 @@ def main():
     news_index     = {t['team_slug']: t for t in news_data.get('news', [])}
     weather_index  = weather_data.get('games', {})
     practice_index = practice_data.get('players', {})
+    # HC index: slug → HC coach entry (for market fit modifier)
+    hc_index       = {
+        c['team_slug']: c
+        for c in coaches_data.get('coaches', [])
+        if c.get('role') == 'hc'
+    }
 
     # Track existing game_ids to avoid duplicates (skip if reset)
     existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
@@ -689,7 +721,8 @@ def main():
             continue
 
         pred = predict_game(game, team_index, news_index, weather_index, practice_index,
-                            existing_predictions=base_predictions + new_predictions)
+                            existing_predictions=base_predictions + new_predictions,
+                            hc_index=hc_index)
         if pred:
             new_predictions.append(pred)
 

@@ -499,6 +499,13 @@ function renderDetail(slug, coachesByTeam, playersBySlug) {
               onclick="event.stopPropagation();showMbtiPopup(this,${JSON.stringify(sig).replace(/"/g,'&quot;')},'${coach.name.replace(/'/g,"\\'")}','${type}')"
             >${type}</span>
             <span style="font-size:0.72rem;color:var(--text-muted)">fit ${coach.role_fit_score}</span>
+            ${coach.role === 'hc' && coach.coach_market_fit_score != null ? `
+              <span style="font-size:0.68rem;padding:0.1rem 0.4rem;border-radius:3px;font-weight:700;
+                background:${coach.coach_market_fit_score >= 65 ? 'rgba(74,222,128,0.12)' : coach.coach_market_fit_score >= 45 ? 'rgba(250,204,21,0.10)' : 'rgba(248,113,113,0.12)'};
+                color:${coach.coach_market_fit_score >= 65 ? 'var(--green)' : coach.coach_market_fit_score >= 45 ? 'var(--gold)' : 'var(--red)'};"
+                title="Market fit: ${(coach.coach_market_fit_evidence || []).join(' | ')}"
+              >mkt ${coach.coach_market_fit_score}</span>
+            ` : ''}
           </div>
         </div>
       </div>`;

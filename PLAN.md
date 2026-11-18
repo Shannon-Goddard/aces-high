@@ -454,6 +454,7 @@ itself before we add more signals. Wrong order = we build on sand.
 | Coordinator change invalidates role fit | A player's role fit score is scheme-specific — new OC means new demands, 3-week reset is honest | 2026 |
 | Coordinator change detection via staff diff | No external API needed — diff CURRENT_STAFF against previous coaches.json on each weekly run | 2026 |
 | Coach market fit as structural drain | An introverted HC in a high-media market pays the same energy tax an INFJ manager does — it's real and nobody tracks it | 2026 |
+| Market pressure as static table | Nielsen DMA + ownership volatility + media scrutiny seeded manually — swap with live data when available | 2026 |
 | Blind spot auto-population on wrong predictions | A wrong prediction with captured reasoning is the most valuable data point in the system | 2026 |
 
 ---
@@ -484,7 +485,7 @@ itself before we add more signals. Wrong order = we build on sand.
 11. Snap% drop early warning — losing snaps without a report is a signal ✅ Live
 12. Divisional familiarity modifier — second matchup tightens, underdog covers more ✅ Live
 13. Coordinator change tracker — scheme transition resets role fit for 3 weeks ✅ Live
-14. Coach market fit — introvert HC in high-media market pays structural energy tax *(planned)*
+14. Coach market fit — introvert HC in high-media market pays structural energy tax ✅ Live
 15. Relationship web — personal connections indexed and applied to matchups *(planned)*
 16. Private vs public accountability as coach scoring variable *(planned)*
 17. Flip conditions — what would change our prediction before kickoff

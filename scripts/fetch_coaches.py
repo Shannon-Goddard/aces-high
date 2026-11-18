@@ -68,6 +68,23 @@ CURRENT_STAFF = {
 
 ROLE_LABELS = {'hc': 'Head Coach', 'oc': 'Offensive Coordinator', 'dc': 'Defensive Coordinator'}
 
+# ── MARKET PRESSURE TABLE ─────────────────────────────────────────────────────
+# 1-10 scale: media intensity × market size × ownership volatility.
+# High = NY/DAL/CHI/PHI/SF. Low = KC/GB/NE/PIT/SEA.
+# An introverted HC in a high-pressure market pays a structural energy tax.
+# Sources: market size (Nielsen DMA), ownership stability (tenure/firings history),
+# media scrutiny (beat reporter count, national coverage frequency).
+MARKET_PRESSURE = {
+    'buf': 4, 'mia': 5, 'ne':  4, 'nyj': 9,
+    'bal': 5, 'cin': 4, 'cle': 6, 'pit': 6,
+    'hou': 5, 'ind': 4, 'jax': 3, 'ten': 4,
+    'den': 6, 'kc':  3, 'lv':  5, 'lac': 6,
+    'dal': 10,'nyg': 9, 'phi': 8, 'wsh': 7,
+    'chi': 8, 'det': 5, 'gb':  3, 'min': 5,
+    'atl': 5, 'car': 4, 'no':  5, 'tb':  5,
+    'ari': 4, 'lar': 7, 'sf':  7, 'sea': 5,
+}
+
 # Keywords that signal a coaching change in headlines
 CHANGE_KEYWORDS = ['fired', 'hired', 'interim', 'named head coach', 'named offensive coordinator',
                    'named defensive coordinator', 'parts ways', 'relieved of duties', 'steps down',
@@ -399,6 +416,104 @@ def role_fit_score(signals, role, pfr_rec):
     return score, evidence
 
 
+# ── COACH MARKET FIT ─────────────────────────────────────────────────────────
+
+def coach_market_fit(slug, signals, pfr_rec, avg_roster_compat=None):
+    """
+    Score 0-100 how well an HC's personality fits their market environment.
+    Three inputs:
+      1. I/E vs market pressure — introvert in high-pressure market = structural drain
+      2. Tenure as ownership stability proxy — longer = more stable environment
+      3. Roster compat avg — HC surrounded by compatible players = lower friction
+
+    Returns (score 0-100, evidence list).
+    Max effect on team score: ±3% (subtle but real — nobody else tracks this).
+    """
+    pressure = MARKET_PRESSURE.get(slug, 5)  # default mid-pressure
+    ie       = signals.get('ie')
+    pfr_rec  = pfr_rec or {}
+    yrs      = pfr_rec.get('pfr_yrs', 0)
+
+    score    = 50
+    evidence = []
+
+    # ── I/E vs market pressure ────────────────────────────────────────────────
+    # Introvert in high-pressure market (8+) = energy drain
+    # Extrovert in high-pressure market = natural fit
+    # Introvert in low-pressure market (<=4) = optimal environment
+    if ie == 'I':
+        if pressure >= 8:
+            score -= 15
+            evidence.append(
+                f'Introvert HC in high-pressure market ({slug.upper()}, pressure={pressure}/10) '
+                f'— structural energy drain, media demands conflict with internal processing style'
+            )
+        elif pressure <= 4:
+            score += 10
+            evidence.append(
+                f'Introvert HC in low-pressure market ({slug.upper()}, pressure={pressure}/10) '
+                f'— optimal environment, internal drive unimpeded by external noise'
+            )
+        else:
+            evidence.append(
+                f'Introvert HC in mid-pressure market ({slug.upper()}, pressure={pressure}/10) '
+                f'— manageable friction'
+            )
+    elif ie == 'E':
+        if pressure >= 8:
+            score += 10
+            evidence.append(
+                f'Extrovert HC in high-pressure market ({slug.upper()}, pressure={pressure}/10) '
+                f'— thrives on external energy, media demands are fuel not friction'
+            )
+        elif pressure <= 4:
+            score -= 5
+            evidence.append(
+                f'Extrovert HC in low-pressure market ({slug.upper()}, pressure={pressure}/10) '
+                f'— may seek external validation the market doesn\'t provide'
+            )
+    else:
+        evidence.append(f'I/E not yet inferred — market fit score is partial ({slug.upper()}, pressure={pressure}/10)')
+
+    # ── Tenure as ownership stability proxy ───────────────────────────────────
+    # Long tenure = ownership trusts the coach = stable environment
+    # Short tenure = volatile situation regardless of market
+    if yrs >= 10:
+        score += 15
+        evidence.append(f'{yrs} years tenure — ownership stability confirmed, long-term trust established')
+    elif yrs >= 6:
+        score += 8
+        evidence.append(f'{yrs} years tenure — established relationship with ownership')
+    elif yrs >= 3:
+        score += 3
+        evidence.append(f'{yrs} years tenure — building stability')
+    elif yrs > 0:
+        score -= 8
+        evidence.append(f'{yrs} year(s) tenure — early, ownership relationship unproven')
+
+    # ── Roster compat avg ─────────────────────────────────────────────────────
+    # HC surrounded by compatible players = lower daily friction = more energy for game prep
+    if avg_roster_compat is not None:
+        if avg_roster_compat >= 65:
+            score += 10
+            evidence.append(
+                f'High roster compat avg ({avg_roster_compat:.0f}) — HC personality aligns with key players, '
+                f'communication friction low'
+            )
+        elif avg_roster_compat >= 50:
+            score += 3
+            evidence.append(f'Adequate roster compat avg ({avg_roster_compat:.0f})')
+        else:
+            score -= 8
+            evidence.append(
+                f'Low roster compat avg ({avg_roster_compat:.0f}) — HC personality misaligned with key players, '
+                f'daily friction compounds market pressure'
+            )
+
+    score = max(0, min(100, score))
+    return score, evidence
+
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def load_json(path):
@@ -420,6 +535,32 @@ def main():
 
     pfr_records     = load_pfr_records(CSV_FILE)
     playing_careers = load_playing_careers(CAREERS_FILE)
+
+    # Load players.json for roster compat avg (HC market fit input)
+    players_path = os.path.join(DATA_DIR, 'players.json')
+    players_data = load_json(players_path)
+    players_list = players_data.get('players', []) if isinstance(players_data, dict) else []
+
+    # Build slug → avg team_compat_score for HC players (starters only)
+    ABBR_TO_SLUG_LOCAL = {
+        'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+        'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+        'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+        'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+        'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+        'SF':'sf','SEA':'sea',
+    }
+    roster_compat_by_slug = {}
+    for p in players_list:
+        slug = ABBR_TO_SLUG_LOCAL.get((p.get('team') or '').upper())
+        snap = (p.get('layer1_body') or {}).get('snap_pct') or 0
+        cs   = (p.get('layer4_personality') or {}).get('team_compat_score')
+        if slug and snap >= 0.40 and cs is not None:
+            roster_compat_by_slug.setdefault(slug, []).append(cs)
+    avg_compat_by_slug = {
+        slug: round(sum(scores) / len(scores), 1)
+        for slug, scores in roster_compat_by_slug.items() if scores
+    }
 
     # Scan news for coaching changes
     print('\nScanning ESPN news for coaching changes...')
@@ -453,23 +594,34 @@ def main():
             fit, fit_ev = role_fit_score(signals, role, pfr_rec)
             mbti_type = inferred_type(signals)
 
+            # Coach market fit — HC only
+            mf_score, mf_ev = (None, [])  # default for OC/DC
+            if role == 'hc':
+                avg_rc   = avg_compat_by_slug.get(slug)
+                mf_score, mf_ev = coach_market_fit(slug, signals, pfr_rec, avg_rc)
+
             entry = {
-                'name':           coach_name,
-                'team_slug':      slug,
-                'role':           role,
-                'role_label':     ROLE_LABELS[role],
-                'playing_career': career,
-                'pfr_record':     pfr_rec,
-                'mbti_signals':   signals,
-                'mbti_type':      mbti_type,
-                'role_fit_score': fit,
-                'role_fit_evidence': fit_ev,
-                'last_updated':   now_str,
-                'pfr_source':     'https://www.pro-football-reference.com/coaches/',
+                'name':                    coach_name,
+                'team_slug':               slug,
+                'role':                    role,
+                'role_label':              ROLE_LABELS[role],
+                'playing_career':          career,
+                'pfr_record':              pfr_rec,
+                'mbti_signals':            signals,
+                'mbti_type':               mbti_type,
+                'role_fit_score':          fit,
+                'role_fit_evidence':       fit_ev,
+                'coach_market_fit_score':  mf_score,
+                'coach_market_fit_evidence': mf_ev,
+                'market_pressure':         MARKET_PRESSURE.get(slug) if role == 'hc' else None,
+                'last_updated':            now_str,
+                'pfr_source':              'https://www.pro-football-reference.com/coaches/',
             }
             coaches_out.append(entry)
 
             status = f'{mbti_type} fit={fit}'
+            if role == 'hc' and mf_score is not None:
+                status += f' mktfit={mf_score}'
             pfr_str = f'{pfr_rec["reg_wins"]}-{pfr_rec["reg_losses"]} ({pfr_rec["reg_wl_pct"]:.3f})' if pfr_rec else 'no PFR record'
             print(f'  [{slug.upper():3}] {coach_name:<28} {ROLE_LABELS[role]:<25} {pfr_str:<20} {status}')
 

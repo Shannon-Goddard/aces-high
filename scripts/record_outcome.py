@@ -207,10 +207,13 @@ def auto_lesson(bet, spread_result, ml_result, prediction=None):
         if wx.get('cold_flag'):        fired.append('cold flag')
         compat = bd.get('compat')
         rf     = bd.get('role_fit_mult')
+        hcmf   = bd.get('hc_market_mult')
         if compat is not None and abs(compat - 50) > 10:
             fired.append(f"compat {compat:.0f}")
         if rf is not None and abs(rf - 1.0) > 0.02:
             fired.append(f"role fit {rf:.3f}")
+        if hcmf is not None and abs(hcmf - 1.0) > 0.005:
+            fired.append(f"hc market fit {hcmf:.3f}")
         if prediction.get('divisional_game'):
             fired.append('divisional game')
         if prediction.get('rematch'):
