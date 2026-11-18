@@ -211,6 +211,10 @@ def auto_lesson(bet, spread_result, ml_result, prediction=None):
             fired.append(f"compat {compat:.0f}")
         if rf is not None and abs(rf - 1.0) > 0.02:
             fired.append(f"role fit {rf:.3f}")
+        if prediction.get('divisional_game'):
+            fired.append('divisional game')
+        if prediction.get('rematch'):
+            fired.append('rematch')
         if fired:
             parts.append(f"Modifiers fired: {', '.join(fired)}.")
 

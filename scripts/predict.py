@@ -394,6 +394,58 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     }
 
 
+# NFL divisions — slug → division string
+DIVISIONS = {
+    'buf': 'AFC East',  'mia': 'AFC East',  'ne': 'AFC East',   'nyj': 'AFC East',
+    'bal': 'AFC North', 'cin': 'AFC North', 'cle': 'AFC North', 'pit': 'AFC North',
+    'hou': 'AFC South', 'ind': 'AFC South', 'jax': 'AFC South', 'ten': 'AFC South',
+    'den': 'AFC West',  'kc': 'AFC West',   'lv': 'AFC West',   'lac': 'AFC West',
+    'dal': 'NFC East',  'nyg': 'NFC East',  'phi': 'NFC East',  'wsh': 'NFC East',
+    'chi': 'NFC North', 'det': 'NFC North', 'gb': 'NFC North',  'min': 'NFC North',
+    'atl': 'NFC South', 'car': 'NFC South', 'no': 'NFC South',  'tb': 'NFC South',
+    'ari': 'NFC West',  'lar': 'NFC West',  'sf': 'NFC West',   'sea': 'NFC West',
+}
+
+
+def get_divisional_flags(home_slug, away_slug, existing_predictions, game_id):
+    """
+    Returns (divisional_game, rematch) booleans.
+    divisional_game: both teams in same division.
+    rematch: these two teams already played earlier this season in predictions.json.
+    """
+    divisional = (
+        home_slug in DIVISIONS and
+        away_slug in DIVISIONS and
+        DIVISIONS[home_slug] == DIVISIONS[away_slug]
+    )
+    rematch = any(
+        p['game_id'] != game_id and
+        {p.get('home_slug'), p.get('away_slug')} == {home_slug, away_slug}
+        for p in existing_predictions
+    )
+    return divisional, rematch
+
+
+def apply_divisional_modifier(edge, pick_type, divisional, rematch):
+    """
+    Tighten the edge when familiarity is high.
+    Divisional game: ×0.97 on favorite edge (underdog covers more often).
+    Rematch: ×0.95 on favorite edge (film cuts both ways, line tightens).
+    Only applies when picking the favorite — underdog picks are unaffected.
+    Returns (adjusted_edge, notes list).
+    """
+    notes = []
+    if pick_type != 'favorite':
+        return edge, notes
+    if divisional:
+        edge = round(edge * 0.97, 2)
+        notes.append('divisional game — favorite edge trimmed ×0.97')
+    if rematch:
+        edge = round(edge * 0.95, 2)
+        notes.append('rematch — favorite edge trimmed ×0.95')
+    return edge, notes
+
+
 def spread_to_implied_edge(spread, home_score, away_score):
     """
     Compare our score differential to the market spread.
@@ -488,12 +540,15 @@ def apply_line_movement(confidence, edge, pick, home_team, line_movement):
     return confidence, sharp_signal
 
 
-def predict_game(game, team_index, news_index, weather_index=None, practice_index=None):
+def predict_game(game, team_index, news_index, weather_index=None, practice_index=None,
+                 existing_predictions=None):
     """Generate a prediction for a single game."""
     if weather_index is None:
         weather_index = {}
     if practice_index is None:
         practice_index = {}
+    if existing_predictions is None:
+        existing_predictions = []
 
     home = game['home_team']
     away = game['away_team']
@@ -512,6 +567,14 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
     confidence = confidence_from_edge(edge)
 
     pick, pick_type = pick_side(home, away, home_data['composite'], away_data['composite'], spread)
+
+    # Divisional familiarity modifier
+    divisional, rematch = get_divisional_flags(
+        home_slug, away_slug, existing_predictions, game['game_id']
+    )
+    edge, div_notes = apply_divisional_modifier(edge, pick_type, divisional, rematch)
+    if div_notes:
+        confidence = confidence_from_edge(edge)
 
     # Apply line movement modifier on closing snapshot
     line_movement = game.get('line_movement')
@@ -545,6 +608,9 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
         "away_score": away_data['composite'],
         "home_breakdown": home_data,
         "away_breakdown": away_data,
+        "divisional_game": divisional,
+        "rematch": rematch,
+        "divisional_notes": div_notes,
         "snapshot_type": game.get('snapshot_type', 'opening'),
         "line_movement": line_movement,
         "status": "open",
@@ -611,7 +677,8 @@ def main():
                         p['closing_spread'] = game['consensus'].get('spread')
             continue
 
-        pred = predict_game(game, team_index, news_index, weather_index, practice_index)
+        pred = predict_game(game, team_index, news_index, weather_index, practice_index,
+                            existing_predictions=base_predictions + new_predictions)
         if pred:
             new_predictions.append(pred)
 

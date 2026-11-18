@@ -450,6 +450,7 @@ itself before we add more signals. Wrong order = we build on sand.
 | Contract year proxy via draft round + years_exp | No contracts API yet — swap `is_contract_year()` with real data when one is added, all downstream logic stays the same | 2026 |
 | Snap% drop as early injury signal | A player losing snaps without an injury report is hiding something — the data knows before the report does | 2026 |
 | Divisional familiarity as favorite penalty | Second matchup tightens — the underdog has film now, the market doesn't fully price this | 2026 |
+| Rematch detection via predictions.json scan | No schedule API needed — if we predicted the same matchup earlier this season, it's a rematch | 2026 |
 | Coordinator change invalidates role fit | A player's role fit score is scheme-specific — new OC means new demands, 3-week reset is honest | 2026 |
 | Coach market fit as structural drain | An introverted HC in a high-media market pays the same energy tax an INFJ manager does — it's real and nobody tracks it | 2026 |
 | Blind spot auto-population on wrong predictions | A wrong prediction with captured reasoning is the most valuable data point in the system | 2026 |
@@ -477,10 +478,10 @@ itself before we add more signals. Wrong order = we build on sand.
 6. Role fit scoring — position demands vs player type, Best Fit / Adequate / Poor Fit ✅ Live
 7. Veteran drain modifier — misfit compounds over career length ✅ Live
 8. Communication chain compat — QB↔WR, LB↔DB, coach chain all scored ✅ Live
-9. Momentum scoring — rolling 3-week weighted skill, form matters as much as season aggregate *(planned)*
-10. Contract year flag — final year hunger spike, extension year comfort plateau *(planned)*
-11. Snap% drop early warning — losing snaps without a report is a signal *(planned)*
-12. Divisional familiarity modifier — second matchup tightens, underdog covers more *(planned)*
+9. Momentum scoring — rolling 3-week weighted skill, form matters as much as season aggregate ✅ Live
+10. Contract year flag — final year hunger spike, extension year comfort plateau ✅ Live
+11. Snap% drop early warning — losing snaps without a report is a signal ✅ Live
+12. Divisional familiarity modifier — second matchup tightens, underdog covers more ✅ Live
 13. Coordinator change tracker — scheme transition resets role fit for 3 weeks *(planned)*
 14. Coach market fit — introvert HC in high-media market pays structural energy tax *(planned)*
 15. Relationship web — personal connections indexed and applied to matchups *(planned)*
