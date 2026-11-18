@@ -88,7 +88,8 @@ data/
 ├── coach_playing_careers.csv — 179 historical coaches, 71 verified
 ├── practice.json          — live, Wed/Thu/Fri trajectory per player
 ├── teams.json             — initialized
-├── relationships.json     — initialized
+├── relationships.json     — live, former pro + college teammate edges
+│                            id, player_a/b, type, unit, seasons_together, strength, sentiment
 ├── stats.json             — built, empty (populates from outcomes)
 ├── blog.json              — built, empty (populates from outcomes)
 ├── odds.json              — live
@@ -106,6 +107,10 @@ scripts/
 ├── fetch_weather.py       — live
 ├── fetch_scores.py        — live
 ├── fetch_coaches.py       — live, PFR record + MBTI inference + playing career
+├── fetch_relationships.py — live, Layer 5 backbone
+│                            pro teammate join (3yr lookback, same unit)
+│                            college teammate join (entry year ±3)
+│                            preserves non-neutral sentiment on re-runs
 ├── predict.py             — live, L1+L2+L3+L4+weather+practice+odds modifiers
 │                            team_compat_score() + team_role_fit_score() both wired
 │                            role_fit_mult uses veteran drain multiplier
@@ -126,7 +131,7 @@ scripts/
 ```
 .github/workflows/
 ├── daily_news.yml         — live
-├── weekly_ratings.yml     — live (update_ratings → infer_personality → fetch_coaches)
+├── weekly_ratings.yml     — live (update_ratings → infer_personality → fetch_coaches → fetch_relationships)
 ├── fetch_odds.yml         — live
 ├── practice_reports.yml   — live
 └── record_outcomes.yml    — live
@@ -164,7 +169,7 @@ pages/
 | 4 | Personality | ✅ Live — MBTI inferred for all 3,216 players + coaches |
 | 4 | Personality / Compat | ✅ Live — team_compat_score per player, affects predictions |
 | 4 | Personality / Role Fit | ✅ Live — position demand scoring, veteran drain modifier |
-| 5 | Relationships | ⬜ Not started — relationships.json initialized, empty |
+| 5 | Relationships | ✅ Live — former pro/college teammate edges, sentiment overlay ready |
 | 6 | Team Chemistry | 🔶 Partial — coach↔player compat live, unit chemistry pending |
 | 7 | Matchup | ⬜ Not started — direct position matchup scoring |
 | 8 | Prediction | ✅ Live — L1+L2+L3+L4+weather+practice+odds modifiers |
@@ -341,13 +346,18 @@ itself before we add more signals. Wrong order = we build on sand.
 
 ---
 
-### 11. Layer 5 — Relationships Web
+### 11. Layer 5 — Relationships Web ✅ Live
 *The layer that captures what happens off the field.*
-- Beat reporter scraping for relationship signals (feuds, friendships, mentor/mentee)
-- Social media cross-team connection indexing
-- `relationships.json` initialized and empty — waiting on scraping strategy
-- Real signal: a WR traded to face his former team, a QB mentoring his backup who just got traded away
-- **Hardest data problem in the system** — no clean free source, requires scraping strategy
+- `fetch_relationships.py` builds from nflverse_players.csv — no external API needed
+- Pro teammate edges: same team + overlapping seasons (3yr window) + same unit (offense/defense)
+- College teammate edges: same college + entry year within ±3 years (Alabama fix)
+- Same-draft-class dropped — 250 guys drafted together is noise not signal
+- Strength scoring: 40 base + 5/season (max 25) + 10 same unit + 10 college bonus
+- Sentiment starts neutral — news scan overlay updates to positive/negative when keywords fire
+- facing_former_team derived at prediction time in predict.py — not stored as static edge
+- relationships.json is source of truth — players.json holds IDs only (Option B)
+- Runs weekly after fetch_coaches.py in weekly_ratings.yml
+- **Next:** wire relationship context into prediction cards as display signal, validate before adding modifier weight
 
 ---
 
@@ -457,12 +467,19 @@ itself before we add more signals. Wrong order = we build on sand.
 | Coach market fit as structural drain | An introverted HC in a high-media market pays the same energy tax an INFJ manager does — it's real and nobody tracks it | 2026 |
 | Market pressure as static table | Nielsen DMA + ownership volatility + media scrutiny seeded manually — swap with live data when available | 2026 |
 | Blind spot auto-population on wrong predictions | A wrong prediction with captured reasoning is the most valuable data point in the system | 2026 |
+| Relationships as Option B (source of truth in relationships.json) | Long-view project — historical edges compound in value over seasons. Player records hold IDs only. Consistent with coaches.json pattern | 2026 |
+| Same-unit filter on pro teammate edges | QB/DL who never shared a meeting room is noise. Offense/defense split keeps edges meaningful | 2026 |
+| College entry-year window ±3 years | Prevents Alabama 2010 connecting to Alabama 2026 — overlap window ensures they actually played together | 2026 |
+| Same-draft-class dropped | 250 guys drafted the same year is structural noise, not signal | 2026 |
+| Sentiment starts neutral, news overlay updates it | nflverse gives structure, news scan gives quality — two separate concerns, two separate passes | 2026 |
+| facing_former_team derived at prediction time | Not stored as a static edge — computed live in predict.py when matchup is known. Avoids stale data | 2026 |
 
 ---
 
 ## Open Questions
 - [ ] Practice report source reliability — ESPN injury API occasionally stale, need fallback
-- [ ] Best free source for roster relationship data (beat reporters, social media)
+- [x] Best free source for roster relationship data — nflverse CSV join (pro + college teammates)
+- [ ] Sentiment overlay — news scan keyword co-occurrence to tag positive/negative on existing edges
 - [ ] Personality inference confidence threshold — when do we have enough behavioral data
 - [ ] How do we handle mid-season trades — player carries his scores to new team (compat auto-updates on next infer_personality.py run — already handled)
 - [ ] How do we score expansion of a player's role (new OC, new scheme fit)
@@ -487,7 +504,7 @@ itself before we add more signals. Wrong order = we build on sand.
 12. Divisional familiarity modifier — second matchup tightens, underdog covers more ✅ Live
 13. Coordinator change tracker — scheme transition resets role fit for 3 weeks ✅ Live
 14. Coach market fit — introvert HC in high-media market pays structural energy tax ✅ Live
-15. Relationship web — personal connections indexed and applied to matchups *(planned)*
+15. Relationship web — former pro/college teammate edges, strength-scored, sentiment-ready ✅ Live
 16. Private vs public accountability as coach scoring variable *(planned)*
 17. Flip conditions — what would change our prediction before kickoff
 18. Modifier validation framework — hypothesis vs evidence, minimum data points
@@ -499,5 +516,5 @@ itself before we add more signals. Wrong order = we build on sand.
 
 *"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."*
 
-*Last updated: Season 2026 Week 12 — L1+L2+L3+L4 live, coaches page live, personality modifier stack complete*
-*Build queue: 14 items ordered by impact — stats.html calibration first, momentum second, blind spot learning third*
+*Last updated: Season 2026 Week 12 — L1+L2+L3+L4+L5 live, coaches page live, personality modifier stack complete*
+*Build queue: Layer 6 unit chemistry next, then direct position matchup scoring (L7)*
