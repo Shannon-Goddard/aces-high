@@ -215,31 +215,173 @@ Who directly communicates with whom — drives compat scoring and expanded playe
 
 ---
 
-## What's Left — Prioritized
+## Build Queue — Ordered by Impact
 
-### Immediate (next session)
-- [ ] `pages/stats.html` — modifier accuracy dashboard
-  - Win rate by confidence tier (are our 70+ picks actually winning 70%?)
-  - Which modifiers fired correctly vs missed
-  - Calibration chart — confidence score vs actual win rate
-  - By situation: divisional, underdog, short week, dome outdoors
-  - *Blocked on outcomes — build the shell now, data fills it in*
+Ordering logic: accountability before expansion. The system needs to be able to measure
+itself before we add more signals. Wrong order = we build on sand.
 
-### Soon
-- [ ] `scripts/update_blog.py` — generate blog posts from prediction + outcome pairs
-- [ ] `pages/blog.html` — render blog.json posts (shell exists, needs content logic)
-- [ ] `pages/findings.html` — validated modifiers vs active hypotheses tracker
+---
 
-### Later (Layer expansion)
-- [ ] Layer 5 — Relationships web (beat reporter scraping, social media)
-- [ ] Layer 6 — Unit chemistry (OL cohesion, secondary communication, years together)
-- [ ] Layer 7 — Direct position matchup scoring
-- [ ] Layer 12 — Anti-bias narrative trap detector
+### 1. `pages/stats.html` — Calibration Dashboard
+*Makes the system accountable to itself. Without this, year two isn't smarter than year one.*
+- Win rate by confidence tier — are our 70+ picks actually winning 70%?
+- Which modifiers fired correctly vs missed (weather, compat, role fit, hunger, silence)
+- Calibration chart — predicted confidence vs actual win rate
+- By situation: divisional, underdog, short week, dome outdoors, Thursday game
+- Shell exists — data fills in as outcomes accumulate
+- **Blocked on:** first closed outcomes (record_outcome.py needs to run on completed games)
+- **Build now:** full shell with empty state messaging, wires up automatically when data arrives
 
-### Launch
-- [ ] `README.md` — origin story, full methodology summary, how to read the system
+---
+
+### 2. Blind Spot / Lesson Auto-Population
+*The learning layer. Every wrong prediction with honest reasoning is more valuable than a lucky right one — but only if we capture the reasoning.*
+- `record_outcome.py` already closes bets and writes to `outcomes.json`
+- Add `lesson` auto-population: when a prediction closes wrong, compare what fired vs what the actual game showed
+- Fields to auto-write: `lesson`, `what_we_missed`, `modifier_that_fired`, `modifier_that_should_have_fired`
+- `predictions.json` already has `lesson: null` placeholder on every prediction — just needs population
+- Feeds directly into `stats.html` modifier accuracy and `findings.html` validated vs hypothesis tracker
+- **Dependency:** needs at least one closed outcome to test against
+
+---
+
+### 3. Momentum Scoring (Layer 2 Extension)
+*Highest direct impact on prediction accuracy of anything not yet built.*
+- Season-aggregate skill score misses form — a team that's won 4 straight plays differently than a 4-8 team
+- Rolling 3-week weighted skill score: last week ×0.5, 2 weeks ago ×0.3, 3 weeks ago ×0.2
+- Store as `layer2_skill.momentum_score` alongside existing `skill_score`
+- `predict.py` blends: `effective_skill = skill_score * 0.7 + momentum_score * 0.3`
+- Data already exists in nflverse weekly stats — `update_ratings.py` just needs a rolling window
+- Show momentum arrow (↑↓→) on player cards and team detail
+- **No new data source needed** — pure calculation change in `update_ratings.py`
+
+---
+
+### 4. Contract Year Flag (Layer 3 Extension)
+*Clean data, real signal, slots directly into existing hunger layer.*
+- Players in final year of contract historically outperform — hunger spike
+- Players who just signed a big extension historically dip 6-12 months — comfort plateau
+- Source: Spotrac (publicly scrapable) or Over The Cap API
+- Add `contract_year: true/false` and `extension_year: true/false` to player draft/hunger block
+- Hunger seed modifier: contract year +15, extension year (yr 1) -10
+- Show contract status badge on player card alongside existing hunger bar
+- **New data source needed:** Spotrac scraper or manual seed for starters
+- **Dependency:** none — can build alongside anything else
+
+---
+
+### 5. Snap% Drop as Early Injury Warning
+*The data is already there — we're just not using it as an injury signal yet.*
+- A player whose snap% drops 15%+ over 3 weeks without an injury report is hiding something
+- Currently flagged only as a J/P personality signal — needs a second read as injury early warning
+- Add `snap_drop_flag: true` to `layer1_body` when: snap% falls >15pts over 3 weeks AND no injury report
+- `predict.py` treats `snap_drop_flag` same as `questionable` in injury penalty calculation
+- Surfaces on player card as a subtle warning indicator
+- **No new data source needed** — snap data already in `layer1_body.snap_trend`
+- **Build note:** this is a 20-line change in `update_ratings.py` + small UI addition
+
+---
+
+### 6. Divisional Familiarity Modifier
+*Small modifier, real edge — the market underprices rematch tightening.*
+- Teams that play each other twice a year have full film on each other
+- Second matchup historically tightens — underdog covers more often in rematches
+- Two signals: (a) same division = familiarity penalty on favorite, (b) rematch within same season = tighter line
+- Add `divisional_game: true/false` and `rematch: true/false` to prediction output
+- Modifier: divisional game ×0.97 on favorite's edge, rematch ×0.95
+- Schedule data already in nflverse — simple lookup
+- **No new data source needed**
+
+---
+
+### 7. Coordinator Change Tracker
+*One of the most disruptive mid-season events — currently invisible to the system.*
+- New OC or DC mid-season = players running a new scheme, role fit score temporarily invalid
+- `coaches.json` already has OC/DC per team — need change detection between weekly fetches
+- When coordinator changes: flag affected players' `role_fit_score` as `scheme_transition: true`
+- `predict.py` treats `scheme_transition` players as Adequate (50) regardless of computed role fit
+- Clears after 3 weeks (enough time to learn the new scheme)
+- Show "New scheme" indicator on affected player cards
+- **Dependency:** `fetch_coaches.py` needs a previous-state comparison
+
+---
+
+### 8. Coach Market Fit (The INFJ Problem Applied to HCs)
+*Most original contribution in the pipeline. Nobody else is tracking this.*
+- An introverted HC in a high-media market pays the same energy tax an INFJ manager does
+- Reid in KC: low media pressure, stable ownership, long tenure = optimal environment
+- A Belichick-type I in NY or Dallas = structural drain regardless of talent
+- Score each HC on: market size (media pressure), ownership stability, tenure length, roster compat avg
+- `coach_market_fit_score` stored on HC entry in `coaches.json`
+- Feeds into `predict.py` as a small HC modifier on team score (±3% max — it's real but subtle)
+- Show on coaches page alongside existing role fit score
+- **Data needed:** market size lookup (static table), ownership stability (manual seed), tenure from PFR (already have)
+- **Dependency:** coach MBTI needs S/N and J/P filled in — currently most HCs are `I?T?`
+
+---
+
+### 9. `pages/findings.html` — Validated Modifiers Tracker
+*The page that separates hypothesis from evidence.*
+- Two columns: Validated (10+ data points, modifier confirmed) vs Active Hypothesis
+- Each modifier card: what it predicts, data points collected, win rate when fired, current status
+- Auto-populates from `stats.json` as outcomes accumulate
+- Shell exists — needs content logic wired to outcome data
+- **Dependency:** needs outcome data from stats.html calibration work
+
+---
+
+### 10. `scripts/update_blog.py` + `pages/blog.html`
+*Turns the system's reasoning into readable content.*
+- Auto-generate blog posts from prediction + outcome pairs
+- Each post: what we predicted, why, what happened, what we learned
+- Tone matches the system — honest about misses, specific about reasoning
+- Shell exists for both — needs content generation logic
+- **Dependency:** needs closed outcomes to have anything to write about
+
+---
+
+### 11. Layer 5 — Relationships Web
+*The layer that captures what happens off the field.*
+- Beat reporter scraping for relationship signals (feuds, friendships, mentor/mentee)
+- Social media cross-team connection indexing
+- `relationships.json` initialized and empty — waiting on scraping strategy
+- Real signal: a WR traded to face his former team, a QB mentoring his backup who just got traded away
+- **Hardest data problem in the system** — no clean free source, requires scraping strategy
+
+---
+
+### 12. Layer 6 — Unit Chemistry (OL Cohesion)
+*The missing piece of team chemistry beyond coach↔player.*
+- OL units that have played together 3+ years outperform shuffled lines significantly
+- Track years together per unit: OL group, secondary group, LB corps
+- `unit_cohesion_score` per position group, feeds into team skill modifier
+- Data source: nflverse roster history — years on same team per player pair
+
+---
+
+### 13. Layer 7 — Direct Position Matchup Scoring
+*The head-to-head layer.*
+- QB skill score vs opposing DB skill score — direct matchup delta
+- WR1 vs CB1, OL pass protection vs DL pass rush
+- Currently team scores are independent — matchup scoring makes them interact
+- Significant architecture change to `predict.py` — save for after calibration data exists
+
+---
+
+### 14. Layer 12 — Anti-Bias Narrative Trap Detector
+*The system that keeps us honest about our own reasoning.*
+- Detect when a prediction is driven by narrative rather than data
+- Flags: "team on revenge game" without supporting score delta, "hot team" without momentum data
+- Recency bias check: are we overweighting last week's result?
+- Public narrative divergence: when our pick matches the public narrative, reduce confidence slightly
+
+---
+
+### Launch Checklist
+- [ ] `README.md` — origin story, full methodology, how to read the system
 - [ ] Custom domain setup
 - [ ] Update modifier weight table with actual outcome data once it accumulates
+- [ ] Accessibility pass on all pages
 
 ---
 
@@ -259,6 +401,14 @@ Who directly communicates with whom — drives compat scoring and expanded playe
 | Personality compat (team) | ×0.90–1.10 | Hypothesis | 0/10 |
 | Role fit — Best Fit veteran | up to ×1.075 | Hypothesis | 0/10 |
 | Role fit — Poor Fit veteran | down to ×0.925 | Hypothesis | 0/10 |
+| Momentum score (last 3 weeks weighted) | skill×0.7 + momentum×0.3 | Hypothesis | 0/10 |
+| Contract year (final year) | hunger +15 | Hypothesis | 0/10 |
+| Extension year (yr 1 post-signing) | hunger -10 | Hypothesis | 0/10 |
+| Snap% drop >15pts, no injury report | early injury warning | Hypothesis | 0/10 |
+| Divisional game | ×0.97 on favorite edge | Hypothesis | 0/10 |
+| Rematch within same season | ×0.95 on favorite edge | Hypothesis | 0/10 |
+| Coordinator change (scheme transition) | role fit → 50 for 3 weeks | Hypothesis | 0/10 |
+| Coach market fit (I/E vs market size) | ±3% on team score | Hypothesis | 0/10 |
 | Revenge game | ×1.10 | Hypothesis | 0/10 |
 | Public callout — feeling type | ×0.80 | Hypothesis | 0/10 |
 | Public callout — thinking type | ×1.05 | Hypothesis | 0/10 |
@@ -295,6 +445,13 @@ Who directly communicates with whom — drives compat scoring and expanded playe
 | QB↔HC double-weighted in compat | The play-calling philosophy relationship is the highest-leverage link on any roster | 2026 |
 | Coach playing career tracked | Played vs never played is a real signal — Vrabel vs Harbaugh (John) contrast is visible | 2026 |
 | Communication chain drives compat partners | QB talks to WR/TE/RB/OL — not to the DC. Chain mirrors real football structure | 2026 |
+| Momentum over season aggregate | A 4-8 team and a team on a 4-game win streak have the same season stats but play completely differently | 2026 |
+| Contract year as hunger spike | Final year players are playing for their next contract — real, measurable, underpriced by the market | 2026 |
+| Snap% drop as early injury signal | A player losing snaps without an injury report is hiding something — the data knows before the report does | 2026 |
+| Divisional familiarity as favorite penalty | Second matchup tightens — the underdog has film now, the market doesn't fully price this | 2026 |
+| Coordinator change invalidates role fit | A player's role fit score is scheme-specific — new OC means new demands, 3-week reset is honest | 2026 |
+| Coach market fit as structural drain | An introverted HC in a high-media market pays the same energy tax an INFJ manager does — it's real and nobody tracks it | 2026 |
+| Blind spot auto-population on wrong predictions | A wrong prediction with captured reasoning is the most valuable data point in the system | 2026 |
 
 ---
 
@@ -319,17 +476,23 @@ Who directly communicates with whom — drives compat scoring and expanded playe
 6. Role fit scoring — position demands vs player type, Best Fit / Adequate / Poor Fit ✅ Live
 7. Veteran drain modifier — misfit compounds over career length ✅ Live
 8. Communication chain compat — QB↔WR, LB↔DB, coach chain all scored ✅ Live
-9. Relationship web — personal connections indexed and applied to matchups *(planned)*
-10. Private vs public accountability as coach scoring variable *(planned)*
-11. Flip conditions — what would change our prediction before kickoff
-12. Modifier validation framework — hypothesis vs evidence, minimum data points
-13. Humility layer — blind spots documented in every prediction
-14. Anti-bias checks — narrative trap detector + recency bias protection *(planned)*
-15. Year one as research dataset — wrong predictions with reasoning are the product
+9. Momentum scoring — rolling 3-week weighted skill, form matters as much as season aggregate *(planned)*
+10. Contract year flag — final year hunger spike, extension year comfort plateau *(planned)*
+11. Snap% drop early warning — losing snaps without a report is a signal *(planned)*
+12. Divisional familiarity modifier — second matchup tightens, underdog covers more *(planned)*
+13. Coordinator change tracker — scheme transition resets role fit for 3 weeks *(planned)*
+14. Coach market fit — introvert HC in high-media market pays structural energy tax *(planned)*
+15. Relationship web — personal connections indexed and applied to matchups *(planned)*
+16. Private vs public accountability as coach scoring variable *(planned)*
+17. Flip conditions — what would change our prediction before kickoff
+18. Modifier validation framework — hypothesis vs evidence, minimum data points
+19. Humility layer — blind spots documented in every prediction
+20. Anti-bias checks — narrative trap detector + recency bias protection *(planned)*
+21. Year one as research dataset — wrong predictions with reasoning are the product
 
 ---
 
 *"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."*
 
 *Last updated: Season 2026 Week 12 — L1+L2+L3+L4 live, coaches page live, personality modifier stack complete*
-*Next: pages/stats.html — the page that proves whether any of this actually works*
+*Build queue: 14 items ordered by impact — stats.html calibration first, momentum second, blind spot learning third*
