@@ -102,6 +102,104 @@ def compat_score(type_a, type_b):
     return max(0, min(100, score))
 
 
+# ── ROLE FIT (position demands vs player MBTI) ───────────────────────────────
+# Each position has ideal axis values. Per axis: match=+1, poor_fit=-1, neutral/unknown=0.
+# Raw -4..+4 normalized to 0-100.
+POS_DEMANDS = {
+    #         ie      sn    tf    jp
+    'QB':  (None,   'N',  'T',  'J'),   # reads (N), cold decisions (T), structured prep (J)
+    'WR':  ('E',    'N',  None, 'P'),   # external energy (E), route creativity (N), adaptive (P)
+    'TE':  (None,   'N',  'T',  'J'),   # hybrid blocker/receiver — reads + structure
+    'RB':  ('E',    None, 'T',  'P'),   # explosive reactive (P/E), cold instinct (T)
+    'FB':  ('E',    'S',  'T',  'J'),   # lead blocker — physical execution, structure
+    'OL':  ('I',    'S',  'T',  'J'),   # technique grind (S/I/J), cold accountability (T)
+    'OT':  ('I',    'S',  'T',  'J'),
+    'OG':  ('I',    'S',  'T',  'J'),
+    'C':   ('I',    'S',  'T',  'J'),
+    'T':   ('I',    'S',  'T',  'J'),
+    'G':   ('I',    'S',  'T',  'J'),
+    'DL':  ('E',    'S',  'T',  'P'),   # explosive reactive (E/P), physical dominance (S/T)
+    'DT':  ('E',    'S',  'T',  'P'),
+    'DE':  ('E',    'S',  'T',  'P'),
+    'LB':  (None,   'S',  'T',  'J'),   # gap discipline (S/J), cold pursuit (T)
+    'DB':  ('E',    None, 'T',  'P'),   # coverage reactive (E/P), cold reads (T)
+    'CB':  ('E',    None, 'T',  'P'),
+    'S':   ('E',    None, 'T',  'P'),
+    'K':   ('I',    'S',  'T',  'J'),   # isolated execution, routine-driven, cold under pressure
+    'P':   ('I',    'S',  'T',  'J'),
+    'LS':  ('I',    'S',  'T',  'J'),
+}
+
+# Human-readable axis labels for evidence
+_AXIS_LABELS = {
+    'ie': {'I': 'internal drive suits isolated execution',
+           'E': 'external energy suits high-communication role'},
+    'sn': {'S': 'detail/execution orientation suits physical role demands',
+           'N': 'pattern recognition suits reads and vision demands'},
+    'tf': {'T': 'cold analytical decision-making under pressure',
+           'F': 'emotionally-driven — friction with cold accountability demands'},
+    'jp': {'J': 'structured preparation suits disciplined role',
+           'P': 'adaptive reactivity suits instinct-driven role'},
+}
+_POOR_LABELS = {
+    'ie': {'I': 'introversion may limit high-communication role energy',
+           'E': 'external energy may disrupt isolated execution focus'},
+    'sn': {'S': 'execution focus may limit pattern-reading demands',
+           'N': 'vision orientation may conflict with pure execution role'},
+    'tf': {'T': 'cold logic may conflict with team-feel role',
+           'F': 'emotional processing under pressure — poor fit for cold-decision role'},
+    'jp': {'J': 'rigid structure may limit reactive instinct role',
+           'P': 'adaptive style may conflict with disciplined structure role'},
+}
+
+
+def compute_role_fit(player):
+    """
+    Score how well a player's MBTI type matches their position's demands.
+    Returns (score 0-100, label, evidence list).
+    """
+    pos    = (player.get('position') or '').upper()
+    l4     = player.get('layer4_personality') or {}
+    demands = POS_DEMANDS.get(pos)
+    if not demands:
+        return None, None, []
+
+    d_ie, d_sn, d_tf, d_jp = demands
+    p_ie = l4.get('ie')
+    p_sn = l4.get('sn')
+    p_tf = l4.get('tf')
+    p_jp = l4.get('jp')
+
+    raw      = 0
+    possible = 0
+    evidence = []
+
+    for axis, demand, player_val in [
+        ('ie', d_ie, p_ie),
+        ('sn', d_sn, p_sn),
+        ('tf', d_tf, p_tf),
+        ('jp', d_jp, p_jp),
+    ]:
+        if demand is None or player_val is None:
+            continue   # axis not demanded or not inferred — neutral
+        possible += 1
+        if player_val == demand:
+            raw += 1
+            evidence.append(f'{axis.upper()} match ({player_val}): {_AXIS_LABELS[axis][player_val]}')
+        else:
+            raw -= 1
+            evidence.append(f'{axis.upper()} mismatch ({player_val} vs {demand} ideal): {_POOR_LABELS[axis][player_val]}')
+
+    if possible == 0:
+        return None, None, []
+
+    # Normalize raw (-possible..+possible) → 0-100
+    score = round((raw + possible) / (2 * possible) * 100)
+    score = max(0, min(100, score))
+    label = 'Best Fit' if score >= 70 else 'Adequate' if score >= 45 else 'Poor Fit'
+    return score, label, evidence
+
+
 def compute_team_compat(player, team_players, coaches_by_slug):
     """
     Weighted compat score for a player within their communication chain.
@@ -411,19 +509,27 @@ def main():
         confidence = confidence_level(ie, tf, sn, jp)
 
         player['layer4_personality'] = {
-            'mbti_type':    mbti_type,
-            'ie':           ie,
-            'sn':           sn,
-            'tf':           tf,
-            'jp':           jp,
-            'ie_evidence':  ie_ev,
-            'sn_evidence':  sn_ev,
-            'tf_evidence':  tf_ev,
-            'jp_evidence':  jp_ev,
-            'confidence':   confidence,
-            'method':       'statistical_inference',
-            'last_updated': now_str,
+            'mbti_type':         mbti_type,
+            'ie':                ie,
+            'sn':                sn,
+            'tf':                tf,
+            'jp':                jp,
+            'ie_evidence':       ie_ev,
+            'sn_evidence':       sn_ev,
+            'tf_evidence':       tf_ev,
+            'jp_evidence':       jp_ev,
+            'confidence':        confidence,
+            'method':            'statistical_inference',
+            'last_updated':      now_str,
         }
+
+        # Role fit — position demands vs inferred type
+        rf_score, rf_label, rf_ev = compute_role_fit(player)
+        if rf_score is not None:
+            player['layer4_personality']['role_fit_score'] = rf_score
+            player['layer4_personality']['role_fit_label'] = rf_label
+            player['layer4_personality']['role_fit_evidence'] = rf_ev
+
         type_counts[mbti_type] = type_counts.get(mbti_type, 0) + 1
         updated += 1
 

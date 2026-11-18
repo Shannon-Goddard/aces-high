@@ -213,7 +213,25 @@ function buildExpandedPanel(player, teamPlayers, teamCoaches) {
 
   return `
     <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)">
-      <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.4rem">Coach Chain</div>
+      ${(() => {
+        const rf = player.layer4_personality?.role_fit_score ?? null;
+        const rl = player.layer4_personality?.role_fit_label || '';
+        const re = player.layer4_personality?.role_fit_evidence || [];
+        if (rf === null) return '';
+        const cls = rf >= 70 ? 'role-fit-high' : rf >= 45 ? 'role-fit-mid' : 'role-fit-low';
+        return `
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem">
+            <span class="role-fit-badge ${cls}" style="font-size:0.68rem;padding:0.15rem 0.5rem">${rl} (${rf})</span>
+            <span style="font-size:0.68rem;color:var(--text-muted)">Role fit for ${player.position}</span>
+          </div>
+          ${re.map(e => {
+            const isMatch = e.includes('match');
+            const isMiss  = e.includes('mismatch');
+            const col = isMatch ? 'var(--green)' : isMiss ? 'var(--red)' : 'var(--text-muted)';
+            return `<div style="font-size:0.72rem;color:${col};padding-left:0.5rem;border-left:2px solid ${col};margin-bottom:0.3rem">${e}</div>`;
+          }).join('')}`;
+      })()}
+      <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.4rem;margin-top:0.5rem">Coach Chain</div>
       ${coachRows}${noCoach}
       ${commPos.length ? `
         <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0.75rem 0 0.4rem">Communication Partners</div>
@@ -233,6 +251,10 @@ _style.textContent = `
   .axis-match { background:rgba(74,222,128,0.12);color:var(--green); }
   .axis-clash { background:rgba(248,113,113,0.12);color:var(--red); }
   .player-card-wrap.expanded { border-color:var(--gold); }
+  .role-fit-badge { font-size:0.6rem;font-weight:800;padding:0.1rem 0.35rem;border-radius:3px;margin-top:0.2rem;display:inline-block; }
+  .role-fit-high { background:rgba(74,222,128,0.15);color:var(--green); }
+  .role-fit-mid  { background:rgba(250,204,21,0.12);color:var(--gold); }
+  .role-fit-low  { background:rgba(248,113,113,0.12);color:var(--red); }
 `;
 document.head.appendChild(_style);
 
@@ -305,7 +327,15 @@ function renderCard(p) {
   const snap    = p.layer1_body?.snap_pct != null ? Math.round(p.layer1_body.snap_pct * 100) + '%' : '—';
   const mbti    = p.layer4_personality?.mbti_type;
   const compat  = p.layer4_personality?.team_compat_score ?? null;
+  const rfScore = p.layer4_personality?.role_fit_score ?? null;
+  const rfLabel = p.layer4_personality?.role_fit_label || '';
   const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
+
+  function rfClass(s) {
+    if (s >= 70) return 'role-fit-high';
+    if (s >= 45) return 'role-fit-mid';
+    return 'role-fit-low';
+  }
 
   const skillBar = skill !== null ? `
     <div class="progress-wrap" style="margin-bottom:0.2rem">
@@ -356,6 +386,7 @@ function renderCard(p) {
           ${skill !== null ? `<div class="score ${scoreClass(skill,100)}" style="font-size:0.72rem">${skill.toFixed(0)}</div>` : ''}
           <div class="text-muted" style="font-size:0.65rem;margin-top:0.2rem">Snap ${snap}</div>
           ${mbti && hasCompat ? `<div style="font-size:0.62rem;color:var(--gold);margin-top:0.2rem;font-weight:700">${mbti}</div>` : ''}
+          ${rfScore !== null ? `<div class="role-fit-badge ${rfClass(rfScore)}" title="Role fit: ${rfLabel}">${rfLabel}</div>` : ''}
         </div>
       </div>
       ${skillBar}${bodyBar}${hungerBar}${compatBar}
