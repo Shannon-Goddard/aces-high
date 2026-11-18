@@ -1,2 +1,0 @@
-One thing you need to do before the season:
-Go to https://the-odds-api.com, grab your free API key, then in your GitHub repo go to Settings → Secrets → Actions → New secret, name it ODDS_API_KEY. That's it. The workflow picks it up automatically, key never touches the code.
