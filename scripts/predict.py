@@ -224,10 +224,10 @@ def predict_game(game, team_index, news_index):
 
     pick, pick_type = pick_side(home, away, home_data['composite'], away_data['composite'], spread)
 
-    # Determine week from commence_time (rough: week 1 = Sep 4 2025)
+    # Determine week from commence_time (rough: week 1 = Sep 4 2026)
     try:
         game_dt = datetime.fromisoformat(game['commence_time'].replace('Z', '+00:00'))
-        season_start = datetime(2025, 9, 4, tzinfo=timezone.utc)
+        season_start = datetime(2026, 9, 3, tzinfo=timezone.utc)
         week = max(1, min(18, int((game_dt - season_start).days / 7) + 1))
     except Exception:
         week = 1
