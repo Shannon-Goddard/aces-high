@@ -131,13 +131,61 @@ def team_compat_score(players_on_team):
             continue
         w = _starter_weight(p)
         if (p.get('position') or '').upper() == 'QB':
-            w *= 2.0   # QB↔HC is the anchor relationship
+            w *= 2.0
         total_s += score * w
         total_w += w
     return round(total_s / total_w, 1) if total_w else 50.0
 
 
+def team_role_fit_score(players_on_team):
+    """
+    Snap-weighted role fit score with veteran drain multiplier.
 
+    A Poor Fit player CAN perform — but it costs more energy and compounds
+    over time. The drain multiplier reflects accumulated friction:
+      year 1 Poor Fit QB  → small penalty
+      year 10 Poor Fit QB → larger penalty (8 years of energy tax)
+
+    Modifier applied to each player's contribution:
+      role_fit_modifier = (role_fit - 50) / 1000   # base ±5% per player
+      drain_mult = 1.0 + min(0.5, years_exp / 20)  # scales to 1.5x at 10+ yrs
+      final_modifier = role_fit_modifier * drain_mult
+
+    QB role fit gets double snap weight — QB is the highest-leverage position.
+    Returns team-level role fit modifier (multiplicative, centered on 1.0).
+    """
+    total_w, total_mod = 0.0, 0.0
+    for p in players_on_team:
+        l4         = p.get('layer4_personality') or {}
+        rf_score   = l4.get('role_fit_score')
+        if rf_score is None:
+            continue
+        years_exp  = (p.get('layer1_body') or {}).get('years_exp') or 0
+        pos        = (p.get('position') or '').upper()
+
+        # Base modifier: ±5% max per player
+        base_mod   = (rf_score - 50.0) / 1000.0
+
+        # Drain multiplier: Poor Fit veterans pay a higher accumulated cost
+        # Best Fit veterans get a slightly larger boost (mastery compounds too)
+        drain_mult = 1.0 + min(0.5, years_exp / 20.0)
+        player_mod = base_mod * drain_mult
+
+        w = _starter_weight(p)
+        if pos == 'QB':
+            w *= 2.0  # QB role fit is highest leverage
+        total_mod += player_mod * w
+        total_w   += w
+
+    if not total_w:
+        return 1.0  # neutral — no data
+
+    # Average modifier across snap-weighted roster, clamp to ±10%
+    avg_mod = total_mod / total_w
+    return round(1.0 + max(-0.10, min(0.10, avg_mod)), 4)
+
+
+def team_hunger_score(players_on_team):
     """Snap-weighted hunger — starters' chip matters more than depth."""
     total_w, total_s = 0.0, 0.0
     for p in players_on_team:
@@ -267,6 +315,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     skill        = team_skill_score(players)
     hunger       = team_hunger_score(players)
     compat       = team_compat_score(players)
+    role_fit_mult = team_role_fit_score(players)
     injury       = team_injury_flag(players, practice_index)
     joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
@@ -277,10 +326,11 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     adjusted_skill = skill - weather_skill_penalty - (joint_pen * 0.3)
     adjusted_skill = max(0.0, adjusted_skill)
 
-    # Personality compat modifier: (compat - 50) / 500 = ±10% max on raw score
-    # Only meaningful when compat deviates from neutral (50)
+    # Personality compat modifier: (compat - 50) / 500 = ±10% max
     compat_mult = 1.0 + (compat - 50.0) / 500.0
 
+    # Role fit drain modifier: ±10% max, veteran Poor Fit compounds over time
+    # Both personality multipliers applied together before normalization
     raw = (
         body              * WEIGHTS['body'] +
         adjusted_skill    * WEIGHTS['skill'] +
@@ -288,7 +338,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         silence * 100     * WEIGHTS['silence_bonus'] +
         injury            * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
-    ) * compat_mult
+    ) * compat_mult * role_fit_mult
     raw = max(0.0, min(100.0, raw))
     composite = normalize(raw)
 
@@ -301,6 +351,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "hunger":             round(hunger, 1),
         "compat":             round(compat, 1),
         "compat_mult":        round(compat_mult, 4),
+        "role_fit_mult":      round(role_fit_mult, 4),
         "injury_penalty":     round(injury, 1),
         "joint_penalty":      round(joint_pen, 1),
         "silence_bonus":      bool(silence),
@@ -485,7 +536,10 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
                 "home": practice_index.get(f"{home_slug}:{home}", {}).get('trajectory'),
                 "away": practice_index.get(f"{away_slug}:{away}", {}).get('trajectory'),
             },
-            "mbti_adjustment":     None,
+            "mbti_adjustment":     {
+                "compat_mult":    home_data.get('compat_mult'),
+                "role_fit_mult":  home_data.get('role_fit_mult'),
+            },
             "coach_compatibility": None,
             "relationship_web":    None,
         }
