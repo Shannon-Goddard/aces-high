@@ -1,0 +1,5 @@
+nflreadpy
+requests
+python-dotenv
+pandas
+pyarrow

@@ -1,0 +1,21 @@
+{
+  "last_updated": null,
+  "overall": {
+    "total_predictions": 0,
+    "spread_record": { "wins": 0, "losses": 0, "pushes": 0 },
+    "over_under_record": { "wins": 0, "losses": 0, "pushes": 0 },
+    "moneyline_record": { "wins": 0, "losses": 0 },
+    "confidence_calibration": {}
+  },
+  "by_modifier": {},
+  "by_situation": {
+    "divisional": { "wins": 0, "losses": 0 },
+    "underdog": { "wins": 0, "losses": 0 },
+    "short_week": { "wins": 0, "losses": 0 },
+    "dome_team_outdoors": { "wins": 0, "losses": 0 },
+    "revenge_game": { "wins": 0, "losses": 0 },
+    "post_trade": { "wins": 0, "losses": 0 }
+  },
+  "modifier_accuracy": {},
+  "keyword_accuracy": {}
+}

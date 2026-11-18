@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Methodology</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page" style="max-width:800px">
+  <div class="page-header">
+    <div class="page-title">Methodology</div>
+    <div class="page-sub">"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:0.75rem">
+
+    <div class="accordion" id="m1">
+      <div class="accordion-header" onclick="toggleAccordion('m1')">
+        <div class="accordion-title"><span class="score score-gold">1</span> Layer 1 — Body</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m1-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">The objective floor. Age vs position peak curve, weight vs optimal range, career longevity, snap count trend, practice participation trajectory, and injury designation. This score exists completely independent of news, drama, or modifiers. It's just the body telling the truth.</p>
+        <p class="mt-2" style="color:var(--text-dim);font-size:0.88rem">Practice report trajectory (Wed → Thu → Fri) is more predictive than the final injury designation. The designation is what Vegas already priced in. The trajectory is what Ace would be watching.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m2">
+      <div class="accordion-header" onclick="toggleAccordion('m2')">
+        <div class="accordion-title"><span class="score score-gold">2</span> Layer 2 — Skill</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m2-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">Raw stats mean nothing. Everything is ranked vs position peers. A QB's EPA per play ranked against all QBs. A WR's WOPR ranked against all WRs. The guy catching 60 balls means nothing. The guy ranking 3rd among all WRs in yards per route run means everything. Data sourced from nflverse — we reference it, we don't archive it.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m3">
+      <div class="accordion-header" onclick="toggleAccordion('m3')">
+        <div class="accordion-title"><span class="score score-gold">3</span> Layer 3 — Mind</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m3-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8"><strong class="text-gold">Hunger Index:</strong> Draft position, hometown zip code median income, prove-it contract vs guaranteed money, came back from career-threatening injury, first in family to make it, years of being overlooked. The chip on his shoulder. The thing that can't be trained.</p>
+        <p class="mt-2" style="color:var(--text-dim);font-size:0.88rem"><strong class="text-gold">Distraction Index:</strong> Legal trouble, trade requests, relationship drama, new money problems, death in family. But also the flip side — NO NEWS AT ALL is a positive signal. Locked in, quiet, focused. That's the Ace gold.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m4">
+      <div class="accordion-header" onclick="toggleAccordion('m4')">
+        <div class="accordion-title"><span class="score score-gold">4</span> Layer 4 — Personality</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m4-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">Inferred Myers-Briggs profile from behavioral data — press conference language, social media patterns, performance consistency, conflict resolution history. We don't quiz players. We observe them. A Feeling type player with a public callout coach is a disaster waiting to happen. A Thinking type with the same coach might use it as fuel. The personality never changes. When a player is traded, his profile travels with him — but everything around him resets.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m5">
+      <div class="accordion-header" onclick="toggleAccordion('m5')">
+        <div class="accordion-title"><span class="score score-gold">5</span> Layer 5 — Relationships</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m5-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">Personal connections indexed and applied to matchups. Best friend on the opposing roster. Guy he had a locker room fight with now on the same team. Former mentor he's trying to prove he surpassed. We track both sides of every trade — the team that lost the player also just changed. We timestamp everything.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m6">
+      <div class="accordion-header" onclick="toggleAccordion('m6')">
+        <div class="accordion-title"><span class="score score-gold">6</span> Layer 6 — Team Chemistry</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m6-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">The coach who works harder than his players. The coach who shares his own mistakes. The coach who celebrates wins publicly and handles failures privately — never embarrassing a player in front of teammates or cameras. Roster continuity, coordinator stability, the fairness standard applied equally to stars and role players. The locker room that has nothing to say after a bad loss is the loudest signal of all.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m7">
+      <div class="accordion-header" onclick="toggleAccordion('m7')">
+        <div class="accordion-title"><span class="score score-gold">7–8</span> Matchup + Prediction</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m7-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">All layers colliding. Direct position matchups, scheme advantages, historical head-to-head, weather vs scheme, home field, Vegas line as signal (not as bet). Every prediction includes a confidence score, the top 3 factors that moved the needle, hypothesis modifiers clearly labeled, blind spots documented, and flip conditions — exactly what new information would change our prediction before kickoff.</p>
+      </div>
+    </div>
+
+    <div class="accordion" id="m9">
+      <div class="accordion-header" onclick="toggleAccordion('m9')">
+        <div class="accordion-title"><span class="score score-gold">9–12</span> Outcome, Learning, Humility, Anti-Bias</div>
+        <div class="accordion-arrow">&#9660;</div>
+      </div>
+      <div class="accordion-body" id="m9-body">
+        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.8">Every wrong prediction with honest reasoning attached is more valuable than a lucky right one. Every modifier starts as a hypothesis — it earns its weight through outcomes or gets cut. Minimum 10 data points before validating any modifier. We show our blind spots. We flag our narrative traps. We protect against recency bias — the system should be harder to move than our gut feeling.</p>
+        <p class="mt-2" style="color:var(--text-dim);font-size:0.88rem">The goal in year one is not to win. The goal is to document everything so that year two is smarter. This is our first crew.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card mt-3" style="border-color:var(--gold-dim)">
+    <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.9">
+      <strong class="text-gold">The Paper Ledger:</strong> Every prediction is paper traded with two parallel tracking methods — flat $100 per game and confidence weighted (confidence score maps directly to bet size, minimum 40 confidence to bet). After a full season we'll know if our confidence score is actually calibrated. If 80% confidence picks win 80% of the time, that's publishable. If not, we know exactly where the model is broken.
+    </div>
+  </div>
+
+</div>
+<footer>
+  <div>Ace's High — Not betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+<script src="../components/nav.js"></script>
+<script>
+function toggleAccordion(id) {
+  const header = document.querySelector(`#${id} .accordion-header`);
+  const body   = document.getElementById(`${id}-body`);
+  if (!header || !body) return;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+</script>
+</body>
+</html>

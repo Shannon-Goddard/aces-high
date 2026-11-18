@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Teams</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Teams</div>
+    <div class="page-sub">Select a team to drill down into roster, scores, and flags</div>
+  </div>
+
+  <!-- 32 team logo grid -->
+  <div class="grid-teams" id="team-grid"></div>
+
+  <!-- Team detail panel — appears below grid on selection -->
+  <div id="team-detail" style="margin-top:2rem; display:none;"></div>
+</div>
+
+<footer>
+  <div>Ace's High — Not betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT = '../';
+
+const TEAMS = [
+  {slug:'buf',name:'Buffalo Bills'},       {slug:'mia',name:'Miami Dolphins'},
+  {slug:'ne', name:'New England Patriots'},{slug:'nyj',name:'New York Jets'},
+  {slug:'bal',name:'Baltimore Ravens'},    {slug:'cin',name:'Cincinnati Bengals'},
+  {slug:'cle',name:'Cleveland Browns'},    {slug:'pit',name:'Pittsburgh Steelers'},
+  {slug:'hou',name:'Houston Texans'},      {slug:'ind',name:'Indianapolis Colts'},
+  {slug:'jax',name:'Jacksonville Jaguars'},{slug:'ten',name:'Tennessee Titans'},
+  {slug:'den',name:'Denver Broncos'},      {slug:'kc', name:'Kansas City Chiefs'},
+  {slug:'lv', name:'Las Vegas Raiders'},   {slug:'lac',name:'Los Angeles Chargers'},
+  {slug:'dal',name:'Dallas Cowboys'},      {slug:'nyg',name:'New York Giants'},
+  {slug:'phi',name:'Philadelphia Eagles'}, {slug:'wsh',name:'Washington Commanders'},
+  {slug:'chi',name:'Chicago Bears'},       {slug:'det',name:'Detroit Lions'},
+  {slug:'gb', name:'Green Bay Packers'},   {slug:'min',name:'Minnesota Vikings'},
+  {slug:'atl',name:'Atlanta Falcons'},     {slug:'car',name:'Carolina Panthers'},
+  {slug:'no', name:'New Orleans Saints'},  {slug:'tb', name:'Tampa Bay Buccaneers'},
+  {slug:'ari',name:'Arizona Cardinals'},   {slug:'lar',name:'Los Angeles Rams'},
+  {slug:'sf', name:'San Francisco 49ers'}, {slug:'sea',name:'Seattle Seahawks'}
+];
+
+// ESPN team abbreviation map for roster matching
+const SLUG_TO_ABBR = {
+  buf:'BUF',mia:'MIA',ne:'NE',nyj:'NYJ',bal:'BAL',cin:'CIN',cle:'CLE',pit:'PIT',
+  hou:'HOU',ind:'IND',jax:'JAX',ten:'TEN',den:'DEN',kc:'KC',lv:'LV',lac:'LAC',
+  dal:'DAL',nyg:'NYG',phi:'PHI',wsh:'WAS',chi:'CHI',det:'DET',gb:'GB',min:'MIN',
+  atl:'ATL',car:'CAR',no:'NO',tb:'TB',ari:'ARI',lar:'LA',sf:'SF',sea:'SEA'
+};
+
+let allPlayers = [];
+let allNews    = [];
+let selectedSlug = null;
+
+function logoUrl(slug) {
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png`;
+}
+
+function scoreClass(s) {
+  if (s === null || s === undefined) return 'score-none';
+  if (s >= 70) return 'score-high';
+  if (s >= 45) return 'score-mid';
+  return 'score-low';
+}
+
+function fillColor(s) {
+  if (!s) return 'fill-red';
+  if (s >= 70) return 'fill-green';
+  if (s >= 45) return 'fill-yellow';
+  return 'fill-red';
+}
+
+function progressBar(score, label) {
+  const s = score || 0;
+  return `
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill ${fillColor(s)}" style="width:${s}%"></div>
+      </div>
+      <div class="progress-label ${scoreClass(s)}">${s}</div>
+    </div>
+  `;
+}
+
+function renderFlags(player, newsEntry) {
+  const flags = [];
+  if (newsEntry) {
+    if (newsEntry.flags.injury)     flags.push(`<span class="flag flag-injury">Injury</span>`);
+    if (newsEntry.flags.distraction) flags.push(`<span class="flag flag-distract">Distraction</span>`);
+    if (newsEntry.flags.trade)      flags.push(`<span class="flag flag-trade">Trade</span>`);
+    if (newsEntry.silence_bonus)    flags.push(`<span class="flag flag-silence">Locked In</span>`);
+  }
+  const draft = player.draft;
+  if (draft && draft.hunger_seed >= 70) flags.push(`<span class="flag flag-hunger">Hungry</span>`);
+  const injury = player.injury;
+  if (injury && injury.report_status && injury.report_status !== 'Active') {
+    flags.push(`<span class="flag flag-injury">${injury.report_status}</span>`);
+  }
+  return flags.join('');
+}
+
+function renderPlayerAccordion(player, newsEntry, idx) {
+  const l1 = player.layer1_body || {};
+  const l2 = player.layer2_skill || {};
+  const draft = player.draft || {};
+  const combine = player.combine || {};
+  const injury = player.injury || {};
+  const flags = renderFlags(player, newsEntry);
+  const id = `player-${idx}`;
+
+  const bodyScore  = l1.body_score;
+  const skillScore = l2.skill_score;
+
+  // Combine highlights
+  const combineHtml = combine.forty
+    ? `<div class="stat-row"><span class="stat-label">40-yard dash</span><span class="stat-value">${combine.forty}s</span></div>`
+    : '';
+
+  // Injury
+  const injuryHtml = injury.report_status
+    ? `<div class="stat-row">
+        <span class="stat-label">Status</span>
+        <span class="stat-value ${injury.report_status === 'Active' ? 'text-green' : 'text-red'}">${injury.report_status}</span>
+       </div>
+       <div class="stat-row">
+        <span class="stat-label">Practice</span>
+        <span class="stat-value">${injury.practice_status || '—'}</span>
+       </div>
+       <div class="stat-row">
+        <span class="stat-label">Injury</span>
+        <span class="stat-value">${injury.primary_injury || '—'}</span>
+       </div>` : '';
+
+  return `
+    <div class="accordion" id="${id}">
+      <div class="accordion-header" onclick="toggleAccordion('${id}')">
+        <div class="accordion-title">
+          <img src="${player.headshot || ''}"
+               class="player-headshot"
+               onerror="this.src=''"
+               style="width:36px;height:36px;">
+          <div>
+            <div class="player-name">${player.name}</div>
+            <div class="player-meta">${player.position} · ${player.college || ''}</div>
+            ${flags ? `<div class="player-flags">${flags}</div>` : ''}
+          </div>
+        </div>
+        <div class="accordion-meta">
+          <span class="score ${scoreClass(bodyScore)}">${bodyScore || '—'}</span>
+          <span class="score ${scoreClass(skillScore)}">${skillScore || '—'}</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body" id="${id}-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+          <div>
+            <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Layer 1 — Body</div>
+            <div class="stat-row"><span class="stat-label">Body Score</span>${progressBar(bodyScore)}</div>
+            <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">${l1.age || '—'} <span class="text-dim">(${l1.age_label || ''})</span></span></div>
+            <div class="stat-row"><span class="stat-label">Age Score</span>${progressBar(l1.age_score)}</div>
+            <div class="stat-row"><span class="stat-label">Weight</span><span class="stat-value">${l1.weight || '—'} lbs <span class="text-dim">(${l1.weight_label || ''})</span></span></div>
+            <div class="stat-row"><span class="stat-label">Weight Score</span>${progressBar(l1.weight_score)}</div>
+            <div class="stat-row"><span class="stat-label">Career Stage</span><span class="stat-value">${l1.career_label || '—'}</span></div>
+            <div class="stat-row"><span class="stat-label">Snap % Trend</span><span class="stat-value">${l1.snap_pct ? l1.snap_pct + '%' : '—'} <span class="text-dim">(${l1.snap_trend || ''})</span></span></div>
+            ${injuryHtml}
+          </div>
+
+          <div>
+            <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Layer 2 — Skill</div>
+            ${skillScore
+              ? `<div class="stat-row"><span class="stat-label">Skill Score</span>${progressBar(skillScore)}</div>
+                 ${l2.epa_pct !== undefined ? `<div class="stat-row"><span class="stat-label">EPA Percentile</span><span class="stat-value">${l2.epa_pct}</span></div>` : ''}
+                 ${l2.cpoe_pct !== undefined ? `<div class="stat-row"><span class="stat-label">CPOE Percentile</span><span class="stat-value">${l2.cpoe_pct}</span></div>` : ''}
+                 ${l2.wopr_pct !== undefined ? `<div class="stat-row"><span class="stat-label">WOPR Percentile</span><span class="stat-value">${l2.wopr_pct}</span></div>` : ''}
+                 ${l2.targets !== undefined ? `<div class="stat-row"><span class="stat-label">Targets</span><span class="stat-value">${l2.targets}</span></div>` : ''}
+                 ${l2.sack_pct !== undefined ? `<div class="stat-row"><span class="stat-label">Sack Percentile</span><span class="stat-value">${l2.sack_pct}</span></div>` : ''}`
+              : '<div class="text-muted" style="font-size:0.82rem">Insufficient sample size</div>'}
+
+            <div class="text-dim mt-2 mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Draft + Hunger Seed</div>
+            <div class="stat-row"><span class="stat-label">Draft Round</span><span class="stat-value">${draft.draft_round || 'Undrafted'}</span></div>
+            <div class="stat-row"><span class="stat-label">Draft Pick</span><span class="stat-value">${draft.draft_pick || '—'}</span></div>
+            <div class="stat-row"><span class="stat-label">Hunger Seed</span>${progressBar(draft.hunger_seed)}</div>
+            ${combineHtml}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPositionGroup(label, players, newsMap) {
+  if (!players.length) return '';
+  const id = `pos-${label.replace(/\//g,'-')}`;
+  const avgBody  = players.filter(p => p.layer1_body?.body_score).reduce((a,p) => a + p.layer1_body.body_score, 0) / (players.filter(p => p.layer1_body?.body_score).length || 1);
+  const avgSkill = players.filter(p => p.layer2_skill?.skill_score).reduce((a,p) => a + p.layer2_skill.skill_score, 0) / (players.filter(p => p.layer2_skill?.skill_score).length || 1);
+
+  return `
+    <div class="accordion" id="${id}">
+      <div class="accordion-header" onclick="toggleAccordion('${id}')">
+        <div class="accordion-title">${label} <span class="text-muted" style="font-weight:400;font-size:0.82rem">(${players.length})</span></div>
+        <div class="accordion-meta">
+          <span class="text-dim" style="font-size:0.75rem">Body</span>
+          <span class="score ${scoreClass(Math.round(avgBody))}">${Math.round(avgBody) || '—'}</span>
+          <span class="text-dim" style="font-size:0.75rem">Skill</span>
+          <span class="score ${scoreClass(Math.round(avgSkill))}">${Math.round(avgSkill) || '—'}</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body" id="${id}-body">
+        ${players.map((p, i) => renderPlayerAccordion(p, newsMap[p.name] || null, `${label}-${i}`)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderTeamDetail(slug, players, newsEntries) {
+  const team = TEAMS.find(t => t.slug === slug);
+  if (!team) return;
+
+  const abbr = SLUG_TO_ABBR[slug] || slug.toUpperCase();
+  const teamPlayers = players.filter(p => p.team === abbr);
+
+  // Build news lookup by player name
+  const newsMap = {};
+  newsEntries.forEach(n => { newsMap[n.team_slug] = n; });
+  const teamNews = newsMap[slug] || null;
+
+  // Group by position
+  const groups = {
+    'QB':        teamPlayers.filter(p => p.position === 'QB'),
+    'RB':        teamPlayers.filter(p => p.position === 'RB'),
+    'WR / TE':   teamPlayers.filter(p => ['WR','TE'].includes(p.position)),
+    'OL':        teamPlayers.filter(p => ['OL','T','G','C'].includes(p.position)),
+    'DL / LB':   teamPlayers.filter(p => ['DL','DE','DT','LB'].includes(p.position)),
+    'DB':        teamPlayers.filter(p => ['CB','S','DB'].includes(p.position)),
+    'K / P / ST':teamPlayers.filter(p => ['K','P','LS'].includes(p.position)),
+  };
+
+  // Team-level averages
+  const allScored = teamPlayers.filter(p => p.layer1_body?.body_score);
+  const avgBody   = allScored.length ? Math.round(allScored.reduce((a,p) => a + p.layer1_body.body_score, 0) / allScored.length) : null;
+  const allSkill  = teamPlayers.filter(p => p.layer2_skill?.skill_score);
+  const avgSkill  = allSkill.length ? Math.round(allSkill.reduce((a,p) => a + p.layer2_skill.skill_score, 0) / allSkill.length) : null;
+
+  // Team news flags
+  const flagsHtml = teamNews ? Object.entries(teamNews.flags)
+    .filter(([,v]) => v)
+    .map(([k]) => `<span class="flag flag-${k === 'injury' ? 'injury' : k === 'distraction' ? 'distract' : k === 'trade' ? 'trade' : 'silence'}">${k}</span>`)
+    .join('') : '';
+
+  document.getElementById('team-detail').style.display = 'block';
+  document.getElementById('team-detail').innerHTML = `
+    <div class="card mb-2">
+      <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1rem;">
+        <img src="${logoUrl(slug)}" style="width:64px;height:64px;object-fit:contain;">
+        <div>
+          <div style="font-size:1.3rem;font-weight:800;color:var(--gold)">${team.name}</div>
+          <div class="player-flags mt-1">${flagsHtml || '<span class="text-muted" style="font-size:0.8rem">No active flags</span>'}</div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:1rem;text-align:center;">
+          <div>
+            <div class="score ${scoreClass(avgBody)}" style="font-size:1.1rem;padding:0.4rem 0.75rem">${avgBody || '—'}</div>
+            <div class="text-muted mt-1" style="font-size:0.72rem">AVG BODY</div>
+          </div>
+          <div>
+            <div class="score ${scoreClass(avgSkill)}" style="font-size:1.1rem;padding:0.4rem 0.75rem">${avgSkill || '—'}</div>
+            <div class="text-muted mt-1" style="font-size:0.72rem">AVG SKILL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team news headlines -->
+      ${teamNews && teamNews.headlines.length ? `
+        <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Latest Headlines</div>
+        ${teamNews.headlines.slice(0,3).map(h => `
+          <div class="stat-row"><span class="stat-label" style="font-size:0.82rem">${h.headline}</span><span class="text-muted" style="font-size:0.72rem">${h.published ? h.published.slice(0,10) : ''}</span></div>
+        `).join('')}
+      ` : ''}
+    </div>
+
+    <!-- Roster by position group -->
+    <div>
+      ${Object.entries(groups).map(([label, players]) => renderPositionGroup(label, players, newsMap)).join('')}
+    </div>
+  `;
+}
+
+function toggleAccordion(id) {
+  const header = document.querySelector(`#${id} .accordion-header`);
+  const body   = document.getElementById(`${id}-body`);
+  if (!header || !body) return;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function selectTeam(slug) {
+  // Deselect all
+  document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`[data-slug="${slug}"]`)?.classList.add('selected');
+
+  if (selectedSlug === slug) {
+    // Toggle off
+    selectedSlug = null;
+    document.getElementById('team-detail').style.display = 'none';
+    return;
+  }
+  selectedSlug = slug;
+  renderTeamDetail(slug, allPlayers, allNews);
+  document.getElementById('team-detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function init() {
+  const [playersRes, newsRes] = await Promise.all([
+    fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => ({ players: [] })),
+    fetch(`${ROOT}data/news.json`).then(r => r.json()).catch(() => ({ news: [] }))
+  ]);
+
+  allPlayers = playersRes.players || [];
+
+  // Latest news entry per team slug
+  const newsLatest = {};
+  (newsRes.news || []).forEach(n => {
+    if (!newsLatest[n.team_slug] || n.scanned_at > newsLatest[n.team_slug].scanned_at) {
+      newsLatest[n.team_slug] = n;
+    }
+  });
+  allNews = Object.values(newsLatest);
+
+  // Render team grid
+  document.getElementById('team-grid').innerHTML = TEAMS.map(t => `
+    <div class="team-card" data-slug="${t.slug}" onclick="selectTeam('${t.slug}')">
+      <img src="${logoUrl(t.slug)}" alt="${t.name}" onerror="this.style.opacity='0.3'">
+      <div class="team-abbr">${SLUG_TO_ABBR[t.slug] || t.slug.toUpperCase()}</div>
+    </div>
+  `).join('');
+}
+
+init();
+</script>
+</body>
+</html>

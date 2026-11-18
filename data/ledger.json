@@ -1,0 +1,52 @@
+{
+  "season": 2025,
+  "first_bet_date": null,
+  "flat_bet_amount": 100,
+  "confidence_threshold": 40,
+  "summary": {
+    "flat": {
+      "total_bets": 0,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "total_wagered": 0,
+      "total_returned": 0,
+      "net_pnl": 0,
+      "roi_pct": 0
+    },
+    "confidence_weighted": {
+      "total_bets": 0,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "total_wagered": 0,
+      "total_returned": 0,
+      "net_pnl": 0,
+      "roi_pct": 0
+    },
+    "delta": {
+      "which_outperforms": null,
+      "flat_roi": 0,
+      "weighted_roi": 0,
+      "confidence_score_value": null
+    },
+    "by_bet_type": {
+      "spread": { "wins": 0, "losses": 0, "pushes": 0 },
+      "over_under": { "wins": 0, "losses": 0, "pushes": 0 },
+      "moneyline": { "wins": 0, "losses": 0 }
+    },
+    "by_modifier": {},
+    "confidence_calibration": {
+      "buckets": {
+        "40_49": { "bets": 0, "wins": 0 },
+        "50_59": { "bets": 0, "wins": 0 },
+        "60_69": { "bets": 0, "wins": 0 },
+        "70_79": { "bets": 0, "wins": 0 },
+        "80_89": { "bets": 0, "wins": 0 },
+        "90_100": { "bets": 0, "wins": 0 }
+      },
+      "note": "Is our confidence score calibrated? 80% confidence picks should win ~80% of the time."
+    }
+  },
+  "bets": []
+}
