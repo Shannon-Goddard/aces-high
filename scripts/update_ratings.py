@@ -333,19 +333,116 @@ def build_layer2_k(stats_row, peer_stats):
         'fg_att':      int(fg_att)
     }
 
-def build_layer2(stats_row, position, peer_stats):
+def build_layer2_ol(snap_pct, years_exp, draft_round, peer_snaps):
+    """OL: snap% vs peers + draft pedigree + longevity. No EPA available."""
+    snap_rank = percentile_rank(snap_pct, [s for s in peer_snaps if s is not None]) if snap_pct else None
+    # Draft pedigree: round 1-2 = high floor, round 5+ = earned their spot
+    draft_score = None
+    if draft_round is not None:
+        if draft_round <= 2:   draft_score = 75.0
+        elif draft_round <= 4: draft_score = 55.0
+        else:                  draft_score = 45.0
+    else:
+        draft_score = 40.0  # undrafted — lowest floor for OL
+    # Longevity: OL who stick around are good
+    longevity_score = None
+    if years_exp is not None:
+        longevity_score = min(90.0, 40.0 + years_exp * 4.0)
+    components = [s for s in [snap_rank, draft_score, longevity_score] if s is not None]
+    skill_score = round(sum(components) / len(components), 1) if components else None
+    return {
+        'skill_score':     skill_score,
+        'snap_rank':       snap_rank,
+        'draft_score':     draft_score,
+        'longevity_score': longevity_score,
+        'source':          'ol_proxy'
+    }
+
+def build_layer2_p(stats_row, peer_stats):
+    """Punters: net yards per punt percentile vs peers."""
+    net_avg = safe_float(stats_row.get('punting_net_yds_per_punt'))
+    punts   = safe_float(stats_row.get('punts')) or 0
+    if punts < 10 or net_avg is None:
+        return None
+    peer_net = [safe_float(r.get('punting_net_yds_per_punt')) for r in peer_stats]
+    net_rank = percentile_rank(net_avg, peer_net)
+    return {
+        'skill_score':   net_rank,
+        'net_yds_avg':   net_avg,
+        'net_yds_rank':  net_rank,
+        'punts':         int(punts)
+    }
+
+def build_layer2_ls(snap_pct, years_exp):
+    """Long snappers: presence + longevity = competence. No stats tracked."""
+    # If they're on the roster and snapping, they're doing their job
+    base = 50.0
+    snap_bonus = min(30.0, (snap_pct or 0) * 30.0)  # snap_pct is 0-1
+    exp_bonus  = min(20.0, (years_exp or 0) * 2.0)
+    skill_score = round(base + snap_bonus + exp_bonus, 1)
+    return {
+        'skill_score': skill_score,
+        'snap_pct':    snap_pct,
+        'years_exp':   years_exp,
+        'source':      'ls_proxy'
+    }
+
+def build_layer2_fallback(layer1, draft):
+    """
+    Fallback for depth players below stat thresholds.
+    Uses body score + snap% + hunger seed as proxy.
+    Labeled so we know it's estimated, not stat-derived.
+    """
+    body_score   = (layer1 or {}).get('body_score') or 50.0
+    snap_pct     = (layer1 or {}).get('snap_pct') or 0.0
+    hunger_seed  = (draft  or {}).get('hunger_seed') or 50.0
+    snap_trend   = (layer1 or {}).get('snap_trend', 'flat')
+
+    # Snap% is 0-1, scale to 0-100
+    snap_score = min(100.0, snap_pct * 100.0)
+
+    # Trend modifier: rising players get a bump, falling get a penalty
+    trend_mod = 5.0 if snap_trend == 'rising' else -5.0 if snap_trend == 'falling' else 0.0
+
+    components = [body_score * 0.4, snap_score * 0.4, hunger_seed * 0.2]
+    skill_score = round(sum(components) + trend_mod, 1)
+    skill_score = max(0.0, min(100.0, skill_score))
+
+    return {
+        'skill_score': skill_score,
+        'body_proxy':  round(body_score, 1),
+        'snap_proxy':  round(snap_score, 1),
+        'hunger_proxy': hunger_seed,
+        'source':      'fallback'
+    }
+
+def build_layer2(stats_row, position, peer_stats, layer1=None, draft=None,
+                 snap_pct=None, years_exp=None, draft_round=None, peer_snaps=None):
     pos = position.upper()
+    result = None
+
     if pos == 'QB':
-        return build_layer2_qb(stats_row, peer_stats)
+        result = build_layer2_qb(stats_row, peer_stats)
     elif pos == 'RB':
-        return build_layer2_rb(stats_row, peer_stats)
+        result = build_layer2_rb(stats_row, peer_stats)
     elif pos in ('WR', 'TE'):
-        return build_layer2_wr_te(stats_row, peer_stats)
+        result = build_layer2_wr_te(stats_row, peer_stats)
     elif pos in ('DL', 'DE', 'DT', 'LB', 'CB', 'S', 'DB'):
-        return build_layer2_def(stats_row, peer_stats)
+        result = build_layer2_def(stats_row, peer_stats)
     elif pos == 'K':
-        return build_layer2_k(stats_row, peer_stats)
-    return None
+        result = build_layer2_k(stats_row, peer_stats)
+    elif pos in ('OL', 'T', 'G', 'C', 'OT', 'OG'):
+        result = build_layer2_ol(snap_pct, years_exp, draft_round, peer_snaps or [])
+    elif pos == 'P':
+        result = build_layer2_p(stats_row, peer_stats)
+    elif pos == 'LS':
+        result = build_layer2_ls(snap_pct, years_exp)
+
+    # Fallback for any position that returned None (below stat threshold)
+    if result is None:
+        result = build_layer2_fallback(layer1, draft)
+
+    return result
 
 # ── COMBINE / DRAFT HUNGER SEEDS ──────────────────────────────────────────
 
@@ -446,7 +543,8 @@ def main():
         'rushing_epa', 'carries',
         'receiving_epa', 'target_share', 'wopr', 'targets',
         'def_sacks', 'def_tackles_solo', 'def_interceptions', 'def_pass_defended',
-        'fg_pct', 'fg_att', 'fg_long'
+        'fg_pct', 'fg_att', 'fg_long',
+        'punting_net_yds_per_punt', 'punts'
     ]
     available_stat_cols = [c for c in stat_cols if c in stats_df.columns]
     reg_stats = stats_df[stats_df['season_type'] == 'REG'][available_stat_cols]
@@ -548,9 +646,22 @@ def main():
         }, snap_pcts, age)
 
         # Layer 2 — Skill
-        stats_row  = stats_by_id.get(gsis_id, {})
-        peer_stats = peer_stats_by_pos.get(position, [])
-        layer2     = build_layer2(stats_row, position, peer_stats)
+        stats_row   = stats_by_id.get(gsis_id, {})
+        peer_stats  = peer_stats_by_pos.get(position, [])
+        ol_positions = ('OL', 'T', 'G', 'C', 'OT', 'OG')
+        peer_snaps  = [
+            safe_float(snaps_by_id.get(str(r.get('pfr_id','') or ''), {}).get('offense', [None])[0])
+            for _, r in active_roster[active_roster['position'].str.upper().isin(ol_positions)].iterrows()
+        ] if position.upper() in ol_positions else []
+        layer2 = build_layer2(
+            stats_row, position, peer_stats,
+            layer1=layer1,
+            draft=draft,
+            snap_pct=(layer1 or {}).get('snap_pct'),
+            years_exp=(layer1 or {}).get('years_exp'),
+            draft_round=(draft or {}).get('draft_round'),
+            peer_snaps=peer_snaps
+        )
 
         # Combine profile
         combine_row = combine_by_name.get(name.lower())
