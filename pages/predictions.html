@@ -151,6 +151,58 @@ function breakdownBar(label, value, max, drillType, teamName, slug) {
     </div>`;
 }
 
+function renderRelationships(p) {
+  const rw = (p.modifiers_applied || {}).relationship_web;
+  if (!rw || !rw.has_context) return '';
+
+  const edges  = rw.cross_team_edges   || [];
+  const facing = rw.facing_former_team || [];
+  const homeSlug = p.home_slug || slugFor(p.home_team);
+
+  const TYPE_LABEL = {
+    'former_pro_teammate':     'Pro teammates',
+    'former_college_teammate': 'College teammates',
+  };
+  const SENTIMENT_COLOR = { positive: 'var(--green)', negative: 'var(--red)', neutral: 'var(--text-muted)' };
+
+  const preview = edges.slice(0, 3).map(e => {
+    const aColor = e.team_a === homeSlug ? 'var(--text)' : 'var(--text-dim)';
+    const bColor = e.team_b === homeSlug ? 'var(--text)' : 'var(--text-dim)';
+    const dot    = SENTIMENT_COLOR[e.sentiment] || SENTIMENT_COLOR.neutral;
+    return `<div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;border-bottom:1px solid var(--border);font-size:0.8rem;flex-wrap:wrap">
+      <span style="color:${aColor};font-weight:600">${e.player_a}</span>
+      <span style="color:var(--text-muted);font-size:0.72rem">${e.pos_a}</span>
+      <span style="color:var(--text-muted)">&#8596;</span>
+      <span style="color:${bColor};font-weight:600">${e.player_b}</span>
+      <span style="color:var(--text-muted);font-size:0.72rem">${e.pos_b}</span>
+      <span style="margin-left:auto;font-size:0.72rem;color:var(--text-muted)">${TYPE_LABEL[e.type] || e.type}</span>
+      <span style="width:6px;height:6px;border-radius:50%;background:${dot};flex-shrink:0"></span>
+    </div>`;
+  }).join('');
+
+  const facingHtml = facing.slice(0, 2).map(f => {
+    const side = f.current_team === homeSlug ? p.home_team : p.away_team;
+    return `<div style="font-size:0.78rem;color:var(--gold);padding:0.2rem 0">&#9889; ${f.player} (${f.position}, ${side}) &mdash; former teammate of ${f.former_teammate} (${f.last_season_together})</div>`;
+  }).join('');
+
+  const moreCount = edges.length - 3;
+  const moreLabel = moreCount > 0 ? `<span style="font-size:0.72rem;color:var(--text-muted)">+${moreCount} more</span>` : '';
+  const gameIdSafe = p.game_id.replace(/'/g, "\\'");
+  const homeSafe   = p.home_team.replace(/'/g, "\\'");
+  const awaySafe   = p.away_team.replace(/'/g, "\\'");
+
+  return `
+    <div class="blind-spots mt-2" style="border-color:rgba(155,89,182,0.3)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem">
+        <div class="blind-spots-title" style="color:rgba(155,89,182,0.9)">&#128101; Relationship Web <span style="font-size:0.72rem;font-weight:400;color:var(--text-muted)">${rw.edge_count} cross-team edge${rw.edge_count !== 1 ? 's' : ''}</span></div>
+        <button onclick="drillRelationships('${gameIdSafe}','${homeSafe}','${awaySafe}')" style="background:none;border:1px solid rgba(155,89,182,0.3);color:rgba(155,89,182,0.8);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:3px;cursor:pointer">View all</button>
+      </div>
+      ${facingHtml}
+      ${preview}
+      ${moreLabel}
+    </div>`;
+}
+
 function renderCard(p) {
   const conf     = p.confidence || 0;
   const isBet    = conf >= 40;
@@ -262,6 +314,7 @@ function renderCard(p) {
         </div>
 
         ${p.lesson ? `<div class="blind-spots mt-2"><div class="blind-spots-title">Lesson</div><div>${p.lesson}</div></div>` : ''}
+        ${renderRelationships(p)}
       </div>
     </div>
   `;
@@ -480,6 +533,64 @@ async function drillDown(type, teamName, slug) {
     </div>`;
     showModal(`${teamName} — Silence Bonus`, html);
   }
+}
+
+function drillRelationships(gameId, homeName, awayName) {
+  const pred = allPredictions.find(p => p.game_id === gameId);
+  const rw   = pred ? (pred.modifiers_applied || {}).relationship_web : null;
+
+  if (!rw || !rw.has_context) {
+    showModal('Relationship Web', '<div style="color:var(--text-muted)">No cross-team relationship data for this matchup.</div>');
+    return;
+  }
+
+  const TYPE_LABEL = {
+    'former_pro_teammate':     'Former Pro Teammates',
+    'former_college_teammate': 'Former College Teammates',
+  };
+  const SENTIMENT_DOT = { positive: '&#128994;', negative: '&#128308;', neutral: '&#9898;' };
+  const homeSlug = pred.home_slug;
+
+  let html = '';
+
+  if (rw.facing_former_team && rw.facing_former_team.length) {
+    html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem">Facing Former Team</div>`;
+    html += rw.facing_former_team.map(f => {
+      const side = f.current_team === homeSlug ? pred.home_team : pred.away_team;
+      return `<div style="padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.83rem">
+        <span style="font-weight:600;color:var(--gold)">${f.player}</span>
+        <span style="color:var(--text-muted)"> (${f.position}) &middot; ${side}</span>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Last played with ${f.former_teammate} in ${f.last_season_together} &middot; strength ${f.strength}</div>
+      </div>`;
+    }).join('');
+    html += '<div style="margin-bottom:1rem"></div>';
+  }
+
+  if (rw.cross_team_edges && rw.cross_team_edges.length) {
+    html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem">Cross-Team Connections</div>`;
+    html += rw.cross_team_edges.map(e => {
+      const typeLabel = TYPE_LABEL[e.type] || e.type;
+      const dot       = SENTIMENT_DOT[e.sentiment] || SENTIMENT_DOT.neutral;
+      const aTeam     = e.team_a === homeSlug ? pred.home_team : pred.away_team;
+      const bTeam     = e.team_b === homeSlug ? pred.home_team : pred.away_team;
+      const seasons   = e.seasons_together && e.seasons_together.length
+        ? `${e.seasons_together.length} season${e.seasons_together.length > 1 ? 's' : ''} (${Math.min(...e.seasons_together)}&ndash;${Math.max(...e.seasons_together)})`
+        : '';
+      return `<div style="padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.83rem;flex-wrap:wrap">
+          <span style="font-weight:600">${e.player_a}</span>
+          <span style="color:var(--text-muted);font-size:0.72rem">${e.pos_a} &middot; ${aTeam}</span>
+          <span style="color:var(--text-muted)">&#8596;</span>
+          <span style="font-weight:600">${e.player_b}</span>
+          <span style="color:var(--text-muted);font-size:0.72rem">${e.pos_b} &middot; ${bTeam}</span>
+          <span style="margin-left:auto">${dot}</span>
+        </div>
+        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.2rem">${typeLabel}${seasons ? ' &middot; ' + seasons : ''} &middot; strength ${e.strength}</div>
+      </div>`;
+    }).join('');
+  }
+
+  showModal(`${pred.away_team} @ ${pred.home_team} &mdash; Relationship Web`, html);
 }
 
 async function init() {

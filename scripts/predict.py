@@ -574,8 +574,134 @@ def apply_line_movement(confidence, edge, pick, home_team, line_movement):
     return confidence, sharp_signal
 
 
+def get_relationship_context(home_slug, away_slug, team_index, rel_index):
+    """
+    Find relationship edges that cross the matchup boundary:
+      - player on home team has a relationship with a player on away team
+      - facing_former_team: player's layer5_relationships includes edges where
+        their former team matches today's opponent
+
+    Returns a dict written into modifiers_applied.relationship_web.
+    Display signal only — no score modification.
+    """
+    home_players = team_index.get(home_slug, [])
+    away_players = team_index.get(away_slug, [])
+
+    home_ids = {p['gsis_id'] for p in home_players if p.get('gsis_id')}
+    away_ids = {p['gsis_id'] for p in away_players if p.get('gsis_id')}
+
+    # Build name lookup for display
+    id_to_name = {}
+    id_to_pos  = {}
+    for p in home_players + away_players:
+        pid = p.get('gsis_id')
+        if pid:
+            id_to_name[pid] = p.get('name', '')
+            id_to_pos[pid]  = p.get('position', '')
+
+    cross_edges = []
+    facing_former = []
+
+    # Collect all rel IDs for players in this matchup
+    candidate_ids = set()
+    for p in home_players + away_players:
+        for rid in (p.get('layer5_relationships') or []):
+            candidate_ids.add(rid)
+
+    for rid in candidate_ids:
+        rel = rel_index.get(rid)
+        if not rel:
+            continue
+        a_id = rel.get('player_a_id', '')
+        b_id = rel.get('player_b_id', '')
+
+        a_home = a_id in home_ids
+        a_away = a_id in away_ids
+        b_home = b_id in home_ids
+        b_away = b_id in away_ids
+
+        # Cross-team edge: one player on each side
+        if (a_home and b_away) or (a_away and b_home):
+            cross_edges.append({
+                'id':       rid,
+                'type':     rel['relationship_type'],
+                'player_a': id_to_name.get(a_id, rel.get('player_a_name', '')),
+                'pos_a':    id_to_pos.get(a_id, ''),
+                'team_a':   home_slug if a_home else away_slug,
+                'player_b': id_to_name.get(b_id, rel.get('player_b_name', '')),
+                'pos_b':    id_to_pos.get(b_id, ''),
+                'team_b':   away_slug if a_home else home_slug,
+                'strength': rel.get('strength', 0),
+                'sentiment': rel.get('sentiment', 'neutral'),
+                'seasons_together': rel.get('seasons_together', []),
+                'unit':     rel.get('unit', ''),
+            })
+
+    # facing_former_team: player currently on one team, former team is today's opponent
+    # Derived from pro teammate edges where both players were on the same team
+    # and one has since moved — detected by checking if the edge team history
+    # includes the opponent slug. We approximate via seasons_together recency.
+    for p in home_players + away_players:
+        pid = p.get('gsis_id')
+        if not pid:
+            continue
+        current_slug = home_slug if pid in home_ids else away_slug
+        opp_slug     = away_slug if current_slug == home_slug else home_slug
+        opp_players  = away_players if current_slug == home_slug else home_players
+        opp_ids      = away_ids if current_slug == home_slug else home_ids
+
+        for rid in (p.get('layer5_relationships') or []):
+            rel = rel_index.get(rid)
+            if not rel or rel['relationship_type'] != 'former_pro_teammate':
+                continue
+            a_id = rel.get('player_a_id', '')
+            b_id = rel.get('player_b_id', '')
+            partner_id = b_id if a_id == pid else a_id
+            # Partner must NOT be in today's matchup at all — they're gone
+            if partner_id in home_ids or partner_id in away_ids:
+                continue
+            # The seasons_together must include a recent season (within 2 years of current)
+            seasons = rel.get('seasons_together', [])
+            if not seasons:
+                continue
+            most_recent = max(seasons)
+            # Use latest season from rel as proxy for current season
+            all_seasons = [s for r in rel_index.values() for s in r.get('seasons_together', [])]
+            cur_season  = max(all_seasons) if all_seasons else 2026
+            if cur_season - most_recent > 2:
+                continue
+            facing_former.append({
+                'player':          id_to_name.get(pid, p.get('name', '')),
+                'position':        id_to_pos.get(pid, p.get('position', '')),
+                'current_team':    current_slug,
+                'former_teammate': rel.get('player_a_name') if b_id == pid else rel.get('player_b_name'),
+                'last_season_together': most_recent,
+                'strength':        rel.get('strength', 0),
+            })
+
+    # Sort cross edges by strength descending, cap at 10 for display
+    cross_edges.sort(key=lambda x: x['strength'], reverse=True)
+    cross_edges = cross_edges[:10]
+
+    # Deduplicate facing_former by player
+    seen = set()
+    facing_deduped = []
+    for f in sorted(facing_former, key=lambda x: x['strength'], reverse=True):
+        if f['player'] not in seen:
+            seen.add(f['player'])
+            facing_deduped.append(f)
+    facing_former = facing_deduped[:5]
+
+    return {
+        'cross_team_edges':   cross_edges,
+        'facing_former_team': facing_former,
+        'edge_count':         len(cross_edges),
+        'has_context':        bool(cross_edges or facing_former),
+    }
+
+
 def predict_game(game, team_index, news_index, weather_index=None, practice_index=None,
-                 existing_predictions=None, hc_index=None):
+                 existing_predictions=None, hc_index=None, rel_index=None):
     """Generate a prediction for a single game."""
     if weather_index is None:
         weather_index = {}
@@ -585,6 +711,8 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
         existing_predictions = []
     if hc_index is None:
         hc_index = {}
+    if rel_index is None:
+        rel_index = {}
 
     home = game['home_team']
     away = game['away_team']
@@ -675,7 +803,9 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
                 "role_fit_mult":  home_data.get('role_fit_mult'),
             },
             "coach_compatibility": None,
-            "relationship_web":    None,
+            "relationship_web":    get_relationship_context(
+                home_slug, away_slug, team_index, rel_index
+            ),
         }
     }
 
@@ -704,6 +834,8 @@ def main():
         for c in coaches_data.get('coaches', [])
         if c.get('role') == 'hc'
     }
+    rel_data  = load('relationships.json')
+    rel_index = {r['id']: r for r in rel_data.get('relationships', [])}
 
     # Track existing game_ids to avoid duplicates (skip if reset)
     existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
@@ -722,7 +854,7 @@ def main():
 
         pred = predict_game(game, team_index, news_index, weather_index, practice_index,
                             existing_predictions=base_predictions + new_predictions,
-                            hc_index=hc_index)
+                            hc_index=hc_index, rel_index=rel_index)
         if pred:
             new_predictions.append(pred)
 
