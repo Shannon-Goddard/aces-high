@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Coaches</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .coach-team-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.6rem 0.4rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .coach-team-card:hover { border-color: var(--gold); }
+    .coach-team-card.selected { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+    .coach-team-card img { width: 40px; height: 40px; object-fit: contain; }
+    .coach-team-card .team-abbr { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); margin-top: 0.25rem; }
+    .coach-team-card .fit-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      margin-top: 0.2rem;
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+    }
+    .fit-high { background: rgba(74,222,128,0.15); color: var(--green); }
+    .fit-mid  { background: rgba(250,204,21,0.12); color: var(--gold); }
+    .fit-low  { background: rgba(248,113,113,0.12); color: var(--red); }
+
+    .staff-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .staff-role {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      min-width: 28px;
+      padding-top: 0.15rem;
+    }
+    .staff-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .staff-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+    .mbti-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mbti-badge:hover { border-color: var(--gold); color: var(--gold); }
+
+    .compat-ring {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .ring-green { background: rgba(74,222,128,0.18); color: var(--green); border: 1.5px solid var(--green); }
+    .ring-yellow { background: rgba(250,204,21,0.15); color: var(--gold); border: 1.5px solid var(--gold); }
+    .ring-red { background: rgba(248,113,113,0.15); color: var(--red); border: 1.5px solid var(--red); }
+    .ring-gray { background: var(--bg3); color: var(--text-muted); border: 1.5px solid var(--border); }
+
+    .player-compat-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .player-compat-row img {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--bg3);
+      flex-shrink: 0;
+    }
+
+    .axis-pill {
+      font-size: 0.62rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      background: var(--bg3);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .axis-match { background: rgba(74,222,128,0.12); color: var(--green); }
+    .axis-clash { background: rgba(248,113,113,0.12); color: var(--red); }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .played-badge {
+      font-size: 0.62rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+    .played-nfl  { background: rgba(74,222,128,0.12); color: var(--green); }
+    .played-col  { background: rgba(250,204,21,0.10); color: var(--gold); }
+    .played-none { background: var(--bg3); color: var(--text-muted); }
+
+    #mbti-popup {
+      position: fixed;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      max-width: 320px;
+      z-index: 2000;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      font-size: 0.8rem;
+      line-height: 1.6;
+      display: none;
+    }
+    #mbti-popup .popup-close {
+      position: absolute; top: 0.5rem; right: 0.6rem;
+      background: none; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Coaches</div>
+    <div class="page-sub" id="coaches-sub">Loading...</div>
+  </div>
+
+  <div id="coaches-grid" class="coaches-grid"></div>
+
+  <div id="coaches-detail" style="display:none">
+    <div class="card" id="coaches-detail-inner"></div>
+  </div>
+</div>
+
+<!-- MBTI explanation popup -->
+<div id="mbti-popup">
+  <button class="popup-close" onclick="closeMbtiPopup()">&#x2715;</button>
+  <div id="mbti-popup-body"></div>
+</div>
+
+<!-- Modal overlay -->
+<div id="coach-modal-overlay" onclick="closeCoachModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;overflow-y:auto">
+  <div id="coach-modal" onclick="event.stopPropagation()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-width:560px;width:90%;margin:4rem auto;padding:1.5rem;position:relative">
+    <button onclick="closeCoachModal()" style="position:absolute;top:0.75rem;right:0.75rem;background:none;border:none;color:var(--text-muted);font-size:1.1rem;cursor:pointer">&#x2715;</button>
+    <div id="coach-modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+
+<script>
+const ROOT = '../';
+
+const TEAMS = [
+  { slug:'buf', abbr:'BUF', name:'Buffalo Bills' },
+  { slug:'mia', abbr:'MIA', name:'Miami Dolphins' },
+  { slug:'ne',  abbr:'NE',  name:'New England Patriots' },
+  { slug:'nyj', abbr:'NYJ', name:'New York Jets' },
+  { slug:'bal', abbr:'BAL', name:'Baltimore Ravens' },
+  { slug:'cin', abbr:'CIN', name:'Cincinnati Bengals' },
+  { slug:'cle', abbr:'CLE', name:'Cleveland Browns' },
+  { slug:'pit', abbr:'PIT', name:'Pittsburgh Steelers' },
+  { slug:'hou', abbr:'HOU', name:'Houston Texans' },
+  { slug:'ind', abbr:'IND', name:'Indianapolis Colts' },
+  { slug:'jax', abbr:'JAX', name:'Jacksonville Jaguars' },
+  { slug:'ten', abbr:'TEN', name:'Tennessee Titans' },
+  { slug:'den', abbr:'DEN', name:'Denver Broncos' },
+  { slug:'kc',  abbr:'KC',  name:'Kansas City Chiefs' },
+  { slug:'lv',  abbr:'LV',  name:'Las Vegas Raiders' },
+  { slug:'lac', abbr:'LAC', name:'Los Angeles Chargers' },
+  { slug:'dal', abbr:'DAL', name:'Dallas Cowboys' },
+  { slug:'nyg', abbr:'NYG', name:'New York Giants' },
+  { slug:'phi', abbr:'PHI', name:'Philadelphia Eagles' },
+  { slug:'wsh', abbr:'WAS', name:'Washington Commanders' },
+  { slug:'chi', abbr:'CHI', name:'Chicago Bears' },
+  { slug:'det', abbr:'DET', name:'Detroit Lions' },
+  { slug:'gb',  abbr:'GB',  name:'Green Bay Packers' },
+  { slug:'min', abbr:'MIN', name:'Minnesota Vikings' },
+  { slug:'atl', abbr:'ATL', name:'Atlanta Falcons' },
+  { slug:'car', abbr:'CAR', name:'Carolina Panthers' },
+  { slug:'no',  abbr:'NO',  name:'New Orleans Saints' },
+  { slug:'tb',  abbr:'TB',  name:'Tampa Bay Buccaneers' },
+  { slug:'ari', abbr:'ARI', name:'Arizona Cardinals' },
+  { slug:'lar', abbr:'LA',  name:'Los Angeles Rams' },
+  { slug:'sf',  abbr:'SF',  name:'San Francisco 49ers' },
+  { slug:'sea', abbr:'SEA', name:'Seattle Seahawks' },
+];
+const ABBR_EXTRA = { 'WAS':'wsh', 'LA':'lar', 'LAR':'lar' };
+
+// ── MBTI COMPATIBILITY ────────────────────────────────────────────────────────
+// Score how well two MBTI types work together in a coach→player relationship.
+// Returns { score: 0-100, axes: [{axis, hc, player, result, note}] }
+function compatScore(hcType, playerType) {
+  if (!hcType || !playerType) return { score: 50, axes: [], label: '?' };
+
+  // Parse: ESTJ → {ie:'E', sn:'S', tf:'T', jp:'J'}
+  const parse = t => ({
+    ie: t[0] !== '?' ? t[0] : null,
+    sn: t[1] !== '?' ? t[1] : null,
+    tf: t[2] !== '?' ? t[2] : null,
+    jp: t[3] !== '?' ? t[3] : null,
+  });
+
+  const hc = parse(hcType);
+  const pl = parse(playerType);
+  let score = 50;
+  const axes = [];
+
+  // I/E — complementary is fine, same is fine. No clash.
+  if (hc.ie && pl.ie) {
+    if (hc.ie === pl.ie) {
+      axes.push({ axis:'I/E', result:'match', note: `Both ${hc.ie} — shared energy style` });
+      score += 5;
+    } else {
+      axes.push({ axis:'I/E', result:'neutral', note: `${hc.ie} coach + ${pl.ie} player — complementary` });
+    }
+  }
+
+  // S/N — clash matters most here. S coach + N player = scheme friction.
+  if (hc.sn && pl.sn) {
+    if (hc.sn === pl.sn) {
+      axes.push({ axis:'S/N', result:'match', note: `Both ${hc.sn} — aligned processing style` });
+      score += 10;
+    } else {
+      axes.push({ axis:'S/N', result:'clash', note: `${hc.sn} coach + ${pl.sn} player — scheme communication friction` });
+      score -= 10;
+    }
+  }
+
+  // T/F — T coach + F player = accountability tension (real signal).
+  // F coach + T player = player may feel under-challenged.
+  if (hc.tf && pl.tf) {
+    if (hc.tf === 'T' && pl.tf === 'F') {
+      axes.push({ axis:'T/F', result:'clash', note: 'T coach + F player — cold accountability vs emotional need' });
+      score -= 15;
+    } else if (hc.tf === 'F' && pl.tf === 'T') {
+      axes.push({ axis:'T/F', result:'neutral', note: 'F coach + T player — player may outgrow the system' });
+      score -= 5;
+    } else {
+      axes.push({ axis:'T/F', result:'match', note: `Both ${hc.tf} — aligned decision-making style` });
+      score += 10;
+    }
+  }
+
+  // J/P — J coach + P player = structure vs freedom tension.
+  if (hc.jp && pl.jp) {
+    if (hc.jp === 'J' && pl.jp === 'P') {
+      axes.push({ axis:'J/P', result:'clash', note: 'J coach + P player — rigid structure vs adaptive style' });
+      score -= 10;
+    } else if (hc.jp === 'P' && pl.jp === 'J') {
+      axes.push({ axis:'J/P', result:'neutral', note: 'P coach + J player — player provides structure coach lacks' });
+    } else {
+      axes.push({ axis:'J/P', result:'match', note: `Both ${hc.jp} — aligned work style` });
+      score += 5;
+    }
+  }
+
+  score = Math.max(0, Math.min(100, score));
+  const label = score >= 70 ? 'Strong fit' : score >= 50 ? 'Workable' : 'Friction risk';
+  return { score, axes, label };
+}
+
+function ringClass(score) {
+  if (score === null || score === undefined) return 'ring-gray';
+  if (score >= 70) return 'ring-green';
+  if (score >= 50) return 'ring-yellow';
+  return 'ring-red';
+}
+
+function fitClass(score) {
+  if (score >= 80) return 'fit-high';
+  if (score >= 60) return 'fit-mid';
+  return 'fit-low';
+}
+
+function hs(url) { return (url && url !== 'nan') ? url : ''; }
+
+function teamLogoUrl(slug) {
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png`;
+}
+
+function playedBadge(career) {
+  if (!career) return '';
+  if (career.played_nfl) {
+    const pos = career.nfl_position || '';
+    return `<span class="played-badge played-nfl">NFL ${pos}</span>`;
+  }
+  if (career.played_college) {
+    const pos = career.college_position || '';
+    return `<span class="played-badge played-col">College ${pos}</span>`;
+  }
+  return `<span class="played-badge played-none">Never played</span>`;
+}
+
+function ageLabel(career) {
+  if (!career || !career.birth_year) return '';
+  const age = new Date().getFullYear() - career.birth_year;
+  return `Age ${age}`;
+}
+
+// ── MBTI POPUP ────────────────────────────────────────────────────────────────
+let _popupTarget = null;
+
+function showMbtiPopup(el, signals, name, type) {
+  const popup = document.getElementById('mbti-popup');
+  const body  = document.getElementById('mbti-popup-body');
+
+  const axes = [
+    { key: 'ie', label: 'I/E', ev: signals.ie_evidence },
+    { key: 'sn', label: 'S/N', ev: signals.sn_evidence },
+    { key: 'tf', label: 'T/F', ev: signals.tf_evidence },
+    { key: 'jp', label: 'J/P', ev: signals.jp_evidence },
+  ];
+
+  body.innerHTML = `
+    <div style="font-weight:800;font-size:0.85rem;margin-bottom:0.6rem">${name} — <span style="color:var(--gold)">${type}</span></div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.75rem">Confidence: ${signals.confidence || '—'}</div>
+    ${axes.map(a => {
+      const evList = (a.ev || []);
+      if (!evList.length) return '';
+      return `<div style="margin-bottom:0.6rem">
+        <div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.2rem">${a.label}</div>
+        ${evList.map(e => `<div style="font-size:0.75rem;color:var(--text-dim);padding-left:0.5rem;border-left:2px solid var(--border)">· ${e}</div>`).join('')}
+      </div>`;
+    }).join('')}
+  `;
+
+  // Position near the clicked element
+  const rect = el.getBoundingClientRect();
+  popup.style.display = 'block';
+  const pw = popup.offsetWidth;
+  let left = rect.left + window.scrollX;
+  if (left + pw > window.innerWidth - 16) left = window.innerWidth - pw - 16;
+  popup.style.left = left + 'px';
+  popup.style.top  = (rect.bottom + window.scrollY + 8) + 'px';
+  _popupTarget = el;
+}
+
+function closeMbtiPopup() {
+  document.getElementById('mbti-popup').style.display = 'none';
+  _popupTarget = null;
+}
+
+document.addEventListener('click', e => {
+  const popup = document.getElementById('mbti-popup');
+  if (popup.style.display === 'block' && !popup.contains(e.target) && e.target !== _popupTarget) {
+    closeMbtiPopup();
+  }
+});
+
+// ── COACH MODAL (compat detail) ───────────────────────────────────────────────
+function closeCoachModal() {
+  document.getElementById('coach-modal-overlay').style.display = 'none';
+}
+
+function openCompatModal(coachName, coachType, playerName, playerType, compatData) {
+  const body = document.getElementById('coach-modal-body');
+  const { score, axes, label } = compatData;
+  const rc = ringClass(score);
+
+  body.innerHTML = `
+    <div style="font-size:0.72rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Compatibility Detail</div>
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem">
+      <div style="flex:1">
+        <div style="font-size:0.75rem;color:var(--text-muted)">Coach</div>
+        <div style="font-weight:700">${coachName}</div>
+        <div style="font-size:0.8rem;color:var(--gold)">${coachType}</div>
+      </div>
+      <div style="font-size:1.5rem;color:var(--text-muted)">↔</div>
+      <div style="flex:1;text-align:right">
+        <div style="font-size:0.75rem;color:var(--text-muted)">Player</div>
+        <div style="font-weight:700">${playerName}</div>
+        <div style="font-size:0.8rem;color:var(--gold)">${playerType}</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;padding:0.75rem;background:var(--bg3);border-radius:var(--radius)">
+      <div class="compat-ring ${rc}" style="width:36px;height:36px;font-size:0.85rem">${score}</div>
+      <div>
+        <div style="font-weight:700">${label}</div>
+        <div style="font-size:0.75rem;color:var(--text-muted)">${axes.length} axes compared</div>
+      </div>
+    </div>
+    ${axes.length ? `
+      <div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem">Axis Breakdown</div>
+      ${axes.map(a => `
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+          <span class="axis-pill ${a.result === 'match' ? 'axis-match' : a.result === 'clash' ? 'axis-clash' : ''}">${a.axis}</span>
+          <span style="font-size:0.8rem;color:var(--text-dim);flex:1">${a.note}</span>
+          <span style="font-size:0.7rem;color:${a.result==='match'?'var(--green)':a.result==='clash'?'var(--red)':'var(--text-muted)'}">${a.result}</span>
+        </div>`).join('')}
+    ` : '<div style="color:var(--text-muted);font-size:0.82rem">Insufficient type data for axis comparison.</div>'}
+    <div style="margin-top:1rem;font-size:0.72rem;color:var(--text-muted);line-height:1.6">
+      Scores are inferred from career data, not behavioral assessment. Treat as directional signal, not diagnosis.
+    </div>
+  `;
+  document.getElementById('coach-modal-overlay').style.display = 'block';
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+let _selectedSlug = null;
+let _coachesData  = null;
+let _playersData  = null;
+
+function renderGrid(coachesByTeam) {
+  const grid = document.getElementById('coaches-grid');
+  grid.innerHTML = TEAMS.map(t => {
+    const hc = (coachesByTeam[t.slug] || []).find(c => c.role === 'hc');
+    const fit = hc ? hc.role_fit_score : null;
+    const fitCls = fit !== null ? fitClass(fit) : '';
+    return `
+      <div class="coach-team-card${_selectedSlug === t.slug ? ' selected' : ''}"
+           onclick="selectTeam('${t.slug}')" id="ctc-${t.slug}">
+        <img src="${teamLogoUrl(t.slug)}" alt="${t.abbr}" onerror="this.style.opacity='0.3'">
+        <div class="team-abbr">${t.abbr}</div>
+        ${fit !== null ? `<div class="fit-badge ${fitCls}">${fit}</div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function renderDetail(slug, coachesByTeam, playersBySlug) {
+  const team    = TEAMS.find(t => t.slug === slug);
+  const staff   = coachesByTeam[slug] || [];
+  const hc      = staff.find(c => c.role === 'hc');
+  const oc      = staff.find(c => c.role === 'oc');
+  const dc      = staff.find(c => c.role === 'dc');
+  const players = playersBySlug[slug] || [];
+
+  // Key players: QB first, then top 8 by skill score (non-QB)
+  const qbs     = players.filter(p => p.position === 'QB')
+                         .sort((a,b) => (b.layer2_skill?.skill_score||0) - (a.layer2_skill?.skill_score||0));
+  const nonQB   = players.filter(p => p.position !== 'QB')
+                         .sort((a,b) => (b.layer2_skill?.skill_score||0) - (a.layer2_skill?.skill_score||0))
+                         .slice(0, 8);
+  const keyPlayers = [...qbs.slice(0,2), ...nonQB];
+
+  const hcType = hc?.mbti_type || '????';
+
+  // Staff section
+  function staffRow(coach, roleLabel) {
+    if (!coach) return '';
+    const pc  = coach.playing_career || {};
+    const sig = coach.mbti_signals   || {};
+    const type = coach.mbti_type || '????';
+    const age  = ageLabel(pc);
+    const pfr  = coach.pfr_record;
+    const record = pfr ? `${pfr.reg_wins}-${pfr.reg_losses} (${pfr.reg_wl_pct.toFixed(3)})` : 'No HC record';
+
+    return `
+      <div class="staff-row">
+        <div class="staff-role">${roleLabel}</div>
+        <div style="flex:1">
+          <div class="staff-name">${coach.name}</div>
+          <div class="staff-meta">
+            ${age ? age + ' · ' : ''}${record}
+            ${pfr?.super_bowls ? ` · ${pfr.super_bowls} SB` : ''}
+          </div>
+          <div style="margin-top:0.4rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            ${playedBadge(pc)}
+            <span class="mbti-badge"
+              onclick="event.stopPropagation();showMbtiPopup(this,${JSON.stringify(sig).replace(/"/g,'&quot;')},'${coach.name.replace(/'/g,"\\'")}','${type}')"
+            >${type}</span>
+            <span style="font-size:0.72rem;color:var(--text-muted)">fit ${coach.role_fit_score}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // Compatibility web — HC vs each key player
+  function compatRows() {
+    if (!hc || !keyPlayers.length) return '<div style="color:var(--text-muted);font-size:0.82rem">No data.</div>';
+    return keyPlayers.map(p => {
+      const l4   = p.layer4_personality || {};
+      const pType = l4.mbti_type || '????';
+      const compat = compatScore(hcType, pType);
+      const rc   = ringClass(compat.score);
+      const skill = p.layer2_skill?.skill_score;
+      const axisHtml = compat.axes.slice(0,2).map(a =>
+        `<span class="axis-pill ${a.result==='match'?'axis-match':a.result==='clash'?'axis-clash':''}">${a.axis} ${a.result}</span>`
+      ).join(' ');
+
+      return `
+        <div class="player-compat-row" style="cursor:pointer"
+             onclick="openCompatModal('${hc.name.replace(/'/g,"\\'")}','${hcType}','${p.name.replace(/'/g,"\\'")}','${pType}',${JSON.stringify(compat).replace(/"/g,'&quot;')})">
+          <div class="compat-ring ${rc}">${compat.score}</div>
+          <img src="${hs(p.headshot)}" onerror="this.style.visibility='hidden'">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:0.83rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+            <div style="font-size:0.7rem;color:var(--text-muted)">${p.position} · ${pType}</div>
+          </div>
+          <div style="display:flex;gap:0.3rem;flex-wrap:wrap;justify-content:flex-end">${axisHtml}</div>
+          ${skill != null ? `<span style="font-size:0.7rem;color:var(--text-muted);min-width:28px;text-align:right">${skill.toFixed(0)}</span>` : ''}
+        </div>`;
+    }).join('');
+  }
+
+  // Overall team chemistry score — avg compat of HC vs key players
+  const compatScores = keyPlayers.map(p => {
+    const pType = (p.layer4_personality || {}).mbti_type || '????';
+    return compatScore(hcType, pType).score;
+  }).filter(s => s !== null);
+  const avgCompat = compatScores.length
+    ? Math.round(compatScores.reduce((a,b) => a+b, 0) / compatScores.length)
+    : null;
+
+  document.getElementById('coaches-detail-inner').innerHTML = `
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+      <img src="${teamLogoUrl(slug)}" style="width:52px;height:52px;object-fit:contain" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:1.25rem;font-weight:800;color:var(--gold)">${team?.name || slug}</div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">HC: ${hc?.name || '—'} · ${hcType}</div>
+      </div>
+      ${avgCompat !== null ? `
+        <div style="margin-left:auto;text-align:center">
+          <div class="compat-ring ${ringClass(avgCompat)}" style="width:44px;height:44px;font-size:0.9rem;margin:0 auto">${avgCompat}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.25rem">avg compat</div>
+        </div>` : ''}
+    </div>
+
+    <div class="section-label">Coaching Staff</div>
+    ${staffRow(hc, 'HC')}
+    ${staffRow(oc, 'OC')}
+    ${staffRow(dc, 'DC')}
+
+    <div class="section-label" style="margin-top:1.5rem">
+      HC ↔ Key Players — Compatibility Web
+      <span style="font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-left:0.5rem">click any row for detail</span>
+    </div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.75rem">
+      ${hc?.name || 'HC'} (${hcType}) vs QB + top skill players
+    </div>
+    ${compatRows()}
+
+    <div style="margin-top:1.25rem;font-size:0.72rem;color:var(--text-muted);line-height:1.7;border-top:1px solid var(--border);padding-top:0.75rem">
+      Types inferred from career data — not behavioral assessment.
+      S/N and J/P axes are most reliable. T/F from draft slot vs performance delta.
+      I/E from career longevity. Click any MBTI badge for evidence breakdown.
+    </div>
+  `;
+}
+
+function selectTeam(slug) {
+  if (_selectedSlug === slug) {
+    _selectedSlug = null;
+    document.getElementById('coaches-detail').style.display = 'none';
+    renderGrid(_coachesByTeam);
+    return;
+  }
+  _selectedSlug = slug;
+  renderGrid(_coachesByTeam);
+  renderDetail(slug, _coachesByTeam, _playersBySlug);
+  document.getElementById('coaches-detail').style.display = 'block';
+  setTimeout(() => document.getElementById('coaches-detail').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+let _coachesByTeam = {};
+let _playersBySlug = {};
+
+async function init() {
+  const bust = `?v=${Date.now()}`;
+  const [coachRes, playerRes] = await Promise.all([
+    fetch(`${ROOT}data/coaches.json${bust}`).then(r => r.json()).catch(() => ({ coaches: [] })),
+    fetch(`${ROOT}data/players.json${bust}`).then(r => r.json()).catch(() => ({ players: [] })),
+  ]);
+
+  const coaches = coachRes.coaches || [];
+  const players = Array.isArray(playerRes) ? playerRes : (playerRes.players || []);
+
+  // Index coaches by team slug
+  for (const c of coaches) {
+    if (!_coachesByTeam[c.team_slug]) _coachesByTeam[c.team_slug] = [];
+    _coachesByTeam[c.team_slug].push(c);
+  }
+
+  // Index players by team slug
+  for (const p of players) {
+    const abbr = (p.team || '').toUpperCase();
+    const direct = TEAMS.find(t => t.abbr === abbr);
+    const slug = direct ? direct.slug : (ABBR_EXTRA[abbr] || null);
+    if (!slug) continue;
+    if (!_playersBySlug[slug]) _playersBySlug[slug] = [];
+    _playersBySlug[slug].push(p);
+  }
+
+  const teamsWithHC = Object.keys(_coachesByTeam).filter(s =>
+    _coachesByTeam[s].some(c => c.role === 'hc')
+  ).length;
+
+  document.getElementById('coaches-sub').textContent =
+    `${coaches.length} coaches · ${teamsWithHC} teams · ${players.length} players tracked`;
+
+  renderGrid(_coachesByTeam);
+
+  const hash = window.location.hash.slice(1);
+  if (hash) selectTeam(hash);
+}
+
+init();
+</script>
+</body>
+</html>

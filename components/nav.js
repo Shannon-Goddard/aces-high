@@ -11,6 +11,7 @@
     { label: 'Predictions',   href: `${root}pages/predictions.html` },
     { label: 'Edge Report',   href: `${root}pages/edge-report.html` },
     { label: 'Teams',         href: `${root}pages/teams.html` },
+    { label: 'Coaches',       href: `${root}pages/coaches.html` },
     { label: 'Players',       href: `${root}pages/players.html` },
     { label: 'Ledger',        href: `${root}pages/ledger.html` },
     { label: 'Stats',         href: `${root}pages/stats.html` },
