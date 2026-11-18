@@ -1,13 +1,18 @@
 import requests
 import json
 import os
+import re
 from datetime import datetime, timezone, timedelta
+try:
+    import xml.etree.ElementTree as ET
+except ImportError:
+    ET = None
 
 DATA_DIR   = os.path.join(os.path.dirname(__file__), '..', 'data')
 NEWS_FILE  = os.path.join(DATA_DIR, 'news.json')
 META_FILE  = os.path.join(DATA_DIR, 'metadata.json')
 
-# All 32 NFL teams — ESPN slug : display name
+# All 32 NFL teams
 NFL_TEAMS = {
     'buf': 'Buffalo Bills',       'mia': 'Miami Dolphins',
     'ne':  'New England Patriots','nyj': 'New York Jets',
@@ -25,6 +30,42 @@ NFL_TEAMS = {
     'no':  'New Orleans Saints',  'tb':  'Tampa Bay Buccaneers',
     'ari': 'Arizona Cardinals',   'lar': 'Los Angeles Rams',
     'sf':  'San Francisco 49ers', 'sea': 'Seattle Seahawks'
+}
+
+# Search terms per team — name variants that appear in headlines
+TEAM_SEARCH_TERMS = {
+    'buf': ['bills', 'buffalo'],
+    'mia': ['dolphins', 'miami'],
+    'ne':  ['patriots', 'new england'],
+    'nyj': ['jets', 'new york jets'],
+    'bal': ['ravens', 'baltimore'],
+    'cin': ['bengals', 'cincinnati'],
+    'cle': ['browns', 'cleveland'],
+    'pit': ['steelers', 'pittsburgh'],
+    'hou': ['texans', 'houston'],
+    'ind': ['colts', 'indianapolis'],
+    'jax': ['jaguars', 'jacksonville'],
+    'ten': ['titans', 'tennessee'],
+    'den': ['broncos', 'denver'],
+    'kc':  ['chiefs', 'kansas city'],
+    'lv':  ['raiders', 'las vegas'],
+    'lac': ['chargers', 'los angeles chargers', 'la chargers'],
+    'dal': ['cowboys', 'dallas'],
+    'nyg': ['giants', 'new york giants'],
+    'phi': ['eagles', 'philadelphia'],
+    'wsh': ['commanders', 'washington'],
+    'chi': ['bears', 'chicago'],
+    'det': ['lions', 'detroit'],
+    'gb':  ['packers', 'green bay'],
+    'min': ['vikings', 'minnesota'],
+    'atl': ['falcons', 'atlanta'],
+    'car': ['panthers', 'carolina'],
+    'no':  ['saints', 'new orleans'],
+    'tb':  ['buccaneers', 'bucs', 'tampa bay'],
+    'ari': ['cardinals', 'arizona'],
+    'lar': ['rams', 'los angeles rams', 'la rams'],
+    'sf':  ['49ers', 'san francisco', 'niners'],
+    'sea': ['seahawks', 'seattle'],
 }
 
 # Keyword categories — each tracked independently for accuracy over time
@@ -75,41 +116,70 @@ ALL_KEYWORD_CATEGORIES = {
     'trade':       TRADE_KEYWORDS
 }
 
-ESPN_NEWS_URL = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/news'
-ESPN_TEAM_URL = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/{slug}/news'
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
+# Sources — all free, no API key needed
+ESPN_NFL_NEWS  = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=100'
+NFL_RSS_FEEDS  = [
+    'https://www.espn.com/espn/rss/nfl/news',
+    'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',  # fallback
+]
 
 
-def load_json(path):
-    with open(path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+def fetch_all_headlines():
+    """Fetch all available NFL headlines from ESPN API + RSS."""
+    articles = []
 
-def save_json(path, data):
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
-
-def fetch_team_news(slug):
+    # ESPN JSON API — global NFL news
     try:
-        url = ESPN_TEAM_URL.format(slug=slug)
-        r = requests.get(url, timeout=10)
-        if r.status_code != 200:
-            return []
-        data = r.json()
-        articles = data.get('articles', [])
-        headlines = []
-        for a in articles:
-            headline = a.get('headline', '')
-            description = a.get('description', '')
-            published = a.get('published', '')
-            if headline:
-                headlines.append({
-                    'headline':    headline,
-                    'description': description,
-                    'published':   published
-                })
-        return headlines
+        r = requests.get(ESPN_NFL_NEWS, timeout=15, headers=HEADERS)
+        if r.status_code == 200:
+            for a in r.json().get('articles', []):
+                headline    = a.get('headline', '')
+                description = a.get('description', '') or ''
+                published   = a.get('published', '')
+                if headline:
+                    articles.append({
+                        'headline':    headline,
+                        'description': description,
+                        'published':   published,
+                        'source':      'espn'
+                    })
     except Exception as e:
-        print(f"  News fetch failed for {slug}: {e}")
-        return []
+        print(f'  ESPN API error: {e}')
+
+    # ESPN RSS feed
+    try:
+        r = requests.get(NFL_RSS_FEEDS[0], timeout=15, headers=HEADERS)
+        if r.status_code == 200 and ET:
+            root = ET.fromstring(r.text)
+            for item in root.iter('item'):
+                title = item.findtext('title') or ''
+                desc  = item.findtext('description') or ''
+                pub   = item.findtext('pubDate') or ''
+                if title:
+                    articles.append({
+                        'headline':    title,
+                        'description': desc,
+                        'published':   pub,
+                        'source':      'espn_rss'
+                    })
+    except Exception as e:
+        print(f'  ESPN RSS error: {e}')
+
+    print(f'  Fetched {len(articles)} total headlines')
+    return articles
+
+
+def filter_for_team(slug, all_articles):
+    """Return articles that mention this team."""
+    terms = TEAM_SEARCH_TERMS.get(slug, [])
+    matched = []
+    for a in all_articles:
+        text = (a['headline'] + ' ' + a.get('description', '')).lower()
+        if any(term in text for term in terms):
+            matched.append(a)
+    return matched
 
 def score_headlines(headlines):
     text = ' '.join(
@@ -156,45 +226,56 @@ def build_team_entry(slug, team_name, headlines, keywords_found, now_str):
         }
     }
 
+def load_json(path):
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def save_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+
 def main():
-    now_utc  = datetime.now(timezone.utc)
-    now_str  = now_utc.strftime('%Y-%m-%d %H:%M:%S UTC')
-    today    = now_utc.strftime('%Y-%m-%d')
+    now_utc = datetime.now(timezone.utc)
+    now_str = now_utc.strftime('%Y-%m-%d %H:%M:%S UTC')
+    today   = now_utc.strftime('%Y-%m-%d')
     print(f"fetch_news.py — {now_str}")
 
     news_data = load_json(NEWS_FILE)
     metadata  = load_json(META_FILE)
 
-    # Remove entries older than 30 days to keep file lean
+    # Remove entries older than 30 days
     cutoff = (now_utc - timedelta(days=30)).strftime('%Y-%m-%d')
     news_data['news'] = [
         n for n in news_data['news']
         if n.get('scanned_at', '')[:10] >= cutoff
     ]
 
-    new_entries  = []
+    # Fetch all headlines once, then filter per team
+    print('Fetching headlines...')
+    all_articles = fetch_all_headlines()
+
+    new_entries   = []
     flags_summary = {
         'injury': [], 'distraction': [], 'trade': [],
         'coach': [], 'hunger': [], 'silence_bonus': []
     }
 
     for slug, team_name in NFL_TEAMS.items():
-        print(f"  Scanning {team_name}...")
-        headlines     = fetch_team_news(slug)
+        headlines      = filter_for_team(slug, all_articles)
         keywords_found = score_headlines(headlines)
-        entry         = build_team_entry(slug, team_name, headlines, keywords_found, now_str)
+        entry          = build_team_entry(slug, team_name, headlines, keywords_found, now_str)
         new_entries.append(entry)
 
-        # Build flags summary for metadata
         for flag in ['injury', 'distraction', 'trade', 'coach', 'hunger']:
             if entry['flags'][flag]:
                 flags_summary[flag].append(slug)
         if entry['silence_bonus']:
             flags_summary['silence_bonus'].append(slug)
 
-        kw_str = ', '.join(entry['keywords_found'].keys()) or 'none'
-        silence_str = ' ** SILENCE BONUS' if entry['silence_bonus'] else ''
-        print(f"    {len(headlines)} headlines | flags: {kw_str}{silence_str}")
+        if headlines:
+            kw_str = ', '.join(entry['keywords_found'].keys()) or 'none'
+            silence_str = ' SILENCE' if entry['silence_bonus'] else ''
+            print(f"  {team_name}: {len(headlines)} headlines | {kw_str}{silence_str}")
 
     news_data['news'].extend(new_entries)
     news_data['last_updated'] = now_str
@@ -208,12 +289,13 @@ def main():
     }
     save_json(META_FILE, metadata)
 
-    print(f"\nScan complete — {len(NFL_TEAMS)} teams")
-    print(f"Injury flags:      {flags_summary['injury']}")
-    print(f"Distraction flags: {flags_summary['distraction']}")
-    print(f"Trade flags:       {flags_summary['trade']}")
-    print(f"Coach flags:       {flags_summary['coach']}")
-    print(f"Silence bonuses:   {flags_summary['silence_bonus']}")
+    teams_with_news = sum(1 for e in new_entries if e['headline_count'] > 0)
+    print(f"\nScan complete — {teams_with_news}/32 teams have headlines")
+    print(f"Injury:      {flags_summary['injury']}")
+    print(f"Distraction: {flags_summary['distraction']}")
+    print(f"Trade:       {flags_summary['trade']}")
+    print(f"Coach:       {flags_summary['coach']}")
+    print(f"Silence:     {flags_summary['silence_bonus']}")
 
 if __name__ == '__main__':
     main()

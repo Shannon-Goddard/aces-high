@@ -333,6 +333,7 @@ def main():
 
     # Track existing game_ids to avoid duplicates (skip if reset)
     existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
+    base_predictions = [] if reset else existing.get('predictions', [])
 
     new_predictions = []
     for game in odds_data.get('games', []):
@@ -349,7 +350,7 @@ def main():
         if pred:
             new_predictions.append(pred)
 
-    all_predictions = existing.get('predictions', []) + new_predictions
+    all_predictions = base_predictions + new_predictions
 
     save('predictions.json', {"predictions": all_predictions})
 
