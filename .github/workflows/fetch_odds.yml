@@ -34,4 +34,4 @@ jobs:
           git config user.email "bot@aces-high"
           git add data/odds.json data/metadata.json
           git diff --staged --quiet || git commit -m "odds update — $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git pull --rebase && git push
