@@ -1,0 +1,38 @@
+name: Record Outcomes
+
+on:
+  schedule:
+    # Monday 6:00 AM UTC (2:00 AM ET) — all Sunday games are final
+    - cron: '0 6 * * 1'
+    # Tuesday 6:00 AM UTC — catches Monday Night Football
+    - cron: '0 6 * * 2'
+  workflow_dispatch:
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch final scores
+        run: python scripts/fetch_scores.py
+
+      - name: Close bets
+        run: python scripts/record_outcome.py
+
+      - name: Commit results
+        run: |
+          git config user.name  "aces-high-bot"
+          git config user.email "bot@aces-high"
+          git add data/scores.json data/ledger.json data/stats.json data/blog.json data/metadata.json
+          git diff --staged --quiet || git commit -m "outcomes recorded — $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --rebase && git push
