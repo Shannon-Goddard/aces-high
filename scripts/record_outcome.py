@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime, timezone
+from update_blog import build_post as build_blog_entry
 
 DATA_DIR         = os.path.join(os.path.dirname(__file__), '..', 'data')
 LEDGER_FILE      = os.path.join(DATA_DIR, 'ledger.json')
@@ -233,29 +234,6 @@ def auto_lesson(bet, spread_result, ml_result, prediction=None):
 
     return ' '.join(parts)
 
-# ── BLOG ───────────────────────────────────────────────────────────────────
-
-def build_blog_entry(bet, prediction):
-    home       = bet['home_team']
-    away       = bet['away_team']
-    pnl        = bet.get('flat_net_pnl', 0)
-    result_str = 'Won' if pnl > 0 else 'Lost' if pnl < 0 else 'Push'
-    return {
-        'id':           bet['bet_id'],
-        'date':         bet['game_date'],
-        'week':         bet['week'],
-        'matchup':      f"{away} @ {home}",
-        'title':        f"{away} @ {home} — Week {bet['week']}: We {result_str} ${abs(pnl):.0f}",
-        'result':       result_str,
-        'confidence':   bet.get('confidence'),
-        'pick':         prediction.get('pick', ''),
-        'edge_score':   prediction.get('edge_score'),
-        'lesson':       bet.get('lesson', ''),
-        'actual_score': bet.get('actual_score', ''),
-        'youtube_id':   None,
-        'published':    True
-    }
-
 # ── MATCH BET → SCORE ──────────────────────────────────────────────────────
 
 def find_score(bet, scores_games):
@@ -363,6 +341,9 @@ def main():
         bet['lesson']  = auto_lesson(bet, spread_result, ml_result, prediction)
         bet['closed_at'] = now_str
         bet['status']    = 'closed'
+        # Cache spread_result on bet so build_post() can read it
+        if spread_result:
+            bet['spread_result_cached'] = spread_result
 
         modifiers = bet.get('modifiers_applied', {})
         primary   = spread_result or ml_result

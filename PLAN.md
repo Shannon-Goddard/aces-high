@@ -114,7 +114,8 @@ scripts/
 │                            Pass 2: team_compat_score per player
 │                            compute_role_fit() per player (POS_DEMANDS table)
 ├── build_coach_careers.py — utility, one-time nflverse join for coach playing data
-├── record_outcome.py      — live, closes bets + updates stats.json
+├── record_outcome.py      — live, closes bets + updates stats.json + triggers blog
+├── update_blog.py         — live, regenerates blog.json from all closed bets (safe to re-run)
 ├── update_ratings.py      — live, weekly nflverse pull
 ├── patch_skill_scores.py  — utility, run as needed
 ├── seed_ledger.py         — utility, run once
@@ -143,9 +144,9 @@ pages/
 │                            compat bar (4th bar), role fit badge, click-to-expand panel
 │                            coach chain + communication partners + role fit evidence
 ├── ledger.html            — live, open/closed bets, P&L tracking
-├── stats.html             — EXISTS but empty shell — needs outcome data + charts
-├── findings.html          — EXISTS but empty shell — needs outcome data
-├── blog.html              — EXISTS but empty shell — needs blog.json populated
+├── stats.html             — live shell — wires up automatically when outcomes accumulate
+├── findings.html          — live, 23 modifiers tracked, layer status current
+├── blog.html              — live, week/result/type filters, modifier story per post
 ├── methodology.html       — live
 └── legal.html             — live
 ```
@@ -168,7 +169,7 @@ pages/
 | 7 | Matchup | ⬜ Not started — direct position matchup scoring |
 | 8 | Prediction | ✅ Live — L1+L2+L3+L4+weather+practice+odds modifiers |
 | 9 | Outcome | ✅ Built — record_outcome.py live, awaiting first closed games |
-| 10 | Learning | ⬜ Waiting — stats.json populates after outcomes accumulate |
+| 10 | Learning | ✅ Live — update_blog.py + blog.html wired, populates as outcomes close |
 | 11 | Humility | ✅ Live — blind spots + flip conditions in every prediction |
 | 12 | Anti-Bias | ⬜ Not started — narrative trap detector not built |
 

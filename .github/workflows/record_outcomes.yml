@@ -29,6 +29,9 @@ jobs:
       - name: Close bets
         run: python scripts/record_outcome.py
 
+      - name: Regenerate blog
+        run: python scripts/update_blog.py
+
       - name: Commit results
         run: |
           git config user.name  "aces-high-bot"

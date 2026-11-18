@@ -13,7 +13,32 @@
 <div class="page">
   <div class="page-header">
     <div class="page-title">Blog</div>
-    <div class="page-sub">Post-game breakdowns. What we got right. What we missed. What we learned.</div>
+    <div class="page-sub" id="blog-sub">Post-game breakdowns. What we got right. What we missed. What we learned.</div>
+  </div>
+
+  <!-- Summary tiles -->
+  <div class="summary-grid" id="blog-tiles" style="display:none"></div>
+
+  <!-- Filters -->
+  <div id="blog-filters" style="display:none;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;align-items:center">
+    <select id="filter-result" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Results</option>
+      <option value="Won">Won</option>
+      <option value="Lost">Lost</option>
+      <option value="Push">Push</option>
+    </select>
+    <select id="filter-week" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Weeks</option>
+    </select>
+    <select id="filter-type" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Pick Types</option>
+      <option value="favorite">Favorite</option>
+      <option value="underdog">Underdog</option>
+    </select>
+    <span id="filter-count" class="text-muted" style="font-size:0.8rem;margin-left:0.25rem"></span>
   </div>
 
   <div id="blog-container"></div>
@@ -27,43 +52,113 @@
 <script src="../components/nav.js"></script>
 <script>
 const ROOT = '../';
+let allPosts = [];
 
-function resultColor(r) {
-  if (!r) return 'text-muted';
-  const l = r.toLowerCase();
-  if (l === 'won')  return 'text-green';
-  if (l === 'lost') return 'text-red';
-  return 'text-muted';
+function teamLogo(slug) {
+  if (!slug) return '';
+  return `<img src="https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png"
+    style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:3px"
+    onerror="this.style.display='none'">`;
+}
+
+function confColor(c) {
+  if (c >= 70) return 'var(--green)';
+  if (c >= 55) return 'var(--gold)';
+  return 'var(--red)';
+}
+
+function pnlColor(pnl) {
+  if (pnl > 0) return 'var(--green)';
+  if (pnl < 0) return 'var(--red)';
+  return 'var(--text-muted)';
 }
 
 function renderPost(post) {
   const date = post.date
-    ? new Date(post.date).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+    ? new Date(post.date).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' })
+    : '';
+
+  const resultCls = post.result === 'Won' ? 'score-high' : post.result === 'Lost' ? 'score-low' : '';
+  const pnlSign   = post.flat_pnl > 0 ? '+' : '';
+  const typeLabel = post.pick_type === 'underdog'
+    ? `<span style="font-size:0.65rem;font-weight:700;color:var(--gold);background:rgba(201,168,76,0.12);padding:0.1rem 0.35rem;border-radius:3px">DOG</span>`
+    : post.pick_type === 'favorite'
+    ? `<span style="font-size:0.65rem;font-weight:700;color:var(--text-muted);background:var(--bg3);padding:0.1rem 0.35rem;border-radius:3px">FAV</span>`
+    : '';
+
+  // Fired modifiers pills
+  const modPills = (post.fired_modifiers || []).map(m =>
+    `<span style="font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:3px;background:var(--bg3);color:var(--text-muted);white-space:nowrap">${m}</span>`
+  ).join('');
+
+  // Score composites
+  const compLine = (post.home_composite != null && post.away_composite != null)
+    ? `<span class="text-muted" style="font-size:0.72rem">
+         Model: ${post.away_team?.split(' ').pop()} ${post.away_composite}
+         vs ${post.home_team?.split(' ').pop()} ${post.home_composite}
+       </span>`
     : '';
 
   return `
     <div class="card" style="margin-bottom:1rem" id="post-${post.id}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem">
+
+      <!-- Header row -->
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.6rem">
         <div>
-          <div style="font-size:1.05rem;font-weight:700;color:var(--text)">${post.title}</div>
-          <div class="text-muted" style="font-size:0.78rem;margin-top:0.2rem">${date} &middot; Week ${post.week}</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text)">
+            ${teamLogo(post.away_slug)}${post.away_team?.split(' ').pop() || ''}
+            <span class="text-muted" style="font-weight:400"> @ </span>
+            ${teamLogo(post.home_slug)}${post.home_team?.split(' ').pop() || ''}
+          </div>
+          <div class="text-muted" style="font-size:0.75rem;margin-top:0.15rem">
+            ${date}${post.week ? ` · Week ${post.week}` : ''}
+          </div>
         </div>
-        <span class="score ${post.result?.toLowerCase() === 'won' ? 'score-high' : post.result?.toLowerCase() === 'lost' ? 'score-low' : 'score-none'}"
-          style="font-size:0.8rem">${post.result || '—'}</span>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0">
+          ${typeLabel}
+          <span class="score ${resultCls}" style="font-size:0.82rem">${post.result || '—'}</span>
+          <span style="font-size:0.82rem;font-weight:700;color:${pnlColor(post.flat_pnl)}">${pnlSign}$${Math.abs(post.flat_pnl || 0).toFixed(0)}</span>
+        </div>
       </div>
 
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.75rem;font-size:0.82rem">
+      <!-- Pick + confidence row -->
+      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;font-size:0.8rem;margin-bottom:0.6rem">
         ${post.pick ? `<div><span class="text-muted">Pick:</span> <strong>${post.pick}</strong></div>` : ''}
-        ${post.confidence ? `<div><span class="text-muted">Confidence:</span> <strong>${post.confidence}</strong></div>` : ''}
+        ${post.confidence != null ? `<div><span class="text-muted">Conf:</span> <strong style="color:${confColor(post.confidence)}">${post.confidence}</strong></div>` : ''}
         ${post.edge_score != null ? `<div><span class="text-muted">Edge:</span> <strong class="${post.edge_score >= 0 ? 'text-green' : 'text-red'}">${post.edge_score >= 0 ? '+' : ''}${post.edge_score}</strong></div>` : ''}
+        ${post.spread != null ? `<div><span class="text-muted">Spread:</span> <strong>${post.spread > 0 ? '+' : ''}${post.spread}</strong></div>` : ''}
         ${post.actual_score ? `<div><span class="text-muted">Final:</span> <strong>${post.actual_score}</strong></div>` : ''}
       </div>
 
-      ${post.lesson ? `
-        <div style="background:var(--bg3);border-left:3px solid var(--gold);padding:0.6rem 0.875rem;border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;color:var(--text-dim)">
-          <span style="color:var(--gold);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em">Lesson &nbsp;</span>${post.lesson}
+      <!-- Result line -->
+      ${post.result_line ? `
+        <div style="font-size:0.83rem;color:var(--text-dim);margin-bottom:0.4rem">${post.result_line}</div>` : ''}
+
+      <!-- Score delta -->
+      ${post.delta_line ? `
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.4rem">${post.delta_line}
+          ${compLine}
         </div>` : ''}
 
+      <!-- Fired modifiers -->
+      ${modPills ? `
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.5rem">
+          <span style="font-size:0.65rem;color:var(--text-muted);padding-top:0.15rem">Fired:</span>
+          ${modPills}
+        </div>` : ''}
+
+      <!-- Lesson -->
+      ${post.lesson_line ? `
+        <div style="background:var(--bg3);border-left:3px solid ${post.result === 'Lost' ? 'var(--red)' : 'var(--gold)'};padding:0.55rem 0.875rem;border-radius:0 var(--radius) var(--radius) 0;font-size:0.82rem;color:var(--text-dim);margin-top:0.25rem">
+          <span style="color:${post.result === 'Lost' ? 'var(--red)' : 'var(--gold)'};font-weight:700;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em">
+            ${post.result === 'Lost' ? 'Miss' : 'Lesson'}&nbsp;
+          </span>${post.lesson_line}
+        </div>` : post.lesson ? `
+        <div style="background:var(--bg3);border-left:3px solid var(--gold);padding:0.55rem 0.875rem;border-radius:0 var(--radius) var(--radius) 0;font-size:0.82rem;color:var(--text-dim);margin-top:0.25rem">
+          <span style="color:var(--gold);font-weight:700;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em">Lesson&nbsp;</span>${post.lesson}
+        </div>` : ''}
+
+      <!-- YouTube -->
       ${post.youtube_id ? `
         <div style="margin-top:0.75rem">
           <a href="https://youtube.com/watch?v=${post.youtube_id}" target="_blank" rel="noopener"
@@ -72,15 +167,31 @@ function renderPost(post) {
     </div>`;
 }
 
+function applyFilters() {
+  const result = document.getElementById('filter-result').value;
+  const week   = document.getElementById('filter-week').value;
+  const type   = document.getElementById('filter-type').value;
+
+  const filtered = allPosts.filter(p => {
+    if (result && p.result !== result) return false;
+    if (week   && String(p.week) !== week) return false;
+    if (type   && p.pick_type !== type) return false;
+    return true;
+  });
+
+  document.getElementById('filter-count').textContent = `${filtered.length} post${filtered.length !== 1 ? 's' : ''}`;
+  document.getElementById('blog-container').innerHTML =
+    filtered.length ? filtered.map(renderPost).join('') : `<div class="text-muted" style="padding:1rem 0">No posts match this filter.</div>`;
+}
+
 async function init() {
-  const data  = await fetch(`${ROOT}data/blog.json`).then(r => r.json()).catch(() => ({ posts: [] }));
-  const posts = (data.posts || []).filter(p => p.published !== false)
+  const bust = `?v=${Date.now()}`;
+  const data  = await fetch(`${ROOT}data/blog.json${bust}`).then(r => r.json()).catch(() => ({ posts: [] }));
+  allPosts = (data.posts || []).filter(p => p.published !== false)
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-  const container = document.getElementById('blog-container');
-
-  if (!posts.length) {
-    container.innerHTML = `
+  if (!allPosts.length) {
+    document.getElementById('blog-container').innerHTML = `
       <div class="empty">
         <div class="empty-icon">&#9997;</div>
         <div>No posts yet.</div>
@@ -92,9 +203,51 @@ async function init() {
     return;
   }
 
-  container.innerHTML = posts.map(renderPost).join('');
+  // Summary tiles
+  const wins   = allPosts.filter(p => p.result === 'Won').length;
+  const losses = allPosts.filter(p => p.result === 'Lost').length;
+  const pushes = allPosts.filter(p => p.result === 'Push').length;
+  const totalPnl = allPosts.reduce((s, p) => s + (p.flat_pnl || 0), 0);
+  const dogs   = allPosts.filter(p => p.pick_type === 'underdog');
+  const dogWins = dogs.filter(p => p.result === 'Won').length;
 
-  // Scroll to anchor if present
+  const tilesEl = document.getElementById('blog-tiles');
+  tilesEl.style.display = '';
+  tilesEl.innerHTML = `
+    <div class="summary-tile">
+      <div class="tile-value">${wins}-${losses}${pushes ? '-'+pushes : ''}</div>
+      <div class="tile-label">Record</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${totalPnl >= 0 ? 'text-green' : 'text-red'}">${totalPnl >= 0 ? '+' : ''}$${Math.abs(totalPnl).toFixed(0)}</div>
+      <div class="tile-label">Flat P&L</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${allPosts.length}</div>
+      <div class="tile-label">Total Posts</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value text-gold">${dogs.length ? Math.round(dogWins/dogs.length*100) : '—'}${dogs.length ? '%' : ''}</div>
+      <div class="tile-label">Dog Win Rate</div>
+    </div>`;
+
+  // Populate week filter
+  const weeks = [...new Set(allPosts.map(p => p.week).filter(Boolean))].sort((a,b) => b-a);
+  const weekSel = document.getElementById('filter-week');
+  weeks.forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w; opt.textContent = `Week ${w}`;
+    weekSel.appendChild(opt);
+  });
+
+  // Show filters
+  document.getElementById('blog-filters').style.display = 'flex';
+  document.getElementById('blog-sub').textContent =
+    `${allPosts.length} post${allPosts.length !== 1 ? 's' : ''} · ${wins}W ${losses}L · updated ${data.last_updated || '—'}`;
+
+  applyFilters();
+
+  // Scroll to anchor
   const hash = window.location.hash.slice(1);
   if (hash) {
     const el = document.getElementById(`post-${hash}`);
