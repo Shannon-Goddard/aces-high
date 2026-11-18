@@ -18,10 +18,11 @@ import re
 import urllib.request
 from datetime import datetime, timezone
 
-DATA_DIR     = os.path.join(os.path.dirname(__file__), '..', 'data')
-CSV_FILE     = os.path.join(DATA_DIR, 'coaches-data.csv')
-COACHES_FILE = os.path.join(DATA_DIR, 'coaches.json')
-META_FILE    = os.path.join(DATA_DIR, 'metadata.json')
+DATA_DIR      = os.path.join(os.path.dirname(__file__), '..', 'data')
+CSV_FILE      = os.path.join(DATA_DIR, 'coaches-data.csv')
+CAREERS_FILE  = os.path.join(DATA_DIR, 'coach_playing_careers.csv')
+COACHES_FILE  = os.path.join(DATA_DIR, 'coaches.json')
+META_FILE     = os.path.join(DATA_DIR, 'metadata.json')
 
 HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
@@ -71,6 +72,38 @@ ROLE_LABELS = {'hc': 'Head Coach', 'oc': 'Offensive Coordinator', 'dc': 'Defensi
 CHANGE_KEYWORDS = ['fired', 'hired', 'interim', 'named head coach', 'named offensive coordinator',
                    'named defensive coordinator', 'parts ways', 'relieved of duties', 'steps down',
                    'resigns', 'new head coach', 'new offensive coordinator', 'new defensive coordinator']
+
+
+# ── PLAYING CAREER LOADER ────────────────────────────────────────────────────
+
+def load_playing_careers(path):
+    """
+    Load coach_playing_careers.csv.
+    Returns dict: coach_name -> career dict.
+    Rows with source=needs_manual and empty played_nfl are incomplete — still included,
+    fetch_coaches.py will note them as unverified.
+    """
+    careers = {}
+    if not os.path.exists(path):
+        print(f'  WARNING: {path} not found — playing career data unavailable')
+        return careers
+    with open(path, encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            name = row['coach_name'].strip()
+            careers[name] = {
+                'played_nfl':       row.get('played_nfl', '').upper() == 'TRUE',
+                'played_college':   row.get('played_college', '').upper() == 'TRUE',
+                'nfl_position':     row.get('nfl_position', '') or None,
+                'college_position': row.get('college_position', '') or None,
+                'college':          row.get('college', '') or None,
+                'birth_year':       int(row['birth_year']) if row.get('birth_year') else None,
+                'nfl_draft_year':   int(row['nfl_draft_year']) if row.get('nfl_draft_year') else None,
+                'nfl_draft_round':  int(row['nfl_draft_round']) if row.get('nfl_draft_round') else None,
+                'career_source':    row.get('source', 'unknown'),
+            }
+    verified = sum(1 for v in careers.values() if v['career_source'] != 'needs_manual')
+    print(f'  Loaded {len(careers)} coach career rows ({verified} verified, {len(careers)-verified} need manual fill)')
+    return careers
 
 
 # ── CSV PARSER ────────────────────────────────────────────────────────────────
@@ -180,7 +213,7 @@ def detect_changes(headlines, current_staff):
 
 # ── MBTI SIGNAL INFERENCE ─────────────────────────────────────────────────────
 
-def infer_mbti_signals(name, pfr_rec, role):
+def infer_mbti_signals(name, pfr_rec, role, career=None):
     """
     Infer MBTI axis signals from available data.
     Returns dict of signals — not a final type, just directional evidence.
@@ -198,6 +231,18 @@ def infer_mbti_signals(name, pfr_rec, role):
         'jp_evidence': ['Accumulating — needs press conference language patterns'],
         'confidence':  'low',
     }
+
+    # ── Playing career signals ───────────────────────────────────────────────
+    if career:
+        if career.get('played_nfl'):
+            signals['ie_evidence'].append('Played in NFL — understands physical demands from inside the game')
+            signals['tf_evidence'].append('NFL playing experience — analytical understanding of player reality')
+        elif career.get('played_college'):
+            pos = career.get('college_position') or career.get('nfl_position') or ''
+            signals['ie_evidence'].append(f'Played college football ({pos}) — competitive playing background')
+        else:
+            signals['ie_evidence'].append('No playing background — pure schemer/analyst path')
+            signals['tf_evidence'].append('No playing experience — may over-index on scheme vs player welfare')
 
     if not pfr_rec:
         return signals
@@ -246,6 +291,10 @@ def infer_mbti_signals(name, pfr_rec, role):
     if sbs >= 1:
         signals['tf'] = 'T'
         signals['tf_evidence'].append(f'{sbs} Super Bowl win(s) — elite systematic execution under pressure')
+
+    # Playing career boosts T confidence if already leaning T
+    if career and career.get('played_nfl') and signals['tf'] == 'T':
+        signals['tf_evidence'].append('NFL playing career + analytical record = strong T signal')
 
     # Confidence: both axes inferred = medium, one = low
     if signals['ie'] and signals['tf']:
@@ -369,7 +418,8 @@ def main():
     print(f'fetch_coaches.py — {now_str}')
     print(f'Data source: Pro Football Reference https://www.pro-football-reference.com/coaches/')
 
-    pfr_records = load_pfr_records(CSV_FILE)
+    pfr_records     = load_pfr_records(CSV_FILE)
+    playing_careers = load_playing_careers(CAREERS_FILE)
 
     # Scan news for coaching changes
     print('\nScanning ESPN news for coaching changes...')
@@ -398,22 +448,24 @@ def main():
                         pfr_rec = v
                         break
 
-            signals   = infer_mbti_signals(coach_name, pfr_rec, role)
+            career    = playing_careers.get(coach_name)
+            signals   = infer_mbti_signals(coach_name, pfr_rec, role, career)
             fit, fit_ev = role_fit_score(signals, role, pfr_rec)
             mbti_type = inferred_type(signals)
 
             entry = {
-                'name':          coach_name,
-                'team_slug':     slug,
-                'role':          role,
-                'role_label':    ROLE_LABELS[role],
-                'pfr_record':    pfr_rec,
-                'mbti_signals':  signals,
-                'mbti_type':     mbti_type,
+                'name':           coach_name,
+                'team_slug':      slug,
+                'role':           role,
+                'role_label':     ROLE_LABELS[role],
+                'playing_career': career,
+                'pfr_record':     pfr_rec,
+                'mbti_signals':   signals,
+                'mbti_type':      mbti_type,
                 'role_fit_score': fit,
                 'role_fit_evidence': fit_ev,
-                'last_updated':  now_str,
-                'pfr_source':    'https://www.pro-football-reference.com/coaches/',
+                'last_updated':   now_str,
+                'pfr_source':     'https://www.pro-football-reference.com/coaches/',
             }
             coaches_out.append(entry)
 
