@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Players</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Players</div>
+    <div class="page-sub" id="players-sub">Loading...</div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;align-items:center">
+    <input id="search" type="text" placeholder="Search player..." oninput="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem;min-width:180px">
+
+    <select id="filter-team" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Teams</option>
+    </select>
+
+    <select id="filter-pos" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Positions</option>
+      <option>QB</option><option>WR</option><option>TE</option><option>RB</option>
+      <option>OL</option><option>DL</option><option>LB</option><option>DB</option>
+      <option>K</option><option>P</option><option>LS</option>
+    </select>
+
+    <select id="filter-injury" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="">All Health</option>
+      <option value="out">Out / Doubtful</option>
+      <option value="questionable">Questionable</option>
+      <option value="active">Active</option>
+    </select>
+
+    <select id="sort-by" onchange="applyFilters()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.75rem;border-radius:var(--radius);font-size:0.85rem">
+      <option value="skill">Sort: Skill</option>
+      <option value="body">Sort: Body</option>
+      <option value="hunger">Sort: Hunger</option>
+      <option value="name">Sort: Name</option>
+    </select>
+
+    <span id="result-count" class="text-muted" style="font-size:0.8rem;margin-left:0.25rem"></span>
+  </div>
+
+  <div id="players-grid" class="grid-3"></div>
+  <div id="load-more-wrap" style="text-align:center;margin-top:1.5rem;display:none">
+    <button onclick="loadMore()"
+      style="background:var(--bg2);border:1px solid var(--border);color:var(--text-dim);padding:0.5rem 1.5rem;border-radius:var(--radius);cursor:pointer;font-size:0.85rem">
+      Load more
+    </button>
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT     = '../';
+const PAGE_SIZE = 60;
+
+const TEAM_NAMES = {
+  'BUF':'Buffalo Bills','MIA':'Miami Dolphins','NE':'New England Patriots',
+  'NYJ':'New York Jets','BAL':'Baltimore Ravens','CIN':'Cincinnati Bengals',
+  'CLE':'Cleveland Browns','PIT':'Pittsburgh Steelers','HOU':'Houston Texans',
+  'IND':'Indianapolis Colts','JAX':'Jacksonville Jaguars','TEN':'Tennessee Titans',
+  'DEN':'Denver Broncos','KC':'Kansas City Chiefs','LV':'Las Vegas Raiders',
+  'LAC':'Los Angeles Chargers','DAL':'Dallas Cowboys','NYG':'New York Giants',
+  'PHI':'Philadelphia Eagles','WAS':'Washington Commanders','CHI':'Chicago Bears',
+  'DET':'Detroit Lions','GB':'Green Bay Packers','MIN':'Minnesota Vikings',
+  'ATL':'Atlanta Falcons','CAR':'Carolina Panthers','NO':'New Orleans Saints',
+  'TB':'Tampa Bay Buccaneers','ARI':'Arizona Cardinals','LA':'Los Angeles Rams',
+  'SF':'San Francisco 49ers','SEA':'Seattle Seahawks'
+};
+
+const SLUG_MAP = {
+  'BUF':'buf','MIA':'mia','NE':'ne','NYJ':'nyj','BAL':'bal','CIN':'cin',
+  'CLE':'cle','PIT':'pit','HOU':'hou','IND':'ind','JAX':'jax','TEN':'ten',
+  'DEN':'den','KC':'kc','LV':'lv','LAC':'lac','DAL':'dal','NYG':'nyg',
+  'PHI':'phi','WAS':'wsh','CHI':'chi','DET':'det','GB':'gb','MIN':'min',
+  'ATL':'atl','CAR':'car','NO':'no','TB':'tb','ARI':'ari','LA':'lar',
+  'SF':'sf','SEA':'sea'
+};
+
+function teamLogoUrl(slug) {
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png`;
+}
+
+function injuryTier(status) {
+  if (!status || status === 'nan' || status === 'None') return 'active';
+  const s = status.toLowerCase();
+  if (s.includes('out') || s.includes('doubtful')) return 'out';
+  if (s.includes('question')) return 'questionable';
+  return 'active';
+}
+
+function injuryBadge(status) {
+  const tier = injuryTier(status);
+  if (tier === 'active') return '';
+  const cls = tier === 'out' ? 'flag-injury' : 'flag-distract';
+  return `<span class="flag ${cls}" style="font-size:0.65rem;padding:0.1rem 0.4rem">${status}</span>`;
+}
+
+function scoreClass(s, max) {
+  const pct = s / max * 100;
+  if (pct >= 65) return 'score-high';
+  if (pct >= 40) return 'score-mid';
+  return 'score-low';
+}
+
+function hungerScore(p) {
+  return p.draft?.hunger_seed ?? null;
+}
+
+function renderCard(p) {
+  const abbr    = (p.team || '').toUpperCase();
+  const slug    = SLUG_MAP[abbr] || abbr.toLowerCase();
+  const skill   = p.layer2_skill?.skill_score ?? null;
+  const body    = p.layer1_body?.body_score ?? null;
+  const hunger  = hungerScore(p);
+  const status  = p.injury?.report_status || '';
+  const injury  = p.injury?.primary_injury || '';
+  const age     = p.layer1_body?.age ? p.layer1_body.age.toFixed(1) : '—';
+  const exp     = p.layer1_body?.years_exp ?? '—';
+  const snap    = p.layer1_body?.snap_pct != null ? Math.round(p.layer1_body.snap_pct * 100) + '%' : '—';
+
+  const skillBar = skill !== null ? `
+    <div class="progress-wrap" style="margin-bottom:0.2rem">
+      <span style="font-size:0.7rem;color:var(--text-muted);min-width:42px">Skill</span>
+      <div class="progress-bar"><div class="progress-fill ${scoreClass(skill,100)}" style="width:${skill}%"></div></div>
+      <span class="progress-label" style="font-size:0.72rem">${skill.toFixed(0)}</span>
+    </div>` : '';
+
+  const bodyBar = body !== null ? `
+    <div class="progress-wrap" style="margin-bottom:0.2rem">
+      <span style="font-size:0.7rem;color:var(--text-muted);min-width:42px">Body</span>
+      <div class="progress-bar"><div class="progress-fill ${scoreClass(body,40)}" style="width:${Math.min(100,body/40*100)}%"></div></div>
+      <span class="progress-label" style="font-size:0.72rem">${body.toFixed(0)}</span>
+    </div>` : '';
+
+  const hungerBar = hunger !== null ? `
+    <div class="progress-wrap">
+      <span style="font-size:0.7rem;color:var(--text-muted);min-width:42px">Hunger</span>
+      <div class="progress-bar"><div class="progress-fill ${scoreClass(hunger,100)}" style="width:${hunger}%"></div></div>
+      <span class="progress-label" style="font-size:0.72rem">${hunger}</span>
+    </div>` : '';
+
+  return `
+    <div class="card card-sm" style="display:flex;flex-direction:column;gap:0.6rem">
+      <div class="player-header">
+        <img class="player-headshot" src="${p.headshot || ''}"
+          onerror="this.src=''" alt="${p.name}">
+        <div style="flex:1;min-width:0">
+          <div class="player-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+          <div class="player-meta">
+            <img src="${teamLogoUrl(slug)}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle;margin-right:3px" onerror="this.style.display='none'">
+            ${abbr} &middot; ${p.position || '—'} &middot; Age ${age} &middot; Yr ${exp}
+          </div>
+          <div class="player-flags">
+            ${injuryBadge(status)}
+            ${injury && injuryTier(status) !== 'active' ? `<span class="text-muted" style="font-size:0.7rem">${injury}</span>` : ''}
+          </div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          ${skill !== null ? `<div class="score ${scoreClass(skill,100)}" style="font-size:0.72rem">${skill.toFixed(0)}</div>` : ''}
+          <div class="text-muted" style="font-size:0.65rem;margin-top:0.2rem">Snap ${snap}</div>
+        </div>
+      </div>
+      ${skillBar}${bodyBar}${hungerBar}
+      ${p.layer1_body?.age_label ? `<div class="text-muted" style="font-size:0.7rem">${p.layer1_body.age_label.replace(/_/g,' ')} &middot; ${p.layer1_body.career_label?.replace(/_/g,' ') || ''}</div>` : ''}
+    </div>`;
+}
+
+let allPlayers   = [];
+let filtered     = [];
+let displayCount = PAGE_SIZE;
+
+function applyFilters() {
+  const q      = document.getElementById('search').value.toLowerCase().trim();
+  const team   = document.getElementById('filter-team').value;
+  const pos    = document.getElementById('filter-pos').value;
+  const health = document.getElementById('filter-injury').value;
+  const sortBy = document.getElementById('sort-by').value;
+
+  filtered = allPlayers.filter(p => {
+    if (q && !p.name.toLowerCase().includes(q)) return false;
+    if (team && (p.team || '').toUpperCase() !== team) return false;
+    if (pos  && p.position !== pos) return false;
+    if (health) {
+      const tier = injuryTier(p.injury?.report_status || '');
+      if (health === 'out'          && tier !== 'out')          return false;
+      if (health === 'questionable' && tier !== 'questionable') return false;
+      if (health === 'active'       && tier !== 'active')       return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sortBy === 'skill')  return (b.layer2_skill?.skill_score || 0) - (a.layer2_skill?.skill_score || 0);
+    if (sortBy === 'body')   return (b.layer1_body?.body_score   || 0) - (a.layer1_body?.body_score   || 0);
+    if (sortBy === 'hunger') return (b.draft?.hunger_seed        || 0) - (a.draft?.hunger_seed        || 0);
+    if (sortBy === 'name')   return a.name.localeCompare(b.name);
+    return 0;
+  });
+
+  displayCount = PAGE_SIZE;
+  renderPage();
+}
+
+function renderPage() {
+  const slice = filtered.slice(0, displayCount);
+  document.getElementById('players-grid').innerHTML = slice.map(renderCard).join('');
+  document.getElementById('result-count').textContent = `${filtered.length} players`;
+  const wrap = document.getElementById('load-more-wrap');
+  wrap.style.display = filtered.length > displayCount ? 'block' : 'none';
+}
+
+function loadMore() {
+  displayCount += PAGE_SIZE;
+  renderPage();
+}
+
+async function init() {
+  const data = await fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => []);
+  allPlayers = Array.isArray(data) ? data : (data.players || []);
+
+  // Populate team dropdown
+  const teams = [...new Set(allPlayers.map(p => (p.team || '').toUpperCase()).filter(Boolean))].sort();
+  const sel = document.getElementById('filter-team');
+  teams.forEach(abbr => {
+    const opt = document.createElement('option');
+    opt.value = abbr;
+    opt.textContent = `${abbr} — ${TEAM_NAMES[abbr] || abbr}`;
+    sel.appendChild(opt);
+  });
+
+  document.getElementById('players-sub').textContent =
+    `${allPlayers.length} players tracked · Layer 1 body + Layer 2 skill scored`;
+
+  // Pre-filter from URL params
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('team')) {
+    document.getElementById('filter-team').value = params.get('team').toUpperCase();
+  }
+  if (params.get('pos')) {
+    document.getElementById('filter-pos').value = params.get('pos');
+  }
+
+  applyFilters();
+}
+
+init();
+</script>
+</body>
+</html>

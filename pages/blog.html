@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Blog</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Blog</div>
+    <div class="page-sub">Post-game breakdowns. What we got right. What we missed. What we learned.</div>
+  </div>
+
+  <div id="blog-container"></div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT = '../';
+
+function resultColor(r) {
+  if (!r) return 'text-muted';
+  const l = r.toLowerCase();
+  if (l === 'won')  return 'text-green';
+  if (l === 'lost') return 'text-red';
+  return 'text-muted';
+}
+
+function renderPost(post) {
+  const date = post.date
+    ? new Date(post.date).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+    : '';
+
+  return `
+    <div class="card" style="margin-bottom:1rem" id="post-${post.id}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem">
+        <div>
+          <div style="font-size:1.05rem;font-weight:700;color:var(--text)">${post.title}</div>
+          <div class="text-muted" style="font-size:0.78rem;margin-top:0.2rem">${date} &middot; Week ${post.week}</div>
+        </div>
+        <span class="score ${post.result?.toLowerCase() === 'won' ? 'score-high' : post.result?.toLowerCase() === 'lost' ? 'score-low' : 'score-none'}"
+          style="font-size:0.8rem">${post.result || '—'}</span>
+      </div>
+
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.75rem;font-size:0.82rem">
+        ${post.pick ? `<div><span class="text-muted">Pick:</span> <strong>${post.pick}</strong></div>` : ''}
+        ${post.confidence ? `<div><span class="text-muted">Confidence:</span> <strong>${post.confidence}</strong></div>` : ''}
+        ${post.edge_score != null ? `<div><span class="text-muted">Edge:</span> <strong class="${post.edge_score >= 0 ? 'text-green' : 'text-red'}">${post.edge_score >= 0 ? '+' : ''}${post.edge_score}</strong></div>` : ''}
+        ${post.actual_score ? `<div><span class="text-muted">Final:</span> <strong>${post.actual_score}</strong></div>` : ''}
+      </div>
+
+      ${post.lesson ? `
+        <div style="background:var(--bg3);border-left:3px solid var(--gold);padding:0.6rem 0.875rem;border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;color:var(--text-dim)">
+          <span style="color:var(--gold);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em">Lesson &nbsp;</span>${post.lesson}
+        </div>` : ''}
+
+      ${post.youtube_id ? `
+        <div style="margin-top:0.75rem">
+          <a href="https://youtube.com/watch?v=${post.youtube_id}" target="_blank" rel="noopener"
+            style="font-size:0.82rem;color:var(--red)">&#9654; Watch breakdown on YouTube</a>
+        </div>` : ''}
+    </div>`;
+}
+
+async function init() {
+  const data  = await fetch(`${ROOT}data/blog.json`).then(r => r.json()).catch(() => ({ posts: [] }));
+  const posts = (data.posts || []).filter(p => p.published !== false)
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+  const container = document.getElementById('blog-container');
+
+  if (!posts.length) {
+    container.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">&#9997;</div>
+        <div>No posts yet.</div>
+        <div class="mt-1">Post-game breakdowns appear here after results are recorded.</div>
+        <div class="mt-1" style="font-size:0.78rem">
+          Run <code style="background:var(--bg3);padding:0.1rem 0.4rem;border-radius:3px">python scripts/record_outcome.py</code> after games finish.
+        </div>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = posts.map(renderPost).join('');
+
+  // Scroll to anchor if present
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const el = document.getElementById(`post-${hash}`);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

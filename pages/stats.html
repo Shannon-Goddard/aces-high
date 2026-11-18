@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace's High — Stats</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Stats</div>
+    <div class="page-sub" id="stats-sub">System performance analytics</div>
+  </div>
+
+  <!-- Overall record -->
+  <div class="summary-grid" id="overall-tiles"></div>
+
+  <!-- Two column layout -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem" id="stats-body">
+
+    <!-- Situation breakdown -->
+    <div>
+      <div class="section-label">By Situation</div>
+      <div id="situation-list"></div>
+    </div>
+
+    <!-- Modifier accuracy -->
+    <div>
+      <div class="section-label">Modifier Accuracy</div>
+      <div id="modifier-list"></div>
+    </div>
+
+  </div>
+
+  <!-- Confidence calibration full width -->
+  <div style="margin-top:1.5rem">
+    <div class="section-label">Confidence Calibration</div>
+    <div class="text-muted" style="font-size:0.8rem;margin-bottom:0.75rem">
+      Are our confidence scores accurate? An 80-confidence pick should win ~80% of the time.
+    </div>
+    <div id="calibration-list"></div>
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+<script>
+const ROOT = '../';
+
+function empty(msg) {
+  return `<div class="text-muted" style="font-size:0.82rem;padding:0.75rem 0">${msg}</div>`;
+}
+
+function recordBar(wins, losses, pushes) {
+  const total = wins + losses + (pushes || 0);
+  if (!total) return empty('No data yet.');
+  const winPct = Math.round(wins / total * 100);
+  const fill   = winPct >= 55 ? 'fill-green' : winPct >= 45 ? 'fill-yellow' : 'fill-red';
+  const color  = winPct >= 55 ? 'text-green' : winPct >= 45 ? 'text-yellow' : 'text-red';
+  return `
+    <div class="progress-wrap">
+      <div class="progress-bar" style="flex:1">
+        <div class="progress-fill ${fill}" style="width:${winPct}%"></div>
+      </div>
+      <span class="progress-label ${color}">${winPct}%</span>
+      <span class="text-muted" style="font-size:0.75rem;margin-left:0.5rem">${wins}W ${losses}L${pushes ? ' ' + pushes + 'P' : ''}</span>
+    </div>`;
+}
+
+async function init() {
+  const [statsRes, ledgerRes] = await Promise.all([
+    fetch(`${ROOT}data/stats.json`).then(r => r.json()).catch(() => null),
+    fetch(`${ROOT}data/ledger.json`).then(r => r.json()).catch(() => null)
+  ]);
+
+  const stats  = statsRes  || {};
+  const ledger = ledgerRes || {};
+  const s      = ledger.summary || {};
+  const flat   = s.flat || {};
+  const wtd    = s.confidence_weighted || {};
+
+  if (stats.last_updated) {
+    document.getElementById('stats-sub').textContent = `Last updated: ${stats.last_updated}`;
+  }
+
+  // Overall tiles — pull from ledger since stats.json is populated by record_outcome
+  document.getElementById('overall-tiles').innerHTML = `
+    <div class="summary-tile">
+      <div class="tile-value">${flat.wins || 0}-${flat.losses || 0}${flat.pushes ? '-'+flat.pushes : ''}</div>
+      <div class="tile-label">Spread Record</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${(flat.roi_pct||0) >= 0 ? 'text-green' : 'text-red'}">${(flat.roi_pct||0) >= 0 ? '+' : ''}${flat.roi_pct || 0}%</div>
+      <div class="tile-label">Flat ROI</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value ${(wtd.roi_pct||0) >= 0 ? 'text-green' : 'text-red'}">${(wtd.roi_pct||0) >= 0 ? '+' : ''}${wtd.roi_pct || 0}%</div>
+      <div class="tile-label">Weighted ROI</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${flat.total_bets || 0}</div>
+      <div class="tile-label">Closed Bets</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value text-gold">${s.delta?.which_outperforms || '—'}</div>
+      <div class="tile-label">Outperforming</div>
+    </div>
+    <div class="summary-tile">
+      <div class="tile-value">${s.delta?.confidence_score_value || '—'}</div>
+      <div class="tile-label">Confidence Value</div>
+    </div>
+  `;
+
+  // Situation breakdown
+  const situations = stats.by_situation || {};
+  const sitEl = document.getElementById('situation-list');
+  const sitEntries = Object.entries(situations);
+  if (!sitEntries.some(([, v]) => v.wins + v.losses > 0)) {
+    sitEl.innerHTML = empty('No situational data yet — populates after results are recorded.');
+  } else {
+    sitEl.innerHTML = sitEntries.map(([key, v]) => `
+      <div style="margin-bottom:0.75rem">
+        <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.25rem;text-transform:capitalize">
+          ${key.replace(/_/g,' ')}
+        </div>
+        ${recordBar(v.wins, v.losses, v.pushes)}
+      </div>`).join('');
+  }
+
+  // Modifier accuracy
+  const mods  = stats.modifier_accuracy || {};
+  const modEl = document.getElementById('modifier-list');
+  const modEntries = Object.entries(mods);
+  if (!modEntries.length) {
+    modEl.innerHTML = empty('No modifier data yet — populates after Phase 2 modifiers are applied and results recorded.');
+  } else {
+    modEl.innerHTML = modEntries.map(([name, m]) => {
+      const pct   = m.accuracy !== null ? m.accuracy : null;
+      const color = pct === null ? 'text-muted' : pct >= 55 ? 'text-green' : 'text-red';
+      const fill  = pct === null ? 'fill-gold' : pct >= 55 ? 'fill-green' : 'fill-red';
+      return `
+        <div style="margin-bottom:0.75rem">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.25rem">
+            <span style="color:var(--text-dim);text-transform:capitalize">${name.replace(/_/g,' ')}</span>
+            <span class="${color}">${pct !== null ? pct + '%' : 'hypothesis'} <span class="text-muted">(${m.data_points} pts)</span></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill ${fill}" style="width:${pct || 50}%"></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // Confidence calibration
+  const buckets = s.confidence_calibration?.buckets || {};
+  const calEl   = document.getElementById('calibration-list');
+  const hasCal  = Object.values(buckets).some(b => b.bets > 0);
+  if (!hasCal) {
+    calEl.innerHTML = empty('No calibration data yet — populates after results are recorded.');
+  } else {
+    calEl.innerHTML = Object.entries(buckets).map(([range, b]) => {
+      const label   = range.replace('_', '–');
+      const midConf = parseInt(range.split('_')[0]) + 5;
+      const winPct  = b.bets > 0 ? Math.round(b.wins / b.bets * 100) : null;
+      const calibrated = winPct !== null && winPct >= midConf - 10;
+      const fill    = winPct === null ? '' : calibrated ? 'fill-green' : 'fill-red';
+      const color   = winPct === null ? 'text-muted' : calibrated ? 'text-green' : 'text-red';
+      return `
+        <div class="stat-row">
+          <span class="stat-label" style="min-width:60px">${label}</span>
+          <span class="text-muted" style="font-size:0.75rem;min-width:55px">${b.wins}/${b.bets} bets</span>
+          <div style="flex:1;margin:0 0.75rem">
+            <div class="progress-bar">
+              ${winPct !== null ? `<div class="progress-fill ${fill}" style="width:${winPct}%"></div>` : ''}
+            </div>
+          </div>
+          <span class="${color}" style="font-size:0.8rem;font-weight:700;min-width:40px;text-align:right">
+            ${winPct !== null ? winPct + '%' : '—'}
+          </span>
+          <span class="text-muted" style="font-size:0.72rem;min-width:80px;text-align:right">
+            target ~${midConf}%
+          </span>
+        </div>`;
+    }).join('');
+  }
+}
+
+init();
+</script>
+
+<style>
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+@media (max-width: 640px) {
+  #stats-body { grid-template-columns: 1fr !important; }
+}
+</style>
+</body>
+</html>
