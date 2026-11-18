@@ -32,6 +32,17 @@
   </div>
 </div>
 
+<!-- Drill-down modal -->
+<div id="drill-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeModal()">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:480px;max-height:80vh;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border)">
+      <div id="drill-title" style="font-weight:700;font-size:0.95rem"></div>
+      <button onclick="closeModal()" style="background:none;border:none;color:var(--text-muted);font-size:1.2rem;cursor:pointer;padding:0 0.25rem">✕</button>
+    </div>
+    <div id="drill-body" style="padding:1rem 1.25rem;overflow-y:auto;font-size:0.85rem"></div>
+  </div>
+</div>
+
 <footer>
   <div>Ace's High — NFL human performance intelligence system.</div>
   <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
@@ -122,12 +133,15 @@ function lineMovementBadge(p) {
   return badge;
 }
 
-function breakdownBar(label, value, max) {
+function breakdownBar(label, value, max, drillType, teamName, slug) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   const cls = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
+  const clickable = drillType
+    ? `onclick="drillDown('${drillType}','${teamName.replace(/'/g,"\\'")}',' ${slug}')" style="cursor:pointer" title="Click to see player breakdown"`
+    : '';
   return `
-    <div class="stat-row">
-      <span class="stat-label">${label}</span>
+    <div class="stat-row drill-row" ${clickable}>
+      <span class="stat-label">${label}${drillType ? ' <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span>' : ''}</span>
       <div class="progress-wrap" style="flex:1;margin-left:1rem">
         <div class="progress-bar">
           <div class="progress-fill ${cls}" style="width:${pct}%"></div>
@@ -207,15 +221,15 @@ function renderCard(p) {
               <span style="font-weight:700;font-size:0.85rem">${p.home_team}</span>
               <span class="score ${hb.composite >= 27 ? 'score-high' : hb.composite >= 24 ? 'score-mid' : 'score-low'}">${hb.composite}</span>
             </div>
-            ${breakdownBar('Body', hb.body, 40)}
-            ${breakdownBar('Skill', hb.skill, 100)}
-            ${breakdownBar('Hunger', hb.hunger, 100)}
-            <div class="stat-row">
-              <span class="stat-label">Silence Bonus</span>
+            ${breakdownBar('Body', hb.body, 40, 'body', p.home_team, homeSlug)}
+            ${breakdownBar('Skill', hb.skill, 100, 'skill', p.home_team, homeSlug)}
+            ${breakdownBar('Hunger', hb.hunger, 100, 'hunger', p.home_team, homeSlug)}
+            <div class="stat-row drill-row" onclick="drillDown('silence','${p.home_team.replace(/'/g,"\\'")}',' ${homeSlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
+              <span class="stat-label">Silence Bonus <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${hb.silence_bonus ? 'text-green' : 'text-muted'}">${hb.silence_bonus ? 'Yes' : 'No'}</span>
             </div>
-            <div class="stat-row">
-              <span class="stat-label">Injury Flag</span>
+            <div class="stat-row drill-row" onclick="drillDown('injury','${p.home_team.replace(/'/g,"\\'")}',' ${homeSlug}')" style="cursor:pointer" title="Click to see injured players">
+              <span class="stat-label">Injury Flag <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${hb.injury_flag ? 'text-red' : 'text-green'}">${hb.injury_flag ? 'Yes' : 'No'}</span>
             </div>
             <div class="stat-row">
@@ -229,15 +243,15 @@ function renderCard(p) {
               <span style="font-weight:700;font-size:0.85rem">${p.away_team}</span>
               <span class="score ${ab.composite >= 27 ? 'score-high' : ab.composite >= 24 ? 'score-mid' : 'score-low'}">${ab.composite}</span>
             </div>
-            ${breakdownBar('Body', ab.body, 40)}
-            ${breakdownBar('Skill', ab.skill, 100)}
-            ${breakdownBar('Hunger', ab.hunger, 100)}
-            <div class="stat-row">
-              <span class="stat-label">Silence Bonus</span>
+            ${breakdownBar('Body', ab.body, 40, 'body', p.away_team, awaySlug)}
+            ${breakdownBar('Skill', ab.skill, 100, 'skill', p.away_team, awaySlug)}
+            ${breakdownBar('Hunger', ab.hunger, 100, 'hunger', p.away_team, awaySlug)}
+            <div class="stat-row drill-row" onclick="drillDown('silence','${p.away_team.replace(/'/g,"\\'")}',' ${awaySlug}')" style="cursor:pointer" title="Click to learn about silence bonus">
+              <span class="stat-label">Silence Bonus <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${ab.silence_bonus ? 'text-green' : 'text-muted'}">${ab.silence_bonus ? 'Yes' : 'No'}</span>
             </div>
-            <div class="stat-row">
-              <span class="stat-label">Injury Flag</span>
+            <div class="stat-row drill-row" onclick="drillDown('injury','${p.away_team.replace(/'/g,"\\'")}',' ${awaySlug}')" style="cursor:pointer" title="Click to see injured players">
+              <span class="stat-label">Injury Flag <span style="font-size:0.65rem;color:var(--text-muted)">ⓘ</span></span>
               <span class="stat-value ${ab.injury_flag ? 'text-red' : 'text-green'}">${ab.injury_flag ? 'Yes' : 'No'}</span>
             </div>
             <div class="stat-row">
@@ -284,6 +298,180 @@ function toggleAccordion(header) {
   body.classList.toggle('open');
 }
 
+// ── Player data cache ────────────────────────────────────────────────────────
+let playerIndex = null;   // { slug: [players] }
+let practiceIndex = null; // { 'slug:name': entry }
+
+async function ensurePlayerData() {
+  if (playerIndex) return;
+  const [pRes, prRes] = await Promise.all([
+    fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => ({ players: [] })),
+    fetch(`${ROOT}data/practice.json`).then(r => r.json()).catch(() => ({ players: {} }))
+  ]);
+  playerIndex = {};
+  for (const p of (pRes.players || [])) {
+    const s = p.team ? p.team.toLowerCase() : '';
+    if (!playerIndex[s]) playerIndex[s] = [];
+    playerIndex[s].push(p);
+  }
+  practiceIndex = prRes.players || {};
+}
+
+// ── Modal ─────────────────────────────────────────────────────────────────────
+function showModal(title, html) {
+  document.getElementById('drill-title').textContent = title;
+  document.getElementById('drill-body').innerHTML = html;
+  document.getElementById('drill-modal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('drill-modal').style.display = 'none';
+}
+
+// ── Drill-down handlers ───────────────────────────────────────────────────────
+async function drillDown(type, teamName, slug) {
+  await ensurePlayerData();
+  const players = (playerIndex[slug.toLowerCase()] || []);
+
+  if (type === 'injury') {
+    const SEVERITY = { 'Out': 0, 'Doubtful': 1, 'Questionable': 2 };
+    const injured = players
+      .filter(p => p.injury && p.injury.report_status && SEVERITY[p.injury.report_status] !== undefined)
+      .sort((a, b) => SEVERITY[a.injury.report_status] - SEVERITY[b.injury.report_status]);
+
+    // Also check practice.json for high-concern players
+    const practiceFlags = Object.values(practiceIndex)
+      .filter(e => e.team_slug === slug.toLowerCase() && e.practice_score >= 60)
+      .sort((a, b) => b.practice_score - a.practice_score)
+      .slice(0, 5);
+
+    let html = '';
+    if (!injured.length && !practiceFlags.length) {
+      html = '<div style="color:var(--text-muted);font-size:0.85rem">No flagged players found in data.</div>';
+    } else {
+      if (injured.length) {
+        html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem">Official Report</div>`;
+        html += injured.map(p => {
+          const inj = p.injury;
+          const statusCls = inj.report_status === 'Out' ? 'text-red' : inj.report_status === 'Doubtful' ? 'text-red' : 'text-yellow';
+          const injury = inj.primary_injury || inj.practice_primary_injury || '—';
+          const practice = inj.practice_status ? inj.practice_status.replace('Participation in Practice','').trim() : '—';
+          return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
+            <img src="${p.headshot || ''}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
+            <div style="flex:1;min-width:120px">
+              <div style="font-weight:600;font-size:0.85rem">${p.name}</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">${p.position} · ${injury}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="${statusCls}" style="font-weight:700;font-size:0.8rem">${inj.report_status}</div>
+              <div style="font-size:0.72rem;color:var(--text-muted)">${practice}</div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+      if (practiceFlags.length) {
+        html += `<div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin:1rem 0 0.5rem">Practice Concern (score ≥60)</div>`;
+        html += practiceFlags.map(e => {
+          const scoreCls = e.practice_score >= 80 ? 'text-red' : 'text-yellow';
+          return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:0.85rem">${e.name}</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">${e.position} · ${e.short_comment ? e.short_comment.slice(0,80)+'…' : e.trajectory}</div>
+            </div>
+            <div class="${scoreCls}" style="font-weight:700;font-size:0.85rem">${e.practice_score}</div>
+          </div>`;
+        }).join('');
+      }
+    }
+    showModal(`${teamName} — Injury Flag`, html);
+
+  } else if (type === 'skill') {
+    const ranked = players
+      .filter(p => p.layer2_skill && p.layer2_skill.skill_score != null)
+      .sort((a, b) => b.layer2_skill.skill_score - a.layer2_skill.skill_score)
+      .slice(0, 8);
+    const html = ranked.length ? ranked.map(p => {
+      const s = p.layer2_skill;
+      const score = s.skill_score.toFixed(1);
+      const scoreCls = s.skill_score >= 80 ? 'text-green' : s.skill_score >= 50 ? 'text-yellow' : 'text-red';
+      const source = s.source === 'fallback' ? 'proxy' : s.source === 'ol_proxy' ? 'OL proxy' : 'stats';
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <img src="${p.headshot || ''}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--bg3);flex-shrink:0" onerror="this.style.display='none'">
+        <div style="flex:1">
+          <div style="font-weight:600;font-size:0.85rem">${p.name}</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)">${p.position} · ${source}</div>
+        </div>
+        <div class="${scoreCls}" style="font-weight:700;font-size:0.9rem">${score}</div>
+      </div>`;
+    }).join('') : '<div style="color:var(--text-muted)">No skill data.</div>';
+    showModal(`${teamName} — Skill Score Breakdown`, html);
+
+  } else if (type === 'body') {
+    const ranked = players
+      .filter(p => p.layer1_body && p.layer1_body.body_score != null)
+      .sort((a, b) => b.layer1_body.body_score - a.layer1_body.body_score);
+    const top5 = ranked.slice(0, 5);
+    const bot5 = ranked.slice(-5).reverse();
+    const row = (p) => {
+      const b = p.layer1_body;
+      const scoreCls = b.body_score >= 80 ? 'text-green' : b.body_score >= 50 ? 'text-yellow' : 'text-red';
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.4rem 0;border-bottom:1px solid var(--border)">
+        <div style="flex:1">
+          <div style="font-weight:600;font-size:0.83rem">${p.name}</div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">${p.position} · Age ${b.age} · ${b.weight_label || '—'} · ${b.career_label || '—'}</div>
+        </div>
+        <div class="${scoreCls}" style="font-weight:700">${b.body_score.toFixed(1)}</div>
+      </div>`;
+    };
+    const html = `
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem">Top 5 Body Score</div>
+      ${top5.map(row).join('')}
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin:1rem 0 0.4rem">Bottom 5 Body Score</div>
+      ${bot5.map(row).join('')}`;
+    showModal(`${teamName} — Body Score Breakdown`, html);
+
+  } else if (type === 'hunger') {
+    const withDraft = players.filter(p => p.draft && p.draft.draft_round);
+    const undrafted = players.filter(p => p.draft && !p.draft.draft_round);
+    const rounds = {};
+    for (const p of withDraft) {
+      const r = p.draft.draft_round;
+      if (!rounds[r]) rounds[r] = [];
+      rounds[r].push(p);
+    }
+    let html = `<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.75rem">${players.length} players · ${withDraft.length} drafted · ${undrafted.length} undrafted/UDFA</div>`;
+    html += Object.entries(rounds).sort((a,b) => +a[0] - +b[0]).map(([round, ps]) => {
+      const avgHunger = Math.round(ps.reduce((s,p) => s + (p.draft.hunger_seed||0), 0) / ps.length);
+      return `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.83rem">
+        <span style="color:var(--text-muted);min-width:60px">Round ${round}</span>
+        <span style="flex:1">${ps.length} players</span>
+        <span style="color:var(--gold)">avg hunger seed ${avgHunger}</span>
+      </div>`;
+    }).join('');
+    if (undrafted.length) {
+      const avgH = Math.round(undrafted.reduce((s,p) => s + (p.draft.hunger_seed||0), 0) / undrafted.length);
+      html += `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.35rem 0;font-size:0.83rem">
+        <span style="color:var(--text-muted);min-width:60px">UDFA</span>
+        <span style="flex:1">${undrafted.length} players</span>
+        <span style="color:var(--gold)">avg hunger seed ${avgH}</span>
+      </div>`;
+    }
+    showModal(`${teamName} — Hunger Breakdown`, html);
+
+  } else if (type === 'silence') {
+    const html = `<div style="font-size:0.85rem;color:var(--text-dim);line-height:1.8">
+      <div style="margin-bottom:0.75rem">The silence bonus fires when a team has <strong>no active noise flags</strong> in the news scan:</div>
+      <div style="padding:0.4rem 0;border-bottom:1px solid var(--border)">✓ No injury news flagged in headlines</div>
+      <div style="padding:0.4rem 0;border-bottom:1px solid var(--border)">✓ No distraction flags (contract disputes, off-field issues)</div>
+      <div style="padding:0.4rem 0;border-bottom:1px solid var(--border)">✓ No trade rumors or coaching instability</div>
+      <div style="padding:0.4rem 0">✓ No hunger-draining factors (team already locked in, nothing to prove)</div>
+      <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:4px;font-size:0.8rem">
+        When a team is operating in silence, the model applies a small composite boost — the assumption is that a quiet locker room is a focused locker room.
+      </div>
+    </div>`;
+    showModal(`${teamName} — Silence Bonus`, html);
+  }
+}
+
 async function init() {
   const [predRes, metaRes] = await Promise.all([
     fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
@@ -317,6 +505,8 @@ init();
 .filter-btn.active { background: var(--bg3); color: var(--gold); border-color: var(--gold-dim); }
 .accordion-bet { border-color: rgba(46,204,113,0.25); }
 .accordion-bet:hover { border-color: rgba(46,204,113,0.45); }
+.drill-row:hover { background: var(--bg3); border-radius: 3px; }
+.drill-row:hover .stat-label { color: var(--gold); }
 
 @media (max-width: 600px) {
   .accordion-body > div[style*="grid-template-columns:1fr 1fr"] {
