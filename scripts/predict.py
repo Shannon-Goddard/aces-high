@@ -70,52 +70,85 @@ def build_team_index(players):
     return index
 
 
+# Positions that anchor a team's performance — injuries here hurt most
+KEY_POSITIONS = {'QB', 'WR', 'RB', 'TE', 'DL', 'LB', 'DB', 'DE', 'DT', 'CB', 'S'}
+STARTER_SNAP_THRESHOLD = 0.40  # 40%+ snap share = meaningful contributor
+
+
+def _starter_weight(p):
+    """Weight a player by snap% — starters dominate, depth barely registers."""
+    snap = (p.get('layer1_body') or {}).get('snap_pct') or 0.0
+    return max(snap, 0.05)  # floor so everyone counts a little
+
+
 def team_body_score(players_on_team):
-    """Average body score for players who have one, weighted toward starters (snap_pct)."""
-    scores = []
+    """Snap-weighted body score — starters dominate."""
+    total_w, total_s = 0.0, 0.0
     for p in players_on_team:
-        b = p.get('layer1_body') or {}
-        score = b.get('body_score')
-        snap = b.get('snap_pct') or 0.3  # default mid-weight if unknown
-        if score is not None:
-            scores.append(score * snap)
-    if not scores:
-        return 50.0
-    return min(100.0, sum(scores) / max(1, len(scores)))
+        score = (p.get('layer1_body') or {}).get('body_score')
+        if score is None:
+            continue
+        w = _starter_weight(p)
+        total_s += score * w
+        total_w += w
+    return round(total_s / total_w, 1) if total_w else 50.0
 
 
 def team_skill_score(players_on_team):
-    """Average skill score for players who have one."""
-    scores = [
-        p['layer2_skill']['skill_score']
-        for p in players_on_team
-        if p.get('layer2_skill') and p['layer2_skill'].get('skill_score') is not None
-    ]
-    if not scores:
-        return 50.0
-    return sum(scores) / len(scores)
+    """
+    Snap-weighted skill score using only stat-derived scores for key positions.
+    Fallback scores (ol_proxy, fallback) get half weight so they inform
+    without drowning out real EPA/percentile data.
+    """
+    total_w, total_s = 0.0, 0.0
+    for p in players_on_team:
+        l2 = p.get('layer2_skill') or {}
+        score = l2.get('skill_score')
+        if score is None:
+            continue
+        source = l2.get('source', 'stat')  # 'fallback', 'ol_proxy', 'ls_proxy', or None
+        w = _starter_weight(p)
+        # Halve weight for proxy/fallback scores so real stats dominate
+        if source in ('fallback', 'ol_proxy', 'ls_proxy'):
+            w *= 0.5
+        total_s += score * w
+        total_w += w
+    return round(total_s / total_w, 1) if total_w else 50.0
 
 
 def team_hunger_score(players_on_team):
-    """Average hunger seed — higher = more chip on shoulder."""
-    seeds = [
-        p['draft']['hunger_seed']
-        for p in players_on_team
-        if p.get('draft') and p['draft'].get('hunger_seed') is not None
-    ]
-    if not seeds:
-        return 50.0
-    return sum(seeds) / len(seeds)
+    """Snap-weighted hunger — starters' chip matters more than depth."""
+    total_w, total_s = 0.0, 0.0
+    for p in players_on_team:
+        seed = (p.get('draft') or {}).get('hunger_seed')
+        if seed is None:
+            continue
+        w = _starter_weight(p)
+        total_s += seed * w
+        total_w += w
+    return round(total_s / total_w, 1) if total_w else 50.0
 
 
 def team_injury_flag(players_on_team):
-    """Returns 1 if any player is Out/Doubtful, 0 otherwise."""
+    """
+    Weighted injury penalty 0-100 based on who is Out/Doubtful.
+    QB out = massive hit. Backup LS out = barely registers.
+    Returns a 0-100 penalty score (higher = worse injury situation).
+    """
+    penalty = 0.0
     for p in players_on_team:
         inj = p.get('injury') or {}
         status = (str(inj.get('report_status') or '')).lower()
-        if status in ('out', 'doubtful'):
-            return 1
-    return 0
+        if status not in ('out', 'doubtful'):
+            continue
+        pos  = (p.get('position') or '').upper()
+        snap = (p.get('layer1_body') or {}).get('snap_pct') or 0.0
+        skill = ((p.get('layer2_skill') or {}).get('skill_score') or 50.0) / 100.0
+        # Base penalty: snap% × skill level × position multiplier
+        pos_mult = 2.5 if pos == 'QB' else 1.5 if pos in KEY_POSITIONS else 0.5
+        penalty += snap * skill * pos_mult * 100.0
+    # Cap at 100, normalize so a single star QB out ≈ 60-70 penalty
+    return round(min(100.0, penalty), 1)
 
 
 def get_news_modifiers(slug, news_index):
@@ -126,38 +159,56 @@ def get_news_modifiers(slug, news_index):
     return silence, distraction
 
 
+# Normalization bounds — set from first full run, updated each season
+# These represent the realistic min/max composite before normalization
+NORM_MIN = 20.0
+NORM_MAX = 75.0
+
+
+def normalize(score, lo=NORM_MIN, hi=NORM_MAX):
+    """Stretch raw composite into full 0-100 range."""
+    if hi == lo:
+        return 50.0
+    return round(max(0.0, min(100.0, (score - lo) / (hi - lo) * 100.0)), 1)
+
+
 def raw_team_score(slug, team_index, news_index):
     """
-    Compute a 0-100 raw score for a team using available layers.
+    Compute a 0-100 normalized score for a team.
     Returns dict with component breakdown.
     """
     players = team_index.get(slug, [])
-    body = team_body_score(players)
-    skill = team_skill_score(players)
-    hunger = team_hunger_score(players)
-    injury = team_injury_flag(players)
+    body    = team_body_score(players)
+    skill   = team_skill_score(players)
+    hunger  = team_hunger_score(players)
+    injury  = team_injury_flag(players)   # now 0-100 penalty score
     silence, distraction = get_news_modifiers(slug, news_index)
 
-    # Weighted composite (before line value adjustment)
-    composite = (
+    # Weighted composite — injury is now a graduated 0-100 penalty
+    raw = (
         body    * WEIGHTS['body'] +
         skill   * WEIGHTS['skill'] +
         hunger  * WEIGHTS['hunger'] +
         silence * 100 * WEIGHTS['silence_bonus'] +
-        injury  * 100 * WEIGHTS['injury_flag'] +
+        injury  * WEIGHTS['injury_flag'] +        # injury already 0-100, weight is negative
         distraction * 100 * WEIGHTS['distraction']
     )
-    composite = max(0.0, min(100.0, composite))
+    raw = max(0.0, min(100.0, raw))
+
+    # Normalize to spread the field across full 0-100 range
+    composite = normalize(raw)
 
     return {
-        "composite": round(composite, 1),
-        "body": round(body, 1),
-        "skill": round(skill, 1),
-        "hunger": round(hunger, 1),
-        "silence_bonus": bool(silence),
-        "injury_flag": bool(injury),
+        "composite":        round(composite, 1),
+        "raw":              round(raw, 1),
+        "body":             round(body, 1),
+        "skill":            round(skill, 1),
+        "hunger":           round(hunger, 1),
+        "injury_penalty":   round(injury, 1),
+        "silence_bonus":    bool(silence),
+        "injury_flag":      injury > 0,
         "distraction_flag": bool(distraction),
-        "player_count": len(players),
+        "player_count":     len(players),
     }
 
 
