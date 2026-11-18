@@ -1,9 +1,9 @@
 {
   "project": "aces-high",
   "version": "1.0",
-  "last_news_scan": "2026-11-18 04:41:24 UTC",
+  "last_news_scan": "2026-11-18 19:44:21 UTC",
   "last_ratings_update": "2026-11-18 03:18:41 UTC",
-  "last_prediction": "2026-11-18 05:14 UTC",
+  "last_prediction": "2026-11-18 05:23 UTC",
   "last_outcome_recorded": null,
   "season": 2026,
   "week": 12,
@@ -13,44 +13,45 @@
     "flags": {
       "injury": [
         "mia",
+        "ne",
+        "bal",
+        "pit",
         "hou",
         "ind",
+        "jax",
         "ten",
+        "dal",
+        "nyg",
         "wsh",
         "chi",
         "det",
         "car",
+        "ari",
         "sf"
       ],
       "distraction": [
         "pit"
       ],
       "trade": [],
-      "coach": [
-        "dal"
+      "coach": [],
+      "hunger": [
+        "lar"
       ],
-      "hunger": [],
       "silence_bonus": [
         "buf",
-        "ne",
         "nyj",
-        "bal",
         "cin",
         "cle",
-        "jax",
         "den",
         "kc",
         "lv",
         "lac",
-        "dal",
-        "nyg",
         "phi",
         "gb",
         "min",
         "atl",
         "no",
         "tb",
-        "ari",
         "lar",
         "sea"
       ]
@@ -77,5 +78,22 @@
   },
   "last_odds_fetch": "2026-11-18 03:49:50 UTC",
   "odds_snapshot": "opening",
-  "api_remaining": "491"
+  "api_remaining": "491",
+  "last_coaches_fetch": "2026-11-18 20:34:02 UTC",
+  "last_personality_inference": "2026-11-18 20:37:47 UTC",
+  "personality_summary": {
+    "total_players": 3216,
+    "type_distribution": {
+      "ESFP": 398,
+      "ESTP": 371,
+      "ENTP": 359,
+      "ISTJ": 198,
+      "ES?P": 190,
+      "ISFP": 150,
+      "?STJ": 140,
+      "?SFP": 121,
+      "?S?P": 113,
+      "ISFJ": 105
+    }
+  }
 }

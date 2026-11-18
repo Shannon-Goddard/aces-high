@@ -24,6 +24,9 @@ jobs:
       - name: Update ratings
         run: python scripts/update_ratings.py
 
+      - name: Infer player personalities
+        run: python scripts/infer_personality.py
+
       - name: Fetch coaches
         run: python scripts/fetch_coaches.py
 
