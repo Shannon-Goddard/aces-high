@@ -98,6 +98,30 @@ function pickLabel(p) {
   }
 }
 
+function lineMovementBadge(p) {
+  const lm = p.line_movement;
+  if (!lm || lm.spread_move === null || lm.spread_move === undefined) return '';
+
+  const move   = lm.spread_move;
+  const sharp  = lm.sharp_signal;  // 'with_pick', 'against_pick', null
+  const abs    = Math.abs(move).toFixed(1);
+  const dir    = move < 0 ? '&#8595;' : '&#8593;';  // down = home more favored
+  const dirLabel = move < 0 ? 'home more favored' : 'home less favored';
+
+  let badge = `<span style="font-size:0.78rem;color:var(--text-dim)">
+    Line moved <span style="font-weight:700">${dir} ${abs}</span>
+    <span style="font-size:0.72rem;color:var(--text-muted)">(${dirLabel})</span>
+  </span>`;
+
+  if (sharp === 'against_pick') {
+    badge += `<span class="flag flag-injury" style="font-size:0.68rem">&#9888; Sharp against pick</span>`;
+  } else if (sharp === 'with_pick') {
+    badge += `<span class="flag flag-silence" style="font-size:0.68rem">&#10003; Sharp with pick</span>`;
+  }
+
+  return badge;
+}
+
 function breakdownBar(label, value, max) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   const cls = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
@@ -150,10 +174,10 @@ function renderCard(p) {
         <!-- Game info row -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
           <div class="text-dim" style="font-size:0.82rem">${gameDate} &middot; Week ${p.week} &middot; ${p.snapshot_type || 'opening'}</div>
-          <div style="font-size:0.82rem">
-            <span class="text-muted">Spread:</span> ${spreadLabel(p)}
-            &nbsp;&middot;&nbsp;
-            <span class="text-muted">O/U:</span> ${p.total || '—'}
+          <div style="font-size:0.82rem;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap">
+            <span><span class="text-muted">Spread:</span> ${spreadLabel(p)}</span>
+            <span><span class="text-muted">O/U:</span> ${p.total || '—'}</span>
+            ${lineMovementBadge(p)}
           </div>
         </div>
 

@@ -172,10 +172,10 @@ def calc_line_movement(odds_data, game_id):
     return {
         'spread_open':   spread_open,
         'spread_close':  spread_close,
-        'spread_move':   round(spread_close - spread_open, 1) if spread_open and spread_close else None,
+        'spread_move':   round(spread_close - spread_open, 1) if spread_open is not None and spread_close is not None else None,
         'total_open':    total_open,
         'total_close':   total_close,
-        'total_move':    round(total_close - total_open, 1) if total_open and total_close else None,
+        'total_move':    round(total_close - total_open, 1) if total_open is not None and total_close is not None else None,
         'sharp_signal':  None   # populated by predict.py when movement diverges from our pick
     }
 

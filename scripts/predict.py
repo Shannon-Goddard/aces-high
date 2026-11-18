@@ -329,6 +329,56 @@ def pick_side(home_team, away_team, home_score, away_score, spread):
             return home_team, "underdog"
 
 
+def apply_line_movement(confidence, edge, pick, home_team, line_movement):
+    """
+    Adjust confidence based on closing line movement.
+    Sharp money moves lines — if the line moves against our pick, reduce confidence.
+    If it moves with our pick, small boost.
+    Threshold: 2+ point move is meaningful. 3+ is a sharp signal.
+    Returns (adjusted_confidence, sharp_signal) where sharp_signal is
+    'with_pick', 'against_pick', or None.
+    """
+    if not line_movement:
+        return confidence, None
+
+    move = line_movement.get('spread_move')  # positive = home team got worse (line moved up)
+    if move is None:
+        return confidence, None
+
+    # Our pick direction: home pick = we want home to cover = negative spread is good for us
+    # If spread moves more negative (home favored more), line moved WITH home pick
+    # If spread moves more positive (home favored less), line moved AGAINST home pick
+    picking_home = (pick == home_team)
+
+    # move < 0 means home became more favored (spread went from -3 to -5 = move of -2)
+    # move > 0 means home became less favored (spread went from -5 to -3 = move of +2)
+    line_with_home = move < 0
+
+    if picking_home:
+        line_with_pick    = line_with_home
+        line_against_pick = not line_with_home
+    else:
+        line_with_pick    = not line_with_home
+        line_against_pick = line_with_home
+
+    abs_move = abs(move)
+    sharp_signal = None
+
+    if abs_move >= 2:
+        if line_against_pick:
+            # Sharp money disagrees — penalize confidence
+            penalty = 10 if abs_move >= 3 else 5
+            confidence = max(20, confidence - penalty)
+            sharp_signal = 'against_pick'
+        elif line_with_pick:
+            # Sharp money agrees — small boost
+            boost = 5 if abs_move >= 3 else 3
+            confidence = min(95, confidence + boost)
+            sharp_signal = 'with_pick'
+
+    return confidence, sharp_signal
+
+
 def predict_game(game, team_index, news_index, weather_index=None, practice_index=None):
     """Generate a prediction for a single game."""
     if weather_index is None:
@@ -353,6 +403,12 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
     confidence = confidence_from_edge(edge)
 
     pick, pick_type = pick_side(home, away, home_data['composite'], away_data['composite'], spread)
+
+    # Apply line movement modifier on closing snapshot
+    line_movement = game.get('line_movement')
+    confidence, sharp_signal = apply_line_movement(confidence, edge, pick, home, line_movement)
+    if line_movement and sharp_signal:
+        line_movement['sharp_signal'] = sharp_signal
 
     # Determine week from commence_time (rough: week 1 = Sep 4 2026)
     try:
@@ -381,7 +437,7 @@ def predict_game(game, team_index, news_index, weather_index=None, practice_inde
         "home_breakdown": home_data,
         "away_breakdown": away_data,
         "snapshot_type": game.get('snapshot_type', 'opening'),
-        "line_movement": game.get('line_movement'),
+        "line_movement": line_movement,
         "status": "open",
         "result": None,
         "lesson": None,
