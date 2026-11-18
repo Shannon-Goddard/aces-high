@@ -13,341 +13,304 @@
 <div class="page">
   <div class="page-header">
     <div class="page-title">Teams</div>
-    <div class="page-sub">Select a team to drill down into roster, scores, and flags</div>
+    <div class="page-sub" id="teams-sub">Loading...</div>
   </div>
 
-  <!-- 32 team logo grid -->
-  <div class="grid-teams" id="team-grid"></div>
+  <div id="teams-grid" class="grid-teams"></div>
 
-  <!-- Team detail panel — appears below grid on selection -->
-  <div id="team-detail" style="margin-top:2rem; display:none;"></div>
+  <!-- Team detail panel -->
+  <div id="team-detail" style="display:none;margin-top:1.5rem">
+    <div class="card" id="team-detail-inner"></div>
+  </div>
 </div>
 
 <footer>
-  <div>Ace's High — Not betting advice. Research only. <a href="./legal.html">Legal</a></div>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. <a href="./legal.html">Legal</a></div>
 </footer>
 
 <script src="../components/nav.js"></script>
 <script>
 const ROOT = '../';
 
+// All 32 teams — slug, abbr (matches players.json team field), full name
 const TEAMS = [
-  {slug:'buf',name:'Buffalo Bills'},       {slug:'mia',name:'Miami Dolphins'},
-  {slug:'ne', name:'New England Patriots'},{slug:'nyj',name:'New York Jets'},
-  {slug:'bal',name:'Baltimore Ravens'},    {slug:'cin',name:'Cincinnati Bengals'},
-  {slug:'cle',name:'Cleveland Browns'},    {slug:'pit',name:'Pittsburgh Steelers'},
-  {slug:'hou',name:'Houston Texans'},      {slug:'ind',name:'Indianapolis Colts'},
-  {slug:'jax',name:'Jacksonville Jaguars'},{slug:'ten',name:'Tennessee Titans'},
-  {slug:'den',name:'Denver Broncos'},      {slug:'kc', name:'Kansas City Chiefs'},
-  {slug:'lv', name:'Las Vegas Raiders'},   {slug:'lac',name:'Los Angeles Chargers'},
-  {slug:'dal',name:'Dallas Cowboys'},      {slug:'nyg',name:'New York Giants'},
-  {slug:'phi',name:'Philadelphia Eagles'}, {slug:'wsh',name:'Washington Commanders'},
-  {slug:'chi',name:'Chicago Bears'},       {slug:'det',name:'Detroit Lions'},
-  {slug:'gb', name:'Green Bay Packers'},   {slug:'min',name:'Minnesota Vikings'},
-  {slug:'atl',name:'Atlanta Falcons'},     {slug:'car',name:'Carolina Panthers'},
-  {slug:'no', name:'New Orleans Saints'},  {slug:'tb', name:'Tampa Bay Buccaneers'},
-  {slug:'ari',name:'Arizona Cardinals'},   {slug:'lar',name:'Los Angeles Rams'},
-  {slug:'sf', name:'San Francisco 49ers'}, {slug:'sea',name:'Seattle Seahawks'}
+  { slug:'buf', abbr:'BUF', name:'Buffalo Bills' },
+  { slug:'mia', abbr:'MIA', name:'Miami Dolphins' },
+  { slug:'ne',  abbr:'NE',  name:'New England Patriots' },
+  { slug:'nyj', abbr:'NYJ', name:'New York Jets' },
+  { slug:'bal', abbr:'BAL', name:'Baltimore Ravens' },
+  { slug:'cin', abbr:'CIN', name:'Cincinnati Bengals' },
+  { slug:'cle', abbr:'CLE', name:'Cleveland Browns' },
+  { slug:'pit', abbr:'PIT', name:'Pittsburgh Steelers' },
+  { slug:'hou', abbr:'HOU', name:'Houston Texans' },
+  { slug:'ind', abbr:'IND', name:'Indianapolis Colts' },
+  { slug:'jax', abbr:'JAX', name:'Jacksonville Jaguars' },
+  { slug:'ten', abbr:'TEN', name:'Tennessee Titans' },
+  { slug:'den', abbr:'DEN', name:'Denver Broncos' },
+  { slug:'kc',  abbr:'KC',  name:'Kansas City Chiefs' },
+  { slug:'lv',  abbr:'LV',  name:'Las Vegas Raiders' },
+  { slug:'lac', abbr:'LAC', name:'Los Angeles Chargers' },
+  { slug:'dal', abbr:'DAL', name:'Dallas Cowboys' },
+  { slug:'nyg', abbr:'NYG', name:'New York Giants' },
+  { slug:'phi', abbr:'PHI', name:'Philadelphia Eagles' },
+  { slug:'wsh', abbr:'WAS', name:'Washington Commanders' },
+  { slug:'chi', abbr:'CHI', name:'Chicago Bears' },
+  { slug:'det', abbr:'DET', name:'Detroit Lions' },
+  { slug:'gb',  abbr:'GB',  name:'Green Bay Packers' },
+  { slug:'min', abbr:'MIN', name:'Minnesota Vikings' },
+  { slug:'atl', abbr:'ATL', name:'Atlanta Falcons' },
+  { slug:'car', abbr:'CAR', name:'Carolina Panthers' },
+  { slug:'no',  abbr:'NO',  name:'New Orleans Saints' },
+  { slug:'tb',  abbr:'TB',  name:'Tampa Bay Buccaneers' },
+  { slug:'ari', abbr:'ARI', name:'Arizona Cardinals' },
+  { slug:'lar', abbr:'LA',  name:'Los Angeles Rams' },
+  { slug:'sf',  abbr:'SF',  name:'San Francisco 49ers' },
+  { slug:'sea', abbr:'SEA', name:'Seattle Seahawks' },
 ];
 
-// ESPN team abbreviation map for roster matching
-const SLUG_TO_ABBR = {
-  buf:'BUF',mia:'MIA',ne:'NE',nyj:'NYJ',bal:'BAL',cin:'CIN',cle:'CLE',pit:'PIT',
-  hou:'HOU',ind:'IND',jax:'JAX',ten:'TEN',den:'DEN',kc:'KC',lv:'LV',lac:'LAC',
-  dal:'DAL',nyg:'NYG',phi:'PHI',wsh:'WAS',chi:'CHI',det:'DET',gb:'GB',min:'MIN',
-  atl:'ATL',car:'CAR',no:'NO',tb:'TB',ari:'ARI',lar:'LA',sf:'SF',sea:'SEA'
-};
+// nflverse abbr variants that map to our slugs
+const ABBR_EXTRA = { 'WAS':'wsh', 'LA':'lar', 'LAR':'lar' };
 
-let allPlayers = [];
-let allNews    = [];
-let selectedSlug = null;
-
-function logoUrl(slug) {
+function teamLogoUrl(slug) {
   return `https://a.espncdn.com/i/teamlogos/nfl/500/${slug}.png`;
 }
 
 function scoreClass(s) {
   if (s === null || s === undefined) return 'score-none';
-  if (s >= 70) return 'score-high';
-  if (s >= 45) return 'score-mid';
+  if (s >= 27) return 'score-high';
+  if (s >= 24) return 'score-mid';
   return 'score-low';
 }
 
-function fillColor(s) {
-  if (!s) return 'fill-red';
-  if (s >= 70) return 'fill-green';
-  if (s >= 45) return 'fill-yellow';
-  return 'fill-red';
+function injuryClass(status) {
+  if (!status || status === 'nan') return '';
+  const s = status.toLowerCase();
+  if (s.includes('out'))      return 'flag-injury';
+  if (s.includes('doubtful')) return 'flag-injury';
+  if (s.includes('question')) return 'flag-distract';
+  return '';
 }
 
-function progressBar(score, label) {
-  const s = score || 0;
+function bar(label, value, max, cls) {
+  const pct = Math.min(100, Math.round((value / max) * 100));
+  const fill = pct >= 65 ? 'fill-green' : pct >= 45 ? 'fill-yellow' : 'fill-red';
   return `
-    <div class="progress-wrap">
-      <div class="progress-bar">
-        <div class="progress-fill ${fillColor(s)}" style="width:${s}%"></div>
+    <div class="stat-row">
+      <span class="stat-label" style="min-width:70px">${label}</span>
+      <div class="progress-wrap" style="flex:1;margin-left:0.75rem">
+        <div class="progress-bar">
+          <div class="progress-fill ${fill}" style="width:${pct}%"></div>
+        </div>
+        <span class="progress-label">${value}</span>
       </div>
-      <div class="progress-label ${scoreClass(s)}">${s}</div>
-    </div>
-  `;
+    </div>`;
 }
 
-function renderFlags(player, newsEntry) {
-  const flags = [];
-  if (newsEntry) {
-    if (newsEntry.flags.injury)     flags.push(`<span class="flag flag-injury">Injury</span>`);
-    if (newsEntry.flags.distraction) flags.push(`<span class="flag flag-distract">Distraction</span>`);
-    if (newsEntry.flags.trade)      flags.push(`<span class="flag flag-trade">Trade</span>`);
-    if (newsEntry.silence_bonus)    flags.push(`<span class="flag flag-silence">Locked In</span>`);
+let selectedSlug = null;
+let teamScores   = {};   // slug → { composite, body, skill, hunger, silence_bonus, injury_flag }
+let rosterBySlug = {};   // slug → [players]
+
+function buildRoster(players) {
+  rosterBySlug = {};
+  for (const p of players) {
+    const abbr = (p.team || '').toUpperCase();
+    // Find slug for this abbr
+    let slug = null;
+    const direct = TEAMS.find(t => t.abbr === abbr);
+    if (direct) slug = direct.slug;
+    else if (ABBR_EXTRA[abbr]) slug = ABBR_EXTRA[abbr];
+    if (!slug) continue;
+    if (!rosterBySlug[slug]) rosterBySlug[slug] = [];
+    rosterBySlug[slug].push(p);
   }
-  const draft = player.draft;
-  if (draft && draft.hunger_seed >= 70) flags.push(`<span class="flag flag-hunger">Hungry</span>`);
-  const injury = player.injury;
-  if (injury && injury.report_status && injury.report_status !== 'Active') {
-    flags.push(`<span class="flag flag-injury">${injury.report_status}</span>`);
+}
+
+function buildTeamScores(predictions) {
+  // Walk all predictions, keep the most recent composite per team slug
+  for (const p of predictions) {
+    for (const side of ['home', 'away']) {
+      const slug = p[`${side}_slug`];
+      const bd   = p[`${side}_breakdown`];
+      if (!slug || !bd) continue;
+      if (!teamScores[slug] || p.predicted_at > (teamScores[slug]._predicted_at || '')) {
+        teamScores[slug] = { ...bd, _predicted_at: p.predicted_at };
+      }
+    }
   }
-  return flags.join('');
 }
 
-function renderPlayerAccordion(player, newsEntry, idx) {
-  const l1 = player.layer1_body || {};
-  const l2 = player.layer2_skill || {};
-  const draft = player.draft || {};
-  const combine = player.combine || {};
-  const injury = player.injury || {};
-  const flags = renderFlags(player, newsEntry);
-  const id = `player-${idx}`;
-
-  const bodyScore  = l1.body_score;
-  const skillScore = l2.skill_score;
-
-  // Combine highlights
-  const combineHtml = combine.forty
-    ? `<div class="stat-row"><span class="stat-label">40-yard dash</span><span class="stat-value">${combine.forty}s</span></div>`
-    : '';
-
-  // Injury
-  const injuryHtml = injury.report_status
-    ? `<div class="stat-row">
-        <span class="stat-label">Status</span>
-        <span class="stat-value ${injury.report_status === 'Active' ? 'text-green' : 'text-red'}">${injury.report_status}</span>
-       </div>
-       <div class="stat-row">
-        <span class="stat-label">Practice</span>
-        <span class="stat-value">${injury.practice_status || '—'}</span>
-       </div>
-       <div class="stat-row">
-        <span class="stat-label">Injury</span>
-        <span class="stat-value">${injury.primary_injury || '—'}</span>
-       </div>` : '';
-
-  return `
-    <div class="accordion" id="${id}">
-      <div class="accordion-header" onclick="toggleAccordion('${id}')">
-        <div class="accordion-title">
-          <img src="${player.headshot || ''}"
-               class="player-headshot"
-               onerror="this.src=''"
-               style="width:36px;height:36px;">
-          <div>
-            <div class="player-name">${player.name}</div>
-            <div class="player-meta">${player.position} · ${player.college || ''}</div>
-            ${flags ? `<div class="player-flags">${flags}</div>` : ''}
-          </div>
-        </div>
-        <div class="accordion-meta">
-          <span class="score ${scoreClass(bodyScore)}">${bodyScore || '—'}</span>
-          <span class="score ${scoreClass(skillScore)}">${skillScore || '—'}</span>
-          <span class="accordion-arrow">&#9660;</span>
-        </div>
-      </div>
-      <div class="accordion-body" id="${id}-body">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
-
-          <div>
-            <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Layer 1 — Body</div>
-            <div class="stat-row"><span class="stat-label">Body Score</span>${progressBar(bodyScore)}</div>
-            <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">${l1.age || '—'} <span class="text-dim">(${l1.age_label || ''})</span></span></div>
-            <div class="stat-row"><span class="stat-label">Age Score</span>${progressBar(l1.age_score)}</div>
-            <div class="stat-row"><span class="stat-label">Weight</span><span class="stat-value">${l1.weight || '—'} lbs <span class="text-dim">(${l1.weight_label || ''})</span></span></div>
-            <div class="stat-row"><span class="stat-label">Weight Score</span>${progressBar(l1.weight_score)}</div>
-            <div class="stat-row"><span class="stat-label">Career Stage</span><span class="stat-value">${l1.career_label || '—'}</span></div>
-            <div class="stat-row"><span class="stat-label">Snap % Trend</span><span class="stat-value">${l1.snap_pct ? l1.snap_pct + '%' : '—'} <span class="text-dim">(${l1.snap_trend || ''})</span></span></div>
-            ${injuryHtml}
-          </div>
-
-          <div>
-            <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Layer 2 — Skill</div>
-            ${skillScore
-              ? `<div class="stat-row"><span class="stat-label">Skill Score</span>${progressBar(skillScore)}</div>
-                 ${l2.epa_pct !== undefined ? `<div class="stat-row"><span class="stat-label">EPA Percentile</span><span class="stat-value">${l2.epa_pct}</span></div>` : ''}
-                 ${l2.cpoe_pct !== undefined ? `<div class="stat-row"><span class="stat-label">CPOE Percentile</span><span class="stat-value">${l2.cpoe_pct}</span></div>` : ''}
-                 ${l2.wopr_pct !== undefined ? `<div class="stat-row"><span class="stat-label">WOPR Percentile</span><span class="stat-value">${l2.wopr_pct}</span></div>` : ''}
-                 ${l2.targets !== undefined ? `<div class="stat-row"><span class="stat-label">Targets</span><span class="stat-value">${l2.targets}</span></div>` : ''}
-                 ${l2.sack_pct !== undefined ? `<div class="stat-row"><span class="stat-label">Sack Percentile</span><span class="stat-value">${l2.sack_pct}</span></div>` : ''}`
-              : '<div class="text-muted" style="font-size:0.82rem">Insufficient sample size</div>'}
-
-            <div class="text-dim mt-2 mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Draft + Hunger Seed</div>
-            <div class="stat-row"><span class="stat-label">Draft Round</span><span class="stat-value">${draft.draft_round || 'Undrafted'}</span></div>
-            <div class="stat-row"><span class="stat-label">Draft Pick</span><span class="stat-value">${draft.draft_pick || '—'}</span></div>
-            <div class="stat-row"><span class="stat-label">Hunger Seed</span>${progressBar(draft.hunger_seed)}</div>
-            ${combineHtml}
-          </div>
-
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderPositionGroup(label, players, newsMap) {
-  if (!players.length) return '';
-  const id = `pos-${label.replace(/\//g,'-')}`;
-  const avgBody  = players.filter(p => p.layer1_body?.body_score).reduce((a,p) => a + p.layer1_body.body_score, 0) / (players.filter(p => p.layer1_body?.body_score).length || 1);
-  const avgSkill = players.filter(p => p.layer2_skill?.skill_score).reduce((a,p) => a + p.layer2_skill.skill_score, 0) / (players.filter(p => p.layer2_skill?.skill_score).length || 1);
-
-  return `
-    <div class="accordion" id="${id}">
-      <div class="accordion-header" onclick="toggleAccordion('${id}')">
-        <div class="accordion-title">${label} <span class="text-muted" style="font-weight:400;font-size:0.82rem">(${players.length})</span></div>
-        <div class="accordion-meta">
-          <span class="text-dim" style="font-size:0.75rem">Body</span>
-          <span class="score ${scoreClass(Math.round(avgBody))}">${Math.round(avgBody) || '—'}</span>
-          <span class="text-dim" style="font-size:0.75rem">Skill</span>
-          <span class="score ${scoreClass(Math.round(avgSkill))}">${Math.round(avgSkill) || '—'}</span>
-          <span class="accordion-arrow">&#9660;</span>
-        </div>
-      </div>
-      <div class="accordion-body" id="${id}-body">
-        ${players.map((p, i) => renderPlayerAccordion(p, newsMap[p.name] || null, `${label}-${i}`)).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderTeamDetail(slug, players, newsEntries) {
-  const team = TEAMS.find(t => t.slug === slug);
-  if (!team) return;
-
-  const abbr = SLUG_TO_ABBR[slug] || slug.toUpperCase();
-  const teamPlayers = players.filter(p => p.team === abbr);
-
-  // Build news lookup by player name
-  const newsMap = {};
-  newsEntries.forEach(n => { newsMap[n.team_slug] = n; });
-  const teamNews = newsMap[slug] || null;
-
-  // Group by position
-  const groups = {
-    'QB':        teamPlayers.filter(p => p.position === 'QB'),
-    'RB':        teamPlayers.filter(p => p.position === 'RB'),
-    'WR / TE':   teamPlayers.filter(p => ['WR','TE'].includes(p.position)),
-    'OL':        teamPlayers.filter(p => ['OL','T','G','C'].includes(p.position)),
-    'DL / LB':   teamPlayers.filter(p => ['DL','DE','DT','LB'].includes(p.position)),
-    'DB':        teamPlayers.filter(p => ['CB','S','DB'].includes(p.position)),
-    'K / P / ST':teamPlayers.filter(p => ['K','P','LS'].includes(p.position)),
-  };
-
-  // Team-level averages
-  const allScored = teamPlayers.filter(p => p.layer1_body?.body_score);
-  const avgBody   = allScored.length ? Math.round(allScored.reduce((a,p) => a + p.layer1_body.body_score, 0) / allScored.length) : null;
-  const allSkill  = teamPlayers.filter(p => p.layer2_skill?.skill_score);
-  const avgSkill  = allSkill.length ? Math.round(allSkill.reduce((a,p) => a + p.layer2_skill.skill_score, 0) / allSkill.length) : null;
-
-  // Team news flags
-  const flagsHtml = teamNews ? Object.entries(teamNews.flags)
-    .filter(([,v]) => v)
-    .map(([k]) => `<span class="flag flag-${k === 'injury' ? 'injury' : k === 'distraction' ? 'distract' : k === 'trade' ? 'trade' : 'silence'}">${k}</span>`)
-    .join('') : '';
-
-  document.getElementById('team-detail').style.display = 'block';
-  document.getElementById('team-detail').innerHTML = `
-    <div class="card mb-2">
-      <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1rem;">
-        <img src="${logoUrl(slug)}" style="width:64px;height:64px;object-fit:contain;">
-        <div>
-          <div style="font-size:1.3rem;font-weight:800;color:var(--gold)">${team.name}</div>
-          <div class="player-flags mt-1">${flagsHtml || '<span class="text-muted" style="font-size:0.8rem">No active flags</span>'}</div>
-        </div>
-        <div style="margin-left:auto;display:flex;gap:1rem;text-align:center;">
-          <div>
-            <div class="score ${scoreClass(avgBody)}" style="font-size:1.1rem;padding:0.4rem 0.75rem">${avgBody || '—'}</div>
-            <div class="text-muted mt-1" style="font-size:0.72rem">AVG BODY</div>
-          </div>
-          <div>
-            <div class="score ${scoreClass(avgSkill)}" style="font-size:1.1rem;padding:0.4rem 0.75rem">${avgSkill || '—'}</div>
-            <div class="text-muted mt-1" style="font-size:0.72rem">AVG SKILL</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Team news headlines -->
-      ${teamNews && teamNews.headlines.length ? `
-        <div class="text-dim mb-1" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Latest Headlines</div>
-        ${teamNews.headlines.slice(0,3).map(h => `
-          <div class="stat-row"><span class="stat-label" style="font-size:0.82rem">${h.headline}</span><span class="text-muted" style="font-size:0.72rem">${h.published ? h.published.slice(0,10) : ''}</span></div>
-        `).join('')}
-      ` : ''}
-    </div>
-
-    <!-- Roster by position group -->
-    <div>
-      ${Object.entries(groups).map(([label, players]) => renderPositionGroup(label, players, newsMap)).join('')}
-    </div>
-  `;
-}
-
-function toggleAccordion(id) {
-  const header = document.querySelector(`#${id} .accordion-header`);
-  const body   = document.getElementById(`${id}-body`);
-  if (!header || !body) return;
-  header.classList.toggle('open');
-  body.classList.toggle('open');
+function renderGrid() {
+  const grid = document.getElementById('teams-grid');
+  grid.innerHTML = TEAMS.map(t => {
+    const sc  = teamScores[t.slug];
+    const comp = sc ? sc.composite : null;
+    const cls  = scoreClass(comp);
+    return `
+      <div class="team-card${selectedSlug === t.slug ? ' selected' : ''}"
+           onclick="selectTeam('${t.slug}')" id="tc-${t.slug}">
+        <img src="${teamLogoUrl(t.slug)}" alt="${t.abbr}" onerror="this.style.display='none'">
+        <div class="team-abbr">${t.abbr}</div>
+        ${comp !== null ? `<div class="score ${cls}" style="margin-top:0.3rem;font-size:0.7rem">${comp}</div>` : ''}
+      </div>`;
+  }).join('');
 }
 
 function selectTeam(slug) {
-  // Deselect all
-  document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
-  document.querySelector(`[data-slug="${slug}"]`)?.classList.add('selected');
-
   if (selectedSlug === slug) {
-    // Toggle off
+    // Deselect
     selectedSlug = null;
     document.getElementById('team-detail').style.display = 'none';
+    renderGrid();
     return;
   }
   selectedSlug = slug;
-  renderTeamDetail(slug, allPlayers, allNews);
-  document.getElementById('team-detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  renderGrid();
+  renderDetail(slug);
+  document.getElementById('team-detail').style.display = 'block';
+  setTimeout(() => document.getElementById('team-detail').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+
+function renderDetail(slug) {
+  const team    = TEAMS.find(t => t.slug === slug);
+  const sc      = teamScores[slug] || {};
+  const roster  = (rosterBySlug[slug] || []).sort((a, b) => {
+    const as_ = (a.layer2_skill?.skill_score || 0) + (a.layer1_body?.body_score || 0);
+    const bs_ = (b.layer2_skill?.skill_score || 0) + (b.layer1_body?.body_score || 0);
+    return bs_ - as_;
+  });
+
+  const posOrder = ['QB','WR','TE','RB','OL','DL','LB','DB','K','P','LS'];
+  const byPos = {};
+  for (const p of roster) {
+    const pos = p.position || 'OTH';
+    if (!byPos[pos]) byPos[pos] = [];
+    byPos[pos].push(p);
+  }
+
+  // Injury summary
+  const injured = roster.filter(p => {
+    const s = (p.injury?.report_status || '').toLowerCase();
+    return s.includes('out') || s.includes('doubtful');
+  });
+  const questionable = roster.filter(p => {
+    const s = (p.injury?.report_status || '').toLowerCase();
+    return s.includes('question');
+  });
+
+  const injuryHtml = (injured.length || questionable.length) ? `
+    <div style="margin-bottom:1rem">
+      ${injured.length ? `<div style="margin-bottom:0.4rem">
+        <span class="flag flag-injury" style="margin-right:0.5rem">Out/Doubtful</span>
+        ${injured.map(p => `<span style="font-size:0.8rem;margin-right:0.75rem">${p.name} <span class="text-muted">${p.position}</span></span>`).join('')}
+      </div>` : ''}
+      ${questionable.length ? `<div>
+        <span class="flag flag-distract" style="margin-right:0.5rem">Questionable</span>
+        ${questionable.map(p => `<span style="font-size:0.8rem;margin-right:0.75rem">${p.name} <span class="text-muted">${p.position}</span></span>`).join('')}
+      </div>` : ''}
+    </div>` : '';
+
+  // Top players per position (top 3 by skill score)
+  const rosterHtml = posOrder
+    .filter(pos => byPos[pos]?.length)
+    .map(pos => {
+      const top = byPos[pos].slice(0, 3);
+      return `
+        <div style="margin-bottom:0.75rem">
+          <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem">${pos}</div>
+          ${top.map(p => {
+            const skill  = p.layer2_skill?.skill_score ?? null;
+            const body   = p.layer1_body?.body_score ?? null;
+            const status = p.injury?.report_status || '';
+            const injCls = injuryClass(status);
+            const injBadge = injCls ? `<span class="flag ${injCls}" style="font-size:0.65rem;padding:0.1rem 0.35rem">${status}</span>` : '';
+            return `
+              <div style="display:flex;align-items:center;gap:0.6rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
+                <img src="${p.headshot || ''}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0" onerror="this.src=''">
+                <span style="font-size:0.83rem;font-weight:600;flex:1">${p.name}</span>
+                ${injBadge}
+                ${skill !== null ? `<span class="score ${scoreClass(skill / 3.7)}" style="font-size:0.68rem">${skill.toFixed(0)}</span>` : ''}
+              </div>`;
+          }).join('')}
+        </div>`;
+    }).join('');
+
+  document.getElementById('team-detail-inner').innerHTML = `
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap">
+      <img src="${teamLogoUrl(slug)}" style="width:56px;height:56px;object-fit:contain" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:1.3rem;font-weight:800;color:var(--gold)">${team?.name || slug}</div>
+        <div class="text-dim" style="font-size:0.82rem">${roster.length} players tracked &middot; Last scored: ${sc._predicted_at || '—'}</div>
+      </div>
+      ${sc.composite ? `<div class="score ${scoreClass(sc.composite)}" style="font-size:1rem;padding:0.4rem 0.8rem;margin-left:auto">${sc.composite}</div>` : ''}
+    </div>
+
+    <!-- Composite breakdown bars -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.25rem">
+      <div>
+        ${bar('Body', sc.body || 0, 40)}
+        ${bar('Skill', sc.skill || 0, 100)}
+        ${bar('Hunger', sc.hunger || 0, 100)}
+      </div>
+      <div>
+        <div class="stat-row">
+          <span class="stat-label">Silence Bonus</span>
+          <span class="stat-value ${sc.silence_bonus ? 'text-green' : 'text-muted'}">${sc.silence_bonus ? 'Yes' : 'No'}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Injury Flag</span>
+          <span class="stat-value ${sc.injury_flag ? 'text-red' : 'text-green'}">${sc.injury_flag ? 'Active' : 'Clean'}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Roster Size</span>
+          <span class="stat-value">${sc.player_count || roster.length}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Injury report -->
+    ${injuryHtml}
+
+    <!-- Roster by position -->
+    <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Roster</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      ${rosterHtml}
+    </div>
+  `;
 }
 
 async function init() {
-  const [playersRes, newsRes] = await Promise.all([
-    fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => ({ players: [] })),
-    fetch(`${ROOT}data/news.json`).then(r => r.json()).catch(() => ({ news: [] }))
+  const [predRes, playersRes] = await Promise.all([
+    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/players.json`).then(r => r.json()).catch(() => [])
   ]);
 
-  allPlayers = playersRes.players || [];
+  const predictions = predRes.predictions || [];
+  const players     = Array.isArray(playersRes) ? playersRes : (playersRes.players || []);
 
-  // Latest news entry per team slug
-  const newsLatest = {};
-  (newsRes.news || []).forEach(n => {
-    if (!newsLatest[n.team_slug] || n.scanned_at > newsLatest[n.team_slug].scanned_at) {
-      newsLatest[n.team_slug] = n;
-    }
-  });
-  allNews = Object.values(newsLatest);
+  buildTeamScores(predictions);
+  buildRoster(players);
 
-  // Render team grid
-  document.getElementById('team-grid').innerHTML = TEAMS.map(t => `
-    <div class="team-card" data-slug="${t.slug}" onclick="selectTeam('${t.slug}')">
-      <img src="${logoUrl(t.slug)}" alt="${t.name}" onerror="this.style.opacity='0.3'">
-      <div class="team-abbr">${SLUG_TO_ABBR[t.slug] || t.slug.toUpperCase()}</div>
-    </div>
-  `).join('');
+  const scored = Object.keys(teamScores).length;
+  document.getElementById('teams-sub').textContent =
+    `${scored} teams scored · ${players.length} players tracked`;
+
+  renderGrid();
+
+  // Auto-open from URL hash
+  const hash = window.location.hash.slice(1);
+  if (hash) selectTeam(hash);
 }
 
 init();
 </script>
+
+<style>
+@media (max-width: 600px) {
+  #team-detail-inner > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
 </body>
 </html>
