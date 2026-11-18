@@ -28,6 +28,9 @@ jobs:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/fetch_odds.py
 
+      - name: Fetch weather
+        run: python scripts/fetch_weather.py
+
       - name: Generate predictions
         run: python scripts/predict.py
 
@@ -38,6 +41,6 @@ jobs:
         run: |
           git config user.name  "aces-high-bot"
           git config user.email "bot@aces-high"
-          git add data/odds.json data/predictions.json data/metadata.json data/ledger.json
+          git add data/odds.json data/weather.json data/predictions.json data/metadata.json data/ledger.json
           git diff --staged --quiet || git commit -m "odds + predictions + ledger — $(date -u '+%Y-%m-%d %H:%M UTC')"
           git pull --rebase && git push

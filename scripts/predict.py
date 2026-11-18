@@ -50,6 +50,8 @@ WEIGHTS = {
 
 def load(filename):
     path = os.path.join(DATA_DIR, filename)
+    if not os.path.exists(path):
+        return {}
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
@@ -159,6 +161,25 @@ def get_news_modifiers(slug, news_index):
     return silence, distraction
 
 
+def get_weather_modifiers(game_id, weather_index):
+    """
+    Returns weather modifier dict for a game.
+    Defaults to no impact if weather not available.
+    """
+    entry = weather_index.get(game_id, {})
+    mods  = entry.get('modifiers', {})
+    return {
+        'dome':         mods.get('dome', False),
+        'passing_mult': mods.get('passing_mult', 1.0),
+        'kicker_mult':  mods.get('kicker_mult', 1.0),
+        'wind_flag':    mods.get('wind_flag', False),
+        'precip_flag':  mods.get('precip_flag', False),
+        'cold_flag':    mods.get('cold_flag', False),
+        'notes':        mods.get('notes', []),
+        'weather':      entry.get('weather'),
+    }
+
+
 # Normalization bounds — set from first full run, updated each season
 # These represent the realistic min/max composite before normalization
 NORM_MIN = 20.0
@@ -172,30 +193,36 @@ def normalize(score, lo=NORM_MIN, hi=NORM_MAX):
     return round(max(0.0, min(100.0, (score - lo) / (hi - lo) * 100.0)), 1)
 
 
-def raw_team_score(slug, team_index, news_index):
+def raw_team_score(slug, team_index, news_index, weather_mods=None):
     """
     Compute a 0-100 normalized score for a team.
+    weather_mods: dict from get_weather_modifiers() — applied to passing/kicking components.
     Returns dict with component breakdown.
     """
+    if weather_mods is None:
+        weather_mods = {'passing_mult': 1.0, 'kicker_mult': 1.0, 'dome': False}
+
     players = team_index.get(slug, [])
     body    = team_body_score(players)
     skill   = team_skill_score(players)
     hunger  = team_hunger_score(players)
-    injury  = team_injury_flag(players)   # now 0-100 penalty score
+    injury  = team_injury_flag(players)
     silence, distraction = get_news_modifiers(slug, news_index)
 
-    # Weighted composite — injury is now a graduated 0-100 penalty
+    # Apply weather to skill — passing game takes the hit, not blocking/running
+    # Dome teams are immune. passing_mult already 1.0 for domes.
+    weather_skill_penalty = skill * (1.0 - weather_mods['passing_mult'])  # how much skill is reduced
+    adjusted_skill = skill - weather_skill_penalty
+
     raw = (
-        body    * WEIGHTS['body'] +
-        skill   * WEIGHTS['skill'] +
-        hunger  * WEIGHTS['hunger'] +
-        silence * 100 * WEIGHTS['silence_bonus'] +
-        injury  * WEIGHTS['injury_flag'] +        # injury already 0-100, weight is negative
+        body            * WEIGHTS['body'] +
+        adjusted_skill  * WEIGHTS['skill'] +
+        hunger          * WEIGHTS['hunger'] +
+        silence * 100   * WEIGHTS['silence_bonus'] +
+        injury          * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
     )
     raw = max(0.0, min(100.0, raw))
-
-    # Normalize to spread the field across full 0-100 range
     composite = normalize(raw)
 
     return {
@@ -203,11 +230,13 @@ def raw_team_score(slug, team_index, news_index):
         "raw":              round(raw, 1),
         "body":             round(body, 1),
         "skill":            round(skill, 1),
+        "adjusted_skill":   round(adjusted_skill, 1),
         "hunger":           round(hunger, 1),
         "injury_penalty":   round(injury, 1),
         "silence_bonus":    bool(silence),
         "injury_flag":      injury > 0,
         "distraction_flag": bool(distraction),
+        "weather_notes":    weather_mods.get('notes', []),
         "player_count":     len(players),
     }
 
@@ -256,8 +285,11 @@ def pick_side(home_team, away_team, home_score, away_score, spread):
             return home_team, "underdog"
 
 
-def predict_game(game, team_index, news_index):
+def predict_game(game, team_index, news_index, weather_index=None):
     """Generate a prediction for a single game."""
+    if weather_index is None:
+        weather_index = {}
+
     home = game['home_team']
     away = game['away_team']
     home_slug = TEAM_SLUG.get(home)
@@ -266,8 +298,10 @@ def predict_game(game, team_index, news_index):
     if not home_slug or not away_slug:
         return None
 
-    home_data = raw_team_score(home_slug, team_index, news_index)
-    away_data = raw_team_score(away_slug, team_index, news_index)
+    weather_mods = get_weather_modifiers(game['game_id'], weather_index)
+    # Both teams play in the same stadium — same weather hits both
+    home_data = raw_team_score(home_slug, team_index, news_index, weather_mods)
+    away_data = raw_team_score(away_slug, team_index, news_index, weather_mods)
 
     spread = game['consensus'].get('spread') or 0.0
     edge = spread_to_implied_edge(spread, home_data['composite'], away_data['composite'])
@@ -309,10 +343,20 @@ def predict_game(game, team_index, news_index):
         "predicted_at": datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
         # Placeholders for Phase 2 layers
         "modifiers_applied": {
+            "weather": {
+                "dome":         weather_mods.get('dome'),
+                "passing_mult": weather_mods.get('passing_mult'),
+                "kicker_mult":  weather_mods.get('kicker_mult'),
+                "wind_flag":    weather_mods.get('wind_flag'),
+                "precip_flag":  weather_mods.get('precip_flag'),
+                "cold_flag":    weather_mods.get('cold_flag'),
+                "conditions":   weather_mods.get('weather'),
+                "notes":        weather_mods.get('notes'),
+            },
             "practice_trajectory": None,
-            "mbti_adjustment": None,
+            "mbti_adjustment":     None,
             "coach_compatibility": None,
-            "relationship_web": None,
+            "relationship_web":    None,
         }
     }
 
@@ -321,15 +365,17 @@ def main():
     import sys
     reset = '--reset' in sys.argv
 
-    odds_data = load('odds.json')
+    odds_data    = load('odds.json')
     players_data = load('players.json')
-    news_data = load('news.json')
-    existing = load('predictions.json')
-    metadata = load('metadata.json')
+    news_data    = load('news.json')
+    weather_data = load('weather.json')
+    existing     = load('predictions.json')
+    metadata     = load('metadata.json')
 
     # Build indexes
-    team_index = build_team_index(players_data['players'])
-    news_index = {t['team_slug']: t for t in news_data['news']}
+    team_index    = build_team_index(players_data['players'])
+    news_index    = {t['team_slug']: t for t in news_data.get('news', [])}
+    weather_index = weather_data.get('games', {})
 
     # Track existing game_ids to avoid duplicates (skip if reset)
     existing_ids = set() if reset else {p['game_id'] for p in existing.get('predictions', [])}
@@ -346,7 +392,7 @@ def main():
                         p['closing_spread'] = game['consensus'].get('spread')
             continue
 
-        pred = predict_game(game, team_index, news_index)
+        pred = predict_game(game, team_index, news_index, weather_index)
         if pred:
             new_predictions.append(pred)
 

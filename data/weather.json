@@ -1,0 +1,257 @@
+{
+  "fetched_at": "2026-11-18 04:49:01 UTC",
+  "games": {
+    "66f9e83cf025d58acee12bce18661fb3": {
+      "game_id": "66f9e83cf025d58acee12bce18661fb3",
+      "home_team": "Houston Texans",
+      "away_team": "Indianapolis Colts",
+      "game_time": "2026-11-20T01:15:00Z",
+      "stadium": "NRG Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "5e63079b678f8c13419adc169fff02d3": {
+      "game_id": "5e63079b678f8c13419adc169fff02d3",
+      "home_team": "Dallas Cowboys",
+      "away_team": "Tennessee Titans",
+      "game_time": "2026-11-22T18:00:00Z",
+      "stadium": "AT&T Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "41e2dd69bddd65d7e823d9ed61cc2afc": {
+      "game_id": "41e2dd69bddd65d7e823d9ed61cc2afc",
+      "home_team": "Detroit Lions",
+      "away_team": "Tampa Bay Buccaneers",
+      "game_time": "2026-11-22T18:00:00Z",
+      "stadium": "Ford Field",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "4b20b742b6168aaca4f25d87f11b1526": {
+      "game_id": "4b20b742b6168aaca4f25d87f11b1526",
+      "home_team": "Los Angeles Chargers",
+      "away_team": "New York Jets",
+      "game_time": "2026-11-22T21:05:00Z",
+      "stadium": "SoFi Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "5b612899d6dcdf998107f2c6c6e49a58": {
+      "game_id": "5b612899d6dcdf998107f2c6c6e49a58",
+      "home_team": "Los Angeles Rams",
+      "away_team": "Green Bay Packers",
+      "game_time": "2026-11-26T01:00:00Z",
+      "stadium": "SoFi Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "9b825e6518156008da499be041975fdd": {
+      "game_id": "9b825e6518156008da499be041975fdd",
+      "home_team": "Detroit Lions",
+      "away_team": "Chicago Bears",
+      "game_time": "2026-11-26T18:00:00Z",
+      "stadium": "Ford Field",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "ffaa06af56a7137d4b078c5c46c0b730": {
+      "game_id": "ffaa06af56a7137d4b078c5c46c0b730",
+      "home_team": "Dallas Cowboys",
+      "away_team": "Philadelphia Eagles",
+      "game_time": "2026-11-26T20:30:00Z",
+      "stadium": "AT&T Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "6a05021bdb6bab24b9bb381ffff10f0c": {
+      "game_id": "6a05021bdb6bab24b9bb381ffff10f0c",
+      "home_team": "Minnesota Vikings",
+      "away_team": "Atlanta Falcons",
+      "game_time": "2026-11-29T18:00:00Z",
+      "stadium": "U.S. Bank Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "60d0c074801985c1062795362a24200e": {
+      "game_id": "60d0c074801985c1062795362a24200e",
+      "home_team": "Houston Texans",
+      "away_team": "Baltimore Ravens",
+      "game_time": "2026-11-29T18:00:00Z",
+      "stadium": "NRG Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "e9da808e36e1b7475698a57465ad4519": {
+      "game_id": "e9da808e36e1b7475698a57465ad4519",
+      "home_team": "Indianapolis Colts",
+      "away_team": "New York Giants",
+      "game_time": "2026-11-29T18:00:00Z",
+      "stadium": "Lucas Oil Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "c64ceba13ede564e8658693e3171e7f9": {
+      "game_id": "c64ceba13ede564e8658693e3171e7f9",
+      "home_team": "Los Angeles Chargers",
+      "away_team": "New England Patriots",
+      "game_time": "2026-11-29T21:05:00Z",
+      "stadium": "SoFi Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    },
+    "69a1dbe9de3d3212c3a7a55be5d204ab": {
+      "game_id": "69a1dbe9de3d3212c3a7a55be5d204ab",
+      "home_team": "Arizona Cardinals",
+      "away_team": "Washington Commanders",
+      "game_time": "2026-11-29T21:25:00Z",
+      "stadium": "State Farm Stadium",
+      "dome": true,
+      "weather": null,
+      "modifiers": {
+        "dome": true,
+        "passing_mult": 1.0,
+        "kicker_mult": 1.0,
+        "wind_flag": false,
+        "precip_flag": false,
+        "cold_flag": false,
+        "notes": [
+          "dome \u2014 no weather impact"
+        ]
+      },
+      "fetched_at": "2026-11-18 04:49:01 UTC"
+    }
+  }
+}
