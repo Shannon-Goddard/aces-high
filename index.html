@@ -153,11 +153,9 @@ function renderPredictionCard(p) {
     <div class="prediction-card${isBet ? ' card-bet' : ''}" id="${p.game_id}">
       <div class="prediction-matchup">
         <div class="prediction-teams">
-          <img src="${teamLogoUrl(awaySlug)}" alt="${p.away_team}" onerror="this.style.display='none'">
-          <span>${p.away_team}</span>
+          <span class="team-unit"><img src="${teamLogoUrl(awaySlug)}" alt="${p.away_team}" onerror="this.style.display='none'"> ${p.away_team}</span>
           <span class="vs">@</span>
-          <img src="${teamLogoUrl(homeSlug)}" alt="${p.home_team}" onerror="this.style.display='none'">
-          <span>${p.home_team}</span>
+          <span class="team-unit"><img src="${teamLogoUrl(homeSlug)}" alt="${p.home_team}" onerror="this.style.display='none'"> ${p.home_team}</span>
         </div>
         <div class="text-dim" style="font-size:0.78rem">${gameDate} &middot; Wk ${p.week}</div>
       </div>

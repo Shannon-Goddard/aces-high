@@ -48,11 +48,11 @@ a:hover { color: var(--text); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
 }
 
-.nav-brand { display: flex; flex-direction: column; padding: 0.75rem 0; }
+.nav-brand { display: flex; flex-direction: column; padding: 0.75rem 0; flex-shrink: 0; }
 
 .nav-logo {
   font-size: 1.3rem;
@@ -69,37 +69,12 @@ a:hover { color: var(--text); }
   letter-spacing: 0.02em;
 }
 
-.nav-toggle {
-  display: none;
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.4rem 0.7rem;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 1.1rem;
-}
-
+/* Desktop nav links — always visible, horizontal */
 .nav-links {
   display: flex;
   align-items: center;
   gap: 0.25rem;
   flex-wrap: wrap;
-}
-
-/* Desktop: links always visible, no transform */
-@media (min-width: 769px) {
-  .nav-links {
-    position: static;
-    transform: none;
-    height: auto;
-    width: auto;
-    background: none;
-    border: none;
-    padding: 0;
-    flex-direction: row;
-    overflow: visible;
-  }
 }
 
 .nav-primary { display: flex; gap: 0.25rem; flex-wrap: wrap; }
@@ -118,13 +93,24 @@ a:hover { color: var(--text); }
   font-size: 0.85rem;
   transition: background 0.15s, color 0.15s;
 }
-.nav-link:hover, .nav-link.active {
-  background: var(--bg3);
-  color: var(--text);
-}
+.nav-link:hover, .nav-link.active { background: var(--bg3); color: var(--text); }
 .nav-link.active { color: var(--gold); }
 .nav-link-sm { font-size: 0.78rem; }
 
+/* Hamburger — hidden on desktop */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* Overlay backdrop */
 .nav-overlay {
   display: none;
   position: fixed;
@@ -134,18 +120,18 @@ a:hover { color: var(--text); }
 }
 .nav-overlay.open { display: block; }
 
+/* Mobile — slide-in drawer */
 @media (max-width: 768px) {
-  .nav-toggle { display: block; flex-shrink: 0; }
-  .nav-brand { flex: 1; }
+  .nav-toggle { display: block; }
   .nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
     width: 260px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
     background: var(--bg2);
     border-left: 1px solid var(--border);
     padding: 5rem 1.5rem 2rem;
@@ -156,8 +142,9 @@ a:hover { color: var(--text); }
     overflow-y: auto;
   }
   .nav-links.open { transform: translateX(0); }
+  .nav-primary { flex-direction: column; width: 100%; }
   .nav-link { width: 100%; font-size: 0.95rem; padding: 0.6rem 0.75rem; }
-  .nav-secondary { border-left: none; padding-left: 0; margin-left: 0; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); width: 100%; }
+  .nav-secondary { flex-direction: column; border-left: none; padding-left: 0; margin-left: 0; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); width: 100%; }
 }
 
 /* ── LAYOUT ───────────────────────────────────────────────────────────── */
@@ -183,9 +170,9 @@ a:hover { color: var(--text); }
   .grid-2 { grid-template-columns: 1fr; }
   .grid-teams { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
   .prediction-matchup { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  .prediction-teams { font-size: 0.78rem; gap: 0.4rem; flex-wrap: wrap; }
-  .prediction-teams img { width: 22px; height: 22px; }
-  .prediction-teams span { white-space: nowrap; }
+  .prediction-teams { font-size: 0.82rem; gap: 0.35rem; flex-direction: column; align-items: flex-start; }
+  .prediction-teams img { width: 20px; height: 20px; }
+  .prediction-teams .vs { align-self: flex-start; padding-left: 0.25rem; }
   .prediction-footer { flex-wrap: wrap; gap: 0.4rem; }
   .prediction-pick { font-size: 0.95rem; }
 }
@@ -437,6 +424,7 @@ tr:hover td { background: var(--bg2); }
   font-weight: 700;
 }
 .prediction-teams img { width: 32px; height: 32px; object-fit: contain; }
+.team-unit { display: inline-flex; align-items: center; gap: 0.4rem; }
 .vs { color: var(--text-muted); font-size: 0.8rem; }
 .prediction-body { padding: 1rem 1.25rem; }
 .prediction-pick {
