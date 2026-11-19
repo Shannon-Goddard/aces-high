@@ -20,7 +20,8 @@
   --font:       'Inter', system-ui, -apple-system, sans-serif;
 }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
+body { overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -47,7 +48,7 @@ a:hover { color: var(--text); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.5rem;
 }
 
@@ -110,6 +111,7 @@ a:hover { color: var(--text); }
 .nav-link-sm { font-size: 0.78rem; }
 
 @media (max-width: 768px) {
+  .nav { flex-wrap: wrap; }
   .nav-toggle { display: block; }
   .nav-links {
     display: none;
@@ -138,6 +140,13 @@ a:hover { color: var(--text); }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 1rem; }
 .grid-teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; }
+
+@media (max-width: 600px) {
+  .grid-4 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-teams { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
 
 /* ── CARDS ────────────────────────────────────────────────────────────── */
 .card {
