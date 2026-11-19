@@ -473,13 +473,15 @@ itself before we add more signals. Wrong order = we build on sand.
 | Same-draft-class dropped | 250 guys drafted the same year is structural noise, not signal | 2026 |
 | Sentiment starts neutral, news overlay updates it | nflverse gives structure, news scan gives quality — two separate concerns, two separate passes | 2026 |
 | facing_former_team derived at prediction time | Not stored as a static edge — computed live in predict.py when matchup is known. Avoids stale data | 2026 |
+| News sentiment overlay at team-level granularity (current) | Headlines rarely name the specific player — team-level is conservative and correct until name extraction is added | 2026 |
 
 ---
 
 ## Open Questions
 - [ ] Practice report source reliability — ESPN injury API occasionally stale, need fallback
 - [x] Best free source for roster relationship data — nflverse CSV join (pro + college teammates)
-- [ ] Sentiment overlay — news scan keyword co-occurrence to tag positive/negative on existing edges
+- [x] Sentiment overlay — news scan keyword co-occurrence to tag positive/negative on existing edges
+- [ ] Player name extraction in `score_headlines()` — extract player names from headline text, match against players.json, target sentiment updates to that player's edges only instead of all players on the team (team-level granularity is current fallback)
 - [ ] Personality inference confidence threshold — when do we have enough behavioral data
 - [ ] How do we handle mid-season trades — player carries his scores to new team (compat auto-updates on next infer_personality.py run — already handled)
 - [ ] How do we score expansion of a player's role (new OC, new scheme fit)
