@@ -398,7 +398,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     scheme_transition_active = any(
         (p.get('layer4_personality') or {}).get('scheme_transition')
         for p in players
-        if (p.get('layer1_body') or {}).get('snap_pct', 0) >= 0.40
+        if ((p.get('layer1_body') or {}).get('snap_pct') or 0) >= 0.40
     )
 
     # Weather: passing game takes the hit from wind/precip

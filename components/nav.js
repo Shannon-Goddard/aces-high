@@ -14,6 +14,7 @@
     { label: 'Players',       href: `${root}pages/players.html` },
     { label: 'Ledger',        href: `${root}pages/ledger.html` },
     { label: 'Stats',         href: `${root}pages/stats.html` },
+    { label: 'Backtest',      href: `${root}pages/backtest.html` },
     { label: 'Findings',      href: `${root}pages/findings.html` },
     { label: 'Blog',          href: `${root}pages/blog.html` },
   ];
