@@ -56,16 +56,16 @@
     </nav>
   `;
 
-  const toggle = document.getElementById('nav-toggle');
-  const links  = document.getElementById('nav-links');
-  const overlay = document.getElementById('nav-overlay');
+  const toggle  = document.getElementById('nav-toggle');
+  const drawer   = document.getElementById('nav-links');
+  const overlay  = document.getElementById('nav-overlay');
 
-  function openMenu()  { links.classList.add('open'); overlay.classList.add('open'); }
-  function closeMenu() { links.classList.remove('open'); overlay.classList.remove('open'); }
+  function openMenu()  { drawer.classList.add('open'); overlay.classList.add('open'); }
+  function closeMenu() { drawer.classList.remove('open'); overlay.classList.remove('open'); }
 
-  toggle.addEventListener('click', () => links.classList.contains('open') ? closeMenu() : openMenu());
+  toggle.addEventListener('click', () => drawer.classList.contains('open') ? closeMenu() : openMenu());
   overlay.addEventListener('click', closeMenu);
-  links.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
+  drawer.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
 
   // Back to top button
   const btn = document.createElement('a');
