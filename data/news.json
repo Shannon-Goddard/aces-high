@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-18 19:44:21 UTC",
+  "last_updated": "2026-11-19 22:00:54 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -3215,6 +3215,928 @@
       "team_slug": "sea",
       "team_name": "Seattle Seahawks",
       "scanned_at": "2026-11-18 19:44:21 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Whether it's against backup QBs or not, the Bills' defense is rolling",
+          "description": "Buffalo will face another backup QB in Week 11 with Kyle McCord set to start in place of Malik Willis for the Dolphins.",
+          "published": "2026-11-19T17:33:20Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Whether it's against backup QBs or not, the Bills' defense is rolling",
+          "description": "Buffalo will face another backup QB in Week 11 with Kyle McCord set to start in place of Malik Willis for the Dolphins.",
+          "published": "2026-11-19T17:33:20Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Ravens' DC supports decision to set Marlon Humphrey as inactive vs. Panthers",
+          "description": "Ravens' DC supports decision to set Marlon Humphrey as inactive vs. Panthers",
+          "published": "2026-11-19T17:46:50Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Ravens send CB Humphrey home, say he'll be inactive after 'criminals' comment",
+          "description": "The Ravens have sent cornerback Marlon Humphrey home from the facility, and he will be inactive for Sunday's game against the Panthers.",
+          "published": "2026-11-19T21:42:20Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Bengals offense will be biggest test yet for Commanders' improving defense",
+          "description": "Washington is moving closer to the defense it wants to be. Monday will provide a benchmark for their progress.",
+          "published": "2026-11-19T20:39:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Can the Bengals succeed in the postseason with a pass-heavy offense?",
+          "description": "Can the Bengals succeed in the postseason with a pass-heavy offense?",
+          "published": "2026-11-19T15:48:55Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "proving"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "NFL Week 11 uniforms: Texans debut Rivalries look, Commanders rock 'Hail Raiser'",
+          "description": "Here's a look at what each NFL team is wearing in Week 11, led by Houston debuting its Rivalries combination.",
+          "published": "2026-11-19T20:48:07Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Colts-Texans odds, best bets: Is Houston laying too many points?",
+          "description": "Odds, analysis and recommended plays to help you bet Thursday's Colts-Texans game.",
+          "published": "2026-11-19T18:57:00Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Colts-Texans odds, best bets: Is Houston laying too many points?",
+          "description": "Odds, analysis and recommended plays to help you bet Thursday's Colts-Texans game.",
+          "published": "2026-11-19T18:57:00Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why can't Richardson beat out struggling Jones as Colts QB1?",
+          "description": "Daniel Jones has some of the worst numbers in the NFL, yet Anthony Richardson can't get on the field for the woeful Colts.",
+          "published": "2026-11-19T11:00:00Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Jaguars visit the Giants in a matchup of two unexpected division leaders",
+          "description": "\u2014 John Harbaugh had no time this week for analyzing what has made the Jacksonville Jaguars one of the NFL's top teams.",
+          "published": "2026-11-19T21:25:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Cowboys face last-place Titans with new play-caller on defense and fading playoff hopes",
+          "description": "\u2014 The Dallas Cowboys have made their biggest move of the season to try to fix a broken defense, just in time for consecutive games against last-place...",
+          "published": "2026-11-19T21:25:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "trade": [
+          "cut"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Broncos sign cornerback Riley Moss to four-year extension",
+          "description": "The Broncos locked up a key piece of their secondary by signing cornerback Riley Moss to a four-year extension.",
+          "published": "2026-11-19T20:24:17Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "extension"
+        ],
+        "coach": [
+          "extension"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": true,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Chiefs are flying high but can ill afford to overlook the lowly Cardinals when they meet Sunday",
+          "description": "\u2014 If ever there was a time for an NFL team to overlook somebody, it just might be Sunday afternoon at Arrowhead Stadium, where the Kansas City Chiefs will continue their pursuit of another AFC West title against the injured, downtrodden Arizona...",
+          "published": "2026-11-19T21:25:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 4,
+      "headlines": [
+        {
+          "headline": "Cowboys DC acknowledges disappointment of losing playcalling duties",
+          "description": "Cowboys DC acknowledges disappointment of losing playcalling duties  ",
+          "published": "2026-11-19T21:11:13Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cowboys face last-place Titans with new play-caller on defense and fading playoff hopes",
+          "description": "\u2014 The Dallas Cowboys have made their biggest move of the season to try to fix a broken defense, just in time for consecutive games against last-place...",
+          "published": "2026-11-19T21:25:03Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cowboys' Parker: I'm still DC, have 'job to do' after losing playcalling duties",
+          "description": "Cowboys defensive coordinator Christian Parker said he briefly considered leaving the team after informed he was being stripped of playcalling responsibilities.",
+          "published": "2026-11-19T21:18:07Z",
+          "source": "espn"
+        },
+        {
+          "headline": "'A walking atrocity!' Stephen A. can't even laugh about Cowboys' defense",
+          "description": "'A walking atrocity!' Stephen A. can't even laugh about Cowboys' defense",
+          "published": "2026-11-19T16:21:01Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ],
+        "trade": [
+          "cut"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Jaguars visit the Giants in a matchup of two unexpected division leaders",
+          "description": "\u2014 John Harbaugh had no time this week for analyzing what has made the Jacksonville Jaguars one of the NFL's top teams.",
+          "published": "2026-11-19T21:25:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "NFL Week 11 uniforms: Texans debut Rivalries look, Commanders rock 'Hail Raiser'",
+          "description": "Here's a look at what each NFL team is wearing in Week 11, led by Houston debuting its Rivalries combination.",
+          "published": "2026-11-19T20:48:07Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bengals offense will be biggest test yet for Commanders' improving defense",
+          "description": "Washington is moving closer to the defense it wants to be. Monday will provide a benchmark for their progress.",
+          "published": "2026-11-19T20:39:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "proving"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Bucs QB Baker Mayfield hopes to play Sunday despite foot injury: 'I feel ready'",
+          "description": "Buccaneers quarterback Baker Mayfield is hoping to play Sunday against the Lions after he sustained a foot injury two weeks ago against the Chicago Bears.",
+          "published": "2026-11-19T21:21:24Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Pass rush part of the focus for the Saints and Bears going into Sunday's game",
+          "description": "\u2014 Carl Granderson and Chase Young form a potent 1-2 punch on defense for the New Orleans Saints. Jeffery Simmons is a force on the defensive line for the Chicago Bears.",
+          "published": "2026-11-19T21:25:05Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bucs QB Baker Mayfield hopes to play Sunday despite foot injury: 'I feel ready'",
+          "description": "Buccaneers quarterback Baker Mayfield is hoping to play Sunday against the Lions after he sustained a foot injury two weeks ago against the Chicago Bears.",
+          "published": "2026-11-19T21:21:24Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Vikings-49ers matchup in Mexico features the best defense vs. the best offense",
+          "description": "When Brock Purdy last walked off the field after playing Minnesota in 2024, he sought out Vikings defensive coordinator Brian Flores an complimented him on...",
+          "published": "2026-11-19T21:25:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Vikings' Cousins channeling Dantonio's 'slow down' maxim amid whirlwind month",
+          "description": "As he manages the whirlwind of his professional and personal life this month, Vikings QB Kirk Cousins has relied on a maxim he often heard from his college coach Mark Dantonio at Michigan State -- when things speed up, try to slow down.",
+          "published": "2026-11-19T19:23:16Z",
+          "source": "espn"
+        },
+        {
+          "headline": "What Stephen A. is looking to see from Vikings in 'litmus test' vs. 49ers",
+          "description": "What Stephen A. is looking to see from Vikings in 'litmus test' vs. 49ers",
+          "published": "2026-11-19T15:29:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Falcons seek change, but keep ending up in the same spot",
+          "description": "Mediocre record, questions at quarterback, rinse, repeat. Maybe next year the Falcons can start making progress.",
+          "published": "2026-11-19T11:39:28Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "record"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Ravens' DC supports decision to set Marlon Humphrey as inactive vs. Panthers",
+          "description": "Ravens' DC supports decision to set Marlon Humphrey as inactive vs. Panthers",
+          "published": "2026-11-19T17:46:50Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Ravens send CB Humphrey home, say he'll be inactive after 'criminals' comment",
+          "description": "The Ravens have sent cornerback Marlon Humphrey home from the facility, and he will be inactive for Sunday's game against the Panthers.",
+          "published": "2026-11-19T21:42:20Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Monroe Freeling, Lee Hunter top Panthers' rookie report at Week 11",
+          "description": "Will this year's draft class have a major impact on Carolina's second half of the season and potential postseason?",
+          "published": "2026-11-19T13:48:26Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Saints, Justin Reid 'working through' potential release",
+          "description": "Saints and safety Justin Reid are \"working through some things\" regarding the veteran safety's potential release, defensive coordinator Brandon Staley said on Thursday.",
+          "published": "2026-11-19T21:51:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Pass rush part of the focus for the Saints and Bears going into Sunday's game",
+          "description": "\u2014 Carl Granderson and Chase Young form a potent 1-2 punch on defense for the New Orleans Saints. Jeffery Simmons is a force on the defensive line for the Chicago Bears.",
+          "published": "2026-11-19T21:25:05Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bucs QB Baker Mayfield hopes to play Sunday despite foot injury: 'I feel ready'",
+          "description": "Buccaneers quarterback Baker Mayfield is hoping to play Sunday against the Lions after he sustained a foot injury two weeks ago against the Chicago Bears.",
+          "published": "2026-11-19T21:21:24Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Chiefs are flying high but can ill afford to overlook the lowly Cardinals when they meet Sunday",
+          "description": "\u2014 If ever there was a time for an NFL team to overlook somebody, it just might be Sunday afternoon at Arrowhead Stadium, where the Kansas City Chiefs will continue their pursuit of another AFC West title against the injured, downtrodden Arizona...",
+          "published": "2026-11-19T21:25:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Rams WR Puka Nacua to serve 3-game suspension while on IR",
+          "description": "Los Angeles Rams standout wide receiver Puka Nacua has been suspended three games for violating the league's personal conduct policy, the NFL announced Thursday.",
+          "published": "2026-11-19T21:39:05Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "suspended",
+          "suspension"
+        ],
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Vikings-49ers matchup in Mexico features the best defense vs. the best offense",
+          "description": "When Brock Purdy last walked off the field after playing Minnesota in 2024, he sought out Vikings defensive coordinator Brian Flores an complimented him on...",
+          "published": "2026-11-19T21:25:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "What Stephen A. is looking to see from Vikings in 'litmus test' vs. 49ers",
+          "description": "What Stephen A. is looking to see from Vikings in 'litmus test' vs. 49ers",
+          "published": "2026-11-19T15:29:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-19 22:00:54 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},
