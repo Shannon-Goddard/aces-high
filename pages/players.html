@@ -163,14 +163,14 @@ function compatRowHtml(label, sublabel, typeB, typeA, headshot) {
     ? `<img src="${headshot}" style="width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.visibility='hidden'">`
     : `<span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:inline-block;flex-shrink:0"></span>`;
   return `
-    <div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
-      <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0">${c.score}</div>
+    <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;border-bottom:1px solid var(--border)">
+      <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;margin-top:0.1rem">${c.score}</div>
       ${img}
       <div style="flex:1;min-width:0">
         <div style="font-size:0.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}</div>
-        <div style="font-size:0.68rem;color:var(--text-muted)">${sublabel}</div>
+        <div style="font-size:0.68rem;color:var(--gold);margin-top:0.1rem">${sublabel}</div>
+        <div style="display:flex;gap:0.25rem;flex-wrap:wrap;margin-top:0.25rem">${axisHtml(c.axes)}</div>
       </div>
-      <div style="display:flex;gap:0.25rem;flex-wrap:wrap;justify-content:flex-end">${axisHtml(c.axes)}</div>
     </div>`;
 }
 
@@ -214,14 +214,14 @@ function buildExpandedPanel(player, teamPlayers, teamCoaches) {
         ? `<img src="${p.headshot}" style="width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.visibility='hidden'">`
         : `<span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:inline-block;flex-shrink:0"></span>`;
       return `
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
-          <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0">${c.score}</div>
+        <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;border-bottom:1px solid var(--border)">
+          <div class="compat-ring ${rc}" style="width:22px;height:22px;font-size:0.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;margin-top:0.1rem">${c.score}</div>
           ${img}
           <div style="flex:1;min-width:0">
             <div style="font-size:0.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
-            <div style="font-size:0.68rem;color:var(--text-muted)">${p.position} · ${pType}</div>
+            <div style="font-size:0.68rem;color:var(--gold);margin-top:0.1rem">${p.position} · ${pType}</div>
+            <div style="display:flex;gap:0.25rem;flex-wrap:wrap;margin-top:0.25rem">${axisHtml(c.axes)}</div>
           </div>
-          <div style="display:flex;gap:0.25rem;flex-wrap:wrap;justify-content:flex-end">${axisHtml(c.axes)}</div>
         </div>`;
     }).join('');
   }
