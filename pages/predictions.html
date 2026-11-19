@@ -36,8 +36,8 @@
 
   <!-- Filter tabs -->
   <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
-    <button class="filter-btn active" data-filter="bet" onclick="setFilter('bet',this)">BET Only</button>
-    <button class="filter-btn" data-filter="all" onclick="setFilter('all',this)">All Games</button>
+    <button class="filter-btn" data-filter="bet" onclick="setFilter('bet',this)">BET Only</button>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All Games</button>
     <button class="filter-btn" data-filter="fav" onclick="setFilter('fav',this)">Favorites</button>
     <button class="filter-btn" data-filter="dog" onclick="setFilter('dog',this)">Underdogs</button>
   </div>
@@ -96,7 +96,7 @@ function confidenceColor(c) {
 }
 
 let allPredictions = [];
-let currentFilter = 'bet';
+let currentFilter = 'all';
 
 function setFilter(f, btn) {
   currentFilter = f;
@@ -611,9 +611,10 @@ function drillRelationships(gameId, homeName, awayName) {
 }
 
 async function init() {
+  const bust = `?v=${Date.now()}`;
   const [predRes, metaRes] = await Promise.all([
-    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
-    fetch(`${ROOT}data/metadata.json`).then(r => r.json()).catch(() => ({}))
+    fetch(`${ROOT}data/predictions.json${bust}`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/metadata.json${bust}`).then(r => r.json()).catch(() => ({}))
   ]);
 
   const week   = metaRes.week || '—';
@@ -625,7 +626,11 @@ async function init() {
   renderList();
 }
 
-init();
+init().catch(err => {
+  console.error('predictions init failed:', err);
+  document.getElementById('predictions-container').innerHTML =
+    `<div class="empty"><div class="empty-icon">&#127944;</div><div>Failed to load predictions. Check console.</div></div>`;
+});
 </script>
 
 <style>
