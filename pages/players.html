@@ -334,6 +334,8 @@ function renderCard(p) {
   const contractYear = p.layer4_personality?.contract_year || false;
   const snapDrop = p.layer1_body?.snap_drop_flag || false;
   const schemeTransition = p.layer4_personality?.scheme_transition || false;
+  const cohesion      = p.layer6_chemistry?.unit_cohesion_score ?? null;
+  const cohesionGroup = p.layer6_chemistry?.unit_cohesion_group || '';
   const hasCompat = !!(COMM_MAP[p.position] || HC_DIRECT.includes(p.position) || COACH_MAP[p.position]);
 
   function rfClass(s) {
@@ -370,6 +372,13 @@ function renderCard(p) {
       <span class="progress-label" style="font-size:0.72rem;color:var(--gold)">${compat.toFixed(0)}</span>
     </div>` : '';
 
+  const cohesionBar = cohesion !== null ? `
+    <div class="progress-wrap" style="margin-bottom:0.2rem">
+      <span style="font-size:0.7rem;color:#818cf8;min-width:42px">Unit</span>
+      <div class="progress-bar"><div class="progress-fill" style="width:${cohesion}%;background:#818cf8;opacity:0.75"></div></div>
+      <span class="progress-label" style="font-size:0.72rem;color:#818cf8">${cohesion}</span>
+    </div>` : '';
+
   const id = pid(p);
   return `
     <div class="card card-sm player-card-wrap" id="${id}" style="display:flex;flex-direction:column;gap:0.6rem;cursor:${hasCompat?'pointer':'default'}" ${hasCompat ? `onclick="toggleCompat('${id}')"` : ''}>
@@ -397,7 +406,7 @@ function renderCard(p) {
           ${rfScore !== null ? `<div class="role-fit-badge ${rfClass(rfScore)}" title="Role fit: ${rfLabel}">${rfLabel}</div>` : ''}
         </div>
       </div>
-      ${skillBar}${bodyBar}${hungerBar}${compatBar}
+      ${skillBar}${bodyBar}${hungerBar}${compatBar}${cohesionBar}
       ${p.layer1_body?.age_label ? `<div class="text-muted" style="font-size:0.7rem">${p.layer1_body.age_label.replace(/_/g,' ')} &middot; ${p.layer1_body.career_label?.replace(/_/g,' ') || ''}</div>` : ''}
       <div id="${id}-compat" style="display:none"></div>
     </div>`;

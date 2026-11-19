@@ -170,7 +170,7 @@ pages/
 | 4 | Personality / Compat | ✅ Live — team_compat_score per player, affects predictions |
 | 4 | Personality / Role Fit | ✅ Live — position demand scoring, veteran drain modifier |
 | 5 | Relationships | ✅ Live — former pro/college teammate edges, sentiment overlay ready |
-| 6 | Team Chemistry | 🔶 Partial — coach↔player compat live, unit chemistry pending |
+| 6 | Team Chemistry | ✅ Live — unit cohesion scores (OL/secondary/LB/WR/DL), cohesion_mult in predict.py |
 | 7 | Matchup | ⬜ Not started — direct position matchup scoring |
 | 8 | Prediction | ✅ Live — L1+L2+L3+L4+weather+practice+odds modifiers |
 | 9 | Outcome | ✅ Built — record_outcome.py live, awaiting first closed games |
@@ -361,30 +361,61 @@ itself before we add more signals. Wrong order = we build on sand.
 
 ---
 
-### 12. Layer 6 — Unit Chemistry (OL Cohesion)
-*The missing piece of team chemistry beyond coach↔player.*
-- OL units that have played together 3+ years outperform shuffled lines significantly
-- Track years together per unit: OL group, secondary group, LB corps
-- `unit_cohesion_score` per position group, feeds into team skill modifier
-- Data source: nflverse roster history — years on same team per player pair
+### 12. Layer 6 — Unit Chemistry ✅ Live
+*OL cohesion, secondary cohesion, LB corps, WR corps, DL corps — all scored.*
+- `build_unit_cohesion_scores()` in `fetch_relationships.py` — runs after relationship edges are built
+- Groups active players by team + position group (OL, secondary=DB/CB/S, LB, WR, DL)
+- Scores each unit 0-100: base 40 + avg seasons together (max +30) + core stability bonus (+10/+20)
+- Writes `layer6_chemistry.unit_cohesion_score` + `unit_cohesion_group` to every eligible player
+- `team_unit_cohesion_score()` in `predict.py` — snap-weighted, ±5% max multiplier (`cohesion_mult`)
+- `cohesion_mult` applied alongside `compat_mult`, `role_fit_mult`, `hc_market_mult` in `raw_team_score()`
+- Indigo "Unit" bar on OL/secondary/LB/WR/DL player cards in `players.html`
 
 ---
 
-### 13. Layer 7 — Direct Position Matchup Scoring
+## Next Season — Builds Requiring Full Season Data
+
+*These are ready to build but need outcome data to validate and calibrate.
+ Do not start until at least one full season of closed predictions exists.*
+
+---
+
+### Layer 7 — Direct Position Matchup Scoring
 *The head-to-head layer.*
 - QB skill score vs opposing DB skill score — direct matchup delta
 - WR1 vs CB1, OL pass protection vs DL pass rush
 - Currently team scores are independent — matchup scoring makes them interact
-- Significant architecture change to `predict.py` — save for after calibration data exists
+- Significant architecture change to `predict.py` — requires calibration baseline first
+- **Blocked on:** full season of predictions to establish baseline before changing the architecture
 
 ---
 
-### 14. Layer 12 — Anti-Bias Narrative Trap Detector
+### Layer 12 — Anti-Bias Narrative Trap Detector
 *The system that keeps us honest about our own reasoning.*
 - Detect when a prediction is driven by narrative rather than data
 - Flags: "team on revenge game" without supporting score delta, "hot team" without momentum data
 - Recency bias check: are we overweighting last week's result?
 - Public narrative divergence: when our pick matches the public narrative, reduce confidence slightly
+- **Blocked on:** 50+ closed predictions to see where narrative traps actually appear in our own misses
+
+---
+
+### Player Name Extraction in `score_headlines()`
+*Upgrade team-level sentiment targeting to player-level.*
+- Extract player names from headline text, match against players.json
+- Target sentiment updates to that specific player's edges only
+- Current team-level fallback is conservative and correct — upgrade when sentiment overlay proves signal
+- **Blocked on:** outcome data showing whether team-level sentiment is moving the needle at all
+
+---
+
+### 13. Layer 7 — Direct Position Matchup Scoring
+*Next season — see Next Season section above.*
+
+---
+
+### 14. Layer 12 — Anti-Bias Narrative Trap Detector
+*Next season — see Next Season section above.*
 
 ---
 
@@ -420,6 +451,7 @@ itself before we add more signals. Wrong order = we build on sand.
 | Rematch within same season | ×0.95 on favorite edge | Hypothesis | 0/10 |
 | Coordinator change (scheme transition) | role fit → 50 for 3 weeks | Hypothesis | 0/10 |
 | Coach market fit (I/E vs market size) | ±3% on team score | Hypothesis | 0/10 |
+| Unit cohesion (OL/secondary/LB/WR/DL) | ±5% on team score | Hypothesis | 0/10 |
 | Revenge game | ×1.10 | Hypothesis | 0/10 |
 | Public callout — feeling type | ×0.80 | Hypothesis | 0/10 |
 | Public callout — thinking type | ×1.05 | Hypothesis | 0/10 |
@@ -474,6 +506,8 @@ itself before we add more signals. Wrong order = we build on sand.
 | Sentiment starts neutral, news overlay updates it | nflverse gives structure, news scan gives quality — two separate concerns, two separate passes | 2026 |
 | facing_former_team derived at prediction time | Not stored as a static edge — computed live in predict.py when matchup is known. Avoids stale data | 2026 |
 | News sentiment overlay at team-level granularity (current) | Headlines rarely name the specific player — team-level is conservative and correct until name extraction is added | 2026 |
+| Unit cohesion as ±5% multiplier | OL/secondary/LB cohesion is real but subtle — capped lower than compat/role fit until outcomes validate the weight | 2026 |
+| Layer 7/12 deferred to next season | Architecture changes to predict.py require a calibration baseline — wrong order = building on sand | 2026 |
 
 ---
 
@@ -507,16 +541,17 @@ itself before we add more signals. Wrong order = we build on sand.
 13. Coordinator change tracker — scheme transition resets role fit for 3 weeks ✅ Live
 14. Coach market fit — introvert HC in high-media market pays structural energy tax ✅ Live
 15. Relationship web — former pro/college teammate edges, strength-scored, sentiment-ready ✅ Live
-16. Private vs public accountability as coach scoring variable *(planned)*
-17. Flip conditions — what would change our prediction before kickoff
-18. Modifier validation framework — hypothesis vs evidence, minimum data points
-19. Humility layer — blind spots documented in every prediction
-20. Anti-bias checks — narrative trap detector + recency bias protection *(planned)*
-21. Year one as research dataset — wrong predictions with reasoning are the product
+16. Unit cohesion scoring — OL/secondary/LB/WR/DL groups scored by seasons together ✅ Live
+17. Private vs public accountability as coach scoring variable *(next season)*
+18. Flip conditions — what would change our prediction before kickoff
+19. Modifier validation framework — hypothesis vs evidence, minimum data points
+20. Humility layer — blind spots documented in every prediction
+21. Anti-bias checks — narrative trap detector + recency bias protection *(next season)*
+22. Year one as research dataset — wrong predictions with reasoning are the product
 
 ---
 
 *"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."*
 
-*Last updated: Season 2026 Week 12 — L1+L2+L3+L4+L5 live, coaches page live, personality modifier stack complete*
-*Build queue: Layer 6 unit chemistry next, then direct position matchup scoring (L7)*
+*Last updated: Season 2026 Week 12 — L1+L2+L3+L4+L5+L6 live, all active layers complete*
+*Next season build queue: Layer 7 matchup scoring, Layer 12 anti-bias, player name extraction in sentiment overlay*

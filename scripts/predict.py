@@ -189,6 +189,27 @@ def team_role_fit_score(players_on_team):
     return round(1.0 + max(-0.10, min(0.10, avg_mod)), 4)
 
 
+def team_unit_cohesion_score(players_on_team):
+    """
+    Snap-weighted unit cohesion score from layer6_chemistry.unit_cohesion_score.
+    Only players with a cohesion score contribute (OL, secondary, LB, WR, DL corps).
+    Returns a multiplier: 1 + (avg_cohesion - 50) / 1000  (±5% max).
+    Defaults to 1.0 (neutral) if no data.
+    """
+    total_w, total_s = 0.0, 0.0
+    for p in players_on_team:
+        score = (p.get('layer6_chemistry') or {}).get('unit_cohesion_score')
+        if score is None:
+            continue
+        w = _starter_weight(p)
+        total_s += score * w
+        total_w += w
+    if not total_w:
+        return 1.0
+    avg = total_s / total_w
+    return round(1.0 + max(-0.05, min(0.05, (avg - 50.0) / 1000.0)), 4)
+
+
 def team_hc_market_fit(slug, hc_index):
     """
     Read coach_market_fit_score from the HC entry for this team.
@@ -367,7 +388,8 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
     momentum     = team_momentum_score(players)
     hunger       = team_hunger_score(players)
     compat       = team_compat_score(players)
-    role_fit_mult = team_role_fit_score(players)
+    role_fit_mult    = team_role_fit_score(players)
+    cohesion_mult    = team_unit_cohesion_score(players)
     injury       = team_injury_flag(players, practice_index)
     joint_pen    = team_chronic_joint_penalty(players, weather_mods.get('cold_joint_flag', False))
     silence, distraction = get_news_modifiers(slug, news_index)
@@ -401,7 +423,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         silence * 100     * WEIGHTS['silence_bonus'] +
         injury            * WEIGHTS['injury_flag'] +
         distraction * 100 * WEIGHTS['distraction']
-    ) * compat_mult * role_fit_mult * hc_market_mult
+    ) * compat_mult * role_fit_mult * cohesion_mult * hc_market_mult
     raw = max(0.0, min(100.0, raw))
     composite = normalize(raw)
 
@@ -416,6 +438,7 @@ def raw_team_score(slug, team_index, news_index, weather_mods=None, practice_ind
         "compat":             round(compat, 1),
         "compat_mult":        round(compat_mult, 4),
         "role_fit_mult":      round(role_fit_mult, 4),
+        "cohesion_mult":      round(cohesion_mult, 4),
         "hc_market_mult":     round(hc_market_mult, 4),
         "injury_penalty":     round(injury, 1),
         "joint_penalty":      round(joint_pen, 1),

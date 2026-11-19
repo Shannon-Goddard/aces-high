@@ -294,6 +294,136 @@ def preserve_sentiment(existing_rels, new_rels):
     return new_rels
 
 
+# Position groups that form meaningful units — cohesion is real within these groups
+UNIT_GROUPS = {
+    'OL':        {'OL', 'FB'},
+    'secondary': {'DB', 'CB', 'S'},
+    'lb_corps':  {'LB'},
+    'wr_corps':  {'WR'},
+    'dl_corps':  {'DL', 'DE', 'DT'},
+}
+
+
+def build_unit_cohesion_scores(csv_players, current_season):
+    """
+    For each team, score each unit group (OL, secondary, LB corps, WR corps, DL corps)
+    by how long the players in that group have been together.
+
+    cohesion_score 0-100:
+      Base 40 for any unit with 2+ players
+      +6 per average seasons together (max +30 at 5 seasons)
+      +10 if 3+ players have been together 2+ seasons (core stability bonus)
+      +20 if 4+ players have been together 3+ seasons (elite cohesion)
+
+    Returns: {team: {group_name: cohesion_score}}
+    Also returns: {gsis_id: {unit_cohesion_score, unit_cohesion_group}}
+    """
+    print(f"  Building unit cohesion scores...")
+
+    lookback_start = current_season - PRO_LOOKBACK
+    active_ids = {
+        p['gsis_id'] for p in csv_players
+        if p.get('status', '') in ACTIVE_STATUSES and p.get('gsis_id')
+    }
+
+    # Build team → group → [players]
+    team_units = {}  # team → group_name → [player]
+    for p in csv_players:
+        gsis  = (p.get('gsis_id') or '').strip()
+        team  = (p.get('latest_team') or '').strip()
+        pg    = (p.get('position_group') or '').upper()
+        last  = safe_int(p.get('last_season'))
+
+        if not gsis or not team or not pg or not last:
+            continue
+        if gsis not in active_ids:
+            continue
+        if last < lookback_start:
+            continue
+
+        for group_name, positions in UNIT_GROUPS.items():
+            if pg in positions:
+                team_units.setdefault(team, {}).setdefault(group_name, []).append(p)
+                break
+
+    # For each team+group, compute pairwise seasons together
+    team_cohesion  = {}  # team → group → score
+    player_cohesion = {}  # gsis_id → {score, group}
+
+    for team, groups in team_units.items():
+        team_cohesion[team] = {}
+        for group_name, members in groups.items():
+            if len(members) < 2:
+                team_cohesion[team][group_name] = 40  # single player, base only
+                for m in members:
+                    player_cohesion[m['gsis_id']] = {'unit_cohesion_score': 40, 'unit_cohesion_group': group_name}
+                continue
+
+            # Count overlapping seasons per pair
+            pair_seasons = []
+            for p_a, p_b in combinations(members, 2):
+                rookie_a = safe_int(p_a.get('rookie_season')) or lookback_start
+                last_a   = safe_int(p_a.get('last_season'))   or current_season
+                rookie_b = safe_int(p_b.get('rookie_season')) or lookback_start
+                last_b   = safe_int(p_b.get('last_season'))   or current_season
+
+                overlap_start = max(rookie_a, rookie_b, lookback_start)
+                overlap_end   = min(last_a, last_b, current_season)
+                seasons = max(0, overlap_end - overlap_start + 1)
+                pair_seasons.append(seasons)
+
+            avg_seasons = sum(pair_seasons) / len(pair_seasons) if pair_seasons else 0
+
+            # Core stability: how many players have 2+ seasons with at least one other member
+            # Approximate: count members whose last_season >= lookback_start + 1
+            core_members = sum(
+                1 for m in members
+                if (safe_int(m.get('last_season')) or 0) >= lookback_start + 1
+                and (safe_int(m.get('rookie_season')) or current_season) <= lookback_start + 1
+            )
+            elite_members = sum(
+                1 for m in members
+                if (safe_int(m.get('last_season')) or 0) >= lookback_start + 2
+                and (safe_int(m.get('rookie_season')) or current_season) <= lookback_start
+            )
+
+            score = 40
+            score += min(30, round(avg_seasons * 6))
+            if core_members >= 3:
+                score += 10
+            if elite_members >= 4:
+                score += 20
+            score = min(100, score)
+
+            team_cohesion[team][group_name] = score
+            for m in members:
+                player_cohesion[m['gsis_id']] = {
+                    'unit_cohesion_score': score,
+                    'unit_cohesion_group': group_name,
+                }
+
+    # Summary
+    total_players = len(player_cohesion)
+    avg_score = round(sum(v['unit_cohesion_score'] for v in player_cohesion.values()) / total_players, 1) if total_players else 0
+    print(f"    {total_players} players scored | avg cohesion: {avg_score}")
+    return player_cohesion
+
+
+def write_unit_cohesion(players_data, player_cohesion):
+    """Write layer6_chemistry block to each player record."""
+    updated = 0
+    for player in players_data.get('players', []):
+        gsis = player.get('gsis_id', '')
+        data = player_cohesion.get(gsis)
+        existing = player.get('layer6_chemistry')
+        new_val = data if data else {'unit_cohesion_score': None, 'unit_cohesion_group': None}
+        if existing != new_val:
+            player['layer6_chemistry'] = new_val
+            updated += 1
+    print(f"  Updated layer6_chemistry on {updated} player records")
+    return players_data
+
+
 def write_player_rel_ids(players_data, all_rels):
     """
     Write relationship IDs to each player's layer5_relationships list.
@@ -359,6 +489,11 @@ def main():
 
     # Write rel IDs back to players.json
     players_data = write_player_rel_ids(players_data, all_rels)
+
+    # Build + write unit cohesion scores (Layer 6)
+    player_cohesion = build_unit_cohesion_scores(csv_players, current_season)
+    players_data    = write_unit_cohesion(players_data, player_cohesion)
+
     players_data['last_updated'] = now_str
     save_json(PLAYERS_JSON, players_data)
     print(f"  players.json updated")
