@@ -553,6 +553,19 @@ footer {
 footer a { color: var(--text-muted); }
 footer a:hover { color: var(--gold); }
 
+.beer-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.beer-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
 /* ── UTILS ────────────────────────────────────────────────────────────── */
 .text-gold   { color: var(--gold); }
 .text-green  { color: var(--green); }
