@@ -21,8 +21,14 @@
 
 <div class="page">
   <div class="page-header">
-    <div class="page-title">2024 Backtest</div>
-    <div class="page-sub">Full season retroactive — how would the system have done?</div>
+    <div class="page-title">Backtest</div>
+    <div class="page-sub">Retroactive predictions — how would the system have done?</div>
+  </div>
+
+  <!-- Season selector -->
+  <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap">
+    <span style="font-size:0.82rem;color:var(--text-muted)">Season</span>
+    <div id="season-tabs" style="display:flex;gap:0.4rem;flex-wrap:wrap"></div>
   </div>
 
   <div id="summary-section">
@@ -82,6 +88,22 @@ function logoUrl(slug) {
 let allGames = [];
 let currentFilter = 'all';
 let currentWeek = 'all';
+let currentSeason = null;
+let seasonsData = {};
+
+function setSeason(season, btn) {
+  currentSeason = season;
+  currentWeek   = 'all';
+  document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('week-select').value = 'all';
+
+  const sd = seasonsData[season];
+  allGames = sd.games;
+  renderSummary(sd.summary);
+  rebuildWeekSelect(sd.games);
+  renderGames();
+}
 
 function setFilter(f, btn) {
   currentFilter = f;
@@ -225,31 +247,46 @@ function renderGameRow(g) {
     </div>`;
 }
 
+function rebuildWeekSelect(games) {
+  const sel   = document.getElementById('week-select');
+  const weeks = [...new Set(games.map(g => g.week))].sort((a,b) => a - b);
+  sel.innerHTML = '<option value="all">All Weeks</option>';
+  weeks.forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w; opt.textContent = `Week ${w}`;
+    sel.appendChild(opt);
+  });
+}
+
 async function init() {
   const bust = `?v=${Date.now()}`;
   const data = await fetch(`${ROOT}data/backtest.json${bust}`)
-    .then(r => r.json())
-    .catch(() => null);
+    .then(r => r.json()).catch(() => null);
 
-  if (!data) {
+  if (!data || !data.seasons) {
     document.getElementById('summary-section').innerHTML =
       `<div class="empty"><div class="empty-icon">🏈</div><div>Backtest data not found. Run <code>python scripts/backtest.py</code> to generate it.</div></div>`;
     return;
   }
 
-  allGames = data.games || [];
-  renderSummary(data.summary);
+  seasonsData = data.seasons;
+  const seasons = Object.keys(seasonsData).map(Number).sort((a,b) => b - a);
 
-  // Populate week selector
-  const weeks = [...new Set(allGames.map(g => g.week))].sort((a,b) => a - b);
-  const sel = document.getElementById('week-select');
-  weeks.forEach(w => {
-    const opt = document.createElement('option');
-    opt.value = w;
-    opt.textContent = `Week ${w}`;
-    sel.appendChild(opt);
+  // Build season tabs
+  const tabsEl = document.getElementById('season-tabs');
+  seasons.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = `filter-btn season-btn${i === 0 ? ' active' : ''}`;
+    btn.textContent = s;
+    btn.onclick = () => setSeason(s, btn);
+    tabsEl.appendChild(btn);
   });
 
+  // Load most recent season by default
+  currentSeason = seasons[0];
+  allGames = seasonsData[currentSeason].games;
+  renderSummary(seasonsData[currentSeason].summary);
+  rebuildWeekSelect(allGames);
   document.getElementById('filter-bar').style.display = 'flex';
   renderGames();
 }
