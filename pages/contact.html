@@ -11,10 +11,15 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="../assets/style.css">
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NHWCHZKN');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5HBJJEMZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T5HBJJEMZF');
+  </script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHWCHZKN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div id="nav-root"></div>
 
@@ -52,17 +57,11 @@
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
       <div style="font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:0.75rem">What to reach out about</div>
       <div style="display:flex;flex-direction:column;gap:0.5rem">
-        ${[
-          'You spotted a data error or a bad prediction call',
-          'You have a modifier hypothesis worth testing',
-          'Bug report or feature idea',
-          'Press, partnership, or data inquiry',
-          'You want to contribute to the open source repo',
-        ].map(item => `
-        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)">
-          <span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span>
-          <span>${item}</span>
-        </div>`).join('')}
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span><span>You spotted a data error or a bad prediction call</span></div>
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span><span>You have a modifier hypothesis worth testing</span></div>
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span><span>Bug report or feature idea</span></div>
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span><span>Press, partnership, or data inquiry</span></div>
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span><span>You want to contribute to the open source repo</span></div>
       </div>
     </div>
 
