@@ -120,10 +120,11 @@ function slugFor(teamName) {
 }
 
 async function loadData() {
+  const bust = `?v=${Date.now()}`;
   const [predRes, ledgerRes, metaRes] = await Promise.all([
-    fetch(`${ROOT}data/predictions.json`).then(r => r.json()).catch(() => ({ predictions: [] })),
-    fetch(`${ROOT}data/ledger.json`).then(r => r.json()).catch(() => null),
-    fetch(`${ROOT}data/metadata.json`).then(r => r.json()).catch(() => ({}))
+    fetch(`${ROOT}data/predictions.json${bust}`).then(r => r.json()).catch(() => ({ predictions: [] })),
+    fetch(`${ROOT}data/ledger.json${bust}`).then(r => r.json()).catch(() => null),
+    fetch(`${ROOT}data/metadata.json${bust}`).then(r => r.json()).catch(() => ({}))
   ]);
   return { predictions: predRes, ledger: ledgerRes, meta: metaRes };
 }
@@ -133,7 +134,9 @@ function renderSummary(ledger) {
   const s = ledger.summary;
   const f = s.flat;
   const w = s.confidence_weighted;
-  document.getElementById('season-summary').innerHTML = `
+  const hasData = f.total_bets > 0;
+
+  document.getElementById('season-summary').innerHTML = hasData ? `
     <div class="summary-tile">
       <div class="tile-value">${f.wins}-${f.losses}${f.pushes ? '-' + f.pushes : ''}</div>
       <div class="tile-label">Flat Record</div>
@@ -157,6 +160,10 @@ function renderSummary(ledger) {
     <div class="summary-tile">
       <div class="tile-value">${f.total_bets}</div>
       <div class="tile-label">Total Predictions</div>
+    </div>
+  ` : `
+    <div style="grid-column:1/-1;padding:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;color:var(--text-muted)">
+      Season record populates as games close. Check back after Week 12 results are final.
     </div>
   `;
 }
