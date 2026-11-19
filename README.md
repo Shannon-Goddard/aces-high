@@ -208,7 +208,8 @@ aces-high/
 │   ├── fetch_weather.py        — Open-Meteo, passing/kicker modifiers
 │   ├── fetch_scores.py         — game scores
 │   ├── record_outcome.py       — closes bets, writes outcomes + lessons
-│   └── update_blog.py          — auto-generates blog posts from closed predictions
+│   ├── update_blog.py          — auto-generates blog posts from closed predictions
+│   └── backtest.py             — retroactive predictions across 2020–2024, writes backtest.json
 │
 ├── data/
 │   ├── players.json            — 3,216 players, L1+L2+L4+L5+L6 complete
@@ -222,6 +223,7 @@ aces-high/
 │   ├── outcomes.json           — closed bets (populates as season progresses)
 │   ├── ledger.json             — open/closed bets, P&L
 │   ├── modifiers.json          — modifier weights + hypothesis status
+│   ├── backtest.json           — 2020–2024 retroactive results, 1,343 games
 │   └── metadata.json           — week, season, scan timestamps
 │
 ├── pages/
@@ -234,6 +236,7 @@ aces-high/
 │   ├── findings.html           — 22+ modifiers tracked, hypothesis vs validated
 │   ├── methodology.html        — full system explanation
 │   ├── stats.html              — calibration dashboard (populates with outcomes)
+│   ├── backtest.html           — 2020–2024 retroactive results, year selector, game-by-game
 │   └── blog.html               — auto-generated posts from closed predictions
 │
 ├── .github/workflows/          — 5 automated GitHub Actions
@@ -311,6 +314,7 @@ These are ready to build but blocked on outcome data:
 - **Layer 7 — Direct Position Matchup Scoring**: QB skill vs opposing DB, OL pass protection vs DL pass rush. Significant architecture change to `predict.py` — needs a calibration baseline first.
 - **Layer 12 — Anti-Bias Narrative Trap Detector**: Flags when a prediction is driven by narrative rather than data. Needs 50+ closed predictions to see where narrative traps appear in our own misses.
 - **Player Name Extraction**: Upgrade team-level sentiment targeting to player-level. Blocked on outcome data showing whether team-level sentiment is moving the needle at all.
+- **Backtest year-over-year trend analysis**: The 2020–2024 backtest shows consistent improvement each season (63% → 72% SU). Once live 2026 outcomes accumulate, compare live accuracy against the backtest baseline to validate whether the system is performing as expected or drifting.
 
 ---
 
@@ -330,6 +334,7 @@ This wasn't "AI generated code." It was a genuine back-and-forth architecture se
 - **Pipeline sequencing** — why `update_ratings → infer_personality → fetch_coaches → fetch_relationships` is the only correct order
 - **The humility layer** — blind spots and flip conditions as first-class data, not afterthoughts
 - **Every script, every data structure, every GitHub Actions workflow** — written together, line by line
+- **The backtest** — the idea to run the full modifier stack against 5 seasons of historical data came out of a live session. 1,343 games. The trend line (63% → 72% SU, improving every year) wasn't expected — it emerged from the data and reframed what the personality/compat layer is actually doing. That conversation is documented in the commit history.
 
 The human brought the vision, the football knowledge, the "inside stuff" philosophy, and the stories. Amazon Q brought the architecture, the code, and the discipline to build it right.
 
@@ -339,4 +344,4 @@ That's the real stack.
 
 *"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."*
 
-*Season 2026 — L1+L2+L3+L4+L5+L6 live. Pipeline runs itself. Next real build session starts after the first few weeks of closed outcomes.*
+*Season 2026 — L1+L2+L3+L4+L5+L6 live. Pipeline runs itself. Backtest shows 63%→72% SU improvement across 2020–2024. Next real build session starts after the first few weeks of closed outcomes.*
