@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aces High — Contact</title>
+  <link rel="icon" type="image/png" href="../assets/img/a-h-white.png">
+  <meta name="description" content="Contact the builder of Aces High. One person building this.">
+  <meta property="og:title" content="Aces High — Contact">
+  <meta property="og:image" content="../assets/img/share.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Contact</div>
+    <div class="page-sub">One person building this. Response time is real, not a bot.</div>
+  </div>
+
+  <div style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem">
+
+    <!-- Contact cards -->
+    <div style="display:flex;flex-direction:column;gap:0.75rem">
+      <a href="mailto:shannon@loyal9.app" style="display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;text-decoration:none;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--gold-dim)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;color:var(--text)">Email</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.15rem">shannon@loyal9.app</div>
+        </div>
+      </a>
+      <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;text-decoration:none;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--gold-dim)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;color:var(--text)">GitHub</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.15rem">github.com/Shannon-Goddard/aces-high</div>
+        </div>
+      </a>
+      <a href="https://shannon-goddard.loyal9.app" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;text-decoration:none;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--gold-dim)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;color:var(--text)">Developer Portfolio</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.15rem">shannon-goddard.loyal9.app</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- What to reach out about -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+      <div style="font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:0.75rem">What to reach out about</div>
+      <div style="display:flex;flex-direction:column;gap:0.5rem">
+        ${[
+          'You spotted a data error or a bad prediction call',
+          'You have a modifier hypothesis worth testing',
+          'Bug report or feature idea',
+          'Press, partnership, or data inquiry',
+          'You want to contribute to the open source repo',
+        ].map(item => `
+        <div style="display:flex;gap:0.75rem;font-size:0.85rem;color:var(--text-dim)">
+          <span style="color:var(--gold);font-weight:700;flex-shrink:0">→</span>
+          <span>${item}</span>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Company -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+      <div style="font-weight:800;font-size:0.9rem;color:var(--text)">Loyal9 LLC</div>
+      <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem">Riverside, CA · Established May 2023</div>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.7;margin:0.75rem 0 0">Aces High is a product of Loyal9 LLC. For data corrections or DMCA requests, email the address above with a subject line matching your inquiry.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. &nbsp;·&nbsp; <a href="./legal.html">Legal</a> &nbsp;·&nbsp; <a href="./licenses.html">Licenses</a> &nbsp;·&nbsp; <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener">GitHub</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+</body>
+</html>

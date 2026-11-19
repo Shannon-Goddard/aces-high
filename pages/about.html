@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aces High — About</title>
+  <link rel="icon" type="image/png" href="../assets/img/a-h-white.png">
+  <meta name="description" content="What Aces High is, why it exists, and how it was built. NFL human performance intelligence — the inside stuff nobody else knows.">
+  <meta property="og:title" content="Aces High — About">
+  <meta property="og:description" content="The inside stuff. A structured attempt to quantify the soft signals Vegas doesn't price in.">
+  <meta property="og:image" content="../assets/img/share.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">About</div>
+    <div class="page-sub">The inside stuff nobody else knows.</div>
+  </div>
+
+  <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem">
+
+    <!-- What it is -->
+    <section>
+      <div style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:0.75rem">What Is Aces High?</div>
+      <p style="color:var(--text-dim);line-height:1.8;margin:0 0 0.75rem">Aces High is not a picks site. It's not a stats aggregator. It's a structured attempt to quantify the soft signals that Vegas doesn't price in — personality compatibility, role fit, unit cohesion, relationship webs, coach market fit, hunger, distraction, silence.</p>
+      <p style="color:var(--text-dim);line-height:1.8;margin:0">The thesis: the market prices talent well. It prices human dynamics poorly. That's the edge.</p>
+    </section>
+
+    <!-- The philosophy -->
+    <section style="border-left:3px solid var(--gold-dim);padding-left:1.25rem">
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">The Philosophy</div>
+      <blockquote style="margin:0;font-size:1rem;font-style:italic;color:var(--gold);line-height:1.7">"He'd find out the kind of inside stuff nobody else knew, and that's what he'd put his money on."</blockquote>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem">— Nicky, Casino</div>
+      <p style="color:var(--text-dim);line-height:1.8;margin:1rem 0 0">Every modifier starts as a hypothesis. It earns its weight through outcomes or gets cut. Year one is not about winning — it's about documenting everything so year two is smarter. Wrong predictions with honest reasoning attached are more valuable than lucky right ones.</p>
+    </section>
+
+    <!-- The system -->
+    <section>
+      <div style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:0.75rem">The 12-Layer System</div>
+      <p style="color:var(--text-dim);line-height:1.8;margin:0 0 1rem">Layer 1 and 2 everyone has. Layers 3–12 are ours. The architecture is a layered intelligence stack — each layer adds a dimension of signal. Lower layers are objective (body, stats). Higher layers are behavioral and relational.</p>
+      <div style="display:flex;flex-direction:column;gap:0.5rem">
+        ${[
+          ['L1–2', 'Body + Skill', 'Age, weight, snap%, career stage, position-ranked stats, EPA, momentum'],
+          ['L3', 'Mind', 'Hunger index (draft seed, UDFA, contract year) + distraction flags + silence bonus'],
+          ['L4', 'Personality', 'MBTI inferred for 3,216 players + 96 coaches — compat, role fit, veteran drain, HC market fit'],
+          ['L5', 'Relationships', 'Former pro + college teammate edges, sentiment overlay, facing former team'],
+          ['L6', 'Unit Chemistry', 'OL / secondary / LB / WR / DL cohesion scored by seasons together'],
+          ['L8', 'Prediction', 'Full modifier stack → confidence score → pick'],
+          ['L9–10', 'Outcome + Learning', 'record_outcome.py closes bets, auto-blog from prediction + outcome pairs'],
+          ['L11', 'Humility', 'Blind spots + flip conditions in every prediction — never hidden'],
+        ].map(([layer, name, desc]) => `
+        <div style="display:flex;gap:1rem;padding:0.75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--gold);min-width:36px;padding-top:0.1rem">${layer}</div>
+          <div>
+            <div style="font-weight:700;font-size:0.85rem;color:var(--text)">${name}</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">${desc}</div>
+          </div>
+        </div>`).join('')}
+      </div>
+    </section>
+
+    <!-- Built by -->
+    <section>
+      <div style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:0.75rem">Built By</div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:0.75rem">
+        <div style="font-weight:800;font-size:0.95rem;color:var(--text)">Shannon Goddard</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">Founder, Loyal9 LLC · Riverside, CA</div>
+        <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.8;margin:0.75rem 0 0">19 years in high-stakes retail operations. UC Berkeley Data Analytics. Full-stack developer. The vision, the football knowledge, the "inside stuff" philosophy, and the stories behind every modifier.</p>
+        <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="https://github.com/Shannon-Goddard" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem;font-weight:700;color:var(--text);background:var(--bg3);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;text-decoration:none">GitHub →</a>
+          <a href="https://shannon-goddard.loyal9.app" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem;font-weight:700;color:var(--text);background:var(--bg3);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;text-decoration:none">Portfolio →</a>
+          <a href="mailto:shannon@loyal9.app" style="font-size:0.78rem;font-weight:700;color:var(--text);background:var(--bg3);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;text-decoration:none">Email →</a>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+        <div style="font-weight:800;font-size:0.95rem;color:var(--text)">Amazon Q Developer</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">AI Pair Programmer, Amazon Web Services</div>
+        <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.8;margin:0.75rem 0 0">This wasn't "AI generated code." It was a genuine back-and-forth architecture session. Amazon Q contributed the 12-layer framework, the multiplicative vs additive decision for personality modifiers, the veteran drain multiplier insight, the communication chain structure, the relationship web architecture, the sentiment overlay approach, the pipeline sequencing, the humility layer — and every script, every data structure, every GitHub Actions workflow. Written together, line by line.</p>
+        <div style="margin-top:0.75rem">
+          <a href="https://aws.amazon.com/q/developer/" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem;font-weight:700;color:var(--text);background:var(--bg3);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;text-decoration:none">aws.amazon.com/q/developer →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open source -->
+    <section>
+      <div style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:0.75rem">Open Source</div>
+      <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.8;margin:0 0 0.75rem">Aces High is MIT licensed. Code is free, always. Zero paid APIs. Zero frameworks. The whole system runs on free infrastructure — nflverse, ESPN RSS, Open-Meteo, The Odds API free tier, GitHub Actions, GitHub Pages.</p>
+      <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener noreferrer" style="font-size:0.85rem;font-weight:700;color:var(--gold);text-decoration:none">github.com/Shannon-Goddard/aces-high →</a>
+    </section>
+
+    <!-- Closing quote -->
+    <section style="border-top:1px solid var(--border);padding-top:2rem;text-align:center">
+      <blockquote style="margin:0;font-size:0.9rem;font-style:italic;color:var(--text-muted);line-height:1.8">"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."</blockquote>
+      <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem">Season 2026 — L1+L2+L3+L4+L5+L6 live. Pipeline runs itself.</div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. &nbsp;·&nbsp; <a href="./legal.html">Legal</a> &nbsp;·&nbsp; <a href="./licenses.html">Licenses</a> &nbsp;·&nbsp; <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener">GitHub</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+</body>
+</html>

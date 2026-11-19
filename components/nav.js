@@ -7,7 +7,6 @@
   const root  = depth > 1 ? '../' : './';
 
   const links = [
-    { label: 'Home',          href: `${root}index.html` },
     { label: 'Predictions',   href: `${root}pages/predictions.html` },
     { label: 'Edge Report',   href: `${root}pages/edge-report.html` },
     { label: 'Teams',         href: `${root}pages/teams.html` },
@@ -17,12 +16,12 @@
     { label: 'Stats',         href: `${root}pages/stats.html` },
     { label: 'Findings',      href: `${root}pages/findings.html` },
     { label: 'Blog',          href: `${root}pages/blog.html` },
-    { label: 'Methodology',   href: `${root}pages/methodology.html` },
   ];
 
   const secondary = [
-    { label: 'GitHub',        href: 'https://github.com', external: true },
-    { label: 'Legal',         href: `${root}pages/legal.html` },
+    { label: 'Methodology',   href: `${root}pages/methodology.html` },
+    { label: 'About',         href: `${root}pages/about.html` },
+    { label: 'Contact',       href: `${root}pages/contact.html` },
   ];
 
   const current = window.location.pathname.split('/').pop() || 'index.html';

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aces High — Open Source Licenses</title>
+  <link rel="icon" type="image/png" href="../assets/img/a-h-white.png">
+  <meta name="description" content="Open source licenses and data attributions for Aces High by Loyal9 LLC.">
+  <meta property="og:title" content="Aces High — Open Source Licenses">
+  <meta property="og:image" content="../assets/img/share.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .lic-section-title { font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin:2rem 0 0.75rem }
+    .lic-card { background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:0.35rem }
+    .lic-card + .lic-card { margin-top:0.5rem }
+    .lic-name { font-weight:800;font-size:0.9rem;color:var(--text) }
+    .lic-copy { font-size:0.8rem;color:var(--text-muted) }
+    .lic-desc { font-size:0.82rem;color:var(--text-dim);line-height:1.7 }
+    .lic-link { font-size:0.8rem;color:var(--gold);text-decoration:none }
+    .lic-link:hover { text-decoration:underline }
+    .lic-divider { border:none;border-top:1px solid var(--border);margin:0.75rem 0 }
+  </style>
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Open Source Licenses</div>
+    <div class="page-sub">Loyal9 LLC · Aces High · Season 2026</div>
+  </div>
+
+  <div style="max-width:680px;margin:0 auto">
+
+    <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.8;margin:0 0 0.5rem">Aces High is built on open source software and public data. Full attributions below.</p>
+
+    <!-- This project -->
+    <div class="lic-section-title">This Project</div>
+    <div class="lic-card">
+      <div class="lic-name">Aces High</div>
+      <div class="lic-copy">© 2026 Loyal9 LLC · Shannon Goddard · Riverside, CA</div>
+      <div class="lic-desc">Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="lic-link">MIT License</a>. Code is free, always. Attribution required.</div>
+      <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener noreferrer" class="lic-link">github.com/Shannon-Goddard/aces-high</a>
+    </div>
+
+    <!-- Data sources -->
+    <div class="lic-section-title">Data Sources</div>
+
+    <div class="lic-card">
+      <div class="lic-name">nflverse / nflreadpy</div>
+      <div class="lic-copy">© nflverse contributors</div>
+      <div class="lic-desc">Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="lic-link">MIT License</a>. Primary source for player stats, rosters, draft data, and snap counts. Referenced at runtime — not archived. Powers L1 (Body) and L2 (Skill) layers.</div>
+      <a href="https://nflverse.nflverse.com" target="_blank" rel="noopener noreferrer" class="lic-link">nflverse.nflverse.com</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">ESPN RSS Feeds</div>
+      <div class="lic-copy">© ESPN, Inc. / The Walt Disney Company</div>
+      <div class="lic-desc">Public RSS feeds used for daily news headline scanning across all 32 NFL teams. Powers L3 (Distraction flags, silence bonus) and L5 (sentiment overlay). Used for non-commercial research purposes only.</div>
+      <a href="https://www.espn.com" target="_blank" rel="noopener noreferrer" class="lic-link">espn.com</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">ESPN CDN — Team Logos</div>
+      <div class="lic-copy">© ESPN, Inc. / The Walt Disney Company</div>
+      <div class="lic-desc">Team logo images loaded from ESPN's public CDN (<code style="font-size:0.78rem;color:var(--text-muted)">a.espncdn.com/i/teamlogos/nfl/</code>). Used for display purposes only. All NFL team logos are trademarks of their respective owners.</div>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">The Odds API</div>
+      <div class="lic-copy">© The Odds API</div>
+      <div class="lic-desc">Free tier used for opening and closing Vegas lines. Powers L8 (Prediction) — spread, total, and line movement data. Used in accordance with The Odds API free tier terms.</div>
+      <a href="https://the-odds-api.com" target="_blank" rel="noopener noreferrer" class="lic-link">the-odds-api.com</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">Open-Meteo</div>
+      <div class="lic-copy">© Open-Meteo contributors</div>
+      <div class="lic-desc">Free, open-source weather API — no key required. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" class="lic-link">CC BY 4.0</a>. Used for game-level weather modifiers (wind, precipitation, temperature) affecting passing and kicker scores.</div>
+      <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="lic-link">open-meteo.com</a>
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="lic-section-title">Infrastructure</div>
+
+    <div class="lic-card">
+      <div class="lic-name">GitHub Actions</div>
+      <div class="lic-copy">© GitHub, Inc. / Microsoft Corporation</div>
+      <div class="lic-desc">Free tier CI/CD. Runs the full automated pipeline — daily news scans, weekly ratings updates, odds fetching, practice reports, and outcome recording. Five workflows, zero manual intervention during the season.</div>
+      <a href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer" class="lic-link">github.com/features/actions</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">GitHub Pages</div>
+      <div class="lic-copy">© GitHub, Inc. / Microsoft Corporation</div>
+      <div class="lic-desc">Free static site hosting. Serves the entire Aces High frontend — no server, no cost.</div>
+      <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer" class="lic-link">pages.github.com</a>
+    </div>
+
+    <!-- Python libraries -->
+    <div class="lic-section-title">Python Libraries</div>
+
+    <div class="lic-card">
+      <div class="lic-name">nflreadpy</div>
+      <div class="lic-copy">© nflverse contributors</div>
+      <div class="lic-desc">Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="lic-link">MIT License</a>. Python interface to nflverse data. Used in <code style="font-size:0.78rem;color:var(--text-muted)">update_ratings.py</code> and <code style="font-size:0.78rem;color:var(--text-muted)">fetch_relationships.py</code>.</div>
+      <a href="https://pypi.org/project/nflreadpy/" target="_blank" rel="noopener noreferrer" class="lic-link">pypi.org/project/nflreadpy</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">requests</div>
+      <div class="lic-copy">© Kenneth Reitz and contributors</div>
+      <div class="lic-desc">Licensed under the <a href="https://opensource.org/licenses/Apache-2.0" target="_blank" rel="noopener noreferrer" class="lic-link">Apache License 2.0</a>. HTTP library used across all fetch scripts.</div>
+      <a href="https://requests.readthedocs.io" target="_blank" rel="noopener noreferrer" class="lic-link">requests.readthedocs.io</a>
+    </div>
+
+    <div class="lic-card" style="margin-top:0.5rem">
+      <div class="lic-name">feedparser</div>
+      <div class="lic-copy">© Kurt McKee and contributors</div>
+      <div class="lic-desc">Licensed under the <a href="https://opensource.org/licenses/BSD-2-Clause" target="_blank" rel="noopener noreferrer" class="lic-link">BSD 2-Clause License</a>. RSS/Atom feed parsing used in <code style="font-size:0.78rem;color:var(--text-muted)">fetch_news.py</code> for daily ESPN headline scans.</div>
+      <a href="https://feedparser.readthedocs.io" target="_blank" rel="noopener noreferrer" class="lic-link">feedparser.readthedocs.io</a>
+    </div>
+
+    <!-- AI tooling -->
+    <div class="lic-section-title">AI Tooling</div>
+
+    <div class="lic-card">
+      <div class="lic-name">Amazon Q Developer</div>
+      <div class="lic-copy">© Amazon Web Services, Inc.</div>
+      <div class="lic-desc">AI coding assistant used throughout the build — architecture decisions, scoring formula design, every script, every data structure, every GitHub Actions workflow. Built alongside Shannon from first line to first push. Not a code generator — a genuine architecture collaborator.</div>
+      <a href="https://aws.amazon.com/q/developer/" target="_blank" rel="noopener noreferrer" class="lic-link">aws.amazon.com/q/developer</a>
+    </div>
+
+    <div style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7">If you believe a license attribution is missing or incorrect, contact <a href="mailto:shannon@loyal9.app" class="lic-link">shannon@loyal9.app</a>.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div>Ace's High — NFL human performance intelligence system.</div>
+  <div class="mt-1">Not financial or betting advice. Research only. &nbsp;·&nbsp; <a href="./legal.html">Legal</a> &nbsp;·&nbsp; <a href="./licenses.html">Licenses</a> &nbsp;·&nbsp; <a href="https://github.com/Shannon-Goddard/aces-high" target="_blank" rel="noopener">GitHub</a></div>
+</footer>
+
+<script src="../components/nav.js"></script>
+</body>
+</html>
