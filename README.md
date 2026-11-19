@@ -8,7 +8,7 @@ A human performance intelligence system that uses NFL football as its dataset.
 Layer 1 and 2 everyone has. Layers 3–12 are ours.
 Free to build. Free to use. Gets smarter every single week.
 
-**[Live Site →](https://your-domain-here)**
+**[Live Site →](https://shannon-goddard.github.io/aces-high/)**
 
 ---
 
