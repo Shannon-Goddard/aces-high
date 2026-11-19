@@ -98,7 +98,7 @@ function setSeason(season, btn) {
   btn.classList.add('active');
   document.getElementById('week-select').value = 'all';
 
-  const sd = seasonsData[season];
+  const sd = seasonsData[String(season)];
   allGames = sd.games;
   renderSummary(sd.summary);
   rebuildWeekSelect(sd.games);
@@ -284,8 +284,8 @@ async function init() {
 
   // Load most recent season by default
   currentSeason = seasons[0];
-  allGames = seasonsData[currentSeason].games;
-  renderSummary(seasonsData[currentSeason].summary);
+  allGames = seasonsData[String(currentSeason)].games;
+  renderSummary(seasonsData[String(currentSeason)].summary);
   rebuildWeekSelect(allGames);
   document.getElementById('filter-bar').style.display = 'flex';
   renderGames();
