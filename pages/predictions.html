@@ -233,11 +233,9 @@ function renderCard(p) {
     <div class="accordion${isBet ? ' accordion-bet' : ''}" id="${p.game_id}">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-title">
-          <img src="${teamLogoUrl(awaySlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'">
-          <span>${p.away_team}</span>
+          <span class="team-unit"><img src="${teamLogoUrl(awaySlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'"> ${p.away_team}</span>
           <span style="color:var(--text-muted);font-size:0.8rem">@</span>
-          <img src="${teamLogoUrl(homeSlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'">
-          <span>${p.home_team}</span>
+          <span class="team-unit"><img src="${teamLogoUrl(homeSlug)}" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display='none'"> ${p.home_team}</span>
           ${statusBadge}
         </div>
         <div class="accordion-meta">
@@ -276,7 +274,7 @@ function renderCard(p) {
         </div>
 
         <!-- Team breakdowns side by side -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="breakdown-grid">
           <div>
             <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
               <img src="${teamLogoUrl(homeSlug)}" style="width:20px;height:20px;object-fit:contain" onerror="this.style.display='none'">
@@ -639,10 +637,13 @@ init();
 .drill-row:hover { background: var(--bg3); border-radius: 3px; }
 .drill-row:hover .stat-label { color: var(--gold); }
 
+.breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
 @media (max-width: 600px) {
-  .accordion-body > div[style*="grid-template-columns:1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
+  .breakdown-grid { grid-template-columns: 1fr; }
+  .accordion-title { flex-wrap: wrap; gap: 0.3rem; }
+  .accordion-title .team-unit { font-size: 0.8rem; }
+  .accordion-meta { gap: 0.4rem; }
 }
 </style>
 </body>

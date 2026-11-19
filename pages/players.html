@@ -551,5 +551,15 @@ async function init() {
 
 init();
 </script>
+<style>
+@media (max-width: 600px) {
+  #controls { flex-direction: column; align-items: stretch; }
+  #controls input, #controls select { width: 100%; min-width: unset; }
+  .player-card-wrap .player-header { flex-wrap: wrap; gap: 0.5rem; }
+  .player-card-wrap .player-name { white-space: normal; word-break: break-word; }
+  .player-card-wrap .player-header > div:last-child { flex-shrink: 1; min-width: 0; }
+  .progress-wrap { gap: 0.4rem; }
+}
+</style>
 </body>
 </html>

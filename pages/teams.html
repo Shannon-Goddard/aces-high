@@ -394,7 +394,11 @@ function renderDetail(slug) {
             const body   = p.layer1_body?.body_score ?? null;
             const status = p.injury?.report_status || '';
             const injCls = injuryClass(status);
-            const injBadge = injCls ? `<span class="flag ${injCls}" style="font-size:0.65rem;padding:0.1rem 0.35rem">${status}</span>` : '';
+            const injBadge = injCls
+              ? injCls === 'flag-injury'
+                ? `<span title="${status}" style="width:16px;height:16px;border-radius:50%;background:rgba(231,76,60,0.2);border:1.5px solid var(--red);color:var(--red);font-size:0.6rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">✕</span>`
+                : `<span title="${status}" style="width:16px;height:16px;border-radius:50%;background:rgba(243,156,18,0.15);border:1.5px solid var(--yellow);color:var(--yellow);font-size:0.65rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">?</span>`
+              : '';
             return `
               <div style="display:flex;align-items:center;gap:0.6rem;padding:0.3rem 0;border-bottom:1px solid var(--border)">
                 <img src="${hs(p.headshot)}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0" onerror="this.style.visibility='hidden'">
