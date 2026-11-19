@@ -28,6 +28,7 @@
   const current = window.location.pathname.split('/').pop() || 'index.html';
 
   nav.innerHTML = `
+    <div class="nav-overlay" id="nav-overlay"></div>
     <nav class="nav">
       <div class="nav-brand">
         <a href="${root}index.html" class="nav-logo">ACE'S HIGH</a>
@@ -55,9 +56,16 @@
     </nav>
   `;
 
-  document.getElementById('nav-toggle').addEventListener('click', () => {
-    document.getElementById('nav-links').classList.toggle('open');
-  });
+  const toggle = document.getElementById('nav-toggle');
+  const links  = document.getElementById('nav-links');
+  const overlay = document.getElementById('nav-overlay');
+
+  function openMenu()  { links.classList.add('open'); overlay.classList.add('open'); }
+  function closeMenu() { links.classList.remove('open'); overlay.classList.remove('open'); }
+
+  toggle.addEventListener('click', () => links.classList.contains('open') ? closeMenu() : openMenu());
+  overlay.addEventListener('click', closeMenu);
+  links.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
 
   // Back to top button
   const btn = document.createElement('a');
