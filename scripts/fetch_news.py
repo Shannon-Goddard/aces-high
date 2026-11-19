@@ -118,6 +118,19 @@ ALL_KEYWORD_CATEGORIES = {
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
+PLAYERS_FILE       = os.path.join(DATA_DIR, 'players.json')
+RELATIONSHIPS_FILE = os.path.join(DATA_DIR, 'relationships.json')
+
+# Which keyword categories update relationship sentiment, and in which direction
+# trade/distraction → negative (tension, uncertainty on edges involving that player)
+# positive/hunger   → positive (chemistry, motivation signal)
+SENTIMENT_TRIGGERS = {
+    'trade':       'negative',
+    'distraction': 'negative',
+    'positive':    'positive',
+    'hunger':      'positive',
+}
+
 # Sources — all free, no API key needed
 ESPN_NFL_NEWS  = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=100'
 NFL_RSS_FEEDS  = [
@@ -234,6 +247,64 @@ def save_json(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
+def update_relationship_sentiment(flagged_teams, now_str):
+    """
+    For each team with a sentiment-triggering keyword flag:
+      - Find all players on that team in players.json
+      - Walk their layer5_relationships IDs
+      - Update sentiment on matching edges in relationships.json
+
+    Only overwrites neutral sentiment — preserves manually set or
+    previously news-updated sentiment (same logic as preserve_sentiment).
+    """
+    try:
+        players_data = load_json(PLAYERS_FILE)
+        rel_data     = load_json(RELATIONSHIPS_FILE)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return  # relationships not built yet — skip silently
+
+    if not rel_data.get('relationships'):
+        return
+
+    # Build rel_id → edge index for O(1) lookup
+    rel_index = {r['id']: r for r in rel_data['relationships']}
+
+    # Build team_slug → [player gsis_ids] from players.json
+    # players.json uses 'team' field (slug)
+    team_to_players = {}
+    for p in players_data.get('players', []):
+        slug = p.get('team', '')
+        gsis = p.get('gsis_id', '')
+        if slug and gsis:
+            team_to_players.setdefault(slug, []).append(p)
+
+    updated_count = 0
+    today = now_str[:10]
+
+    for slug, triggered_categories in flagged_teams.items():
+        # Determine net sentiment direction for this team's flags
+        # If both positive and negative fire, negative wins (conservative)
+        directions = [SENTIMENT_TRIGGERS[c] for c in triggered_categories if c in SENTIMENT_TRIGGERS]
+        if not directions:
+            continue
+        sentiment = 'negative' if 'negative' in directions else 'positive'
+
+        for player in team_to_players.get(slug, []):
+            for rel_id in player.get('layer5_relationships', []):
+                edge = rel_index.get(rel_id)
+                if not edge:
+                    continue
+                # Only overwrite neutral — preserve prior news/manual updates
+                if edge.get('sentiment', 'neutral') == 'neutral':
+                    edge['sentiment']    = sentiment
+                    edge['last_updated'] = today
+                    updated_count += 1
+
+    if updated_count:
+        rel_data['last_updated'] = now_str
+        save_json(RELATIONSHIPS_FILE, rel_data)
+        print(f"  Relationship sentiment updated: {updated_count} edges")
+
 def main():
     now_utc = datetime.now(timezone.utc)
     now_str = now_utc.strftime('%Y-%m-%d %H:%M:%S UTC')
@@ -296,6 +367,15 @@ def main():
     print(f"Trade:       {flags_summary['trade']}")
     print(f"Coach:       {flags_summary['coach']}")
     print(f"Silence:     {flags_summary['silence_bonus']}")
+
+    # Relationship sentiment overlay — update edges for flagged teams
+    print("\nUpdating relationship sentiment...")
+    flagged_teams = {}
+    for entry in new_entries:
+        triggered = [c for c in SENTIMENT_TRIGGERS if entry['flags'].get(c)]
+        if triggered:
+            flagged_teams[entry['team_slug']] = triggered
+    update_relationship_sentiment(flagged_teams, now_str)
 
 if __name__ == '__main__':
     main()
