@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19 22:00:54 UTC",
+  "last_updated": "2026-11-20 21:43:48 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -4137,6 +4137,922 @@
       "team_slug": "sea",
       "team_name": "Seattle Seahawks",
       "scanned_at": "2026-11-19 22:00:54 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bills TE Dalton Kincaid doubtful to play vs. Dolphins",
+          "description": "Bills starting tight end Dalton Kincaid, their leading receiver, is listed as doubtful for Sunday's game against the Dolphins due to thumb and ankle injuries.",
+          "published": "2026-11-20T21:05:14Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "doubtful",
+          "ankle"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bills TE Dalton Kincaid doubtful to play vs. Dolphins",
+          "description": "Bills starting tight end Dalton Kincaid, their leading receiver, is listed as doubtful for Sunday's game against the Dolphins due to thumb and ankle injuries.",
+          "published": "2026-11-20T21:05:14Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "doubtful",
+          "ankle"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Patriots QB Drake Maye has fractured fibula, sources say",
+          "description": "Patriots quarterback Drake Maye has a fractured right fibula, and receiver A.J. Brown has a hamstring injury, sources told ESPN's Mike Reiss and Adam Schefter.",
+          "published": "2026-11-20T19:36:45Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "fracture",
+          "hamstring",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Ravens rule out DT Nnamdi Madubuike (hamstring) vs Panthers",
+          "description": "Ravens defensive tackle Nnamdi Madubuike has a hamstring injury and has been ruled out for Sunday's game against the Panthers.",
+          "published": "2026-11-20T20:14:01Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Can Ravens keep the Marlon Humphrey controversy from becoming a distraction?",
+          "description": "While there's more to the cornerback's story, one Baltimore teammate says: \"We have enough things to worry about.\"",
+          "published": "2026-11-20T17:12:30Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "controversy"
+        ],
+        "injury": [
+          "injury",
+          "out",
+          "hamstring",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bengals vs. Commanders: Where to watch 'Monday Night Football'",
+          "description": "Here's what to know about the Week 11 matchup.",
+          "published": "2026-11-20T20:02:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Fantasy buzz: Does anything change in Indy with Richardson under center?",
+          "description": "Matt Bowen provides fantasy expectations for the Colts' new starter at QB and his supporting cast.",
+          "published": "2026-11-20T21:04:02Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Shane Steichen announces Daniel Jones' release from Colts",
+          "description": "Shane Steichen announces Daniel Jones' release from Colts",
+          "published": "2026-11-20T18:23:47Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Schefter on Daniel Jones\u2019 release: Colts \u2018could\u2019ve and should\u2019ve traded him\u2019",
+          "description": "Schefter on Daniel Jones\u2019 release: Colts \u2018could\u2019ve and should\u2019ve traded him\u2019",
+          "published": "2026-11-20T18:28:58Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Colts cut QB Daniel Jones, turn to Anthony Richardson Sr. for next start",
+          "description": "The Colts have cut quarterback Daniel Jones after a challenging 11-game stint in 2026 and are turning to Anthony Richardson Sr. to start going forward.",
+          "published": "2026-11-20T20:00:49Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Pat McAfee sees no hope for Colts' future",
+          "description": "Pat McAfee sees no hope for Colts' future",
+          "published": "2026-11-20T17:39:23Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "trade": [
+          "traded",
+          "trade",
+          "cut"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Cowboys' Mike Pettine feels for DC Christian Parker, but focused on Titans",
+          "description": "Mike Pettine, the Cowboys' new defensive playcaller, is focused on preparing for the Titans, not looking in the rearview mirror.",
+          "published": "2026-11-20T20:24:06Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Draft buzz: Interest in Oklahoma State's Drew Mestemaker could spur draft trade",
+          "description": "If the Titans or Chargers wind up with the No. 1 selection and stick with their franchise quarterbacks, interest in Oklahoma State's Drew Mestemaker could lead to a team seeking to trade up for the top overall pick.",
+          "published": "2026-11-20T17:16:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "focused"
+        ],
+        "trade": [
+          "trade"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Can the Broncos continue winning run vs. the Raiders?",
+          "description": "Can the Broncos continue winning run vs. the Raiders?",
+          "published": "2026-11-20T14:18:30Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Chiefs' Kenneth Walker III, two linemen out vs. Cardinals",
+          "description": "Chiefs RB Kenneth Walker III will not play in Sunday's game against the Cardinals after not participating in practice this week due to a groin injury.",
+          "published": "2026-11-20T20:29:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cardinals QB Carson Beck dealing with back spasms; Josh Johnson may start",
+          "description": "The Cardinals are preparing veteran quarterback Josh Johnson to start Sunday vs. the Chiefs as rookie Carson Beck deals with back spasms, coach Mike LaFleur said Friday.",
+          "published": "2026-11-20T19:59:27Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "out",
+          "back"
+        ],
+        "trade": [
+          "deal"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Can the Broncos continue winning run vs. the Raiders?",
+          "description": "Can the Broncos continue winning run vs. the Raiders?",
+          "published": "2026-11-20T14:18:30Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Draft buzz: Interest in Oklahoma State's Drew Mestemaker could spur draft trade",
+          "description": "If the Titans or Chargers wind up with the No. 1 selection and stick with their franchise quarterbacks, interest in Oklahoma State's Drew Mestemaker could lead to a team seeking to trade up for the top overall pick.",
+          "published": "2026-11-20T17:16:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "trade": [
+          "trade"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Cowboys' Mike Pettine feels for DC Christian Parker, but focused on Titans",
+          "description": "Mike Pettine, the Cowboys' new defensive playcaller, is focused on preparing for the Titans, not looking in the rearview mirror.",
+          "published": "2026-11-20T20:24:06Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Stephen A. can't hide his dismay over Skip's Cowboys optimism",
+          "description": "Stephen A. can't hide his dismay over Skip's Cowboys optimism ",
+          "published": "2026-11-20T16:25:22Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "positive": [
+          "focused"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Fantasy football: Don't be surprised if Likely is TE1, Gainwell finishes strong",
+          "description": "Eric Karabell explains why the Giants' TE could top the position and the Bucs' No. 2 RB will finish strong.",
+          "published": "2026-11-20T13:16:44Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bengals vs. Commanders: Where to watch 'Monday Night Football'",
+          "description": "Here's what to know about the Week 11 matchup.",
+          "published": "2026-11-20T20:02:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bears rule out CB Kyler Gordon; RB Kyle Monangai cleared to return",
+          "description": "The Bears will be without nickel corner Kyler Gordon when they host the Saints, while running back Kyle Monangai, wide receiver Luther Burden III and defensive tackle Jeffery Simmons are expected to play.",
+          "published": "2026-11-20T20:03:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "cleared"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Why Stephen A. is picking the Vikings to beat the 49ers on SNF",
+          "description": "Why Stephen A. is picking the Vikings to beat the 49ers on SNF",
+          "published": "2026-11-20T15:47:43Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Ravens rule out DT Nnamdi Madubuike (hamstring) vs Panthers",
+          "description": "Ravens defensive tackle Nnamdi Madubuike has a hamstring injury and has been ruled out for Sunday's game against the Panthers.",
+          "published": "2026-11-20T20:14:01Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "out",
+          "hamstring"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Justin Reid posts Saints farewell as team works through release",
+          "description": "After safety Justin Reid requested his release earlier this week, Saints coach Kellen Moore said the team was still working through the process but expected a roster move to happen soon.",
+          "published": "2026-11-20T20:39:47Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bears rule out CB Kyler Gordon; RB Kyle Monangai cleared to return",
+          "description": "The Bears will be without nickel corner Kyler Gordon when they host the Saints, while running back Kyle Monangai, wide receiver Luther Burden III and defensive tackle Jeffery Simmons are expected to play.",
+          "published": "2026-11-20T20:03:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "cleared"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Fantasy football: Don't be surprised if Likely is TE1, Gainwell finishes strong",
+          "description": "Eric Karabell explains why the Giants' TE could top the position and the Bucs' No. 2 RB will finish strong.",
+          "published": "2026-11-20T13:16:44Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Chiefs' Kenneth Walker III, two linemen out vs. Cardinals",
+          "description": "Chiefs RB Kenneth Walker III will not play in Sunday's game against the Cardinals after not participating in practice this week due to a groin injury.",
+          "published": "2026-11-20T20:29:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Mike LaFleur: Cardinals proceeding as if Josh Johnson will start",
+          "description": "Mike LaFleur: Cardinals proceeding as if Josh Johnson will start",
+          "published": "2026-11-20T19:59:04Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cardinals QB Carson Beck dealing with back spasms; Josh Johnson may start",
+          "description": "The Cardinals are preparing veteran quarterback Josh Johnson to start Sunday vs. the Chiefs as rookie Carson Beck deals with back spasms, coach Mike LaFleur said Friday.",
+          "published": "2026-11-20T19:59:27Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "out",
+          "back"
+        ],
+        "trade": [
+          "deal"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Rapoport: Rams expect Puka to be out for season after knee surgery",
+          "description": "Rapoport: Rams expect Puka to be out for season after knee surgery",
+          "published": "2026-11-20T17:40:42Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams' Puka Nacua has MCL surgery, likely done for regular season",
+          "description": "Rams WR Puka Nacua, who is serving a three-game suspension while on IR, had surgery on his MCL and likely will miss at least the rest of the regular season.",
+          "published": "2026-11-20T18:19:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "suspension"
+        ],
+        "injury": [
+          "out",
+          "surgery",
+          "knee"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Why Stephen A. is picking the Vikings to beat the 49ers on SNF",
+          "description": "Why Stephen A. is picking the Vikings to beat the 49ers on SNF",
+          "published": "2026-11-20T15:47:43Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-20 21:43:48 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},

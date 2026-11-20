@@ -1,64 +1,63 @@
 {
   "project": "aces-high",
   "version": "1.0",
-  "last_news_scan": "2026-11-19 22:00:54 UTC",
+  "last_news_scan": "2026-11-20 21:43:48 UTC",
   "last_ratings_update": "2026-11-18 03:18:41 UTC",
   "last_prediction": "2026-11-20 01:07 UTC",
   "last_outcome_recorded": null,
   "season": 2026,
   "week": 12,
   "news_scan_summary": {
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "teams_scanned": 32,
     "flags": {
       "injury": [
         "buf",
         "mia",
+        "ne",
         "bal",
+        "cin",
         "ind",
-        "den",
+        "ten",
         "kc",
-        "dal",
+        "lac",
+        "wsh",
         "chi",
-        "det",
-        "min",
-        "atl",
         "car",
-        "tb",
+        "no",
         "ari",
-        "lar",
-        "sf"
+        "lar"
       ],
       "distraction": [
+        "bal",
         "lar"
       ],
       "trade": [
+        "ind",
         "ten",
-        "dal"
+        "kc",
+        "lac",
+        "ari"
       ],
-      "coach": [
-        "den"
-      ],
-      "hunger": [
-        "cin",
-        "wsh"
-      ],
+      "coach": [],
+      "hunger": [],
       "silence_bonus": [
-        "ne",
         "nyj",
-        "cin",
         "cle",
         "pit",
         "hou",
         "jax",
-        "ten",
+        "den",
         "lv",
-        "lac",
+        "dal",
         "nyg",
         "phi",
-        "wsh",
+        "det",
         "gb",
-        "no",
+        "min",
+        "atl",
+        "tb",
+        "sf",
         "sea"
       ]
     }
