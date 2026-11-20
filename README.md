@@ -1,5 +1,4 @@
-# Aces High
-
+![](assets/img/gif-b.gif)
 > *"He'd find out the kind of inside stuff nobody else knew, and that's what he'd put his money on."*
 > — Nicky, Casino
 
@@ -345,3 +344,6 @@ That's the real stack.
 *"He'd be workin' on this shit day and night. There was nothin' about a game he was gonna bet that he didn't know."*
 
 *Season 2026 — L1+L2+L3+L4+L5+L6 live. Pipeline runs itself. Backtest shows 63%→72% SU improvement across 2020–2024. Next real build session starts after the first few weeks of closed outcomes.*
+<p align="center">
+  <img src="assets\img\a-h-gold.png" alt="logo" width="100">
+</p>  
