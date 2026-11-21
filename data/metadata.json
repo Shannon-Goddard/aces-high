@@ -3,7 +3,7 @@
   "version": "1.0",
   "last_news_scan": "2026-11-20 21:43:48 UTC",
   "last_ratings_update": "2026-11-18 03:18:41 UTC",
-  "last_prediction": "2026-11-21 00:40 UTC",
+  "last_prediction": "2026-11-21 01:19 UTC",
   "last_outcome_recorded": null,
   "season": 2026,
   "week": 12,
@@ -81,9 +81,9 @@
     "layer1_complete": true,
     "layer2_complete": true
   },
-  "last_odds_fetch": "2026-11-18 03:49:50 UTC",
+  "last_odds_fetch": "2026-11-21 01:19:45 UTC",
   "odds_snapshot": "opening",
-  "api_remaining": "491",
+  "api_remaining": "488",
   "last_coaches_fetch": "2026-11-18 20:34:02 UTC",
   "last_personality_inference": "2026-11-18 21:42:59 UTC",
   "personality_summary": {
