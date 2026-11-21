@@ -1,4 +1,4 @@
-![](assets/img/gif-b.gif)
+![](assets/img/grey.gif)
 > *"He'd find out the kind of inside stuff nobody else knew, and that's what he'd put his money on."*
 > — Nicky, Casino
 
