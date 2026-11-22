@@ -223,7 +223,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": null
     },
     {
       "game_id": "4c5b1c0843a260278e95eb93e7787576",
@@ -679,7 +680,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -3.2
     },
     {
       "game_id": "1940706a79cbcbafacdcbf231069716b",
@@ -752,7 +754,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -10.8
     },
     {
       "game_id": "8ba112fabf4e87639338a5f437c5abfe",
@@ -825,7 +828,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": 6.5
     },
     {
       "game_id": "60e1d27b083a335b722c2c852ea85612",
@@ -898,7 +902,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -3.7
     },
     {
       "game_id": "3a60ed1d20004aa4d4772b2c1a2272e7",
@@ -971,7 +976,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": 5.8
     },
     {
       "game_id": "5b612899d6dcdf998107f2c6c6e49a58",
@@ -1050,7 +1056,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -3.0
     },
     {
       "game_id": "9b825e6518156008da499be041975fdd",
@@ -1129,7 +1136,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": 2.5
     },
     {
       "game_id": "ffaa06af56a7137d4b078c5c46c0b730",
@@ -1208,7 +1216,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -8.5
     },
     {
       "game_id": "f36f518585aec40e8cb40e071c0844aa",
@@ -1281,7 +1290,8 @@
         "mbti_adjustment": null,
         "coach_compatibility": null,
         "relationship_web": null
-      }
+      },
+      "closing_spread": -3.0
     },
     {
       "game_id": "44a3bcf5bd002583ddef2207a92dd977",
