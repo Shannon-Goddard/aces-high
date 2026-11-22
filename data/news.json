@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-21 20:25:47 UTC",
+  "last_updated": "2026-11-22 20:37:28 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -6098,6 +6098,955 @@
       "team_slug": "sea",
       "team_name": "Seattle Seahawks",
       "scanned_at": "2026-11-21 20:25:47 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Dolphins' defensive line hit hard by season-ending injuries",
+          "description": "Marcel Louis-Jacques explains how three season-ending injuries put pressure on Kenneth Grant ahead of the Bills matchup.",
+          "published": "2026-11-22T06:46:57Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Dolphins' defensive line hit hard by season-ending injuries",
+          "description": "Marcel Louis-Jacques explains how three season-ending injuries put pressure on Kenneth Grant ahead of the Bills matchup.",
+          "published": "2026-11-22T06:46:57Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "How Patriots' top 10 earners have fared: A.J. Brown, Christian Gonzalez, more",
+          "description": "The Patriots' 5-5 record reflects what happens when a team's highest-paid players don't perform well. Let's look closer at the top 10 earners in New England.",
+          "published": "2026-11-22T11:59:26Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Drake Maye ankle injury: Is the Patriots' season over? Can Tommy DeVito step up?",
+          "description": "If the QB doesn't return in 2026, New England faces an uphill battle against some of the NFL's best teams.",
+          "published": "2026-11-20T22:06:28Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "ankle"
+        ],
+        "positive": [
+          "record"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Why the Jets' next two games have major implications on the 2027 draft",
+          "description": "At two wins, New York will play two of the three remaining one-win teams in Weeks 11 and 12.",
+          "published": "2026-11-22T11:00:01Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Carmelo Anthony calls out Ravens' Humphrey over Baltimore 'criminals' remark",
+          "description": "Former NBA star Carmelo Anthony challenged Ravens cornerback Marlon Humphrey to do more than apologize after he said Baltimore was \"best at making criminals.\"",
+          "published": "2026-11-21T13:35:36Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Why Amarius Mims is an underrated key to Bengals' success",
+          "description": "Joe Burrow is on an MVP trajectory, and a big reason is his OL, led by Amarius Mims.",
+          "published": "2026-11-21T11:00:10Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Back at practice again, Bengals QB Burrow optimistic he'll be at full strength",
+          "description": "A full participant at practice for the second straight day despite the bug that he has battled, Bengals quarterback Joe Burrow is optimistic that he'll be at full strength when Cincinnati plays the Washington Commanders on \"Monday Night Football.\"",
+          "published": "2026-11-21T12:51:42Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "mvp"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 4,
+      "headlines": [
+        {
+          "headline": "Steelers WR DK Metcalf ejected from game against Eagles",
+          "description": "Steelers wide receiver DK Metcalf was ejected in the third quarter of Sunday's game against the Eagles for unsportsmanlike conduct.",
+          "published": "2026-11-22T20:30:06Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Steelers activate WR Roman Wilson off IR for Eagles game",
+          "description": "The Steelers have activated wide receiver Roman Wilson from injured reserve ahead of Sunday's game against the Eagles.",
+          "published": "2026-11-21T20:54:35Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 11 predictions: Upsets, fantasy sleepers, stat lines, TD scorers, more",
+          "description": "Eagles upsetting the Steelers? Big receiving day for Christian McCaffrey? Touchdown for Josh Downs? Let's predict 15 things for Week 11.",
+          "published": "2026-11-21T11:49:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "How Steelers' wide receiver corps gets big boost in Week 11",
+          "description": "DK Metcalf and the passing game are poised to get a lift this week with the return of Roman Wilson and Michael Pittman Jr.",
+          "published": "2026-11-21T11:00:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "NFL Week 11 uniforms: Texans debut Rivalries look, Commanders rock 'Hail Raiser'",
+          "description": "Here's a look at what each NFL team is wearing in Week 11, led by Houston debuting its Rivalries combination.",
+          "published": "2026-11-20T22:49:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Sources: Ex-Colts QB Daniel Jones likely to wait before signing with new team",
+          "description": "If Daniel Jones clear waivers and becomes a free agent, the QB is unlikely to sign immediately, preferring to wait for the right opportunity, sources said.",
+          "published": "2026-11-22T15:07:28Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Sources: Colts shut down Alec Pierce for season, plan for WR's return in 2027",
+          "description": "The Colts are shutting down Alec Pierce for the rest of the season and are planning for the WR to return fully healthy in 2027, sources told NFL Network.",
+          "published": "2026-11-22T16:20:24Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "positive": [
+          "healthy"
+        ],
+        "trade": [
+          "free agent"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "NFL Week 11 arrivals: CeeDee Lamb leads the way ahead of Titans-Cowboys",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-22T17:13:29Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Police investigating whether Titans DE Harrell assaulted driver before crash",
+          "description": "Police are investigating whether Titans DE Jaylen Harrell assaulted a rideshare driver before a serious car crash that left him hospitalized.",
+          "published": "2026-11-22T16:03:48Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Titans DL Jaylen Harrell hospitalized after car accident in Tampa",
+          "description": "Titans defensive lineman Jaylen Harrell was involved in a serious car accident Friday and remains hospitalized, according to the team.",
+          "published": "2026-11-21T18:31:47Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Tom Jackson, Broncos star LB and Hall of Fame broadcaster at ESPN, dies at 75",
+          "description": "Tom Jackson, a foundational player on the Broncos \"Orange Crush\" defense and a fixture at ESPN as a Hall of Fame broadcaster, has died. He was 75.",
+          "published": "2026-11-22T19:39:58Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Week 11 NFL highlights: Best plays, moments, touchdowns, more",
+          "description": "Check here for all of the top moments, TDs and analysis from games at the Cowboys, Chiefs, Eagles, Panthers and more.",
+          "published": "2026-11-22T20:34:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Kansas City Chiefs tight end Travis Kelce's top moments at Arrowhead Stadium",
+          "description": "Kelce's greatest Arrowhead moments include his first catch, lots of playoff magic, and meeting the love of his life, Taylor Swift.",
+          "published": "2026-11-22T20:33:07Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cardinals rule out rookie Carson Beck, turn to 40-year-old Josh Johnson vs. Chiefs",
+          "description": "Cardinals rookie quarterback Carson Beck has been downgraded to out, paving the way for 40-year-old Josh Johnson to start against the Chiefs.",
+          "published": "2026-11-21T21:41:11Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Raiders' Mark Davis unhappy with 'unfair' image of his father in 'Madden' movie",
+          "description": "Saying \"I did the best I could to protect him,\" Raiders owner Mark Davis expressed frustration with the depiction of his father, the late Al Davis, in the new movie \"Madden.\"",
+          "published": "2026-11-21T15:27:22Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why is the Raiders' defense struggling, and how can it improve?",
+          "description": "The Raiders' defense has struggled mightly for weeks, but small steps of progress have been made.",
+          "published": "2026-11-21T11:00:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "prove"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Week 11 NFL highlights: Best plays, moments, touchdowns, more",
+          "description": "Check here for all of the top moments, TDs and analysis from games at the Cowboys, Chiefs, Eagles, Panthers and more.",
+          "published": "2026-11-22T20:34:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 11 arrivals: CeeDee Lamb leads the way ahead of Titans-Cowboys",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-22T17:13:29Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Giants' Abdul Carter on lack of sacks: 'I've got to do more'",
+          "description": "On the surface, the lack of sacks and hard numbers seem insufficient, but dig deeper and it's a different story.",
+          "published": "2026-11-21T11:00:00Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Steelers WR DK Metcalf ejected from game against Eagles",
+          "description": "Steelers wide receiver DK Metcalf was ejected in the third quarter of Sunday's game against the Eagles for unsportsmanlike conduct.",
+          "published": "2026-11-22T20:30:06Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Week 11 NFL highlights: Best plays, moments, touchdowns, more",
+          "description": "Check here for all of the top moments, TDs and analysis from games at the Cowboys, Chiefs, Eagles, Panthers and more.",
+          "published": "2026-11-22T20:34:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Steelers activate WR Roman Wilson off IR for Eagles game",
+          "description": "The Steelers have activated wide receiver Roman Wilson from injured reserve ahead of Sunday's game against the Eagles.",
+          "published": "2026-11-21T20:54:35Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 11 predictions: Upsets, fantasy sleepers, stat lines, TD scorers, more",
+          "description": "Eagles upsetting the Steelers? Big receiving day for Christian McCaffrey? Touchdown for Josh Downs? Let's predict 15 things for Week 11.",
+          "published": "2026-11-21T11:49:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Edge Jonathan Greenard loves to makes plays, despite Eagles' standing",
+          "description": "Greenard speaks on his injury-filled season and outlook for the second half of the year.",
+          "published": "2026-11-21T11:00:15Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured",
+          "injury",
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "'Receiving Trust': Behind Lawrence and Washington's elite partnership",
+          "description": "'Receiving Trust': Behind Lawrence and Washington's elite partnership",
+          "published": "2026-11-22T16:46:00Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Back at practice again, Bengals QB Burrow optimistic he'll be at full strength",
+          "description": "A full participant at practice for the second straight day despite the bug that he has battled, Bengals quarterback Joe Burrow is optimistic that he'll be at full strength when Cincinnati plays the Washington Commanders on \"Monday Night Football.\"",
+          "published": "2026-11-21T12:51:42Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 11 uniforms: Texans debut Rivalries look, Commanders rock 'Hail Raiser'",
+          "description": "Here's a look at what each NFL team is wearing in Week 11, led by Houston debuting its Rivalries combination.",
+          "published": "2026-11-20T22:49:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "elite"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Kirk Cousins on pace to make history as 1st QB to play 18 regular-season games",
+          "description": "Vikings quarterback Kirk Cousins is poised to become the first quarterback in the modern era to play 18 regular-season games.",
+          "published": "2026-11-22T16:12:17Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Best bets for Vikings-49ers: Tips, analysis and our top prop plays",
+          "description": "Odds, analysis and recommended plays to help you bet Sunday night's Vikings-49ers game.",
+          "published": "2026-11-22T11:32:20Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Falcons insist winning still the goal despite trading Jessie Bates III",
+          "description": "Atlanta wanted to ensure trading away Jessie Bates III didn't send the wrong message to the team.",
+          "published": "2026-11-21T11:59:54Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Week 11 NFL highlights: Best plays, moments, touchdowns, more",
+          "description": "Check here for all of the top moments, TDs and analysis from games at the Cowboys, Chiefs, Eagles, Panthers and more.",
+          "published": "2026-11-22T20:34:34Z",
+          "source": "espn"
+        },
+        {
+          "headline": "South Carolina legend Alshon Jeffery discusses Georgia rivalry",
+          "description": "Jeffery joins SEC Network's Marion Crowder on SEC Nation to preview the Gamecocks' matchup against the Bulldogs and explain how Shane Beamer recruited him to South Carolina.",
+          "published": "2026-11-21T17:13:41Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Sources: Bucs' Baker Mayfield has plantar fasciitis, determined to keep playing",
+          "description": "Baker Mayfield is dealing with a painful case of plantar fasciitis, sources told NFL Network, an injury that the Bucs QB is determined to play through.",
+          "published": "2026-11-22T16:35:18Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury"
+        ],
+        "trade": [
+          "deal"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Cardinals rule out rookie Carson Beck, turn to 40-year-old Josh Johnson vs. Chiefs",
+          "description": "Cardinals rookie quarterback Carson Beck has been downgraded to out, paving the way for 40-year-old Josh Johnson to start against the Chiefs.",
+          "published": "2026-11-21T21:41:11Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Sources: Rams' Puka Nacua out 4-5 months after knee surgery, will miss playoffs",
+          "description": "Puka Nacua's recovery time from MCL surgery is considered to be four to five months, sources told ESPN, meaning he will miss the playoffs.",
+          "published": "2026-11-22T02:19:36Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "surgery",
+          "knee"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Best bets for Vikings-49ers: Tips, analysis and our top prop plays",
+          "description": "Odds, analysis and recommended plays to help you bet Sunday night's Vikings-49ers game.",
+          "published": "2026-11-22T11:32:20Z",
+          "source": "espn"
+        },
+        {
+          "headline": "In Mexico City, 49ers' Fred Warner can represent his heritage and boost DPOY case",
+          "description": "Warner will represent his heritage again Sunday in Mexico City. This time while in the middle of the best Defensive Player of the Year campaign of his career.",
+          "published": "2026-11-21T11:57:44Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-22 20:37:28 UTC",
       "headline_count": 0,
       "headlines": [],
       "keywords_found": {},
