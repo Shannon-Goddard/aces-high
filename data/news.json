@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-22 20:37:28 UTC",
+  "last_updated": "2026-11-24 01:32:18 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -7054,6 +7054,1002 @@
       "silence_reason": "no_headlines",
       "flags": {
         "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Vrabel: Patriots sticking with DeVito as QB1, not looking for outside help",
+          "description": "Patriots coach Mike Vrabel said Monday the team isn't looking outside the organization for a starting quarterback as it prepares to be without Drake Maye in the coming weeks due to a fractured right fibula.",
+          "published": "2026-11-23T19:41:05Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "fracture",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Another year of Geno Smith? Jets pleased with the QB's play",
+          "description": "New York's QB is coming off his best game of the season against the Chargers.",
+          "published": "2026-11-23T16:13:35Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Struggling Ravens noncommittal on whether Humphrey will play Sunday vs. Texans",
+          "description": "A day after he was a healthy scratch in a 35-33 loss at the Panthers following a derogatory comment he made about the city of Baltimore, the Ravens were noncommittal on whether cornerback Marlon Humphrey would play Sunday against the Texans.",
+          "published": "2026-11-23T23:38:39Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Turnovers, penalties, time management: Ravens are NFL's best at beating themselves",
+          "description": "Baltimore hasn't won since Oct. 11 and is currently sporting the NFL's longest losing streak at six games.",
+          "published": "2026-11-23T16:44:57Z",
+          "source": "espn"
+        },
+        {
+          "headline": "How Panthers rookie's big play became an all-timer for Dave Canales",
+          "description": "Cornerback Will Lee III came up with a momentum-shifting play that helped stave off Baltimore's potential TD.",
+          "published": "2026-11-23T17:00:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "healthy"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Bengals-Commanders odds, best bets: Tips, analysis and top plays",
+          "description": "Odds, analysis and recommended plays to help you bet the Bengals-Commanders matchup on Monday night.",
+          "published": "2026-11-23T15:10:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Inside the gymnastics lore of Bengals star Ja'Marr Chase",
+          "description": "Ja'Marr Chase's skill set suggests formal gymnastics training, but the reality isn't quite that simple.",
+          "published": "2026-11-23T22:28:51Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Steelers' Metcalf denies trying to poke DeJean in eye; WR won't be suspended",
+          "description": "Steelers wide receiver DK Metcalf on Monday denied trying to poke Eagles cornerback Cooper DeJean in the eye before he was ejected Sunday.",
+          "published": "2026-11-23T21:38:02Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "suspended"
+        ],
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Struggling Ravens noncommittal on whether Humphrey will play Sunday vs. Texans",
+          "description": "A day after he was a healthy scratch in a 35-33 loss at the Panthers following a derogatory comment he made about the city of Baltimore, the Ravens were noncommittal on whether cornerback Marlon Humphrey would play Sunday against the Texans.",
+          "published": "2026-11-23T23:38:39Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "healthy"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Trevor Lawrence, Liam Coen share the blame for the Jaguars' loss to the Giants",
+          "description": "The offense struggled mightily in New York. What does Jacksonville need to fix ahead of the Week 12 matchup against the Titans?",
+          "published": "2026-11-23T16:55:24Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Trevor Lawrence, Liam Coen share the blame for the Jaguars' loss to the Giants",
+          "description": "The offense struggled mightily in New York. What does Jacksonville need to fix ahead of the Week 12 matchup against the Titans?",
+          "published": "2026-11-23T16:55:24Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Fantasy buzz: Who got the ball Sunday? Usage trends and role changes",
+          "description": "A closer look at the top 10 fantasy scorers in Week 11, including Cowboys QB Dak Prescott and Broncos RB Jonah Coleman.",
+          "published": "2026-11-23T21:24:31Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Adam Schefter: Cardinals fire defensive coordinator after loss to Chiefs",
+          "description": "Adam Schefter: Cardinals fire defensive coordinator after loss to Chiefs ",
+          "published": "2026-11-23T21:09:00Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Another year of Geno Smith? Jets pleased with the QB's play",
+          "description": "New York's QB is coming off his best game of the season against the Chargers.",
+          "published": "2026-11-23T16:13:35Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Fantasy buzz: Who got the ball Sunday? Usage trends and role changes",
+          "description": "A closer look at the top 10 fantasy scorers in Week 11, including Cowboys QB Dak Prescott and Broncos RB Jonah Coleman.",
+          "published": "2026-11-23T21:24:31Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Stephen A. rolls his eyes at Michael Irvin's Cowboys hype",
+          "description": "Stephen A. rolls his eyes at Michael Irvin's Cowboys hype ",
+          "published": "2026-11-23T16:22:58Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Thanksgiving games: Traditions, best moments, team records, 2026 schedule",
+          "description": "NFL games on Thanksgiving Day date back to 1934, and the Lions and Cowboys are always in action. We revisit top performers, the best moments and more.",
+          "published": "2026-11-23T11:09:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "record"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Giants' Greg Newsome out 'multiple weeks' with ankle sprain",
+          "description": "Giants starting cornerback Greg Newsome will miss \"multiple weeks\" with a high ankle sprain, coach John Harbaugh said Monday.",
+          "published": "2026-11-23T21:59:39Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Sources: Giants DC Dennard Wilson interviews for HC job at alma mater Maryland",
+          "description": "Giants defensive coordinator Dennard Wilson had a virtual interview recently for the vacant head coaching job at Maryland, sources told NFL Network.",
+          "published": "2026-11-23T21:22:25Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Trevor Lawrence, Liam Coen share the blame for the Jaguars' loss to the Giants",
+          "description": "The offense struggled mightily in New York. What does Jacksonville need to fix ahead of the Week 12 matchup against the Titans?",
+          "published": "2026-11-23T16:55:24Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why Stephen A. considers the Giants as legit threats in the NFC",
+          "description": "Why Stephen A. considers the Giants as legit threats in the NFC ",
+          "published": "2026-11-23T15:57:02Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Did Jags mismanage the fourth quarter in loss to Giants?",
+          "description": "Did Jags mismanage the fourth quarter in loss to Giants?",
+          "published": "2026-11-23T13:41:05Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "sprain",
+          "ankle",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Steelers' Metcalf denies trying to poke DeJean in eye; WR won't be suspended",
+          "description": "Steelers wide receiver DK Metcalf on Monday denied trying to poke Eagles cornerback Cooper DeJean in the eye before he was ejected Sunday.",
+          "published": "2026-11-23T21:38:02Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "suspended"
+        ],
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 4,
+      "headlines": [
+        {
+          "headline": "Why the Commanders D/ST has top-10 fantasy upside in Week 12",
+          "description": "Why the Commanders D/ST has top-10 fantasy upside in Week 12",
+          "published": "2026-11-24T00:12:38Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Commanders RB Jacory Croskey-Merritt activated from IR ahead of MNF",
+          "description": "The Commanders activated running back Jacory Croskey-Merritt off injured reserve Monday.",
+          "published": "2026-11-23T23:48:49Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bengals-Commanders odds, best bets: Tips, analysis and top plays",
+          "description": "Odds, analysis and recommended plays to help you bet the Bengals-Commanders matchup on Monday night.",
+          "published": "2026-11-23T15:10:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Inside Commanders DC Daronte Jones' unusual coaching journey",
+          "description": "From living in his car to various college offices, Washington defensive coordinator Daronte Jones has paid his dues.",
+          "published": "2026-11-23T18:03:50Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "NFL Thanksgiving games: Traditions, best moments, team records, 2026 schedule",
+          "description": "NFL games on Thanksgiving Day date back to 1934, and the Lions and Cowboys are always in action. We revisit top performers, the best moments and more.",
+          "published": "2026-11-23T11:09:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "record"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Sources: Packers' Micah Parsons cleared to make season debut Wednesday vs. Rams",
+          "description": "Packers star Micah Parsons has been cleared and is set for his season debut against the Rams on Wednesday night, sources told NFL Network's Ian Rapoport.",
+          "published": "2026-11-23T23:37:43Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Fantasy football free agent pickups: Grab your Rams and Packers quickly",
+          "description": "Eric Karabell lists the top available players worth adding for the week ahead.",
+          "published": "2026-11-23T15:42:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "positive": [
+          "cleared"
+        ],
+        "trade": [
+          "free agent"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Stephen A.: The 49ers ramrodded the Vikings",
+          "description": "Stephen A.: The 49ers ramrodded the Vikings",
+          "published": "2026-11-23T15:43:10Z",
+          "source": "espn"
+        },
+        {
+          "headline": "49ers' Brock Purdy beats Vikings blitz, hears 'MVP' chants in Mexico City",
+          "description": "Quarterback Brock Purdy heard \"MVP\" chants in Mexico City and continued to earn praise from his teammates as he led the 49ers to a statement victory against the top-ranked Vikings defense on Sunday night",
+          "published": "2026-11-23T07:58:45Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "mvp"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Struggling Ravens noncommittal on whether Humphrey will play Sunday vs. Texans",
+          "description": "A day after he was a healthy scratch in a 35-33 loss at the Panthers following a derogatory comment he made about the city of Baltimore, the Ravens were noncommittal on whether cornerback Marlon Humphrey would play Sunday against the Texans.",
+          "published": "2026-11-23T23:38:39Z",
+          "source": "espn"
+        },
+        {
+          "headline": "How Panthers rookie's big play became an all-timer for Dave Canales",
+          "description": "Cornerback Will Lee III came up with a momentum-shifting play that helped stave off Baltimore's potential TD.",
+          "published": "2026-11-23T17:00:04Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "healthy"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Adam Schefter: Cardinals fire defensive coordinator after loss to Chiefs",
+          "description": "Adam Schefter: Cardinals fire defensive coordinator after loss to Chiefs ",
+          "published": "2026-11-23T21:09:00Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Cardinals fire DC Nick Rallis; Teryl Austin takes over on interim basis",
+          "description": "The Cardinals have fired defensive coordinator Nick Rallis, coach Mike LaFleur announced Monday.",
+          "published": "2026-11-23T22:57:19Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "coach": [
+          "fired",
+          "interim"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": true,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Sources: Packers' Micah Parsons cleared to make season debut Wednesday vs. Rams",
+          "description": "Packers star Micah Parsons has been cleared and is set for his season debut against the Rams on Wednesday night, sources told NFL Network's Ian Rapoport.",
+          "published": "2026-11-23T23:37:43Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams TE Terrance Ferguson needs season-ending ankle surgery, Sean McVay says",
+          "description": "Rams tight end Terrance Ferguson's ankle injury will require season-ending surgery.",
+          "published": "2026-11-23T20:41:51Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Fantasy football free agent pickups: Grab your Rams and Packers quickly",
+          "description": "Eric Karabell lists the top available players worth adding for the week ahead.",
+          "published": "2026-11-23T15:42:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "surgery",
+          "ankle"
+        ],
+        "positive": [
+          "cleared"
+        ],
+        "trade": [
+          "free agent"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 6,
+      "headlines": [
+        {
+          "headline": "What's next for Brandon Aiyuk after release by 49ers?",
+          "description": "What's next for Brandon Aiyuk after release by 49ers?",
+          "published": "2026-11-23T19:29:43Z",
+          "source": "espn"
+        },
+        {
+          "headline": "49ers release WR Brandon Aiyuk with roster exemption ending",
+          "description": "The 49ers released wide receiver Brandon Aiyuk on Monday.",
+          "published": "2026-11-23T22:15:11Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Source: 49ers, GM John Lynch agree to contract extension",
+          "description": "The 49ers and general manager John Lynch have agreed to a multiyear contract extension, a team source confirmed to NFL Network's Ian Rapoport.",
+          "published": "2026-11-23T19:05:14Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Early betting for Week 12: Will Seahawks slow down 49ers?",
+          "description": "Which Week 12 lines offered immediate value once odds came out? Matt Bowen found one he's jumping on now.",
+          "published": "2026-11-23T17:59:25Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Stephen A.: The 49ers ramrodded the Vikings",
+          "description": "Stephen A.: The 49ers ramrodded the Vikings",
+          "published": "2026-11-23T15:43:10Z",
+          "source": "espn"
+        },
+        {
+          "headline": "49ers' Brock Purdy beats Vikings blitz, hears 'MVP' chants in Mexico City",
+          "description": "Quarterback Brock Purdy heard \"MVP\" chants in Mexico City and continued to earn praise from his teammates as he led the 49ers to a statement victory against the top-ranked Vikings defense on Sunday night",
+          "published": "2026-11-23T07:58:45Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "extension",
+          "mvp"
+        ],
+        "coach": [
+          "extension",
+          "contract extension"
+        ],
+        "trade": [
+          "released"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": true,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-24 01:32:18 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Early betting for Week 12: Will Seahawks slow down 49ers?",
+          "description": "Which Week 12 lines offered immediate value once odds came out? Matt Bowen found one he's jumping on now.",
+          "published": "2026-11-23T17:59:25Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
         "distraction": false,
         "trade": false,
         "coach": false,
