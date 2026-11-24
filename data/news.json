@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-24 01:32:18 UTC",
+  "last_updated": "2026-11-24 23:26:00 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -8050,6 +8050,740 @@
       "silence_reason": null,
       "flags": {
         "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Ravens cut punt returner LaJohntay Wester after his two muffs in loss",
+          "description": "The Ravens waived returner LaJohntay Wester after he muffed two punts in Sunday's loss at Carolina.",
+          "published": "2026-11-24T21:05:41Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "trade": [
+          "cut",
+          "waived"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Commanders coach Dan Quinn fine with Stefon Diggs' sideline rant",
+          "description": "A video clip of Washington Commanders receiver Stefon Diggs appearing to chew out teammates, including quarterback Jayden Daniels, during Monday's win over Cincinnati did not bother his coach.",
+          "published": "2026-11-24T21:46:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why Stephen A. isn't counting out the Bengals after loss to Commanders",
+          "description": "Why Stephen A. isn't counting out the Bengals after loss to Commanders",
+          "published": "2026-11-24T16:07:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "What Todd Monken's six keys reveal about the Browns' offense",
+          "description": "Let's look at the six pillars the first-year head coach stands by and how they're helping (or hurting) Cleveland's offense.",
+          "published": "2026-11-24T14:02:17Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Dopp out on Jaylen Waddle in Week 12 vs. Steelers",
+          "description": "Dopp out on Jaylen Waddle in Week 12 vs. Steelers",
+          "published": "2026-11-24T20:55:42Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Broncos' Sean Payton: J.K. Dobbins suspended one game for detrimental conduct",
+          "description": "The Broncos have suspended running back J.K. Dobbins for one game for conduct detrimental to the team.",
+          "published": "2026-11-24T23:22:38Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "distraction": [
+          "suspended"
+        ],
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": true,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Stephen A. not feeling too enthusiastic about Cowboys ahead of Eagles game",
+          "description": "Stephen A. not feeling too enthusiastic about Cowboys ahead of Eagles game",
+          "published": "2026-11-24T17:16:55Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Stephen A. not feeling too enthusiastic about Cowboys ahead of Eagles game",
+          "description": "Stephen A. not feeling too enthusiastic about Cowboys ahead of Eagles game",
+          "published": "2026-11-24T17:16:55Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Brandon Aiyuk scheduled for visit Wednesday with Commanders, agent says",
+          "description": "Wide receiver Brandon Aiyuk is scheduled to visit Wednesday with the Commanders, agent Drew Rosenhaus told ESPN's Adam Schefter.",
+          "published": "2026-11-24T23:05:18Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Commanders coach Dan Quinn fine with Stefon Diggs' sideline rant",
+          "description": "A video clip of Washington Commanders receiver Stefon Diggs appearing to chew out teammates, including quarterback Jayden Daniels, during Monday's win over Cincinnati did not bother his coach.",
+          "published": "2026-11-24T21:46:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why Stephen A. isn't counting out the Bengals after loss to Commanders",
+          "description": "Why Stephen A. isn't counting out the Bengals after loss to Commanders",
+          "published": "2026-11-24T16:07:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Stephen A.: Bears-Lions a big-time game",
+          "description": "Stephen A.: Bears-Lions a big-time game",
+          "published": "2026-11-24T15:55:30Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Stephen A.: Bears-Lions a big-time game",
+          "description": "Stephen A.: Bears-Lions a big-time game",
+          "published": "2026-11-24T15:55:30Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Myles Garrett, Micah Parsons ready for spotlight when Rams host Packers on Thanksgiving Eve",
+          "description": "\u2014 Myles Garrett and Micah Parsons are two of the best pass rushers of their generation, and they're set to share an NFL field for only the third time Wednesday night when the Los Angeles Rams host...",
+          "published": "2026-11-24T20:35:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Ravens cut punt returner LaJohntay Wester after his two muffs in loss",
+          "description": "The Ravens waived returner LaJohntay Wester after he muffed two punts in Sunday's loss at Carolina.",
+          "published": "2026-11-24T21:05:41Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Chuba Hubbard explains how Dave Canales has changed the Panthers' culture",
+          "description": "Chuba Hubbard explains how Dave Canales has changed the Panthers' culture",
+          "published": "2026-11-24T20:33:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "trade": [
+          "cut",
+          "waived"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Myles Garrett, Micah Parsons ready for spotlight when Rams host Packers on Thanksgiving Eve",
+          "description": "\u2014 Myles Garrett and Micah Parsons are two of the best pass rushers of their generation, and they're set to share an NFL field for only the third time Wednesday night when the Los Angeles Rams host...",
+          "published": "2026-11-24T20:35:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-24 23:26:00 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
         "distraction": false,
         "trade": false,
         "coach": false,
