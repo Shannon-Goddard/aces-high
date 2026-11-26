@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-25 22:59:25 UTC",
+  "last_updated": "2026-11-26 22:53:14 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -9738,6 +9738,1085 @@
       "silence_reason": "no_headlines",
       "flags": {
         "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "2026 NFL Thanksgiving preview: Picks, predictions, schedule, odds, fantasy tips",
+          "description": "Eagles-Cowboys and Chiefs-Bills are still on deck. We have the top storylines, bold predictions, stats to know, fantasy/betting nuggets and more.",
+          "published": "2026-11-26T18:39:03Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why Stephen A. is backing the Bills to beat the Chiefs",
+          "description": "Why Stephen A. is backing the Bills to beat the Chiefs",
+          "published": "2026-11-26T16:11:54Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why the Chiefs and Bills can give thanks to 2017 trade that landed Mahomes in KC",
+          "description": "Kansas City traded up for Patrick Mahomes, while Buffalo got a franchise left tackle and several Pro Bowlers.",
+          "published": "2026-11-26T11:00:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "pro bowl"
+        ],
+        "trade": [
+          "traded",
+          "trade"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Dolphins playing host to Jets, as the NFL's youngest team remains mindful of rookie wall",
+          "description": "\u2014 The Miami Dolphins have a visible opponent this week. They're playing host to the rival New York Jets on Sunday.",
+          "published": "2026-11-25T23:48:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Patriots-Chargers shaping up to be battle of backup QBs for 2 of AFC's biggest disappointments",
+          "description": "\u2014 When Drake Maye\u2019s New England Patriots eased past Justin Herbert\u2019s Los Angeles Chargers in an AFC wild-card game in January, it seemed as if...",
+          "published": "2026-11-26T00:38:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Dolphins playing host to Jets, as the NFL's youngest team remains mindful of rookie wall",
+          "description": "\u2014 The Miami Dolphins have a visible opponent this week. They're playing host to the rival New York Jets on Sunday.",
+          "published": "2026-11-25T23:48:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bengals look to get back on track when they host the Saints on a short week",
+          "description": "Most coaches don't like coming off a Monday night game the week of Thanksgiving because of changes to the practice schedule and a short week of preparation becoming even more condensed.",
+          "published": "2026-11-26T00:37:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Deshaun Watson and No. 1 pick Fernando Mendoza face primetime pressure in Browns' matchup vs Raiders",
+          "description": "\u2014 Deshaun Watson and Fernando Mendoza have plenty to prove when Cleveland hosts Las Vegas on Sunday night.",
+          "published": "2026-11-25T23:47:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "prove"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Steelers activate Michael Pittman Jr. off IR, sign Max Hurleman to active roster",
+          "description": "The Steelers on Thursday activated Michael Pittman Jr. from injured reserve and signed Max Hurleman to the active roster from the practice squad.",
+          "published": "2026-11-26T22:36:50Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Betting Broncos-Steelers: How will Pittsburgh respond to stunning events?",
+          "description": "Odds, analysis and recommended plays to help you bet the day after Thanksgiving game between the Broncos and Steelers.",
+          "published": "2026-11-26T19:55:10Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Steelers owner Art Rooney II 'disappointed' in Rodgers outcome, backs McCarthy",
+          "description": "Steelers owner Art Rooney II reacted to Wednesday's fiery interview from Aaron Rodgers by saying he was \"disappointed in where this went\" with their now-former quarterback, adding he has \"100% confidence in Mike McCarthy.\"",
+          "published": "2026-11-26T22:37:22Z",
+          "source": "espn"
+        },
+        {
+          "headline": "The Steelers are turning to Mason Rudolph to salvage their season. It's not the first time",
+          "description": "\u2014 A season on the brink of crumbling. A disgruntled quarterback unhappy with the state of things. A team in need of a jolt.",
+          "published": "2026-11-26T16:11:33Z",
+          "source": "espn"
+        },
+        {
+          "headline": "'He's got to go!' Stephen A. implores Steelers to move on from Mike McCarthy",
+          "description": "'He's got to go!' Stephen A. implores Steelers to move on from Mike McCarthy",
+          "published": "2026-11-26T15:37:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured",
+          "out",
+          "back"
+        ],
+        "positive": [
+          "signed"
+        ],
+        "trade": [
+          "signed"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Jaguars are simplifying the operation in hopes of bouncing back against the woeful Titans",
+          "description": "\u2014 Coming off their worst offensive performance in two months, the Jacksonville Jaguars are simplifying the operation.",
+          "published": "2026-11-26T00:17:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Jaguars are simplifying the operation in hopes of bouncing back against the woeful Titans",
+          "description": "\u2014 Coming off their worst offensive performance in two months, the Jacksonville Jaguars are simplifying the operation.",
+          "published": "2026-11-26T00:17:34Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Betting Broncos-Steelers: How will Pittsburgh respond to stunning events?",
+          "description": "Odds, analysis and recommended plays to help you bet the day after Thanksgiving game between the Broncos and Steelers.",
+          "published": "2026-11-26T19:55:10Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "2026 NFL Thanksgiving preview: Picks, predictions, schedule, odds, fantasy tips",
+          "description": "Eagles-Cowboys and Chiefs-Bills are still on deck. We have the top storylines, bold predictions, stats to know, fantasy/betting nuggets and more.",
+          "published": "2026-11-26T18:39:03Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why Stephen A. is backing the Bills to beat the Chiefs",
+          "description": "Why Stephen A. is backing the Bills to beat the Chiefs",
+          "published": "2026-11-26T16:11:54Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Why the Chiefs and Bills can give thanks to 2017 trade that landed Mahomes in KC",
+          "description": "Kansas City traded up for Patrick Mahomes, while Buffalo got a franchise left tackle and several Pro Bowlers.",
+          "published": "2026-11-26T11:00:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ],
+        "positive": [
+          "pro bowl"
+        ],
+        "trade": [
+          "traded",
+          "trade"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Deshaun Watson and No. 1 pick Fernando Mendoza face primetime pressure in Browns' matchup vs Raiders",
+          "description": "\u2014 Deshaun Watson and Fernando Mendoza have plenty to prove when Cleveland hosts Las Vegas on Sunday night.",
+          "published": "2026-11-25T23:47:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "prove"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Patriots-Chargers shaping up to be battle of backup QBs for 2 of AFC's biggest disappointments",
+          "description": "\u2014 When Drake Maye\u2019s New England Patriots eased past Justin Herbert\u2019s Los Angeles Chargers in an AFC wild-card game in January, it seemed as if...",
+          "published": "2026-11-26T00:38:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 4,
+      "headlines": [
+        {
+          "headline": "Eagles' Cooper DeJean leaves game at Cowboys because of concussion",
+          "description": "Eagles All-Pro defensive back Cooper DeJean was ruled out of Thursday's game against the Dallas Cowboys with a concussion.",
+          "published": "2026-11-26T22:34:37Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 arrivals: CeeDee Lamb leads arrivals ahead of Eagles-Cowboys",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-26T20:21:31Z",
+          "source": "espn"
+        },
+        {
+          "headline": "2026 NFL Thanksgiving preview: Picks, predictions, schedule, odds, fantasy tips",
+          "description": "Eagles-Cowboys and Chiefs-Bills are still on deck. We have the top storylines, bold predictions, stats to know, fantasy/betting nuggets and more.",
+          "published": "2026-11-26T18:39:03Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 uniforms: Rams debut alternates, Cowboys rock Thanksgiving throwbacks",
+          "description": "Here's a look at what each NFL team is wearing in Week 12, led by an alternate uniform for the Los Angeles Rams.",
+          "published": "2026-11-26T17:49:54Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "concussion",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Eagles' Cooper DeJean leaves game at Cowboys because of concussion",
+          "description": "Eagles All-Pro defensive back Cooper DeJean was ruled out of Thursday's game against the Dallas Cowboys with a concussion.",
+          "published": "2026-11-26T22:34:37Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 arrivals: CeeDee Lamb leads arrivals ahead of Eagles-Cowboys",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-26T20:21:31Z",
+          "source": "espn"
+        },
+        {
+          "headline": "2026 NFL Thanksgiving preview: Picks, predictions, schedule, odds, fantasy tips",
+          "description": "Eagles-Cowboys and Chiefs-Bills are still on deck. We have the top storylines, bold predictions, stats to know, fantasy/betting nuggets and more.",
+          "published": "2026-11-26T18:39:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "concussion",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Commanders try to continue momentum while Cardinals work to end 11-game home losing streak",
+          "description": "\u2014 Some people around the NFL might have needed a reminder what Jayden Daniels can do on a football field before the quarterback led the Washington Commanders ",
+          "published": "2026-11-26T00:58:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Chicago Bears vs. Detroit Lions: Game Highlights",
+          "description": "Chicago Bears vs. Detroit Lions: Game Highlights",
+          "published": "2026-11-26T22:02:59Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Caleb Williams' late TD to Rome Odunze gives Bears dramatic win over Lions",
+          "description": "Caleb Williams turned into the 'Iceman' once again to give the Bears a dramatic late win over the Lions.",
+          "published": "2026-11-26T22:09:47Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Caleb Williams' TD pass with 3 seconds left gives Bears 39-35 win over Lions",
+          "description": "\u2014 Caleb Williams took a shotgun snap, dropped back, looked left and threw a perfect pass to the back, right corner of the end zone where only Rome Odunze could catch it.",
+          "published": "2026-11-26T22:37:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bears TE Colston Loveland exits win over Lions with knee injury",
+          "description": "Bears tight end Colston Loveland was ruled out of Thursday's game at Detroit after injuring his left knee in the first quarter.",
+          "published": "2026-11-26T22:09:43Z",
+          "source": "espn"
+        },
+        {
+          "headline": "How Jeffery Simmons changed the Bears' defensive identity",
+          "description": "Simmons' impact isn't just measured by his own numbers, but also by how he has elevated his teammates.",
+          "published": "2026-11-26T17:16:52Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "out",
+          "knee",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 4,
+      "headlines": [
+        {
+          "headline": "Chicago Bears vs. Detroit Lions: Game Highlights",
+          "description": "Chicago Bears vs. Detroit Lions: Game Highlights",
+          "published": "2026-11-26T22:02:59Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Caleb Williams' late TD to Rome Odunze gives Bears dramatic win over Lions",
+          "description": "Caleb Williams turned into the 'Iceman' once again to give the Bears a dramatic late win over the Lions.",
+          "published": "2026-11-26T22:09:47Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Caleb Williams' TD pass with 3 seconds left gives Bears 39-35 win over Lions",
+          "description": "\u2014 Caleb Williams took a shotgun snap, dropped back, looked left and threw a perfect pass to the back, right corner of the end zone where only Rome Odunze could catch it.",
+          "published": "2026-11-26T22:37:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bears TE Colston Loveland exits win over Lions with knee injury",
+          "description": "Bears tight end Colston Loveland was ruled out of Thursday's game at Detroit after injuring his left knee in the first quarter.",
+          "published": "2026-11-26T22:09:43Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "out",
+          "knee",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Packers' Micah Parsons calls for accountability after Rams run wild",
+          "description": "\"That wasn't a championship attitude, competitiveness, drive,\" Micah Parsons said of the Packers allowing the Rams to rush for a season-high 241 yards.",
+          "published": "2026-11-26T14:16:27Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams pick up important home win over the Packers",
+          "description": "Rams pick up important home win over the Packers",
+          "published": "2026-11-26T04:46:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Blake Corum leads Rams' dominant rushing attack in their 5th straight win, 26-13 over Packers",
+          "description": "\u2014 At some point, Blake Corum realized he should be getting weary while he ran the ball more times than anybody ever had during Sean McVay's 10 seasons in charge of the Los Angeles Rams.",
+          "published": "2026-11-26T05:49:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams take Packers' dinner in first Thanksgiving Eve game",
+          "description": "The night was full of interceptions and injuries with the Rams taking the W.",
+          "published": "2026-11-26T04:34:44Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams' Kam Kinchens ejected as hit leaves Packers' Christian Watson concussed",
+          "description": "Rams safety Kam Kinchens was ejected for a hit along the sideline that left Packers wide receiver Christian Watson with a concussion.",
+          "published": "2026-11-26T14:09:41Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "concussion"
+        ],
+        "positive": [
+          "dominant"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Kirk Cousins makes his home debut in his second act with the Vikings, fittingly against the Falcons",
+          "description": "\u2014 When the Minnesota Vikings last played at home, a foundering offense heard it from the frustrated fans after each futile possession.",
+          "published": "2026-11-26T01:47:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Kirk Cousins makes his home debut in his second act with the Vikings, fittingly against the Falcons",
+          "description": "\u2014 When the Minnesota Vikings last played at home, a foundering offense heard it from the frustrated fans after each futile possession.",
+          "published": "2026-11-26T01:47:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Buccaneers will need more from Baker Mayfield and struggling passing attack to beat the Panthers",
+          "description": "\u2014 The Tampa Bay Buccaneers didn't need much from Baker Mayfield to rout the Carolina Panthers last month.",
+          "published": "2026-11-26T02:24:54Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Bengals look to get back on track when they host the Saints on a short week",
+          "description": "Most coaches don't like coming off a Monday night game the week of Thanksgiving because of changes to the practice schedule and a short week of preparation becoming even more condensed.",
+          "published": "2026-11-26T00:37:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Buccaneers will need more from Baker Mayfield and struggling passing attack to beat the Panthers",
+          "description": "\u2014 The Tampa Bay Buccaneers didn't need much from Baker Mayfield to rout the Carolina Panthers last month.",
+          "published": "2026-11-26T02:24:54Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Commanders try to continue momentum while Cardinals work to end 11-game home losing streak",
+          "description": "\u2014 Some people around the NFL might have needed a reminder what Jayden Daniels can do on a football field before the quarterback led the Washington Commanders ",
+          "published": "2026-11-26T00:58:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 6,
+      "headlines": [
+        {
+          "headline": "NFL Week 12 uniforms: Rams debut alternates, Cowboys rock Thanksgiving throwbacks",
+          "description": "Here's a look at what each NFL team is wearing in Week 12, led by an alternate uniform for the Los Angeles Rams.",
+          "published": "2026-11-26T17:49:54Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Packers' Micah Parsons calls for accountability after Rams run wild",
+          "description": "\"That wasn't a championship attitude, competitiveness, drive,\" Micah Parsons said of the Packers allowing the Rams to rush for a season-high 241 yards.",
+          "published": "2026-11-26T14:16:27Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams pick up important home win over the Packers",
+          "description": "Rams pick up important home win over the Packers",
+          "published": "2026-11-26T04:46:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Blake Corum leads Rams' dominant rushing attack in their 5th straight win, 26-13 over Packers",
+          "description": "\u2014 At some point, Blake Corum realized he should be getting weary while he ran the ball more times than anybody ever had during Sean McVay's 10 seasons in charge of the Los Angeles Rams.",
+          "published": "2026-11-26T05:49:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams take Packers' dinner in first Thanksgiving Eve game",
+          "description": "The night was full of interceptions and injuries with the Rams taking the W.",
+          "published": "2026-11-26T04:34:44Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Rams' Kam Kinchens ejected as hit leaves Packers' Christian Watson concussed",
+          "description": "Rams safety Kam Kinchens was ejected for a hit along the sideline that left Packers wide receiver Christian Watson with a concussion.",
+          "published": "2026-11-26T14:09:41Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "concussion",
+          "back"
+        ],
+        "positive": [
+          "dominant"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Purdy and the 49ers prepare for another tough test against Seahawks' stout defense",
+          "description": "\u2014 The San Francisco 49ers passed the first of back-to-back tests against two of the NFL's top defenses with flying colors as Brock Prudy ",
+          "published": "2026-11-26T00:25:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-26 22:53:14 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Purdy and the 49ers prepare for another tough test against Seahawks' stout defense",
+          "description": "\u2014 The San Francisco 49ers passed the first of back-to-back tests against two of the NFL's top defenses with flying colors as Brock Prudy ",
+          "published": "2026-11-26T00:25:33Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
         "distraction": false,
         "trade": false,
         "coach": false,
