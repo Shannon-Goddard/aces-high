@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-26 22:53:14 UTC",
+  "last_updated": "2026-11-27 22:33:52 UTC",
   "news": [
     {
       "team_slug": "buf",
@@ -10810,6 +10810,1058 @@
       "keywords_found": {
         "injury": [
           "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "buf",
+      "team_name": "Buffalo Bills",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Rashee Rice, Chiefs believe he caught pivotal 3rd-down pass late vs. Bills",
+          "description": "WR Rashee Rice -- along with several members of the Chiefs -- felt he caught the ball on a pivotal third-down pass with less than two minutes left at the Bills.",
+          "published": "2026-11-27T13:50:21Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bills QB Josh Allen struggles vs. Chiefs in 'grossest' conditions",
+          "description": "The Bills won their 10th game of the season Thursday vs. the Chiefs, but QB Josh Allen struggled in the weather, passing for only 81 yards.",
+          "published": "2026-11-27T07:57:30Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Kansas City Chiefs vs. Buffalo Bills: Game Highlight",
+          "description": "Kansas City Chiefs vs. Buffalo Bills: Game Highlight",
+          "published": "2026-11-27T06:19:18Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Tyler Bass hits 57-yard field goal as time expires to lift Bills past Chiefs, 13-10",
+          "description": "\u2014 After sharing top billing, Buffalo\u2019s Josh Allen and Kansas City\u2019s Patrick Mahomes proved no match for the elements in the latest showdown of...",
+          "published": "2026-11-27T07:25:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bills edge Chiefs with last-second FG in low-scoring battle",
+          "description": "The Bills won their seventh straight, snapping the Chiefs' win streak at three in a sloppy, low-scoring thriller.",
+          "published": "2026-11-27T05:59:59Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "prove"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "mia",
+      "team_name": "Miami Dolphins",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ne",
+      "team_name": "New England Patriots",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "nyj",
+      "team_name": "New York Jets",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "bal",
+      "team_name": "Baltimore Ravens",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Ravens' Marlon Humphrey to return to lineup; role uncertain",
+          "description": "Ravens cornerback Marlon Humphrey will play Sunday against the Texans, a week after he was benched for making disparaging comments about the city of Baltimore.",
+          "published": "2026-11-27T21:33:18Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cin",
+      "team_name": "Cincinnati Bengals",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Bengals WR Tee Higgins dealing with 'sore' hamstring, says coach Zac Taylor",
+          "description": "Bengals receiver Tee Higgins is dealing with a \"sore\" hamstring, according to coach Zac Taylor, and is listed as questionable for Sunday's game vs. the Saints.",
+          "published": "2026-11-27T22:19:25Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Saints rule TE Juwan Johnson out vs. Bengals; TE Noah Fant questionable",
+          "description": "The Saints ruled out tight end Juwan Johnson with a hamstring and wrist injuries while backup Noah Fant is questionable with a calf injury vs. the Bengals.",
+          "published": "2026-11-27T22:06:53Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "questionable",
+          "out",
+          "hamstring",
+          "back"
+        ],
+        "trade": [
+          "deal"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "cle",
+      "team_name": "Cleveland Browns",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "pit",
+      "team_name": "Pittsburgh Steelers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "NFL Week 12 arrivals: Cameron Heyward leads arrivals ahead of Steelers-Broncos",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-27T18:59:58Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Tomlin upset by Rodgers' bitter exit, calls situation 'a dumpster fire'",
+          "description": "Mike Tomlin said he was saddened by Aaron Rodgers' tumultuous exit from Pittsburgh and disagreed with how the QB \"aired out\" his grievances against Mike McCarthy.",
+          "published": "2026-11-27T05:02:36Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "hou",
+      "team_name": "Houston Texans",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Ravens' Marlon Humphrey to return to lineup; role uncertain",
+          "description": "Ravens cornerback Marlon Humphrey will play Sunday against the Texans, a week after he was benched for making disparaging comments about the city of Baltimore.",
+          "published": "2026-11-27T21:33:18Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ind",
+      "team_name": "Indianapolis Colts",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "jax",
+      "team_name": "Jacksonville Jaguars",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "What will Jaguars do with Parker Washington out week-to-week?",
+          "description": "What will Jaguars do with Parker Washington out week-to-week?",
+          "published": "2026-11-27T15:55:33Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Jaguars' Parker Washington, Bhayshul Tuten both out Sunday",
+          "description": "Jaguars wide receiver Parker Washington (shoulder) and running back Bhayshul Tuten (foot/ankle) have both been ruled out for Sunday's game against the Titans.",
+          "published": "2026-11-27T21:08:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "ankle",
+          "shoulder",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ten",
+      "team_name": "Tennessee Titans",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Jaguars' Parker Washington, Bhayshul Tuten both out Sunday",
+          "description": "Jaguars wide receiver Parker Washington (shoulder) and running back Bhayshul Tuten (foot/ankle) have both been ruled out for Sunday's game against the Titans.",
+          "published": "2026-11-27T21:08:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "ankle",
+          "shoulder",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "den",
+      "team_name": "Denver Broncos",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "NFL Week 12 arrivals: Cameron Heyward leads arrivals ahead of Steelers-Broncos",
+          "description": "NFL stars continue to turn game-day arrivals into their own weekly fashion showcase.",
+          "published": "2026-11-27T18:59:58Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Best friends Pat Surtain II, Jaylen Waddle ecstatic about reuniting on Broncos",
+          "description": "Surtain and Waddle bonded immediately at Alabama six years ago and have embraced the chance to play together again in Denver on a team with Super Bowl hopes.",
+          "published": "2026-11-27T14:58:48Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "kc",
+      "team_name": "Kansas City Chiefs",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 5,
+      "headlines": [
+        {
+          "headline": "Rashee Rice, Chiefs believe he caught pivotal 3rd-down pass late vs. Bills",
+          "description": "WR Rashee Rice -- along with several members of the Chiefs -- felt he caught the ball on a pivotal third-down pass with less than two minutes left at the Bills.",
+          "published": "2026-11-27T13:50:21Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bills QB Josh Allen struggles vs. Chiefs in 'grossest' conditions",
+          "description": "The Bills won their 10th game of the season Thursday vs. the Chiefs, but QB Josh Allen struggled in the weather, passing for only 81 yards.",
+          "published": "2026-11-27T07:57:30Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Kansas City Chiefs vs. Buffalo Bills: Game Highlight",
+          "description": "Kansas City Chiefs vs. Buffalo Bills: Game Highlight",
+          "published": "2026-11-27T06:19:18Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Tyler Bass hits 57-yard field goal as time expires to lift Bills past Chiefs, 13-10",
+          "description": "\u2014 After sharing top billing, Buffalo\u2019s Josh Allen and Kansas City\u2019s Patrick Mahomes proved no match for the elements in the latest showdown of...",
+          "published": "2026-11-27T07:25:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Bills edge Chiefs with last-second FG in low-scoring battle",
+          "description": "The Bills won their seventh straight, snapping the Chiefs' win streak at three in a sloppy, low-scoring thriller.",
+          "published": "2026-11-27T05:59:59Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "prove"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lv",
+      "team_name": "Las Vegas Raiders",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lac",
+      "team_name": "Los Angeles Chargers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "dal",
+      "team_name": "Dallas Cowboys",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 12,
+      "headlines": [
+        {
+          "headline": "Brian Schottenheimer says Jerry Jones shares 'in our disappointment'",
+          "description": "Brian Schottenheimer said Jerry Jones and Stephen Jones \"share in our disappointment\" after the trio met following the Cowboys' collapse vs. the Eagles on Thursday.",
+          "published": "2026-11-27T22:26:13Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 uniforms: Rams debut alternates, Cowboys rock Thanksgiving throwbacks",
+          "description": "Here's a look at what each NFL team is wearing in Week 12, led by an alternate uniform for the Los Angeles Rams.",
+          "published": "2026-11-27T21:58:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Players or coaches: Who's to blame for Cowboys' D?",
+          "description": "Players or coaches: Who's to blame for Cowboys' D?",
+          "published": "2026-11-27T15:41:33Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Hawkins: The season is over for the Dallas Cowboys",
+          "description": "Hawkins: The season is over for the Dallas Cowboys",
+          "published": "2026-11-27T13:26:43Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles QB Joe Milton wows teammates with breakout game in Dallas",
+          "description": "Eagles QB Joe Milton had a breakout game on the national stage, accounting for four touchdowns in a wild 39-38 come-from-behind win over the Cowboys.",
+          "published": "2026-11-27T06:10:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Jerry Jones backs Schottenheimer despite 'damning setbacks' in loss",
+          "description": "Jerry Jones said he did not anticipate making immediate changes but still labeled the Cowboys' latest fourth-quarter collapse as a \"damning\" setback.",
+          "published": "2026-11-27T05:17:22Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Will Shipley brushes off argument with coach Nick Sirianni: 'Emotions were running high'",
+          "description": "RB Will Shipley likened his sideline argument with coach Nick Sirianni to a Thanksgiving family spat in the wake of the Eagles' dramatic comeback win at Dallas.",
+          "published": "2026-11-27T06:26:41Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Stephen A. can't stop laughing at Cowboys after Thanksgiving collapse",
+          "description": "Stephen A. can't stop laughing at Cowboys after Thanksgiving collapse",
+          "published": "2026-11-27T05:19:27Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles' comeback against Cowboys stuns Jason Kelce, Caitlin Clark and more",
+          "description": "The Philadelphia Eagles pulled off the largest Thanksgiving Day comeback in NFL history.",
+          "published": "2026-11-27T02:36:42Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles stun Cowboys with largest-ever Thanksgiving game comeback",
+          "description": "Eagles stun Cowboys with largest-ever Thanksgiving game comeback",
+          "published": "2026-11-27T01:58:17Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "comeback"
+        ],
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "breakout"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "nyg",
+      "team_name": "New York Giants",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "phi",
+      "team_name": "Philadelphia Eagles",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 7,
+      "headlines": [
+        {
+          "headline": "Brian Schottenheimer says Jerry Jones shares 'in our disappointment'",
+          "description": "Brian Schottenheimer said Jerry Jones and Stephen Jones \"share in our disappointment\" after the trio met following the Cowboys' collapse vs. the Eagles on Thursday.",
+          "published": "2026-11-27T22:26:13Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles QB Joe Milton wows teammates with breakout game in Dallas",
+          "description": "Eagles QB Joe Milton had a breakout game on the national stage, accounting for four touchdowns in a wild 39-38 come-from-behind win over the Cowboys.",
+          "published": "2026-11-27T06:10:08Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Will Shipley brushes off argument with coach Nick Sirianni: 'Emotions were running high'",
+          "description": "RB Will Shipley likened his sideline argument with coach Nick Sirianni to a Thanksgiving family spat in the wake of the Eagles' dramatic comeback win at Dallas.",
+          "published": "2026-11-27T06:26:41Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles' comeback against Cowboys stuns Jason Kelce, Caitlin Clark and more",
+          "description": "The Philadelphia Eagles pulled off the largest Thanksgiving Day comeback in NFL history.",
+          "published": "2026-11-27T02:36:42Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Eagles stun Cowboys with largest-ever Thanksgiving game comeback",
+          "description": "Eagles stun Cowboys with largest-ever Thanksgiving game comeback",
+          "published": "2026-11-27T01:58:17Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Joe Milton has huge game as Eagles shock Cowboys",
+          "description": "Dallas blew a 21-point lead as Philly made a spectacular comeback with Milton at the helm.",
+          "published": "2026-11-27T02:43:27Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Schottenheimer defends 4th-down call before Eagles' 59-yard FG in 39-38 stunner over Cowboys",
+          "description": "\u2014 Brian Schottenheimer said he second-guesses plenty of his decisions, just not the one that will be dissected more than any other in his two seasons as coach of the Dallas Cowboys.",
+          "published": "2026-11-27T05:21:32Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "hunger": [
+          "comeback"
+        ],
+        "injury": [
+          "out",
+          "back"
+        ],
+        "positive": [
+          "breakout"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": true,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "wsh",
+      "team_name": "Washington Commanders",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Cardinals to start QB Josh Johnson again with Carson Beck (back spasms) out",
+          "description": "Cardinals rookie QB Carson Beck will miss a second straight game as he recovers from back spasms, paving the way for veteran Josh Johnson to start vs. the Commanders.",
+          "published": "2026-11-27T20:50:14Z",
+          "source": "espn"
+        },
+        {
+          "headline": "What will Jaguars do with Parker Washington out week-to-week?",
+          "description": "What will Jaguars do with Parker Washington out week-to-week?",
+          "published": "2026-11-27T15:55:33Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Jaguars' Parker Washington, Bhayshul Tuten both out Sunday",
+          "description": "Jaguars wide receiver Parker Washington (shoulder) and running back Bhayshul Tuten (foot/ankle) have both been ruled out for Sunday's game against the Titans.",
+          "published": "2026-11-27T21:08:03Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "ankle",
+          "shoulder",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "chi",
+      "team_name": "Chicago Bears",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Sources: Bears' Colston Loveland awaiting second opinion on knee",
+          "description": "The Bears are holding off on placing Colston Loveland on injured reserve while the injured tight end gets a second opinion on his left knee, sources told ESPN",
+          "published": "2026-11-27T18:16:47Z",
+          "source": "espn"
+        },
+        {
+          "headline": "QB Caleb Williams, WR Rome Odunze's chemistry helps Bears stun Lions",
+          "description": "QB Caleb Williams and WR Rome Odunze leaned on their chemistry and trust to secure Chicago's ninth win of the season.",
+          "published": "2026-11-27T03:58:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injured",
+          "knee"
+        ],
+        "positive": [
+          "chemistry"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "det",
+      "team_name": "Detroit Lions",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "QB Caleb Williams, WR Rome Odunze's chemistry helps Bears stun Lions",
+          "description": "QB Caleb Williams and WR Rome Odunze leaned on their chemistry and trust to secure Chicago's ninth win of the season.",
+          "published": "2026-11-27T03:58:07Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "positive": [
+          "chemistry"
+        ]
+      },
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": true
+      }
+    },
+    {
+      "team_slug": "gb",
+      "team_name": "Green Bay Packers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "min",
+      "team_name": "Minnesota Vikings",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "atl",
+      "team_name": "Atlanta Falcons",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "NFL Week 12 preview: Picks, predictions, schedule, betting odds, fantasy tips",
+          "description": "Seahawks vs. 49ers? Kirk Cousins against Atlanta? There are 12 more games in Week 12, and we have picks, predictions and more for all of them.",
+          "published": "2026-11-27T11:48:57Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_negative_keywords",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "car",
+      "team_name": "Carolina Panthers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "no",
+      "team_name": "New Orleans Saints",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "Bengals WR Tee Higgins dealing with 'sore' hamstring, says coach Zac Taylor",
+          "description": "Bengals receiver Tee Higgins is dealing with a \"sore\" hamstring, according to coach Zac Taylor, and is listed as questionable for Sunday's game vs. the Saints.",
+          "published": "2026-11-27T22:19:25Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Saints rule TE Juwan Johnson out vs. Bengals; TE Noah Fant questionable",
+          "description": "The Saints ruled out tight end Juwan Johnson with a hamstring and wrist injuries while backup Noah Fant is questionable with a calf injury vs. the Bengals.",
+          "published": "2026-11-27T22:06:53Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "injury",
+          "questionable",
+          "out",
+          "hamstring",
+          "back"
+        ],
+        "trade": [
+          "deal"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": true,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "tb",
+      "team_name": "Tampa Bay Buccaneers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 0,
+      "headlines": [],
+      "keywords_found": {},
+      "silence_bonus": true,
+      "silence_reason": "no_headlines",
+      "flags": {
+        "injury": false,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "ari",
+      "team_name": "Arizona Cardinals",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 1,
+      "headlines": [
+        {
+          "headline": "Cardinals to start QB Josh Johnson again with Carson Beck (back spasms) out",
+          "description": "Cardinals rookie QB Carson Beck will miss a second straight game as he recovers from back spasms, paving the way for veteran Josh Johnson to start vs. the Commanders.",
+          "published": "2026-11-27T20:50:14Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "out",
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "lar",
+      "team_name": "Los Angeles Rams",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 2,
+      "headlines": [
+        {
+          "headline": "NFL Week 12 uniforms: Rams debut alternates, Cowboys rock Thanksgiving throwbacks",
+          "description": "Here's a look at what each NFL team is wearing in Week 12, led by an alternate uniform for the Los Angeles Rams.",
+          "published": "2026-11-27T21:58:32Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Can the 49ers lock up the NFC West after exceeding preseason expectations?",
+          "description": "The 49ers are 9-1, and two of their next three games are against the Seahawks (6-4) and Rams (7-4) at home.",
+          "published": "2026-11-27T11:00:13Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sf",
+      "team_name": "San Francisco 49ers",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Why the Seahawks are turning back to quarterback Sam Darnold vs. the 49ers",
+          "description": "Drew Lock has been 'fantastic' filling in for Darnold, who has struggled with injuries but is on track to face 9-1 San Francisco on Sunday.",
+          "published": "2026-11-27T12:02:29Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Can the 49ers lock up the NFC West after exceeding preseason expectations?",
+          "description": "The 49ers are 9-1, and two of their next three games are against the Seahawks (6-4) and Rams (7-4) at home.",
+          "published": "2026-11-27T11:00:13Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 preview: Picks, predictions, schedule, betting odds, fantasy tips",
+          "description": "Seahawks vs. 49ers? Kirk Cousins against Atlanta? There are 12 more games in Week 12, and we have picks, predictions and more for all of them.",
+          "published": "2026-11-27T11:48:57Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
+          "back"
+        ]
+      },
+      "silence_bonus": false,
+      "silence_reason": null,
+      "flags": {
+        "injury": true,
+        "distraction": false,
+        "trade": false,
+        "coach": false,
+        "hunger": false,
+        "positive": false
+      }
+    },
+    {
+      "team_slug": "sea",
+      "team_name": "Seattle Seahawks",
+      "scanned_at": "2026-11-27 22:33:52 UTC",
+      "headline_count": 3,
+      "headlines": [
+        {
+          "headline": "Why the Seahawks are turning back to quarterback Sam Darnold vs. the 49ers",
+          "description": "Drew Lock has been 'fantastic' filling in for Darnold, who has struggled with injuries but is on track to face 9-1 San Francisco on Sunday.",
+          "published": "2026-11-27T12:02:29Z",
+          "source": "espn"
+        },
+        {
+          "headline": "Can the 49ers lock up the NFC West after exceeding preseason expectations?",
+          "description": "The 49ers are 9-1, and two of their next three games are against the Seahawks (6-4) and Rams (7-4) at home.",
+          "published": "2026-11-27T11:00:13Z",
+          "source": "espn"
+        },
+        {
+          "headline": "NFL Week 12 preview: Picks, predictions, schedule, betting odds, fantasy tips",
+          "description": "Seahawks vs. 49ers? Kirk Cousins against Atlanta? There are 12 more games in Week 12, and we have picks, predictions and more for all of them.",
+          "published": "2026-11-27T11:48:57Z",
+          "source": "espn"
+        }
+      ],
+      "keywords_found": {
+        "injury": [
           "back"
         ]
       },
