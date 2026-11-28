@@ -693,6 +693,478 @@
       "actual_spread": null,
       "actual_total": null,
       "lesson": null
+    },
+    {
+      "bet_id": "c94419ba8fb818fc36a5b21b526aab75",
+      "game_id": "c94419ba8fb818fc36a5b21b526aab75",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Atlanta Falcons",
+      "away_team": "Detroit Lions",
+      "home_slug": "atl",
+      "away_slug": "det",
+      "confidence": 59,
+      "edge_score": 9.0,
+      "pick_team": "Atlanta Falcons",
+      "pick_side": "home",
+      "pick_type": "underdog",
+      "spread_pick": "home",
+      "spread_value": 3.5,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0062,
+          "role_fit_mult": 1.0158
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "0236f9aa68d65ea03bd1ca025b749c20",
+      "game_id": "0236f9aa68d65ea03bd1ca025b749c20",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Chicago Bears",
+      "away_team": "Jacksonville Jaguars",
+      "home_slug": "chi",
+      "away_slug": "jax",
+      "confidence": 40,
+      "edge_score": -9.7,
+      "pick_team": "Jacksonville Jaguars",
+      "pick_side": "away",
+      "pick_type": "underdog",
+      "spread_pick": "away",
+      "spread_value": 3.0,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "away",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 43.7,
+            "wind_mph": 9.0,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0086,
+          "role_fit_mult": 1.0177
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "b447fab53534af892f98a74eae26c1c6",
+      "game_id": "b447fab53534af892f98a74eae26c1c6",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Cleveland Browns",
+      "away_team": "Cincinnati Bengals",
+      "home_slug": "cle",
+      "away_slug": "cin",
+      "confidence": 80,
+      "edge_score": 30.0,
+      "pick_team": "Cleveland Browns",
+      "pick_side": "home",
+      "pick_type": "underdog",
+      "spread_pick": "home",
+      "spread_value": 5.8,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 43.0,
+            "wind_mph": 20.0,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.009,
+          "role_fit_mult": 1.0151
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "ae3429e95ee704c7fd001cade20072d0",
+      "game_id": "ae3429e95ee704c7fd001cade20072d0",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Tennessee Titans",
+      "away_team": "Washington Commanders",
+      "home_slug": "ten",
+      "away_slug": "wsh",
+      "confidence": 65,
+      "edge_score": 15.0,
+      "pick_team": "Tennessee Titans",
+      "pick_side": "home",
+      "pick_type": "underdog",
+      "spread_pick": "home",
+      "spread_value": 4.5,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 48.2,
+            "wind_mph": 7.8,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.007,
+          "role_fit_mult": 1.0062
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "f4897f48a5351881280f7598bd826408",
+      "game_id": "f4897f48a5351881280f7598bd826408",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Arizona Cardinals",
+      "away_team": "Philadelphia Eagles",
+      "home_slug": "ari",
+      "away_slug": "phi",
+      "confidence": 60,
+      "edge_score": 10.0,
+      "pick_team": "Arizona Cardinals",
+      "pick_side": "home",
+      "pick_type": "underdog",
+      "spread_pick": "home",
+      "spread_value": 3.2,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.008,
+          "role_fit_mult": 1.0161
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "4116dbff75ab7957b69c2152f204b74d",
+      "game_id": "4116dbff75ab7957b69c2152f204b74d",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "New England Patriots",
+      "away_team": "Buffalo Bills",
+      "home_slug": "ne",
+      "away_slug": "buf",
+      "confidence": 80,
+      "edge_score": 30.0,
+      "pick_team": "New England Patriots",
+      "pick_side": "home",
+      "pick_type": "underdog",
+      "spread_pick": "home",
+      "spread_value": 13.0,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 0.85,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": true,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 45.4,
+            "wind_mph": 5.4,
+            "precip_in": 0.08,
+            "condition": "rain",
+            "wmo_code": 80
+          },
+          "notes": [
+            "rain \u2192 passing \u00d70.85"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0072,
+          "role_fit_mult": 1.0199
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
+    },
+    {
+      "bet_id": "c186c605febd6370b292469c9151cfb3",
+      "game_id": "c186c605febd6370b292469c9151cfb3",
+      "week": 14,
+      "game_date": "2026-12-06",
+      "home_team": "Minnesota Vikings",
+      "away_team": "Carolina Panthers",
+      "home_slug": "min",
+      "away_slug": "car",
+      "confidence": 45,
+      "edge_score": -5.3,
+      "pick_team": "Minnesota Vikings",
+      "pick_side": "home",
+      "pick_type": "favorite",
+      "spread_pick": "home",
+      "spread_value": -5.0,
+      "spread_odds": -110,
+      "spread_result": null,
+      "moneyline_pick": "home",
+      "moneyline_value": null,
+      "moneyline_odds": -110,
+      "moneyline_result": null,
+      "over_under_pick": null,
+      "over_under_value": null,
+      "over_under_odds": null,
+      "over_under_result": null,
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0064,
+          "role_fit_mult": 1.0106
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      },
+      "status": "open",
+      "opened_at": "2026-11-28 02:39 UTC",
+      "closed_at": null,
+      "actual_score": null,
+      "actual_spread": null,
+      "actual_total": null,
+      "lesson": null
     }
   ]
 }

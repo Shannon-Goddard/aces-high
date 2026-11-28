@@ -2198,6 +2198,1186 @@
         "coach_compatibility": null,
         "relationship_web": null
       }
+    },
+    {
+      "game_id": "06e52a676b516186989e3b181a37c8a7",
+      "week": 14,
+      "home_team": "Los Angeles Rams",
+      "away_team": "Kansas City Chiefs",
+      "home_slug": "lar",
+      "away_slug": "kc",
+      "game_time": "2026-12-04T01:15:00Z",
+      "spread": 0.0,
+      "total": 44.0,
+      "pick": "Kansas City Chiefs",
+      "pick_type": "underdog",
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 0.0,
+      "away_score": 21.5,
+      "home_breakdown": {
+        "composite": 0.0,
+        "raw": 19.5,
+        "body": 76.6,
+        "skill": 56.9,
+        "momentum": 50.0,
+        "adjusted_skill": 56.9,
+        "hunger": 62.5,
+        "compat": 53.5,
+        "compat_mult": 1.007,
+        "role_fit_mult": 1.0131,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 95
+      },
+      "away_breakdown": {
+        "composite": 21.5,
+        "raw": 31.8,
+        "body": 76.2,
+        "skill": 68.6,
+        "momentum": 50.0,
+        "adjusted_skill": 68.6,
+        "hunger": 54.2,
+        "compat": 57.8,
+        "compat_mult": 1.0156,
+        "role_fit_mult": 1.0242,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 99
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.007,
+          "role_fit_mult": 1.0131
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "c94419ba8fb818fc36a5b21b526aab75",
+      "week": 14,
+      "home_team": "Atlanta Falcons",
+      "away_team": "Detroit Lions",
+      "home_slug": "atl",
+      "away_slug": "det",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": 3.5,
+      "total": 50.5,
+      "pick": "Atlanta Falcons",
+      "pick_type": "underdog",
+      "confidence": 59,
+      "edge_score": 9.0,
+      "home_score": 19.5,
+      "away_score": 20.3,
+      "home_breakdown": {
+        "composite": 19.5,
+        "raw": 30.7,
+        "body": 76.7,
+        "skill": 64.7,
+        "momentum": 50.0,
+        "adjusted_skill": 64.7,
+        "hunger": 56.1,
+        "compat": 53.1,
+        "compat_mult": 1.0062,
+        "role_fit_mult": 1.0158,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 107
+      },
+      "away_breakdown": {
+        "composite": 20.3,
+        "raw": 31.2,
+        "body": 77.1,
+        "skill": 67.1,
+        "momentum": 50.0,
+        "adjusted_skill": 67.1,
+        "hunger": 54.1,
+        "compat": 54.4,
+        "compat_mult": 1.0088,
+        "role_fit_mult": 1.017,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 108
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0062,
+          "role_fit_mult": 1.0158
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "0236f9aa68d65ea03bd1ca025b749c20",
+      "week": 14,
+      "home_team": "Chicago Bears",
+      "away_team": "Jacksonville Jaguars",
+      "home_slug": "chi",
+      "away_slug": "jax",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": -3.0,
+      "total": 50.0,
+      "pick": "Jacksonville Jaguars",
+      "pick_type": "underdog",
+      "confidence": 40,
+      "edge_score": -9.7,
+      "home_score": 0.1,
+      "away_score": 0.0,
+      "home_breakdown": {
+        "composite": 0.1,
+        "raw": 20.1,
+        "body": 74.8,
+        "skill": 65.2,
+        "momentum": 50.0,
+        "adjusted_skill": 65.2,
+        "hunger": 53.0,
+        "compat": 54.3,
+        "compat_mult": 1.0086,
+        "role_fit_mult": 1.0177,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 90
+      },
+      "away_breakdown": {
+        "composite": 0.0,
+        "raw": 19.7,
+        "body": 80.7,
+        "skill": 60.9,
+        "momentum": 50.0,
+        "adjusted_skill": 60.9,
+        "hunger": 50.7,
+        "compat": 54.0,
+        "compat_mult": 1.008,
+        "role_fit_mult": 1.0101,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 95
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 43.7,
+            "wind_mph": 9.0,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0086,
+          "role_fit_mult": 1.0177
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "b447fab53534af892f98a74eae26c1c6",
+      "week": 14,
+      "home_team": "Cleveland Browns",
+      "away_team": "Cincinnati Bengals",
+      "home_slug": "cle",
+      "away_slug": "cin",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": 5.8,
+      "total": 46.5,
+      "pick": "Cleveland Browns",
+      "pick_type": "underdog",
+      "confidence": 80,
+      "edge_score": 30.0,
+      "home_score": 15.3,
+      "away_score": 0.5,
+      "home_breakdown": {
+        "composite": 15.3,
+        "raw": 28.4,
+        "body": 75.4,
+        "skill": 55.7,
+        "momentum": 50.0,
+        "adjusted_skill": 55.7,
+        "hunger": 53.0,
+        "compat": 54.5,
+        "compat_mult": 1.009,
+        "role_fit_mult": 1.0151,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 112
+      },
+      "away_breakdown": {
+        "composite": 0.5,
+        "raw": 20.3,
+        "body": 78.1,
+        "skill": 62.3,
+        "momentum": 50.0,
+        "adjusted_skill": 62.3,
+        "hunger": 54.8,
+        "compat": 54.3,
+        "compat_mult": 1.0086,
+        "role_fit_mult": 1.024,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 100
+      },
+      "divisional_game": true,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 43.0,
+            "wind_mph": 20.0,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.009,
+          "role_fit_mult": 1.0151
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "1ccb61b811b7aae4270df22a67e6459f",
+      "week": 14,
+      "home_team": "New Orleans Saints",
+      "away_team": "Green Bay Packers",
+      "home_slug": "no",
+      "away_slug": "gb",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": 5.0,
+      "total": 46.0,
+      "pick": "Green Bay Packers",
+      "pick_type": "favorite",
+      "confidence": 20,
+      "edge_score": -30.0,
+      "home_score": 0.0,
+      "away_score": 23.1,
+      "home_breakdown": {
+        "composite": 0.0,
+        "raw": 19.2,
+        "body": 72.6,
+        "skill": 62.0,
+        "momentum": 50.0,
+        "adjusted_skill": 62.0,
+        "hunger": 56.5,
+        "compat": 53.3,
+        "compat_mult": 1.0066,
+        "role_fit_mult": 1.0083,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 104
+      },
+      "away_breakdown": {
+        "composite": 23.1,
+        "raw": 32.7,
+        "body": 85.2,
+        "skill": 66.4,
+        "momentum": 50.0,
+        "adjusted_skill": 66.4,
+        "hunger": 56.1,
+        "compat": 55.9,
+        "compat_mult": 1.0118,
+        "role_fit_mult": 1.0198,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 93
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0066,
+          "role_fit_mult": 1.0083
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "f8a92363386bd337975650879086cca6",
+      "week": 14,
+      "home_team": "Tampa Bay Buccaneers",
+      "away_team": "Los Angeles Chargers",
+      "home_slug": "tb",
+      "away_slug": "lac",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": -5.5,
+      "total": 40.5,
+      "pick": "Los Angeles Chargers",
+      "pick_type": "underdog",
+      "confidence": 32,
+      "edge_score": -18.0,
+      "home_score": 19.9,
+      "away_score": 19.8,
+      "home_breakdown": {
+        "composite": 19.9,
+        "raw": 30.9,
+        "body": 76.7,
+        "skill": 65.9,
+        "momentum": 50.0,
+        "adjusted_skill": 65.9,
+        "hunger": 56.6,
+        "compat": 54.2,
+        "compat_mult": 1.0084,
+        "role_fit_mult": 1.0112,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 105
+      },
+      "away_breakdown": {
+        "composite": 19.8,
+        "raw": 30.9,
+        "body": 76.2,
+        "skill": 66.8,
+        "momentum": 50.0,
+        "adjusted_skill": 66.8,
+        "hunger": 55.6,
+        "compat": 54.8,
+        "compat_mult": 1.0096,
+        "role_fit_mult": 1.0082,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 108
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 76.5,
+            "wind_mph": 8.3,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0084,
+          "role_fit_mult": 1.0112
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "ae3429e95ee704c7fd001cade20072d0",
+      "week": 14,
+      "home_team": "Tennessee Titans",
+      "away_team": "Washington Commanders",
+      "home_slug": "ten",
+      "away_slug": "wsh",
+      "game_time": "2026-12-06T18:00:00Z",
+      "spread": 4.5,
+      "total": 47.5,
+      "pick": "Tennessee Titans",
+      "pick_type": "underdog",
+      "confidence": 65,
+      "edge_score": 15.0,
+      "home_score": 0.0,
+      "away_score": 0.0,
+      "home_breakdown": {
+        "composite": 0.0,
+        "raw": 18.5,
+        "body": 79.1,
+        "skill": 53.6,
+        "momentum": 50.0,
+        "adjusted_skill": 53.6,
+        "hunger": 57.2,
+        "compat": 53.5,
+        "compat_mult": 1.007,
+        "role_fit_mult": 1.0062,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 101
+      },
+      "away_breakdown": {
+        "composite": 0.0,
+        "raw": 19.4,
+        "body": 67.2,
+        "skill": 67.9,
+        "momentum": 50.0,
+        "adjusted_skill": 67.9,
+        "hunger": 54.3,
+        "compat": 53.7,
+        "compat_mult": 1.0074,
+        "role_fit_mult": 1.0068,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 99
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 48.2,
+            "wind_mph": 7.8,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.007,
+          "role_fit_mult": 1.0062
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "f4897f48a5351881280f7598bd826408",
+      "week": 14,
+      "home_team": "Arizona Cardinals",
+      "away_team": "Philadelphia Eagles",
+      "home_slug": "ari",
+      "away_slug": "phi",
+      "game_time": "2026-12-06T21:05:00Z",
+      "spread": 3.2,
+      "total": 37.5,
+      "pick": "Arizona Cardinals",
+      "pick_type": "underdog",
+      "confidence": 60,
+      "edge_score": 10.0,
+      "home_score": 1.9,
+      "away_score": 2.1,
+      "home_breakdown": {
+        "composite": 1.9,
+        "raw": 21.1,
+        "body": 80.9,
+        "skill": 63.3,
+        "momentum": 50.0,
+        "adjusted_skill": 63.3,
+        "hunger": 57.7,
+        "compat": 54.0,
+        "compat_mult": 1.008,
+        "role_fit_mult": 1.0161,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 99
+      },
+      "away_breakdown": {
+        "composite": 2.1,
+        "raw": 21.2,
+        "body": 78.3,
+        "skill": 68.9,
+        "momentum": 50.0,
+        "adjusted_skill": 68.9,
+        "hunger": 50.4,
+        "compat": 55.7,
+        "compat_mult": 1.0114,
+        "role_fit_mult": 1.0179,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 99
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.008,
+          "role_fit_mult": 1.0161
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "4116dbff75ab7957b69c2152f204b74d",
+      "week": 14,
+      "home_team": "New England Patriots",
+      "away_team": "Buffalo Bills",
+      "home_slug": "ne",
+      "away_slug": "buf",
+      "game_time": "2026-12-06T21:25:00Z",
+      "spread": 13.0,
+      "total": 44.5,
+      "pick": "New England Patriots",
+      "pick_type": "underdog",
+      "confidence": 80,
+      "edge_score": 30.0,
+      "home_score": 12.1,
+      "away_score": 13.9,
+      "home_breakdown": {
+        "composite": 12.1,
+        "raw": 26.7,
+        "body": 76.1,
+        "skill": 51.6,
+        "momentum": 50.0,
+        "adjusted_skill": 43.9,
+        "hunger": 57.8,
+        "compat": 53.6,
+        "compat_mult": 1.0072,
+        "role_fit_mult": 1.0199,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "rain \u2192 passing \u00d70.85"
+        ],
+        "player_count": 95
+      },
+      "away_breakdown": {
+        "composite": 13.9,
+        "raw": 27.7,
+        "body": 74.6,
+        "skill": 61.8,
+        "momentum": 50.0,
+        "adjusted_skill": 52.5,
+        "hunger": 55.5,
+        "compat": 54.0,
+        "compat_mult": 1.008,
+        "role_fit_mult": 1.0071,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "rain \u2192 passing \u00d70.85"
+        ],
+        "player_count": 96
+      },
+      "divisional_game": true,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 0.85,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": true,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 45.4,
+            "wind_mph": 5.4,
+            "precip_in": 0.08,
+            "condition": "rain",
+            "wmo_code": 80
+          },
+          "notes": [
+            "rain \u2192 passing \u00d70.85"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0072,
+          "role_fit_mult": 1.0199
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "c186c605febd6370b292469c9151cfb3",
+      "week": 14,
+      "home_team": "Minnesota Vikings",
+      "away_team": "Carolina Panthers",
+      "home_slug": "min",
+      "away_slug": "car",
+      "game_time": "2026-12-06T21:25:00Z",
+      "spread": -5.0,
+      "total": 43.0,
+      "pick": "Minnesota Vikings",
+      "pick_type": "favorite",
+      "confidence": 45,
+      "edge_score": -5.3,
+      "home_score": 17.6,
+      "away_score": 14.2,
+      "home_breakdown": {
+        "composite": 17.6,
+        "raw": 29.7,
+        "body": 77.1,
+        "skill": 62.2,
+        "momentum": 50.0,
+        "adjusted_skill": 62.2,
+        "hunger": 51.9,
+        "compat": 53.2,
+        "compat_mult": 1.0064,
+        "role_fit_mult": 1.0106,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 91
+      },
+      "away_breakdown": {
+        "composite": 14.2,
+        "raw": 27.8,
+        "body": 69.1,
+        "skill": 56.1,
+        "momentum": 50.0,
+        "adjusted_skill": 56.1,
+        "hunger": 58.9,
+        "compat": 52.1,
+        "compat_mult": 1.0042,
+        "role_fit_mult": 1.0078,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": true,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "dome \u2014 no weather impact"
+        ],
+        "player_count": 111
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": true,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": null,
+          "notes": [
+            "dome \u2014 no weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0064,
+          "role_fit_mult": 1.0106
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
+    },
+    {
+      "game_id": "0db4646c964ecdff19957373fe707546",
+      "week": 14,
+      "home_team": "Seattle Seahawks",
+      "away_team": "Dallas Cowboys",
+      "home_slug": "sea",
+      "away_slug": "dal",
+      "game_time": "2026-12-08T01:15:00Z",
+      "spread": -6.2,
+      "total": 51.5,
+      "pick": "Dallas Cowboys",
+      "pick_type": "underdog",
+      "confidence": 30,
+      "edge_score": -20.0,
+      "home_score": 0.2,
+      "away_score": 0.0,
+      "home_breakdown": {
+        "composite": 0.2,
+        "raw": 20.1,
+        "body": 77.0,
+        "skill": 62.0,
+        "momentum": 50.0,
+        "adjusted_skill": 62.0,
+        "hunger": 54.2,
+        "compat": 56.3,
+        "compat_mult": 1.0126,
+        "role_fit_mult": 1.0248,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 112
+      },
+      "away_breakdown": {
+        "composite": 0.0,
+        "raw": 19.0,
+        "body": 74.4,
+        "skill": 59.1,
+        "momentum": 50.0,
+        "adjusted_skill": 59.1,
+        "hunger": 56.6,
+        "compat": 54.0,
+        "compat_mult": 1.008,
+        "role_fit_mult": 1.0101,
+        "cohesion_mult": 1.0,
+        "hc_market_mult": 1.0,
+        "injury_penalty": 100.0,
+        "joint_penalty": 0.0,
+        "silence_bonus": false,
+        "injury_flag": true,
+        "distraction_flag": false,
+        "scheme_transition_active": false,
+        "weather_notes": [
+          "no significant weather impact"
+        ],
+        "player_count": 99
+      },
+      "divisional_game": false,
+      "rematch": false,
+      "divisional_notes": [],
+      "snapshot_type": "opening",
+      "line_movement": null,
+      "status": "open",
+      "result": null,
+      "lesson": null,
+      "predicted_at": "2026-11-28 02:39 UTC",
+      "modifiers_applied": {
+        "weather": {
+          "dome": false,
+          "passing_mult": 1.0,
+          "kicker_mult": 1.0,
+          "wind_flag": false,
+          "precip_flag": false,
+          "cold_flag": false,
+          "cold_joint_flag": false,
+          "conditions": {
+            "temp_f": 45.3,
+            "wind_mph": 7.7,
+            "precip_in": 0.0,
+            "condition": "partly_cloudy",
+            "wmo_code": 3
+          },
+          "notes": [
+            "no significant weather impact"
+          ]
+        },
+        "practice_trajectory": {
+          "home": null,
+          "away": null
+        },
+        "mbti_adjustment": {
+          "compat_mult": 1.0126,
+          "role_fit_mult": 1.0248
+        },
+        "coach_compatibility": null,
+        "relationship_web": {
+          "cross_team_edges": [],
+          "facing_former_team": [],
+          "edge_count": 0,
+          "has_context": false
+        }
+      }
     }
   ]
 }
